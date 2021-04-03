@@ -1,0 +1,526 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix meta: <https://w3id.org/biolink/biolinkml/meta/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+meta:SubsetDefinition a owl:Class ;
+    rdfs:label "subset_definition" ;
+    skos:definition "the name and description of a subset" .
+
+<https://w3id.org/gocam> a owl:Ontology ;
+    rdfs:label "gocam" ;
+    dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
+    rdfs:seeAlso "https://docs.google.com/presentation/d/1ja0Vkw0AoENJ58emM77dGnqPtY1nfIJMeyVnObBxIxI/edit#slide=id.p8" ;
+    skos:definition "GO CAM" ;
+    meta:generation_date "2021-04-03 12:37" ;
+    meta:metamodel_version "1.7.0" ;
+    meta:source_file "gocam.yaml" ;
+    meta:source_file_date "Sat Apr  3 12:37:44 2021" ;
+    meta:source_file_size 6371 .
+
+<https://w3id.org/gocam/BiologicalProcess> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "biological process" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/OccursInAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/occurs_in> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/HappensDuringAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/happens_during> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/CausesAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/causes> ],
+        <https://w3id.org/gocam/Element>,
+        <https://w3id.org/gocam/Occurent> .
+
+<https://w3id.org/gocam/CellularComponent> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "cellular component" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/PartOfAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/part_of> ],
+        <https://w3id.org/gocam/Continuant>,
+        <https://w3id.org/gocam/Element> .
+
+<https://w3id.org/gocam/ChemicalFormulaValue> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "chemical formula value" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty meta:topValue ;
+            owl:qualifiedCardinality 1 ] ;
+    skos:definition "A chemical formula" ;
+    skos:editorialNote "Should be implemented as a stronger type" .
+
+<https://w3id.org/gocam/HasPartAssociation> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "has part association" ;
+    rdfs:subClassOf <https://w3id.org/gocam/Association> .
+
+<https://w3id.org/gocam/IriType> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "iri type" ;
+    rdfs:subClassOf <https://w3id.org/linkml/Uriorcurie> ;
+    skos:definition "An IRI" .
+
+<https://w3id.org/gocam/MolecularActivity> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "molecular activity" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/HappensDuringAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/happens_during> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/CausesAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/causes> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/HasInputAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/has_input> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/OccursInAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/occurs_in> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/EnabledByAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/enabled_by> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/PartOfAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/part_of> ],
+        <https://w3id.org/gocam/Element>,
+        <https://w3id.org/gocam/Occurent> .
+
+<https://w3id.org/gocam/NarrativeText> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "narrative text" ;
+    rdfs:subClassOf <https://w3id.org/linkml/String> ;
+    skos:definition "A string that provides a human-readable description of something" .
+
+<https://w3id.org/gocam/SymbolType> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "symbol type" ;
+    rdfs:subClassOf <https://w3id.org/linkml/String> .
+
+<https://w3id.org/linkml/Boolean> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "boolean" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:boolean ;
+            owl:onProperty meta:topValue ;
+            owl:qualifiedCardinality 1 ] ;
+    skos:definition "A binary (true or false) value" .
+
+<https://w3id.org/linkml/Date> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "date" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:date ;
+            owl:onProperty meta:topValue ;
+            owl:qualifiedCardinality 1 ] ;
+    skos:definition "a date (year, month and day) in an idealized calendar" ;
+    skos:editorialNote "URI is dateTime because OWL reasoners don't work with straight date or time" .
+
+<https://w3id.org/linkml/Datetime> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "datetime" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:dateTime ;
+            owl:onProperty meta:topValue ;
+            owl:qualifiedCardinality 1 ] ;
+    skos:definition "The combination of a date and time" .
+
+<https://w3id.org/linkml/Decimal> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "decimal" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:decimal ;
+            owl:onProperty meta:topValue ;
+            owl:qualifiedCardinality 1 ] ;
+    skos:definition "A real number with arbitrary precision that conforms to the xsd:decimal specification" .
+
+<https://w3id.org/linkml/Double> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "double" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:double ;
+            owl:onProperty meta:topValue ;
+            owl:qualifiedCardinality 1 ] ;
+    skos:definition "A real number that conforms to the xsd:double specification" .
+
+<https://w3id.org/linkml/Float> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "float" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:float ;
+            owl:onProperty meta:topValue ;
+            owl:qualifiedCardinality 1 ] ;
+    skos:definition "A real number that conforms to the xsd:float specification" .
+
+<https://w3id.org/linkml/Integer> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "integer" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:integer ;
+            owl:onProperty meta:topValue ;
+            owl:qualifiedCardinality 1 ] ;
+    skos:definition "An integer" .
+
+<https://w3id.org/linkml/Ncname> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "ncname" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty meta:topValue ;
+            owl:qualifiedCardinality 1 ] ;
+    skos:definition "Prefix part of CURIE" .
+
+<https://w3id.org/linkml/Nodeidentifier> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "nodeidentifier" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange <http://www.w3.org/ns/shex#nonLiteral> ;
+            owl:onProperty meta:topValue ;
+            owl:qualifiedCardinality 1 ] ;
+    skos:definition "A URI, CURIE or BNODE that represents a node in a model." .
+
+<https://w3id.org/linkml/Objectidentifier> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "objectidentifier" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange <http://www.w3.org/ns/shex#iri> ;
+            owl:onProperty meta:topValue ;
+            owl:qualifiedCardinality 1 ] ;
+    skos:definition "A URI or CURIE that represents an object in the model." ;
+    skos:note "Used for inheritence and type checking" .
+
+<https://w3id.org/linkml/Time> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "time" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:dateTime ;
+            owl:onProperty meta:topValue ;
+            owl:qualifiedCardinality 1 ] ;
+    skos:definition "A time object represents a (local) time of day, independent of any particular day" ;
+    skos:editorialNote "URI is dateTime because OWL reasoners don't work with straight date or time" .
+
+<https://w3id.org/linkml/Uri> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "uri" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:anyURI ;
+            owl:onProperty meta:topValue ;
+            owl:qualifiedCardinality 1 ] ;
+    skos:definition "a complete URI" .
+
+<https://w3id.org/gocam/Continuant> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "continuant" ;
+    rdfs:subClassOf meta:mixin .
+
+<https://w3id.org/gocam/category> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "category" ;
+    rdfs:range <https://w3id.org/gocam/CategoryType> ;
+    rdfs:subPropertyOf <https://w3id.org/gocam/type> ;
+    skos:definition "Name of the high level ontology class in which this entity is categorized" .
+
+<https://w3id.org/gocam/contributor> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "contributor" ;
+    rdfs:range <https://w3id.org/linkml/String> .
+
+<https://w3id.org/gocam/date> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "date" ;
+    rdfs:range <https://w3id.org/linkml/String> .
+
+<https://w3id.org/gocam/enabled_by> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "enabled by" ;
+    rdfs:range <https://w3id.org/gocam/EnabledByAssociation> ;
+    rdfs:subPropertyOf <https://w3id.org/gocam/related_to> .
+
+<https://w3id.org/gocam/evidence_type> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "evidence type" ;
+    rdfs:range <https://w3id.org/gocam/OntologyClass> ;
+    rdfs:subPropertyOf <https://w3id.org/gocam/type> .
+
+<https://w3id.org/gocam/has_evidence> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "has evidence" ;
+    rdfs:range <https://w3id.org/gocam/Evidence> .
+
+<https://w3id.org/gocam/has_input> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "has input" ;
+    rdfs:range <https://w3id.org/gocam/HasInputAssociation> ;
+    rdfs:subPropertyOf <https://w3id.org/gocam/related_to> .
+
+<https://w3id.org/gocam/name> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "name" ;
+    rdfs:range <https://w3id.org/gocam/LabelType> ;
+    skos:definition "A human-readable name for an attribute or entity." .
+
+<https://w3id.org/gocam/object> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "object" ;
+    rdfs:domain <https://w3id.org/gocam/Association> ;
+    rdfs:range <https://w3id.org/gocam/Element> ;
+    rdfs:subPropertyOf <https://w3id.org/gocam/association_slot> ;
+    skos:definition "connects an association to the object of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object." .
+
+<https://w3id.org/gocam/predicate> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "predicate" ;
+    rdfs:domain <https://w3id.org/gocam/Association> ;
+    rdfs:range <https://w3id.org/gocam/PredicateType> ;
+    rdfs:subPropertyOf <https://w3id.org/gocam/association_slot> ;
+    skos:definition "A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes." .
+
+<https://w3id.org/gocam/reference> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "reference" ;
+    rdfs:range <https://w3id.org/linkml/String> .
+
+<https://w3id.org/gocam/subject> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "subject" ;
+    rdfs:domain <https://w3id.org/gocam/Association> ;
+    rdfs:range <https://w3id.org/gocam/Element> ;
+    rdfs:subPropertyOf <https://w3id.org/gocam/association_slot> ;
+    skos:definition "connects an association to the subject of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object." .
+
+<https://w3id.org/gocam/type_inferences> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "type inferences" ;
+    rdfs:range <https://w3id.org/gocam/OntologyClass> ;
+    skos:definition "links a GOCAM element (an OWL individual) to the specific class it instantiates" .
+
+<https://w3id.org/gocam/with> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "with" ;
+    rdfs:range <https://w3id.org/linkml/String> .
+
+<https://w3id.org/gocam/CategoryType> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "category type" ;
+    rdfs:subClassOf <https://w3id.org/linkml/Uriorcurie> ;
+    skos:definition "A primitive type in which the value denotes a class within the biolink model. The value must be a URI or a CURIE. In a Neo4j representation, the value should be the CURIE for the biolink class, for example biolink:Gene. For an RDF representation, the value should be a URI such as https://w3id.org/biolink/vocab/Gene" .
+
+<https://w3id.org/gocam/EnabledByAssociation> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "enabled by association" ;
+    rdfs:subClassOf <https://w3id.org/gocam/Association> .
+
+<https://w3id.org/gocam/Evidence> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "evidence" ;
+    rdfs:seeAlso "https://docs.google.com/presentation/d/1ja0Vkw0AoENJ58emM77dGnqPtY1nfIJMeyVnObBxIxI/edit#slide=id.p9" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/linkml/String> ;
+            owl:onProperty <https://w3id.org/gocam/contributor> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/OntologyClass> ;
+            owl:onProperty <https://w3id.org/gocam/evidence_type> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/linkml/String> ;
+            owl:onProperty <https://w3id.org/gocam/reference> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/linkml/String> ;
+            owl:onProperty <https://w3id.org/gocam/with> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/linkml/String> ;
+            owl:onProperty <https://w3id.org/gocam/date> ] .
+
+<https://w3id.org/gocam/HasInputAssociation> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "has input association" ;
+    rdfs:subClassOf <https://w3id.org/gocam/Association> .
+
+<https://w3id.org/gocam/LabelType> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "label type" ;
+    rdfs:subClassOf <https://w3id.org/linkml/String> ;
+    skos:definition "A string that provides a human-readable name for an entity" .
+
+<https://w3id.org/gocam/Occurent> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "occurent" ;
+    rdfs:subClassOf meta:mixin .
+
+<https://w3id.org/gocam/PredicateType> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "predicate type" ;
+    rdfs:subClassOf <https://w3id.org/linkml/Uriorcurie> ;
+    skos:definition "A CURIE from the biolink related_to hierarchy. For example, biolink:related_to, biolink:causes, biolink:treats." .
+
+<https://w3id.org/gocam/causes> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "causes" ;
+    rdfs:range <https://w3id.org/gocam/CausesAssociation> ;
+    rdfs:subPropertyOf <https://w3id.org/gocam/related_to> .
+
+<https://w3id.org/gocam/happens_during> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "happens during" ;
+    rdfs:range <https://w3id.org/gocam/HappensDuringAssociation> ;
+    rdfs:subPropertyOf <https://w3id.org/gocam/related_to> .
+
+<https://w3id.org/gocam/id> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "id" ;
+    rdfs:range <https://w3id.org/linkml/String> .
+
+<https://w3id.org/gocam/occurs_in> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "occurs in" ;
+    rdfs:range <https://w3id.org/gocam/OccursInAssociation> ;
+    rdfs:subPropertyOf <https://w3id.org/gocam/related_to> .
+
+<https://w3id.org/gocam/part_of> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "part of" ;
+    rdfs:range <https://w3id.org/gocam/PartOfAssociation> ;
+    rdfs:subPropertyOf <https://w3id.org/gocam/related_to> .
+
+<https://w3id.org/gocam/CausesAssociation> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "causes association" ;
+    rdfs:subClassOf <https://w3id.org/gocam/Association> .
+
+<https://w3id.org/gocam/HappensDuringAssociation> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "happens during association" ;
+    rdfs:subClassOf <https://w3id.org/gocam/Association> .
+
+<https://w3id.org/gocam/OccursInAssociation> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "occurs in association" ;
+    rdfs:subClassOf <https://w3id.org/gocam/Association> .
+
+<https://w3id.org/gocam/PartOfAssociation> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "part of association" ;
+    rdfs:subClassOf <https://w3id.org/gocam/Association> .
+
+<https://w3id.org/gocam/association_slot> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "association slot" ;
+    rdfs:domain <https://w3id.org/gocam/Association> ;
+    rdfs:range <https://w3id.org/linkml/String> ;
+    skos:definition "any slot that relates an association to another entity" .
+
+<https://w3id.org/gocam/type> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "type" ;
+    rdfs:range <https://w3id.org/gocam/OntologyClass> ;
+    skos:definition "links a GOCAM element (an OWL individual) to the specific class it instantiates" .
+
+<https://w3id.org/linkml/Uriorcurie> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "uriorcurie" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:anyURI ;
+            owl:onProperty meta:topValue ;
+            owl:qualifiedCardinality 1 ] ;
+    skos:definition "a URI or a CURIE" .
+
+<https://w3id.org/gocam/OntologyClass> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "ontology class" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass <https://w3id.org/linkml/String> ;
+            owl:onProperty <https://w3id.org/gocam/id> ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/LabelType> ;
+            owl:onProperty <https://w3id.org/gocam/name> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/CategoryType> ;
+            owl:onProperty <https://w3id.org/gocam/category> ] .
+
+<https://w3id.org/gocam/related_to> a owl:ObjectProperty,
+        meta:SlotDefinition ;
+    rdfs:label "related to" ;
+    rdfs:range <https://w3id.org/gocam/Association> .
+
+<https://w3id.org/gocam/Element> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "element" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/gocam/OntologyClass> ;
+            owl:onProperty <https://w3id.org/gocam/type_inferences> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/OntologyClass> ;
+            owl:onProperty <https://w3id.org/gocam/type> ],
+        [ a owl:Restriction ;
+            owl:onClass <https://w3id.org/linkml/String> ;
+            owl:onProperty <https://w3id.org/gocam/id> ;
+            owl:qualifiedCardinality 1 ] ;
+    skos:definition "An OWL individual representing a particular element in a context. Here element is generic and encompasses causal entities as well as processes, activities" .
+
+<https://w3id.org/gocam/Association> a owl:Class,
+        meta:ClassDefinition ;
+    rdfs:label "association" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass <https://w3id.org/gocam/PredicateType> ;
+            owl:onProperty <https://w3id.org/gocam/predicate> ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:onClass <https://w3id.org/gocam/Element> ;
+            owl:onProperty <https://w3id.org/gocam/subject> ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:onClass <https://w3id.org/gocam/Element> ;
+            owl:onProperty <https://w3id.org/gocam/object> ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/Evidence> ;
+            owl:onProperty <https://w3id.org/gocam/has_evidence> ] .
+
+meta:topValue a owl:DatatypeProperty ;
+    rdfs:label "value" .
+
+<https://w3id.org/linkml/String> a owl:Class,
+        meta:TypeDefinition ;
+    rdfs:label "string" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty meta:topValue ;
+            owl:qualifiedCardinality 1 ] ;
+    skos:definition "A character string" .
+
+meta:ClassDefinition a owl:Class ;
+    rdfs:label "class_definition" ;
+    skos:definition "the definition of a class or interface" .
+
+meta:TypeDefinition a owl:Class ;
+    rdfs:label "type_definition" ;
+    skos:definition "A data type definition." .
+
+meta:SlotDefinition a owl:Class ;
+    rdfs:label "slot_definition" ;
+    skos:definition "the definition of a property or a slot" .
+
+
+

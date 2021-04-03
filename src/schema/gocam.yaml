@@ -1,0 +1,295 @@
+id: https://w3id.org/gocam
+name: gocam
+description: >-
+  GO CAM
+default_curi_maps:
+  - obo_context
+  - go_context
+  - idot_context
+  - semweb_context
+imports:
+ - linkml:types
+prefixes:
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/
+  gocam: https://w3id.org/gocam/
+  goshapes: http://purl.obolibrary.org/obo/go/shapes/
+default_prefix: gocam
+see_also:
+  - https://docs.google.com/presentation/d/1ja0Vkw0AoENJ58emM77dGnqPtY1nfIJMeyVnObBxIxI/edit#slide=id.p8
+
+
+slots:
+  id:
+    identifier: true
+    
+  name:
+    aliases: [ 'label', 'display name', 'title' ]
+    description: >-
+      A human-readable name for an attribute or entity.
+    range: label type
+    slot_uri: rdfs:label
+    exact_mappings:
+      - biolink:name
+
+  type:
+    description: >-
+      links a GOCAM element (an OWL individual) to the specific class it instantiates
+    range: ontology class
+
+  category:
+    is_a: type
+    range: category type
+    description: >-
+      Name of the high level ontology class in which this entity is categorized
+
+  with:
+  reference:
+  contributor:
+  date:
+  evidence type:
+    is_a: type
+    
+  type inferences:
+    description: >-
+      links a GOCAM element (an OWL individual) to the specific class it instantiates
+    range: ontology class
+    multivalued: true
+
+  related to:
+    abstract: true
+    range: association
+    
+  occurs in:
+    is_a: related to
+    range: occurs in association
+    
+  causes:
+    is_a: related to
+    range: causes association
+
+  happens during:
+    is_a: related to
+    range: happens during association
+
+  part of:
+    is_a: related to
+    range: part of association
+
+  enabled by:
+    is_a: related to
+    range: enabled by association
+
+  has input:
+    is_a: related to
+    range: has input association
+
+  has evidence:
+    range: evidence
+
+  association slot:
+    abstract: true
+    domain: association
+    aliases: ['edge property', 'statement property']
+    description: >-
+      any slot that relates an association to another entity
+
+  subject:
+    is_a: association slot
+    local_names:
+      ga4gh: annotation subject
+      neo4j: node with outgoing relationship
+    description: >-
+      connects an association to the subject of the association.
+      For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.
+    required: true
+    range: element
+    slot_uri: rdf:subject
+    exact_mappings:
+      - owl:annotatedSource
+      - OBAN:association_has_subject
+
+  object:
+    is_a: association slot
+    description: >-
+      connects an association to the object of the association.
+      For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.
+    required: true
+    range: element
+    local_names:
+      ga4gh: descriptor
+      neo4j: node with incoming relationship
+    slot_uri: rdf:object
+    exact_mappings:
+      - owl:annotatedTarget
+      - OBAN:association_has_object
+
+  predicate:
+    is_a: association slot
+    description: >-
+      A high-level grouping for the relationship type. AKA minimal predicate.
+      This is analogous to category for nodes.
+    domain: association
+    range: predicate type
+    required: true
+    local_names:
+      ga4gh: annotation predicate
+      translator: predicate
+    slot_uri: rdf:predicate
+    exact_mappings:
+      - owl:annotatedProperty
+      - OBAN:association_has_predicate
+    
+classes:
+
+   ## -- ELEMENTS --
+
+  element:
+    description: >-
+      An OWL individual representing a particular element in a context. Here element is generic and encompasses causal entities as well as processes, activities
+    slots:
+      - id
+      - type
+      - type inferences
+    exact_mappings:
+      - goshapes:GoCamEntity
+  
+  molecular activity:
+    is_a: element
+    mixins:
+      - occurent
+    slots:
+      - causes
+      - happens during
+      - part of
+      - enabled by
+      - has input
+      - occurs in
+    exact_mappings:
+      - goshapes:MolecularFunction
+
+  biological process:
+    is_a: element
+    mixins:
+      - occurent
+    slots:
+      - occurs in
+      - causes
+      - happens during
+    exact_mappings:
+      - goshapes:BiologicalProcess
+
+  cellular component:
+    is_a: element
+    mixins:
+      - continuant
+    slots:
+      - part of
+    exact_mappings:
+      - goshapes:CellularComponent
+  
+  ## -- ASSOCIATIONS --
+
+  association:
+    abstract: true
+#    domain: element
+    slots:
+      - has evidence
+      - subject
+      - predicate
+      - object
+      
+  occurs in association:
+    is_a: association
+
+  causes association:
+    is_a: association
+
+  part of association:
+    is_a: association
+
+  enabled by association:
+    is_a: association
+
+  happens during association:
+    is_a: association
+
+  has part association:
+    is_a: association
+
+  has input association:
+    is_a: association
+
+  ## -- Ontologies --
+    
+
+  ontology class:
+    slots:
+      - id
+      - name
+      - category
+
+  ## -- Evidence --
+
+  evidence:
+    slots:
+      - contributor
+      - date
+      - evidence type
+      - reference
+      - with
+    see_also:
+      - https://docs.google.com/presentation/d/1ja0Vkw0AoENJ58emM77dGnqPtY1nfIJMeyVnObBxIxI/edit#slide=id.p9
+      
+
+  ## -- MIXINS --
+  
+  occurent:
+    mixin: true
+      
+  continuant:
+    mixin: true
+
+types:
+
+  chemical formula value:
+    uri: xsd:string
+    base: str
+    description: A chemical formula
+    notes:
+      - Should be implemented as a stronger type
+
+  category type:
+    typeof: uriorcurie
+    description: >-
+      A primitive type in which the value denotes a class within the biolink model.
+      The value must be a URI or a CURIE. In a Neo4j representation, the value should
+      be the CURIE for the biolink class, for example biolink:Gene. For an RDF representation,
+      the value should be a URI such as https://w3id.org/biolink/vocab/Gene
+
+  iri type:
+    typeof: uriorcurie
+    description: >-
+      An IRI
+
+  label type:
+    typeof: string
+    description: >-
+      A string that provides a human-readable name for an entity
+
+  predicate type:
+    typeof: uriorcurie
+    description: >-
+      A CURIE from the biolink related_to hierarchy.
+      For example, biolink:related_to, biolink:causes, biolink:treats.
+
+  narrative text:
+    typeof: string
+    description: >-
+      A string that provides a human-readable description of something
+
+  symbol type:
+    typeof: string
+
+
+    

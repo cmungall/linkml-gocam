@@ -1,0 +1,203 @@
+BASE <https://w3id.org/gocam/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX linkml: <https://w3id.org/linkml/>
+
+
+<ChemicalFormulaValue> xsd:string
+
+<CategoryType> IRI
+
+<IriType> IRI
+
+<LabelType> xsd:string
+
+<PredicateType> IRI
+
+<NarrativeText> xsd:string
+
+<SymbolType> xsd:string
+
+linkml:String xsd:string
+
+linkml:Integer xsd:integer
+
+linkml:Boolean xsd:boolean
+
+linkml:Float xsd:float
+
+linkml:Double xsd:double
+
+linkml:Decimal xsd:decimal
+
+linkml:Time xsd:dateTime
+
+linkml:Date xsd:date
+
+linkml:Datetime xsd:dateTime
+
+linkml:Uriorcurie IRI
+
+linkml:Uri IRI
+
+linkml:Ncname xsd:string
+
+linkml:Objectidentifier IRI
+
+linkml:Nodeidentifier NONLITERAL
+
+<Association>  (
+    @<CausesAssociation> OR @<EnabledByAssociation> OR @<HappensDuringAssociation> OR @<HasInputAssociation> OR
+    @<HasPartAssociation> OR @<OccursInAssociation> OR @<PartOfAssociation>
+)
+
+<Association_struct> {
+    (  $<Association_tes> (  <has_evidence> @<Evidence> ? ;
+          rdf:subject @<Element> ;
+          rdf:predicate @<PredicateType> ;
+          rdf:object @<Element>
+       ) ;
+       rdf:type [ <Association> ] ?
+    )
+}
+
+<BiologicalProcess> CLOSED {
+    (  $<BiologicalProcess_tes> (  &<Element_tes> ;
+          rdf:type [ <Element> ] ? ;
+          &<Occurent_tes> ;
+          rdf:type [ <Occurent> ] ? ;
+          <occurs_in> @<OccursInAssociation> ? ;
+          <causes> @<CausesAssociation> ? ;
+          <happens_during> @<HappensDuringAssociation> ?
+       ) ;
+       rdf:type [ <BiologicalProcess> ]
+    )
+}
+
+<CausesAssociation> CLOSED {
+    (  $<CausesAssociation_tes> (  &<Association_tes> ;
+          rdf:type [ <Association> ] ?
+       ) ;
+       rdf:type [ <CausesAssociation> ] ?
+    )
+}
+
+<CellularComponent> CLOSED {
+    (  $<CellularComponent_tes> (  &<Element_tes> ;
+          rdf:type [ <Element> ] ? ;
+          &<Continuant_tes> ;
+          rdf:type [ <Continuant> ] ? ;
+          <part_of> @<PartOfAssociation> ?
+       ) ;
+       rdf:type [ <CellularComponent> ]
+    )
+}
+
+<Continuant> {
+    (  $<Continuant_tes> rdf:type . * ;
+       rdf:type [ <Continuant> ] ?
+    )
+}
+
+<Element>  (
+    CLOSED {
+       (  $<Element_tes> (  <type> @<OntologyClass> ? ;
+             <type_inferences> @<OntologyClass> *
+          ) ;
+          rdf:type [ <Element> ]
+       )
+    } OR @<BiologicalProcess> OR @<CellularComponent> OR @<MolecularActivity>
+)
+
+<EnabledByAssociation> CLOSED {
+    (  $<EnabledByAssociation_tes> (  &<Association_tes> ;
+          rdf:type [ <Association> ] ?
+       ) ;
+       rdf:type [ <EnabledByAssociation> ] ?
+    )
+}
+
+<Evidence> CLOSED {
+    (  $<Evidence_tes> (  <contributor> @linkml:String ? ;
+          <date> @linkml:String ? ;
+          <evidence_type> @<OntologyClass> ? ;
+          <reference> @linkml:String ? ;
+          <with> @linkml:String ?
+       ) ;
+       rdf:type [ <Evidence> ] ?
+    )
+}
+
+<HappensDuringAssociation> CLOSED {
+    (  $<HappensDuringAssociation_tes> (  &<Association_tes> ;
+          rdf:type [ <Association> ] ?
+       ) ;
+       rdf:type [ <HappensDuringAssociation> ] ?
+    )
+}
+
+<HasInputAssociation> CLOSED {
+    (  $<HasInputAssociation_tes> (  &<Association_tes> ;
+          rdf:type [ <Association> ] ?
+       ) ;
+       rdf:type [ <HasInputAssociation> ] ?
+    )
+}
+
+<HasPartAssociation> CLOSED {
+    (  $<HasPartAssociation_tes> (  &<Association_tes> ;
+          rdf:type [ <Association> ] ?
+       ) ;
+       rdf:type [ <HasPartAssociation> ] ?
+    )
+}
+
+<MolecularActivity> CLOSED {
+    (  $<MolecularActivity_tes> (  &<Element_tes> ;
+          rdf:type [ <Element> ] ? ;
+          &<Occurent_tes> ;
+          rdf:type [ <Occurent> ] ? ;
+          <causes> @<CausesAssociation> ? ;
+          <happens_during> @<HappensDuringAssociation> ? ;
+          <part_of> @<PartOfAssociation> ? ;
+          <enabled_by> @<EnabledByAssociation> ? ;
+          <has_input> @<HasInputAssociation> ? ;
+          <occurs_in> @<OccursInAssociation> ?
+       ) ;
+       rdf:type [ <MolecularActivity> ]
+    )
+}
+
+<Occurent> {
+    (  $<Occurent_tes> rdf:type . * ;
+       rdf:type [ <Occurent> ] ?
+    )
+}
+
+<OccursInAssociation> CLOSED {
+    (  $<OccursInAssociation_tes> (  &<Association_tes> ;
+          rdf:type [ <Association> ] ?
+       ) ;
+       rdf:type [ <OccursInAssociation> ] ?
+    )
+}
+
+<OntologyClass> CLOSED {
+    (  $<OntologyClass_tes> (  rdfs:label @<LabelType> ? ;
+          <category> @<CategoryType> ?
+       ) ;
+       rdf:type [ <OntologyClass> ]
+    )
+}
+
+<PartOfAssociation> CLOSED {
+    (  $<PartOfAssociation_tes> (  &<Association_tes> ;
+          rdf:type [ <Association> ] ?
+       ) ;
+       rdf:type [ <PartOfAssociation> ] ?
+    )
+}
+
+
+

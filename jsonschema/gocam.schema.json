@@ -1,0 +1,382 @@
+{
+   "$id": "https://w3id.org/gocam",
+   "$schema": "http://json-schema.org/draft-07/schema#",
+   "definitions": {
+      "BiologicalProcess": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "causes": {
+               "$ref": "#/definitions/CausesAssociation"
+            },
+            "happens_during": {
+               "$ref": "#/definitions/HappensDuringAssociation"
+            },
+            "id": {
+               "type": "string"
+            },
+            "occurs_in": {
+               "$ref": "#/definitions/OccursInAssociation"
+            },
+            "type": {
+               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "type": "string"
+            },
+            "type_inferences": {
+               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "BiologicalProcess",
+         "type": "object"
+      },
+      "CausesAssociation": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "has_evidence": {
+               "$ref": "#/definitions/Evidence"
+            },
+            "object": {
+               "description": "connects an association to the object of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
+               "type": "string"
+            },
+            "predicate": {
+               "description": "A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.",
+               "type": "string"
+            },
+            "subject": {
+               "description": "connects an association to the subject of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
+               "type": "string"
+            }
+         },
+         "required": [
+            "subject",
+            "predicate",
+            "object"
+         ],
+         "title": "CausesAssociation",
+         "type": "object"
+      },
+      "CellularComponent": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "id": {
+               "type": "string"
+            },
+            "part_of": {
+               "$ref": "#/definitions/PartOfAssociation"
+            },
+            "type": {
+               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "type": "string"
+            },
+            "type_inferences": {
+               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "CellularComponent",
+         "type": "object"
+      },
+      "Element": {
+         "additionalProperties": false,
+         "description": "An OWL individual representing a particular element in a context. Here element is generic and encompasses causal entities as well as processes, activities",
+         "properties": {
+            "id": {
+               "type": "string"
+            },
+            "type": {
+               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "type": "string"
+            },
+            "type_inferences": {
+               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Element",
+         "type": "object"
+      },
+      "EnabledByAssociation": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "has_evidence": {
+               "$ref": "#/definitions/Evidence"
+            },
+            "object": {
+               "description": "connects an association to the object of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
+               "type": "string"
+            },
+            "predicate": {
+               "description": "A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.",
+               "type": "string"
+            },
+            "subject": {
+               "description": "connects an association to the subject of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
+               "type": "string"
+            }
+         },
+         "required": [
+            "subject",
+            "predicate",
+            "object"
+         ],
+         "title": "EnabledByAssociation",
+         "type": "object"
+      },
+      "Evidence": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "contributor": {
+               "type": "string"
+            },
+            "date": {
+               "type": "string"
+            },
+            "evidence_type": {
+               "type": "string"
+            },
+            "reference": {
+               "type": "string"
+            },
+            "with": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "Evidence",
+         "type": "object"
+      },
+      "HappensDuringAssociation": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "has_evidence": {
+               "$ref": "#/definitions/Evidence"
+            },
+            "object": {
+               "description": "connects an association to the object of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
+               "type": "string"
+            },
+            "predicate": {
+               "description": "A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.",
+               "type": "string"
+            },
+            "subject": {
+               "description": "connects an association to the subject of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
+               "type": "string"
+            }
+         },
+         "required": [
+            "subject",
+            "predicate",
+            "object"
+         ],
+         "title": "HappensDuringAssociation",
+         "type": "object"
+      },
+      "HasInputAssociation": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "has_evidence": {
+               "$ref": "#/definitions/Evidence"
+            },
+            "object": {
+               "description": "connects an association to the object of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
+               "type": "string"
+            },
+            "predicate": {
+               "description": "A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.",
+               "type": "string"
+            },
+            "subject": {
+               "description": "connects an association to the subject of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
+               "type": "string"
+            }
+         },
+         "required": [
+            "subject",
+            "predicate",
+            "object"
+         ],
+         "title": "HasInputAssociation",
+         "type": "object"
+      },
+      "HasPartAssociation": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "has_evidence": {
+               "$ref": "#/definitions/Evidence"
+            },
+            "object": {
+               "description": "connects an association to the object of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
+               "type": "string"
+            },
+            "predicate": {
+               "description": "A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.",
+               "type": "string"
+            },
+            "subject": {
+               "description": "connects an association to the subject of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
+               "type": "string"
+            }
+         },
+         "required": [
+            "subject",
+            "predicate",
+            "object"
+         ],
+         "title": "HasPartAssociation",
+         "type": "object"
+      },
+      "MolecularActivity": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "causes": {
+               "$ref": "#/definitions/CausesAssociation"
+            },
+            "enabled_by": {
+               "$ref": "#/definitions/EnabledByAssociation"
+            },
+            "happens_during": {
+               "$ref": "#/definitions/HappensDuringAssociation"
+            },
+            "has_input": {
+               "$ref": "#/definitions/HasInputAssociation"
+            },
+            "id": {
+               "type": "string"
+            },
+            "occurs_in": {
+               "$ref": "#/definitions/OccursInAssociation"
+            },
+            "part_of": {
+               "$ref": "#/definitions/PartOfAssociation"
+            },
+            "type": {
+               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "type": "string"
+            },
+            "type_inferences": {
+               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "MolecularActivity",
+         "type": "object"
+      },
+      "OccursInAssociation": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "has_evidence": {
+               "$ref": "#/definitions/Evidence"
+            },
+            "object": {
+               "description": "connects an association to the object of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
+               "type": "string"
+            },
+            "predicate": {
+               "description": "A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.",
+               "type": "string"
+            },
+            "subject": {
+               "description": "connects an association to the subject of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
+               "type": "string"
+            }
+         },
+         "required": [
+            "subject",
+            "predicate",
+            "object"
+         ],
+         "title": "OccursInAssociation",
+         "type": "object"
+      },
+      "OntologyClass": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "category": {
+               "description": "Name of the high level ontology class in which this entity is categorized",
+               "type": "string"
+            },
+            "id": {
+               "type": "string"
+            },
+            "name": {
+               "description": "A human-readable name for an attribute or entity.",
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "OntologyClass",
+         "type": "object"
+      },
+      "PartOfAssociation": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "has_evidence": {
+               "$ref": "#/definitions/Evidence"
+            },
+            "object": {
+               "description": "connects an association to the object of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
+               "type": "string"
+            },
+            "predicate": {
+               "description": "A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.",
+               "type": "string"
+            },
+            "subject": {
+               "description": "connects an association to the subject of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
+               "type": "string"
+            }
+         },
+         "required": [
+            "subject",
+            "predicate",
+            "object"
+         ],
+         "title": "PartOfAssociation",
+         "type": "object"
+      }
+   },
+   "properties": {},
+   "title": "gocam",
+   "type": "object"
+}
+

@@ -1,0 +1,127 @@
+interface Association
+  {
+    hasEvidence: Evidence
+    subject: Element!
+    predicate: PredicateType!
+    object: Element!
+  }
+
+type BiologicalProcess implements Occurent
+  {
+    id: String!
+    type: OntologyClass
+    typeInferences: [OntologyClass]
+    occursIn: OccursInAssociation
+    causes: CausesAssociation
+    happensDuring: HappensDuringAssociation
+  }
+
+type CausesAssociation
+  {
+    hasEvidence: Evidence
+    subject: Element!
+    predicate: PredicateType!
+    object: Element!
+  }
+
+type CellularComponent implements Continuant
+  {
+    id: String!
+    type: OntologyClass
+    typeInferences: [OntologyClass]
+    partOf: PartOfAssociation
+  }
+
+interface Continuant
+  {
+  }
+
+type Element
+  {
+    id: String!
+    type: OntologyClass
+    typeInferences: [OntologyClass]
+  }
+
+type EnabledByAssociation
+  {
+    hasEvidence: Evidence
+    subject: Element!
+    predicate: PredicateType!
+    object: Element!
+  }
+
+type Evidence
+  {
+    contributor: String
+    date: String
+    evidenceType: OntologyClass
+    reference: String
+    with: String
+  }
+
+type HappensDuringAssociation
+  {
+    hasEvidence: Evidence
+    subject: Element!
+    predicate: PredicateType!
+    object: Element!
+  }
+
+type HasInputAssociation
+  {
+    hasEvidence: Evidence
+    subject: Element!
+    predicate: PredicateType!
+    object: Element!
+  }
+
+type HasPartAssociation
+  {
+    hasEvidence: Evidence
+    subject: Element!
+    predicate: PredicateType!
+    object: Element!
+  }
+
+type MolecularActivity implements Occurent
+  {
+    id: String!
+    type: OntologyClass
+    typeInferences: [OntologyClass]
+    causes: CausesAssociation
+    happensDuring: HappensDuringAssociation
+    partOf: PartOfAssociation
+    enabledBy: EnabledByAssociation
+    hasInput: HasInputAssociation
+    occursIn: OccursInAssociation
+  }
+
+interface Occurent
+  {
+  }
+
+type OccursInAssociation
+  {
+    hasEvidence: Evidence
+    subject: Element!
+    predicate: PredicateType!
+    object: Element!
+  }
+
+type OntologyClass
+  {
+    id: String!
+    name: LabelType
+    category: CategoryType
+  }
+
+type PartOfAssociation
+  {
+    hasEvidence: Evidence
+    subject: Element!
+    predicate: PredicateType!
+    object: Element!
+  }
+
+
