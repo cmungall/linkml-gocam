@@ -239,7 +239,20 @@ classes:
         range: occurrent
 
   part of association:
+    abstract: true
     is_a: association
+
+  entity part of association:
+    is_a: part of association
+    slot_usage:
+      object:
+        range: continuant
+
+  process part of association:
+    is_a: part of association
+    slot_usage:
+      object:
+        range: occurrent
 
   enabled by association:
     is_a: association
