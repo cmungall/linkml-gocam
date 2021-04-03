@@ -14,7 +14,7 @@ meta:SubsetDefinition a owl:Class ;
     dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
     rdfs:seeAlso "https://docs.google.com/presentation/d/1ja0Vkw0AoENJ58emM77dGnqPtY1nfIJMeyVnObBxIxI/edit#slide=id.p8" ;
     skos:definition "GO CAM" ;
-    meta:generation_date "2021-04-03 12:37" ;
+    meta:generation_date "2021-04-03 12:39" ;
     meta:metamodel_version "1.7.0" ;
     meta:source_file "gocam.yaml" ;
     meta:source_file_date "Sat Apr  3 12:37:44 2021" ;
@@ -29,12 +29,12 @@ meta:SubsetDefinition a owl:Class ;
             owl:onProperty <https://w3id.org/gocam/occurs_in> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/HappensDuringAssociation> ;
-            owl:onProperty <https://w3id.org/gocam/happens_during> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/gocam/CausesAssociation> ;
             owl:onProperty <https://w3id.org/gocam/causes> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/HappensDuringAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/happens_during> ],
         <https://w3id.org/gocam/Element>,
         <https://w3id.org/gocam/Occurent> .
 
@@ -74,24 +74,24 @@ meta:SubsetDefinition a owl:Class ;
     rdfs:label "molecular activity" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/HappensDuringAssociation> ;
-            owl:onProperty <https://w3id.org/gocam/happens_during> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/gocam/CausesAssociation> ;
             owl:onProperty <https://w3id.org/gocam/causes> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/HasInputAssociation> ;
-            owl:onProperty <https://w3id.org/gocam/has_input> ],
+            owl:onClass <https://w3id.org/gocam/HappensDuringAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/happens_during> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/EnabledByAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/enabled_by> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/gocam/OccursInAssociation> ;
             owl:onProperty <https://w3id.org/gocam/occurs_in> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/EnabledByAssociation> ;
-            owl:onProperty <https://w3id.org/gocam/enabled_by> ],
+            owl:onClass <https://w3id.org/gocam/HasInputAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/has_input> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/gocam/PartOfAssociation> ;
@@ -329,16 +329,16 @@ meta:SubsetDefinition a owl:Class ;
     rdfs:seeAlso "https://docs.google.com/presentation/d/1ja0Vkw0AoENJ58emM77dGnqPtY1nfIJMeyVnObBxIxI/edit#slide=id.p9" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/linkml/String> ;
-            owl:onProperty <https://w3id.org/gocam/contributor> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/gocam/OntologyClass> ;
             owl:onProperty <https://w3id.org/gocam/evidence_type> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/linkml/String> ;
             owl:onProperty <https://w3id.org/gocam/reference> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/linkml/String> ;
+            owl:onProperty <https://w3id.org/gocam/contributor> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/linkml/String> ;
@@ -450,12 +450,12 @@ meta:SubsetDefinition a owl:Class ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/LabelType> ;
-            owl:onProperty <https://w3id.org/gocam/name> ],
+            owl:onClass <https://w3id.org/gocam/CategoryType> ;
+            owl:onProperty <https://w3id.org/gocam/category> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/CategoryType> ;
-            owl:onProperty <https://w3id.org/gocam/category> ] .
+            owl:onClass <https://w3id.org/gocam/LabelType> ;
+            owl:onProperty <https://w3id.org/gocam/name> ] .
 
 <https://w3id.org/gocam/related_to> a owl:ObjectProperty,
         meta:SlotDefinition ;
@@ -469,29 +469,29 @@ meta:SubsetDefinition a owl:Class ;
             owl:allValuesFrom <https://w3id.org/gocam/OntologyClass> ;
             owl:onProperty <https://w3id.org/gocam/type_inferences> ],
         [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/OntologyClass> ;
-            owl:onProperty <https://w3id.org/gocam/type> ],
-        [ a owl:Restriction ;
             owl:onClass <https://w3id.org/linkml/String> ;
             owl:onProperty <https://w3id.org/gocam/id> ;
-            owl:qualifiedCardinality 1 ] ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/OntologyClass> ;
+            owl:onProperty <https://w3id.org/gocam/type> ] ;
     skos:definition "An OWL individual representing a particular element in a context. Here element is generic and encompasses causal entities as well as processes, activities" .
 
 <https://w3id.org/gocam/Association> a owl:Class,
         meta:ClassDefinition ;
     rdfs:label "association" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass <https://w3id.org/gocam/Element> ;
+            owl:onProperty <https://w3id.org/gocam/object> ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
             owl:onClass <https://w3id.org/gocam/PredicateType> ;
             owl:onProperty <https://w3id.org/gocam/predicate> ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:onClass <https://w3id.org/gocam/Element> ;
             owl:onProperty <https://w3id.org/gocam/subject> ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:onClass <https://w3id.org/gocam/Element> ;
-            owl:onProperty <https://w3id.org/gocam/object> ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
