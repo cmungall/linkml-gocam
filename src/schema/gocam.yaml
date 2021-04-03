@@ -146,7 +146,10 @@ classes:
 
   element:
     description: >-
-      An OWL individual representing a particular element in a context. Here element is generic and encompasses causal entities as well as processes, activities
+      Base class for any biological entity or occurrent in a GO-CAM model
+    comments:
+      - An OWL individual representing a particular element in a context
+      - Here element is generic and encompasses causal entities as well as processes, activities
     slots:
       - id
       - type
@@ -157,7 +160,7 @@ classes:
   molecular activity:
     is_a: element
     mixins:
-      - occurent
+      - occurrent
     slots:
       - causes
       - happens during
@@ -171,7 +174,7 @@ classes:
   biological process:
     is_a: element
     mixins:
-      - occurent
+      - occurrent
     slots:
       - occurs in
       - causes
@@ -187,6 +190,18 @@ classes:
       - part of
     exact_mappings:
       - goshapes:CellularComponent
+
+  anatomical entity:
+    is_a: element
+    mixins:
+      - continuant
+    slots:
+      - part of
+    slot_usage:
+      category:
+        range: anatomical_entity_category
+    exact_mappings:
+      - goshapes:AnatomicalEntity
   
   ## -- ASSOCIATIONS --
 
@@ -201,9 +216,15 @@ classes:
       
   occurs in association:
     is_a: association
+    slot_usage:
+      object:
+        range: anatomical entity
 
   causes association:
     is_a: association
+    slot_usage:
+      object:
+        range: occurrent
 
   part of association:
     is_a: association
@@ -244,7 +265,7 @@ classes:
 
   ## -- MIXINS --
   
-  occurent:
+  occurrent:
     mixin: true
       
   continuant:
@@ -292,4 +313,10 @@ types:
     typeof: string
 
 
-    
+enums:
+
+  anatomical_entity_category:
+    permissible_values:
+      CellularAnatomicalEntity:
+      Cell:
+      GrossAnatomicalStructure:

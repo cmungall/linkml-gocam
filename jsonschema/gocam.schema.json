@@ -2,6 +2,37 @@
    "$id": "https://w3id.org/gocam",
    "$schema": "http://json-schema.org/draft-07/schema#",
    "definitions": {
+      "AnatomicalEntity": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "category": {
+               "type": "string"
+            },
+            "id": {
+               "type": "string"
+            },
+            "part_of": {
+               "$ref": "#/definitions/PartOfAssociation"
+            },
+            "type": {
+               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "type": "string"
+            },
+            "type_inferences": {
+               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "AnatomicalEntity",
+         "type": "object"
+      },
       "BiologicalProcess": {
          "additionalProperties": false,
          "description": "",
@@ -44,8 +75,7 @@
                "$ref": "#/definitions/Evidence"
             },
             "object": {
-               "description": "connects an association to the object of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
-               "type": "string"
+               "$ref": "#/definitions/Occurrent"
             },
             "predicate": {
                "description": "A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.",
@@ -94,7 +124,7 @@
       },
       "Element": {
          "additionalProperties": false,
-         "description": "An OWL individual representing a particular element in a context. Here element is generic and encompasses causal entities as well as processes, activities",
+         "description": "Base class for any biological entity or occurrent in a GO-CAM model",
          "properties": {
             "id": {
                "type": "string"
@@ -304,7 +334,6 @@
                "$ref": "#/definitions/Evidence"
             },
             "object": {
-               "description": "connects an association to the object of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
                "type": "string"
             },
             "predicate": {

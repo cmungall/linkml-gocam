@@ -1,5 +1,5 @@
 # Auto generated from gocam.yaml by pythongen.py version: 0.9.0
-# Generation date: 2021-04-03 12:39
+# Generation date: 2021-04-03 12:57
 # Schema: gocam
 #
 # id: https://w3id.org/gocam
@@ -116,6 +116,10 @@ class CellularComponentId(ElementId):
     pass
 
 
+class AnatomicalEntityId(ElementId):
+    pass
+
+
 class OntologyClassId(extended_str):
     pass
 
@@ -123,8 +127,7 @@ class OntologyClassId(extended_str):
 @dataclass
 class Element(YAMLRoot):
     """
-    An OWL individual representing a particular element in a context. Here element is generic and encompasses causal
-    entities as well as processes, activities
+    Base class for any biological entity or occurrent in a GO-CAM model
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -256,6 +259,34 @@ class CellularComponent(Element):
 
 
 @dataclass
+class AnatomicalEntity(Element):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = GOCAM.AnatomicalEntity
+    class_class_curie: ClassVar[str] = "gocam:AnatomicalEntity"
+    class_name: ClassVar[str] = "anatomical entity"
+    class_model_uri: ClassVar[URIRef] = GOCAM.AnatomicalEntity
+
+    id: Union[str, AnatomicalEntityId] = None
+    part_of: Optional[Union[dict, "PartOfAssociation"]] = None
+    category: Optional[Union[str, "AnatomicalEntityCategory"]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError("id must be supplied")
+        if not isinstance(self.id, AnatomicalEntityId):
+            self.id = AnatomicalEntityId(self.id)
+
+        if self.part_of is not None and not isinstance(self.part_of, PartOfAssociation):
+            self.part_of = PartOfAssociation(**self.part_of)
+
+        if self.category is not None and not isinstance(self.category, AnatomicalEntityCategory):
+            self.category = AnatomicalEntityCategory(self.category)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class Association(YAMLRoot):
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -302,7 +333,16 @@ class OccursInAssociation(Association):
 
     subject: Union[str, ElementId] = None
     predicate: Union[str, PredicateType] = None
-    object: Union[str, ElementId] = None
+    object: Union[str, AnatomicalEntityId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.object is None:
+            raise ValueError("object must be supplied")
+        if not isinstance(self.object, AnatomicalEntityId):
+            self.object = AnatomicalEntityId(self.object)
+
+        super().__post_init__(**kwargs)
+
 
 @dataclass
 class CausesAssociation(Association):
@@ -315,7 +355,16 @@ class CausesAssociation(Association):
 
     subject: Union[str, ElementId] = None
     predicate: Union[str, PredicateType] = None
-    object: Union[str, ElementId] = None
+    object: Union[dict, "Occurrent"] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.object is None:
+            raise ValueError("object must be supplied")
+        if not isinstance(self.object, Occurrent):
+            self.object = Occurrent()
+
+        super().__post_init__(**kwargs)
+
 
 @dataclass
 class PartOfAssociation(Association):
@@ -444,13 +493,13 @@ class Evidence(YAMLRoot):
         super().__post_init__(**kwargs)
 
 
-class Occurent(YAMLRoot):
+class Occurrent(YAMLRoot):
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = GOCAM.Occurent
-    class_class_curie: ClassVar[str] = "gocam:Occurent"
-    class_name: ClassVar[str] = "occurent"
-    class_model_uri: ClassVar[URIRef] = GOCAM.Occurent
+    class_class_uri: ClassVar[URIRef] = GOCAM.Occurrent
+    class_class_curie: ClassVar[str] = "gocam:Occurrent"
+    class_name: ClassVar[str] = "occurrent"
+    class_model_uri: ClassVar[URIRef] = GOCAM.Occurrent
 
 
 class Continuant(YAMLRoot):
@@ -463,7 +512,15 @@ class Continuant(YAMLRoot):
 
 
 # Enumerations
+class AnatomicalEntityCategory(EnumDefinitionImpl):
 
+    CellularAnatomicalEntity = PermissibleValue(text="CellularAnatomicalEntity")
+    Cell = PermissibleValue(text="Cell")
+    GrossAnatomicalStructure = PermissibleValue(text="GrossAnatomicalStructure")
+
+    _defn = EnumDefinition(
+        name="AnatomicalEntityCategory",
+    )
 
 # Slots
 class slots:
@@ -534,3 +591,12 @@ slots.object = Slot(uri=RDF.object, name="object", curie=RDF.curie('object'),
 
 slots.predicate = Slot(uri=RDF.predicate, name="predicate", curie=RDF.curie('predicate'),
                    model_uri=GOCAM.predicate, domain=Association, range=Union[str, PredicateType])
+
+slots.anatomical_entity_category = Slot(uri=GOCAM.category, name="anatomical entity_category", curie=GOCAM.curie('category'),
+                   model_uri=GOCAM.anatomical_entity_category, domain=AnatomicalEntity, range=Optional[Union[str, "AnatomicalEntityCategory"]])
+
+slots.occurs_in_association_object = Slot(uri=GOCAM.object, name="occurs in association_object", curie=GOCAM.curie('object'),
+                   model_uri=GOCAM.occurs_in_association_object, domain=OccursInAssociation, range=Union[str, AnatomicalEntityId])
+
+slots.causes_association_object = Slot(uri=GOCAM.object, name="causes association_object", curie=GOCAM.curie('object'),
+                   model_uri=GOCAM.causes_association_object, domain=CausesAssociation, range=Union[dict, "Occurrent"])

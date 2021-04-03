@@ -47,6 +47,18 @@ linkml:Objectidentifier IRI
 
 linkml:Nodeidentifier NONLITERAL
 
+<AnatomicalEntity> CLOSED {
+    (  $<AnatomicalEntity_tes> (  &<Element_tes> ;
+          rdf:type [ <Element> ] ? ;
+          &<Continuant_tes> ;
+          rdf:type [ <Continuant> ] ? ;
+          <part_of> @<PartOfAssociation> ? ;
+          <category> @<AnatomicalEntityCategory> ?
+       ) ;
+       rdf:type [ <AnatomicalEntity> ]
+    )
+}
+
 <Association>  (
     @<CausesAssociation> OR @<EnabledByAssociation> OR @<HappensDuringAssociation> OR @<HasInputAssociation> OR
     @<HasPartAssociation> OR @<OccursInAssociation> OR @<PartOfAssociation>
@@ -65,8 +77,8 @@ linkml:Nodeidentifier NONLITERAL
 <BiologicalProcess> CLOSED {
     (  $<BiologicalProcess_tes> (  &<Element_tes> ;
           rdf:type [ <Element> ] ? ;
-          &<Occurent_tes> ;
-          rdf:type [ <Occurent> ] ? ;
+          &<Occurrent_tes> ;
+          rdf:type [ <Occurrent> ] ? ;
           <occurs_in> @<OccursInAssociation> ? ;
           <causes> @<CausesAssociation> ? ;
           <happens_during> @<HappensDuringAssociation> ?
@@ -77,7 +89,8 @@ linkml:Nodeidentifier NONLITERAL
 
 <CausesAssociation> CLOSED {
     (  $<CausesAssociation_tes> (  &<Association_tes> ;
-          rdf:type [ <Association> ] ?
+          rdf:type [ <Association> ] ? ;
+          <object> @<Occurrent>
        ) ;
        rdf:type [ <CausesAssociation> ] ?
     )
@@ -107,7 +120,7 @@ linkml:Nodeidentifier NONLITERAL
           ) ;
           rdf:type [ <Element> ]
        )
-    } OR @<BiologicalProcess> OR @<CellularComponent> OR @<MolecularActivity>
+    } OR @<AnatomicalEntity> OR @<BiologicalProcess> OR @<CellularComponent> OR @<MolecularActivity>
 )
 
 <EnabledByAssociation> CLOSED {
@@ -156,8 +169,8 @@ linkml:Nodeidentifier NONLITERAL
 <MolecularActivity> CLOSED {
     (  $<MolecularActivity_tes> (  &<Element_tes> ;
           rdf:type [ <Element> ] ? ;
-          &<Occurent_tes> ;
-          rdf:type [ <Occurent> ] ? ;
+          &<Occurrent_tes> ;
+          rdf:type [ <Occurrent> ] ? ;
           <causes> @<CausesAssociation> ? ;
           <happens_during> @<HappensDuringAssociation> ? ;
           <part_of> @<PartOfAssociation> ? ;
@@ -169,15 +182,16 @@ linkml:Nodeidentifier NONLITERAL
     )
 }
 
-<Occurent> {
-    (  $<Occurent_tes> rdf:type . * ;
-       rdf:type [ <Occurent> ] ?
+<Occurrent> {
+    (  $<Occurrent_tes> rdf:type . * ;
+       rdf:type [ <Occurrent> ] ?
     )
 }
 
 <OccursInAssociation> CLOSED {
     (  $<OccursInAssociation_tes> (  &<Association_tes> ;
-          rdf:type [ <Association> ] ?
+          rdf:type [ <Association> ] ? ;
+          <object> @<AnatomicalEntity>
        ) ;
        rdf:type [ <OccursInAssociation> ] ?
     )

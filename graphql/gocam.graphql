@@ -1,3 +1,12 @@
+type AnatomicalEntity implements Continuant
+  {
+    id: String!
+    type: OntologyClass
+    typeInferences: [OntologyClass]
+    partOf: PartOfAssociation
+    category: AnatomicalEntityCategory
+  }
+
 interface Association
   {
     hasEvidence: Evidence
@@ -6,7 +15,7 @@ interface Association
     object: Element!
   }
 
-type BiologicalProcess implements Occurent
+type BiologicalProcess implements Occurrent
   {
     id: String!
     type: OntologyClass
@@ -21,7 +30,7 @@ type CausesAssociation
     hasEvidence: Evidence
     subject: Element!
     predicate: PredicateType!
-    object: Element!
+    object: Occurrent!
   }
 
 type CellularComponent implements Continuant
@@ -84,7 +93,7 @@ type HasPartAssociation
     object: Element!
   }
 
-type MolecularActivity implements Occurent
+type MolecularActivity implements Occurrent
   {
     id: String!
     type: OntologyClass
@@ -97,7 +106,7 @@ type MolecularActivity implements Occurent
     occursIn: OccursInAssociation
   }
 
-interface Occurent
+interface Occurrent
   {
   }
 
@@ -106,7 +115,7 @@ type OccursInAssociation
     hasEvidence: Evidence
     subject: Element!
     predicate: PredicateType!
-    object: Element!
+    object: AnatomicalEntity!
   }
 
 type OntologyClass

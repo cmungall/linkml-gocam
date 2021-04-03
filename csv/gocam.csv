@@ -1,17 +1,18 @@
 id,mappings,description
+anatomical_entity,,
 association,,
 biological_process,,
 causes_association,,
 cellular_component,,
 continuant,,
-element,,"An OWL individual representing a particular element in a context. Here element is generic and encompasses causal entities as well as processes, activities"
+element,,Base class for any biological entity or occurrent in a GO-CAM model
 enabled_by_association,,
 evidence,,
 happens_during_association,,
 has_input_association,,
 has_part_association,,
 molecular_activity,,
-occurent,,
+occurrent,,
 occurs_in_association,,
 ontology_class,,
 part_of_association,,
