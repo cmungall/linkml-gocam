@@ -93,7 +93,7 @@
               
                 <h1 id="class-anatomicalentity">Class: AnatomicalEntity</h1>
 <p>URI: <a href="https://w3id.org/gocam/AnatomicalEntity">gocam:AnatomicalEntity</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[PartOfAssociation],[OntologyClass],[OccursInAssociation],[Element],[Continuant],[PartOfAssociation]&lt;part%20of%200..1-++[AnatomicalEntity&#124;id(i):string],[OccursInAssociation]-%20object%201..1&gt;[AnatomicalEntity],[AnatomicalEntity]uses%20-.-&gt;[Continuant],[Element]^-[AnatomicalEntity]" /></p>
+<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[PartOfAssociation],[OntologyClass],[OccursInAssociation],[Element],[Continuant],[PartOfAssociation]&lt;part%20of%200..1-++[AnatomicalEntity&#124;category:anatomical_entity_category%20%3F;id(i):string],[OccursInAssociation]-%20object%201..1&gt;[AnatomicalEntity],[AnatomicalEntity]uses%20-.-&gt;[Continuant],[Element]^-[AnatomicalEntity]" /></p>
 <h2 id="parents">Parents</h2>
 <ul>
 <li>is_a: <a href="../Element/">Element</a> - Base class for any biological entity or occurrent in a GO-CAM model</li>
@@ -109,6 +109,10 @@
 <h2 id="attributes">Attributes</h2>
 <h3 id="own">Own</h3>
 <ul>
+<li><a href="../anatomical_entity_category/">anatomical entity➞category</a>  <sub>OPT</sub><ul>
+<li>range: </li>
+</ul>
+</li>
 <li><a href="../part_of/">part of</a>  <sub>OPT</sub><ul>
 <li>range: <a href="../PartOfAssociation/">PartOfAssociation</a></li>
 </ul>
