@@ -1,7 +1,7 @@
 id: https://w3id.org/gocam
 name: gocam
 description: >-
-  GO CAM
+  GO CAM experimental LinkML schema
 default_curi_maps:
   - obo_context
   - go_context
@@ -192,6 +192,18 @@ classes:
       - goshapes:CellularComponent
 
   anatomical entity:
+    is_a: element
+    mixins:
+      - continuant
+    slots:
+      - part of
+    slot_usage:
+      category:
+        range: anatomical_entity_category
+    exact_mappings:
+      - goshapes:AnatomicalEntity
+
+  information macromolecule:
     is_a: element
     mixins:
       - continuant
