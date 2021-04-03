@@ -320,3 +320,4 @@ enums:
       CellularAnatomicalEntity:
       Cell:
       GrossAnatomicalStructure:
+      Organism:
