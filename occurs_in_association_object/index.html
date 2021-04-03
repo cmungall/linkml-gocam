@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Class: CausesAssociation - gocam in linkml demo</title>
+  <title>Slot: occurs_in_association_object - gocam in linkml demo</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Class: CausesAssociation";
-    var mkdocs_page_input_path = "CausesAssociation.md";
+    var mkdocs_page_name = "Slot: occurs_in_association_object";
+    var mkdocs_page_input_path = "occurs_in_association_object.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -80,7 +80,7 @@
     
       
     
-    <li>Class: CausesAssociation</li>
+    <li>Slot: occurs_in_association_object</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -91,41 +91,18 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="class-causesassociation">Class: CausesAssociation</h1>
-<p>URI: <a href="https://w3id.org/gocam/CausesAssociation">gocam:CausesAssociation</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[Occurrent],[Evidence],[Element],[Occurrent]&lt;object%201..1-++[CausesAssociation&#124;predicate(i):predicate_type],[MolecularActivity]++-%20causes%200..1&gt;[CausesAssociation],[BiologicalProcess]++-%20causes%200..1&gt;[CausesAssociation],[Association]^-[CausesAssociation],[MolecularActivity],[BiologicalProcess],[Association]" /></p>
+                <h1 id="slot-occurs_in_association_object">Slot: occurs_in_association_object</h1>
+<p>URI: <a href="https://w3id.org/gocam/occurs_in_association_object">gocam:occurs_in_association_object</a></p>
+<h2 id="domain-and-range">Domain and Range</h2>
+<p><a href="../OccursInAssociation/">OccursInAssociation</a> -&gt;  <sub>REQ</sub> <a href="../AnatomicalEntity/">AnatomicalEntity</a></p>
 <h2 id="parents">Parents</h2>
 <ul>
-<li>is_a: <a href="../Association/">Association</a></li>
+<li>is_a: <a href="../object/">object</a></li>
 </ul>
-<h2 id="referenced-by-class">Referenced by class</h2>
+<h2 id="children">Children</h2>
+<h2 id="used-by">Used by</h2>
 <ul>
-<li><strong>None</strong> <em><a href="../causes/">causes</a></em>  <sub>OPT</sub>  <strong><a href="./">CausesAssociation</a></strong></li>
-</ul>
-<h2 id="attributes">Attributes</h2>
-<h3 id="own">Own</h3>
-<ul>
-<li><a href="../causes_association_object/">causes association➞object</a>  <sub>REQ</sub><ul>
-<li>range: <a href="../Occurrent/">Occurrent</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="inherited-from-association">Inherited from association:</h3>
-<ul>
-<li><a href="../has_evidence/">has evidence</a>  <sub>OPT</sub><ul>
-<li>range: <a href="../Evidence/">Evidence</a></li>
-</ul>
-</li>
-<li><a href="../predicate/">predicate</a>  <sub>REQ</sub><ul>
-<li>Description: A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.</li>
-<li>range: <a href="../types/PredicateType/">PredicateType</a></li>
-</ul>
-</li>
-<li><a href="../subject/">subject</a>  <sub>REQ</sub><ul>
-<li>Description: connects an association to the subject of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.</li>
-<li>range: <a href="../Element/">Element</a></li>
-</ul>
-</li>
+<li><a href="../OccursInAssociation/">OccursInAssociation</a></li>
 </ul>
               
             </div>

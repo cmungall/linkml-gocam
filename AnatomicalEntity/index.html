@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Class: CausesAssociation - gocam in linkml demo</title>
+  <title>Class: AnatomicalEntity - gocam in linkml demo</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Class: CausesAssociation";
-    var mkdocs_page_input_path = "CausesAssociation.md";
+    var mkdocs_page_name = "Class: AnatomicalEntity";
+    var mkdocs_page_input_path = "AnatomicalEntity.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -80,7 +80,7 @@
     
       
     
-    <li>Class: CausesAssociation</li>
+    <li>Class: AnatomicalEntity</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -91,42 +91,63 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="class-causesassociation">Class: CausesAssociation</h1>
-<p>URI: <a href="https://w3id.org/gocam/CausesAssociation">gocam:CausesAssociation</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[Occurrent],[Evidence],[Element],[Occurrent]&lt;object%201..1-++[CausesAssociation&#124;predicate(i):predicate_type],[MolecularActivity]++-%20causes%200..1&gt;[CausesAssociation],[BiologicalProcess]++-%20causes%200..1&gt;[CausesAssociation],[Association]^-[CausesAssociation],[MolecularActivity],[BiologicalProcess],[Association]" /></p>
+                <h1 id="class-anatomicalentity">Class: AnatomicalEntity</h1>
+<p>URI: <a href="https://w3id.org/gocam/AnatomicalEntity">gocam:AnatomicalEntity</a></p>
+<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[PartOfAssociation],[OntologyClass],[OccursInAssociation],[Element],[Continuant],[PartOfAssociation]&lt;part%20of%200..1-++[AnatomicalEntity&#124;id(i):string],[OccursInAssociation]-%20object%201..1&gt;[AnatomicalEntity],[AnatomicalEntity]uses%20-.-&gt;[Continuant],[Element]^-[AnatomicalEntity]" /></p>
 <h2 id="parents">Parents</h2>
 <ul>
-<li>is_a: <a href="../Association/">Association</a></li>
+<li>is_a: <a href="../Element/">Element</a> - Base class for any biological entity or occurrent in a GO-CAM model</li>
+</ul>
+<h2 id="uses-mixins">Uses Mixins</h2>
+<ul>
+<li>mixin: <a href="../Continuant/">Continuant</a></li>
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
-<li><strong>None</strong> <em><a href="../causes/">causes</a></em>  <sub>OPT</sub>  <strong><a href="./">CausesAssociation</a></strong></li>
+<li><strong><a href="../OccursInAssociation/">OccursInAssociation</a></strong> <em><a href="../occurs_in_association_object/">occurs in association➞object</a></em>  <sub>REQ</sub>  <strong><a href="./">AnatomicalEntity</a></strong></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
 <h3 id="own">Own</h3>
 <ul>
-<li><a href="../causes_association_object/">causes association➞object</a>  <sub>REQ</sub><ul>
-<li>range: <a href="../Occurrent/">Occurrent</a></li>
+<li><a href="../part_of/">part of</a>  <sub>OPT</sub><ul>
+<li>range: <a href="../PartOfAssociation/">PartOfAssociation</a></li>
 </ul>
 </li>
 </ul>
-<h3 id="inherited-from-association">Inherited from association:</h3>
+<h3 id="inherited-from-element">Inherited from element:</h3>
 <ul>
-<li><a href="../has_evidence/">has evidence</a>  <sub>OPT</sub><ul>
-<li>range: <a href="../Evidence/">Evidence</a></li>
+<li><a href="../id/">id</a>  <sub>REQ</sub><ul>
+<li>range: <a href="../types/String/">String</a></li>
 </ul>
 </li>
-<li><a href="../predicate/">predicate</a>  <sub>REQ</sub><ul>
-<li>Description: A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.</li>
-<li>range: <a href="../types/PredicateType/">PredicateType</a></li>
+<li><a href="../type/">type</a>  <sub>OPT</sub><ul>
+<li>Description: links a GOCAM element (an OWL individual) to the specific class it instantiates</li>
+<li>range: <a href="../OntologyClass/">OntologyClass</a></li>
 </ul>
 </li>
-<li><a href="../subject/">subject</a>  <sub>REQ</sub><ul>
-<li>Description: connects an association to the subject of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.</li>
-<li>range: <a href="../Element/">Element</a></li>
+<li><a href="../type_inferences/">type inferences</a>  <sub>0..*</sub><ul>
+<li>Description: links a GOCAM element (an OWL individual) to the specific class it instantiates</li>
+<li>range: <a href="../OntologyClass/">OntologyClass</a></li>
 </ul>
 </li>
 </ul>
+<h2 id="other-properties">Other properties</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Exact Mappings:</strong></td>
+<td></td>
+<td>goshapes:AnatomicalEntity</td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div>

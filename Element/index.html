@@ -92,11 +92,12 @@
             <div class="section">
               
                 <h1 id="class-element">Class: Element</h1>
-<p>An OWL individual representing a particular element in a context. Here element is generic and encompasses causal entities as well as processes, activities</p>
+<p>Base class for any biological entity or occurrent in a GO-CAM model</p>
 <p>URI: <a href="https://w3id.org/gocam/Element">gocam:Element</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[OntologyClass],[MolecularActivity],[OntologyClass]&lt;type%20inferences%200..*-%20[Element&#124;id:string],[OntologyClass]&lt;type%200..1-%20[Element],[Association]-%20object%201..1&gt;[Element],[Association]-%20subject%201..1&gt;[Element],[Element]^-[MolecularActivity],[Element]^-[CellularComponent],[Element]^-[BiologicalProcess],[CellularComponent],[BiologicalProcess],[Association]" /></p>
+<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[OntologyClass],[MolecularActivity],[OntologyClass]&lt;type%20inferences%200..*-%20[Element&#124;id:string],[OntologyClass]&lt;type%200..1-%20[Element],[Association]-%20object%201..1&gt;[Element],[Association]-%20subject%201..1&gt;[Element],[Element]^-[MolecularActivity],[Element]^-[CellularComponent],[Element]^-[BiologicalProcess],[Element]^-[AnatomicalEntity],[CellularComponent],[BiologicalProcess],[Association],[AnatomicalEntity]" /></p>
 <h2 id="children">Children</h2>
 <ul>
+<li><a href="../AnatomicalEntity/">AnatomicalEntity</a></li>
 <li><a href="../BiologicalProcess/">BiologicalProcess</a></li>
 <li><a href="../CellularComponent/">CellularComponent</a></li>
 <li><a href="../MolecularActivity/">MolecularActivity</a></li>
@@ -134,6 +135,16 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><strong>Comments:</strong></td>
+<td></td>
+<td>An OWL individual representing a particular element in a context</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Here element is generic and encompasses causal entities as well as processes, activities</td>
+</tr>
 <tr>
 <td><strong>Exact Mappings:</strong></td>
 <td></td>

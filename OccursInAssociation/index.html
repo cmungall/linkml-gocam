@@ -93,7 +93,7 @@
               
                 <h1 id="class-occursinassociation">Class: OccursInAssociation</h1>
 <p>URI: <a href="https://w3id.org/gocam/OccursInAssociation">gocam:OccursInAssociation</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[MolecularActivity]++-%20occurs%20in%200..1&gt;[OccursInAssociation&#124;predicate(i):predicate_type],[BiologicalProcess]++-%20occurs%20in%200..1&gt;[OccursInAssociation],[Association]^-[OccursInAssociation],[MolecularActivity],[Evidence],[Element],[BiologicalProcess],[Association]" /></p>
+<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[AnatomicalEntity]&lt;object%201..1-%20[OccursInAssociation&#124;predicate(i):predicate_type],[MolecularActivity]++-%20occurs%20in%200..1&gt;[OccursInAssociation],[BiologicalProcess]++-%20occurs%20in%200..1&gt;[OccursInAssociation],[Association]^-[OccursInAssociation],[MolecularActivity],[Evidence],[Element],[BiologicalProcess],[Association],[AnatomicalEntity]" /></p>
 <h2 id="parents">Parents</h2>
 <ul>
 <li>is_a: <a href="../Association/">Association</a></li>
@@ -103,15 +103,17 @@
 <li><strong>None</strong> <em><a href="../occurs_in/">occurs in</a></em>  <sub>OPT</sub>  <strong><a href="./">OccursInAssociation</a></strong></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
+<h3 id="own">Own</h3>
+<ul>
+<li><a href="../occurs_in_association_object/">occurs in association➞object</a>  <sub>REQ</sub><ul>
+<li>range: <a href="../AnatomicalEntity/">AnatomicalEntity</a></li>
+</ul>
+</li>
+</ul>
 <h3 id="inherited-from-association">Inherited from association:</h3>
 <ul>
 <li><a href="../has_evidence/">has evidence</a>  <sub>OPT</sub><ul>
 <li>range: <a href="../Evidence/">Evidence</a></li>
-</ul>
-</li>
-<li><a href="../object/">object</a>  <sub>REQ</sub><ul>
-<li>Description: connects an association to the object of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.</li>
-<li>range: <a href="../Element/">Element</a></li>
 </ul>
 </li>
 <li><a href="../predicate/">predicate</a>  <sub>REQ</sub><ul>
