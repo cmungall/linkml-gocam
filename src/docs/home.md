@@ -35,7 +35,15 @@ Here we show an example of using the Python object model to create a portion of 
 
 
 ```python
- m = Model(id=id('m1'),
+WNT_SIGNALING = 'GO:0060070' ## canonical Wnt signaling pathway
+RECEPTOR_LIGAND = 'GO:0048018' ## receptor ligand activity
+RECEPTOR_ACTIVITY = 'GO:0042813' ## Wnt-activated receptor activity
+EXTRACELLULAR = 'GO:0005615' ## extracellular space
+PM = 'GO:0005886' ## plasma membrane
+WNT3 = 'UniprotKB:P56703'
+FZD1 = 'UniprotKB:Q9UP38'
+
+m = Model(id=id('m1'),
                   title='test title',
                   contributor=['orcid:123', 'orcid:234'],
                   state=ModelStateEnum.production)
@@ -64,6 +72,11 @@ Here we show an example of using the Python object model to create a portion of 
         jsonld = dumps(m, cntxt)
         print(jsonld)
 ```
+
+Of course, one would generally not write code like this - to obtain
+python objects we would use an adapter to get from files/database, or
+it would sit at the end of a CRUD API. The code above is just for
+illustration purposes.
 
 ## JSON Serialization
 

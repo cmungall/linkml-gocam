@@ -5,10 +5,10 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
 <model:a5g4ccd08-m1> a gocam:Model ;
-    lego:modelstate [ gocam:text "production" ] ;
+    lego:modelstate [ gocam:text "development" ] ;
     dce:contributor "orcid:123",
         "orcid:234" ;
-    dce:title "test title" ;
+    dce:title "test model: see https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7012280/figure/F3/" ;
     gocam:information_biomacromolecule_set <model:a5g4ccd08-g1>,
         <model:a5g4ccd08-g2> ;
     gocam:molecular_activity_set <model:a5g4ccd08-a1>,
@@ -21,7 +21,9 @@
     gocam:enabled_by [ rdf:object <model:a5g4ccd08-g1> ;
             gocam:has_evidence <model:a5g4ccd08-e4> ] ;
     gocam:occurs_in [ rdf:object <model:a5g4ccd08-c1> ;
-            gocam:has_evidence <model:a5g4ccd08-e5> ] .
+            gocam:has_evidence <model:a5g4ccd08-e5> ] ;
+    gocam:part_of [ rdf:object <model:a5g4ccd08-p1> ;
+            gocam:has_evidence <model:a5g4ccd08-e7> ] .
 
 <model:a5g4ccd08-e1> dce:source <file:///Users/cjm/repos/linkml-gocam/PMID:1234> ;
     gocam:evidence_type <eco:nnn> .
@@ -39,6 +41,9 @@
     gocam:evidence_type <eco:nnn> .
 
 <model:a5g4ccd08-e6> dce:source <file:///Users/cjm/repos/linkml-gocam/PMID:1234> ;
+    gocam:evidence_type <eco:nnn> .
+
+<model:a5g4ccd08-e7> dce:source <file:///Users/cjm/repos/linkml-gocam/PMID:1234> ;
     gocam:evidence_type <eco:nnn> .
 
 <model:a5g4ccd08-a2> a <file:///Users/cjm/repos/linkml-gocam/GO:0042813> ;

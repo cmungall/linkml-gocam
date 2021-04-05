@@ -1,12 +1,12 @@
 {
   "id": "model:a5g4ccd08-m1",
-  "title": "test title",
+  "title": "test model: see https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7012280/figure/F3/",
   "contributor": [
     "orcid:123",
     "orcid:234"
   ],
   "state": {
-    "text": "production"
+    "text": "development"
   },
   "molecular_activity_set": [
     {
@@ -22,6 +22,16 @@
           ]
         },
         "predicate": "regulates"
+      },
+      "part_of": {
+        "object": "model:a5g4ccd08-p1",
+        "has_evidence": {
+          "id": "model:a5g4ccd08-e7",
+          "evidence_type": "ECO:nnn",
+          "reference": [
+            "PMID:1234"
+          ]
+        }
       },
       "enabled_by": {
         "object": "model:a5g4ccd08-g1",

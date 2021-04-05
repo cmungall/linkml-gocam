@@ -1,5 +1,5 @@
 # Auto generated from gocam.yaml by pythongen.py version: 0.9.0
-# Generation date: 2021-04-04 16:44
+# Generation date: 2021-04-05 13:22
 # Schema: gocam
 #
 # id: https://w3id.org/gocam
@@ -150,18 +150,26 @@ class EvidenceId(InformationElementId):
     pass
 
 
-class OccurrentId(extended_str):
+class DomainElementMixinId(extended_str):
     pass
 
 
-class ContinuantId(extended_str):
+class ActivityOrProcessId(DomainElementMixinId):
+    pass
+
+
+class ProcessOrPhaseId(DomainElementMixinId):
+    pass
+
+
+class ContinuantId(DomainElementMixinId):
     pass
 
 
 @dataclass
 class Element(YAMLRoot):
     """
-    Base class for any biological entity or occurrent in a GO-CAM model
+    Base class for any biological entity or activity or process in a GO-CAM model
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -183,6 +191,10 @@ class Element(YAMLRoot):
 
 @dataclass
 class Model(Element):
+    """
+    A collection of GO-CAM elements and associated metadata. A model combines multiple simple GO annotations into an
+    integrated, semantically precise and computable model of biological function.
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = GOCAM.Model
@@ -439,6 +451,10 @@ class ChemicalEntity(DomainElement):
 
 @dataclass
 class InformationBiomacromolecule(ChemicalEntity):
+    """
+    This class groups gene, gene product (protein on ncRNA), or a macromolecular complex that is capable of carrying
+    out a molecular activity
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = GOCAM.InformationBiomacromolecule
@@ -540,14 +556,14 @@ class CausesAssociation(Association):
     class_name: ClassVar[str] = "causes association"
     class_model_uri: ClassVar[URIRef] = GOCAM.CausesAssociation
 
-    object: Union[str, OccurrentId] = None
+    object: Union[str, ActivityOrProcessId] = None
     predicate: Optional[Union[str, PredicateType]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self.object is None:
             raise ValueError("object must be supplied")
-        if not isinstance(self.object, OccurrentId):
-            self.object = OccurrentId(self.object)
+        if not isinstance(self.object, ActivityOrProcessId):
+            self.object = ActivityOrProcessId(self.object)
 
         if self.predicate is not None and not isinstance(self.predicate, PredicateType):
             self.predicate = PredicateType(self.predicate)
@@ -641,13 +657,13 @@ class ProcessPartOfAssociation(PartOfAssociation):
     class_name: ClassVar[str] = "process part of association"
     class_model_uri: ClassVar[URIRef] = GOCAM.ProcessPartOfAssociation
 
-    object: Union[str, OccurrentId] = None
+    object: Union[str, ActivityOrProcessId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self.object is None:
             raise ValueError("object must be supplied")
-        if not isinstance(self.object, OccurrentId):
-            self.object = OccurrentId(self.object)
+        if not isinstance(self.object, ActivityOrProcessId):
+            self.object = ActivityOrProcessId(self.object)
 
         super().__post_init__(**kwargs)
 
@@ -687,13 +703,13 @@ class HappensDuringAssociation(Association):
     class_name: ClassVar[str] = "happens during association"
     class_model_uri: ClassVar[URIRef] = GOCAM.HappensDuringAssociation
 
-    object: Union[str, OccurrentId] = None
+    object: Union[str, ActivityOrProcessId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self.object is None:
             raise ValueError("object must be supplied")
-        if not isinstance(self.object, OccurrentId):
-            self.object = OccurrentId(self.object)
+        if not isinstance(self.object, ActivityOrProcessId):
+            self.object = ActivityOrProcessId(self.object)
 
         super().__post_init__(**kwargs)
 
@@ -701,7 +717,7 @@ class HappensDuringAssociation(Association):
 @dataclass
 class HasInputAssociation(Association):
     """
-    Connects an MF or BP to ats input entity, which may be a chemical entity, an information macromolecule, or a
+    Connects an MF or BP to its input entity, which may be a chemical entity, an information biomacromolecule, or a
     larger structure
     """
     _inherited_slots: ClassVar[List[str]] = []
@@ -838,27 +854,53 @@ class Evidence(InformationElement):
 
 
 @dataclass
-class Occurrent(YAMLRoot):
+class DomainElementMixin(YAMLRoot):
+    """
+    Grouping for mixins that apply to GO-CAM elements. These mixins allow us to group together elements that are alike
+    in some fashion
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = GOCAM.Occurrent
-    class_class_curie: ClassVar[str] = "gocam:Occurrent"
-    class_name: ClassVar[str] = "occurrent"
-    class_model_uri: ClassVar[URIRef] = GOCAM.Occurrent
+    class_class_uri: ClassVar[URIRef] = GOCAM.DomainElementMixin
+    class_class_curie: ClassVar[str] = "gocam:DomainElementMixin"
+    class_name: ClassVar[str] = "domain element mixin"
+    class_model_uri: ClassVar[URIRef] = GOCAM.DomainElementMixin
 
-    id: Union[str, OccurrentId] = None
+    id: Union[str, DomainElementMixinId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self.id is None:
             raise ValueError("id must be supplied")
-        if not isinstance(self.id, OccurrentId):
-            self.id = OccurrentId(self.id)
+        if not isinstance(self.id, DomainElementMixinId):
+            self.id = DomainElementMixinId(self.id)
 
         super().__post_init__(**kwargs)
 
 
 @dataclass
-class Continuant(YAMLRoot):
+class ActivityOrProcess(DomainElementMixin):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = GOCAM.ActivityOrProcess
+    class_class_curie: ClassVar[str] = "gocam:ActivityOrProcess"
+    class_name: ClassVar[str] = "activity or process"
+    class_model_uri: ClassVar[URIRef] = GOCAM.ActivityOrProcess
+
+    id: Union[str, ActivityOrProcessId] = None
+
+@dataclass
+class ProcessOrPhase(DomainElementMixin):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = GOCAM.ProcessOrPhase
+    class_class_curie: ClassVar[str] = "gocam:ProcessOrPhase"
+    class_name: ClassVar[str] = "process or phase"
+    class_model_uri: ClassVar[URIRef] = GOCAM.ProcessOrPhase
+
+    id: Union[str, ProcessOrPhaseId] = None
+
+@dataclass
+class Continuant(DomainElementMixin):
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = GOCAM.Continuant
@@ -867,15 +909,6 @@ class Continuant(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = GOCAM.Continuant
 
     id: Union[str, ContinuantId] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
-        if not isinstance(self.id, ContinuantId):
-            self.id = ContinuantId(self.id)
-
-        super().__post_init__(**kwargs)
-
 
 # Enumerations
 class ModelStateEnum(EnumDefinitionImpl):
@@ -1071,7 +1104,7 @@ slots.occurs_in_association_object = Slot(uri=GOCAM.object, name="occurs in asso
                    model_uri=GOCAM.occurs_in_association_object, domain=OccursInAssociation, range=Union[str, AnatomicalEntityId])
 
 slots.causes_association_object = Slot(uri=GOCAM.object, name="causes association_object", curie=GOCAM.curie('object'),
-                   model_uri=GOCAM.causes_association_object, domain=CausesAssociation, range=Union[str, OccurrentId])
+                   model_uri=GOCAM.causes_association_object, domain=CausesAssociation, range=Union[str, ActivityOrProcessId])
 
 slots.causes_association_predicate = Slot(uri=GOCAM.predicate, name="causes association_predicate", curie=GOCAM.curie('predicate'),
                    model_uri=GOCAM.causes_association_predicate, domain=CausesAssociation, range=Optional[Union[str, PredicateType]])
@@ -1083,13 +1116,13 @@ slots.anatomical_part_of_association_object = Slot(uri=GOCAM.object, name="anato
                    model_uri=GOCAM.anatomical_part_of_association_object, domain=AnatomicalPartOfAssociation, range=Union[str, AnatomicalEntityId])
 
 slots.process_part_of_association_object = Slot(uri=GOCAM.object, name="process part of association_object", curie=GOCAM.curie('object'),
-                   model_uri=GOCAM.process_part_of_association_object, domain=ProcessPartOfAssociation, range=Union[str, OccurrentId])
+                   model_uri=GOCAM.process_part_of_association_object, domain=ProcessPartOfAssociation, range=Union[str, ActivityOrProcessId])
 
 slots.enabled_by_association_object = Slot(uri=GOCAM.object, name="enabled by association_object", curie=GOCAM.curie('object'),
                    model_uri=GOCAM.enabled_by_association_object, domain=EnabledByAssociation, range=Union[str, InformationBiomacromoleculeId])
 
 slots.happens_during_association_object = Slot(uri=GOCAM.object, name="happens during association_object", curie=GOCAM.curie('object'),
-                   model_uri=GOCAM.happens_during_association_object, domain=HappensDuringAssociation, range=Union[str, OccurrentId])
+                   model_uri=GOCAM.happens_during_association_object, domain=HappensDuringAssociation, range=Union[str, ActivityOrProcessId])
 
 slots.has_input_association_object = Slot(uri=GOCAM.object, name="has input association_object", curie=GOCAM.curie('object'),
                    model_uri=GOCAM.has_input_association_object, domain=HasInputAssociation, range=Union[str, ContinuantId])

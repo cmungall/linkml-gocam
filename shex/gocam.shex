@@ -50,6 +50,14 @@ linkml:Objectidentifier IRI
 
 linkml:Nodeidentifier NONLITERAL
 
+<ActivityOrProcess> {
+    (  $<ActivityOrProcess_tes> (  &<DomainElementMixin_tes> ;
+          rdf:type [ <DomainElementMixin> ] ?
+       ) ;
+       rdf:type [ <ActivityOrProcess> ]
+    )
+}
+
 <AnatomicalEntity> CLOSED {
     (  $<AnatomicalEntity_tes> (  &<DomainElement_tes> ;
           rdf:type [ <DomainElement> ] ? ;
@@ -89,8 +97,10 @@ linkml:Nodeidentifier NONLITERAL
 <BiologicalProcess> CLOSED {
     (  $<BiologicalProcess_tes> (  &<DomainElement_tes> ;
           rdf:type [ <DomainElement> ] ? ;
-          &<Occurrent_tes> ;
-          rdf:type [ <Occurrent> ] ? ;
+          &<ActivityOrProcess_tes> ;
+          rdf:type [ <ActivityOrProcess> ] ? ;
+          &<ProcessOrPhase_tes> ;
+          rdf:type [ <ProcessOrPhase> ] ? ;
           <occurs_in> @<OccursInAssociation> ? ;
           <causes> @<CausesAssociation> ? ;
           <happens_during> @<HappensDuringAssociation> ?
@@ -102,7 +112,7 @@ linkml:Nodeidentifier NONLITERAL
 <CausesAssociation> CLOSED {
     (  $<CausesAssociation_tes> (  &<Association_tes> ;
           rdf:type [ rdf:Statement ] ? ;
-          <object> @<Occurrent> ;
+          <object> @<ActivityOrProcess> ;
           <predicate> @<PredicateType> ?
        ) ;
        rdf:type [ <CausesAssociation> ] ?
@@ -120,7 +130,9 @@ linkml:Nodeidentifier NONLITERAL
 )
 
 <Continuant> {
-    (  $<Continuant_tes> rdf:type . * ;
+    (  $<Continuant_tes> (  &<DomainElementMixin_tes> ;
+          rdf:type [ <DomainElementMixin> ] ?
+       ) ;
        rdf:type [ <Continuant> ]
     )
 }
@@ -136,6 +148,16 @@ linkml:Nodeidentifier NONLITERAL
        )
     } OR @<AnatomicalEntity> OR @<BiologicalProcess> OR @<ChemicalEntity> OR @<MolecularActivity>
 )
+
+<DomainElementMixin>  (
+    @<ActivityOrProcess> OR @<Continuant> OR @<ProcessOrPhase>
+)
+
+<DomainElementMixin_struct> {
+    (  $<DomainElementMixin_tes> rdf:type . * ;
+       rdf:type [ <DomainElementMixin> ]
+    )
+}
 
 <Element>  (
     CLOSED {
@@ -170,7 +192,7 @@ linkml:Nodeidentifier NONLITERAL
 <HappensDuringAssociation> CLOSED {
     (  $<HappensDuringAssociation_tes> (  &<Association_tes> ;
           rdf:type [ rdf:Statement ] ? ;
-          <object> @<Occurrent>
+          <object> @<ActivityOrProcess>
        ) ;
        rdf:type [ <HappensDuringAssociation> ] ?
     )
@@ -249,8 +271,8 @@ linkml:Nodeidentifier NONLITERAL
 <MolecularActivity> CLOSED {
     (  $<MolecularActivity_tes> (  &<DomainElement_tes> ;
           rdf:type [ <DomainElement> ] ? ;
-          &<Occurrent_tes> ;
-          rdf:type [ <Occurrent> ] ? ;
+          &<ActivityOrProcess_tes> ;
+          rdf:type [ <ActivityOrProcess> ] ? ;
           <causes> @<CausesAssociation> ? ;
           <happens_during> @<HappensDuringAssociation> ? ;
           <part_of> @<ProcessPartOfAssociation> ? ;
@@ -259,12 +281,6 @@ linkml:Nodeidentifier NONLITERAL
           <occurs_in> @<OccursInAssociation> ?
        ) ;
        rdf:type [ <MolecularActivity> ]
-    )
-}
-
-<Occurrent> {
-    (  $<Occurrent_tes> rdf:type . * ;
-       rdf:type [ <Occurrent> ]
     )
 }
 
@@ -297,10 +313,18 @@ linkml:Nodeidentifier NONLITERAL
     )
 }
 
+<ProcessOrPhase> {
+    (  $<ProcessOrPhase_tes> (  &<DomainElementMixin_tes> ;
+          rdf:type [ <DomainElementMixin> ] ?
+       ) ;
+       rdf:type [ <ProcessOrPhase> ]
+    )
+}
+
 <ProcessPartOfAssociation> CLOSED {
     (  $<ProcessPartOfAssociation_tes> (  &<PartOfAssociation_tes> ;
           rdf:type [ <PartOfAssociation> ] ? ;
-          <object> @<Occurrent>
+          <object> @<ActivityOrProcess>
        ) ;
        rdf:type [ <ProcessPartOfAssociation> ] ?
     )

@@ -1,4 +1,5 @@
 id,mappings,description
+activity_or_process,,
 anatomical_entity,,"An instance of a GO cellular anatomical entity, a cell type, or gross anatomical structure"
 anatomical_part_of_association,,"Connects an anatomical entity (such as a component, cell, or gross anatomical entity) to its parent parts"
 association,,An association between a domain element (e.g. a MolecularActivity) and another domain element (e.g. another MolecularActivity) with evidence and provenance attached
@@ -7,21 +8,22 @@ causes_association,,An association owned by an upstream MA or BP that connects t
 chemical_entity,,"An instance of a chemical entity, as defined in CHEBI, including macromolecules defined in NEO"
 continuant,,
 domain_element,,An element that is part of a GO-CAM model
-element,,Base class for any biological entity or occurrent in a GO-CAM model
+domain_element_mixin,,Grouping for mixins that apply to GO-CAM elements. These mixins allow us to group together elements that are alike in some fashion
+element,,Base class for any biological entity or activity or process in a GO-CAM model
 enabled_by_association,,Connects an MA to the information biomacromolecule that executes the activity
 evidence,,"An instance of a piece of evidence. Evidence attributes such as type, reference, hang off of here"
 happens_during_association,,Connects an MF to a process or phase in which the process occurs
-has_input_association,,"Connects an MF or BP to ats input entity, which may be a chemical entity, an information macromolecule, or a larger structure"
+has_input_association,,"Connects an MF or BP to its input entity, which may be a chemical entity, an information biomacromolecule, or a larger structure"
 has_part_association,,General grouping for associations that Link an entity to its parts by a HasPartAssociation
-information_biomacromolecule,,
+information_biomacromolecule,,"This class groups gene, gene product (protein on ncRNA), or a macromolecular complex that is capable of carrying out a molecular activity"
 information_element,,
 macromolecule_has_part_association,,Connects a macromolecule (such as a protein complex) to its parts (gene products or chemical entities)
-model,,
+model,,"A collection of GO-CAM elements and associated metadata. A model combines multiple simple GO annotations into an integrated, semantically precise and computable model of biological function."
 molecular_activity,,An instance of a GO molecular function
-occurrent,,
 occurs_in_association,,An association owned by a MA or BP that connect to an AE object in which the activity/process is carried out
 ontology_class,,
 part_of_association,,General grouping for associations that Link an entity to its wholes by a PartOfAssociation
+process_or_phase,,
 process_part_of_association,,Connects a MA or BP to its parent parts
 publication,,
 

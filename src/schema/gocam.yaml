@@ -21,6 +21,7 @@ prefixes:
   BFO: http://purl.obolibrary.org/obo/BFO_
 default_prefix: gocam
 see_also:
+  - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7012280/
   - https://docs.google.com/presentation/d/1ja0Vkw0AoENJ58emM77dGnqPtY1nfIJMeyVnObBxIxI/edit#slide=id.p8
 
 subsets:
@@ -124,14 +125,14 @@ slots:
   occurs in:
     is_a: related to
     range: occurs in association
-    domain: occurrent
+    domain: activity or process
     description: >-
       Links a subject domain entity (a MA or BP) to an object domain entity by way of an OccursInAssociation
     
   causes:
     is_a: related to
     range: causes association
-    domain: occurrent
+    domain: activity or process
     description: >-
       Links a subject domain entity (a MA or BP) to an object domain entity by way of an CausesAssociation
     comments:
@@ -140,7 +141,7 @@ slots:
   happens during:
     is_a: related to
     range: happens during association
-    domain: occurrent
+    domain: activity or process
     description: >-
       Links a subject domain entity (a MA or BP) to an object domain entity by way of a HappensDuringAssociation 
 
@@ -301,7 +302,7 @@ classes:
 
   element:
     description: >-
-      Base class for any biological entity or occurrent in a GO-CAM model
+      Base class for any biological entity or activity or process in a GO-CAM model
     comments:
       - An OWL individual representing a particular element in a context
       - Here element is generic and encompasses causal entities as well as processes, activities
@@ -314,6 +315,8 @@ classes:
     local_names:
       gocam: GO-CAM model
     is_a: element
+    description: >-
+      A collection of GO-CAM elements and associated metadata. A model combines multiple simple GO annotations into an integrated, semantically precise and computable model of biological function.
     slots:
       - id
       - title
@@ -349,7 +352,7 @@ classes:
     description: >-
       An instance of a GO molecular function
     mixins:
-      - occurrent
+      - activity or process
     slots:
       - causes
       - happens during
@@ -372,7 +375,8 @@ classes:
     description: >-
       An instance of a GO biological process
     mixins:
-      - occurrent
+      - activity or process
+      - process or phase
     slots:
       - occurs in
       - causes
@@ -409,6 +413,8 @@ classes:
     is_a: domain element
     
   information biomacromolecule:
+    description: >-
+      This class groups gene, gene product (protein on ncRNA), or a macromolecular complex that is capable of carrying out a molecular activity
     local_names:
       paper: Active Entity
       go: Gene Product or Complex
@@ -459,7 +465,7 @@ classes:
       An association owned by an upstream MA or BP that connects to a downstream MA or BP. The nature of the causal relationship is indicated with the predicate.
     slot_usage:
       object:
-        range: occurrent
+        range: activity or process
         role: target
       predicate:
         description: >-
@@ -499,7 +505,7 @@ classes:
     is_a: part of association
     slot_usage:
       object:
-        range: occurrent
+        range: activity or process
         role: whole
     description: >-
       Connects a MA or BP to its parent parts
@@ -517,7 +523,7 @@ classes:
     is_a: association
     slot_usage:
       object:
-        range: occurrent
+        range: activity or process
         role: phase
     description: >-
       Connects an MF to a process or phase in which the process occurs
@@ -529,7 +535,7 @@ classes:
         range: continuant
         role: input
     description: >-
-      Connects an MF or BP to ats input entity, which may be a chemical entity, an information macromolecule, or a larger structure
+      Connects an MF or BP to its input entity, which may be a chemical entity, an information biomacromolecule, or a larger structure
 
   ## -- Ontologies --
     
@@ -564,16 +570,31 @@ classes:
       
 
   ## -- MIXINS --
-  
-  occurrent:
+
+  domain element mixin:
+    description: >-
+      Grouping for mixins that apply to GO-CAM elements. These mixins allow us to group together elements that are alike in some fashion
+    abstract: true
     mixin: true
     slots:
       - id
+  
+  activity or process:
+    is_a: domain element mixin
+    mixin: true
+    union_of:
+      - molecular activity
+      - biological process
+      
+  process or phase:
+    is_a: domain element mixin
+    mixin: true
+    union_of:
+      - biological process
       
   continuant:
+    is_a: domain element mixin
     mixin: true
-    slots:
-      - id
 
 types:
 

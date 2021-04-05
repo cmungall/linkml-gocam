@@ -30,7 +30,7 @@ WNT3 = 'UniprotKB:P56703'
 FZD1 = 'UniprotKB:Q9UP38'
 
 ttl_out = os.path.join(TARGET_DIR, 'sample.ttl')
-json_out = os.path.join(TARGET_DIR, 'sample.jsonld')
+jsonld_out = os.path.join(TARGET_DIR, 'sample.jsonld')
 cntxt_file =  os.path.join(JSONLD_DIR, 'gocam.context.jsonld')
 f = open(cntxt_file)
 #cntxt = json.load(f)
@@ -51,9 +51,9 @@ class TestCreate(unittest.TestCase):
 
     def test_create(self):
         m = Model(id=id('m1'),
-                  title='test title',
+                  title='test model: see https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7012280/figure/F3/',
                   contributor=['orcid:123', 'orcid:234'],
-                  state=ModelStateEnum.production)
+                  state=ModelStateEnum.development)
         print(f'Model = {m.id}')
         p1 = BiologicalProcess(id=id('p1'), type=WNT_SIGNALING)
         c1 = AnatomicalEntity(id=id('c1'), type=EXTRACELLULAR,
@@ -82,13 +82,16 @@ class TestCreate(unittest.TestCase):
                                    object=c1.id),
                                causes=CausesAssociation(has_evidence=gen_evidence('ECO:nnn'),
                                                         predicate='regulates',
-                                                        object=id('a2')))
+                                                        object=id('a2')),
+                               part_of=ProcessPartOfAssociation(
+                                   has_evidence=gen_evidence('ECO:nnn'),
+                                   object=p1.id))
 
         m.molecular_activity_set = [a1, a2]
         m.information_biomacromolecule_set = [g1, g2]
         jsonld = dumps(m, cntxt)
         print(jsonld)
-        with open(json_out, 'w') as io:
+        with open(jsonld_out, 'w') as io:
             io.write(jsonld)
         #print(cntxt)
         g = Graph()

@@ -1,5 +1,5 @@
 {
-   "_comments": "Auto generated from gocam.yaml by jsonldcontextgen.py version: 0.1.1\n    Generation date: 2021-04-04 16:44\n    Schema: gocam\n    \n    id: https://w3id.org/gocam\n    description: GO CAM experimental LinkML schema\n    license: https://creativecommons.org/publicdomain/zero/1.0/\n    ",
+   "_comments": "Auto generated from gocam.yaml by jsonldcontextgen.py version: 0.1.1\n    Generation date: 2021-04-05 13:22\n    Schema: gocam\n    \n    id: https://w3id.org/gocam\n    description: GO CAM experimental LinkML schema\n    license: https://creativecommons.org/publicdomain/zero/1.0/\n    ",
    "@context": {
       "BFO": {
          "@id": "http://purl.obolibrary.org/obo/BFO_",

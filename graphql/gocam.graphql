@@ -1,3 +1,8 @@
+interface ActivityOrProcess
+  {
+    id: String!
+  }
+
 type AnatomicalEntity implements Continuant
   {
     id: String!
@@ -23,7 +28,7 @@ interface Association
     object: Element!
   }
 
-type BiologicalProcess implements Occurrent
+type BiologicalProcess implements ActivityOrProcess, ProcessOrPhase
   {
     id: String!
     type: OntologyClass!
@@ -37,7 +42,7 @@ type CausesAssociation
   {
     hasEvidence: Evidence
     subject: DomainElement
-    object: Occurrent!
+    object: ActivityOrProcess!
     predicate: PredicateType
   }
 
@@ -58,6 +63,11 @@ type DomainElement
     id: String!
     type: OntologyClass!
     typeInferences: [OntologyClass]
+  }
+
+interface DomainElementMixin
+  {
+    id: String!
   }
 
 type Element
@@ -88,7 +98,7 @@ type HappensDuringAssociation
     hasEvidence: Evidence
     subject: DomainElement
     predicate: PredicateType
-    object: Occurrent!
+    object: ActivityOrProcess!
   }
 
 type HasInputAssociation
@@ -144,7 +154,7 @@ type Model
     ontologyClassSet: [OntologyClass]
   }
 
-type MolecularActivity implements Occurrent
+type MolecularActivity implements ActivityOrProcess
   {
     id: String!
     type: OntologyClass!
@@ -155,11 +165,6 @@ type MolecularActivity implements Occurrent
     enabledBy: EnabledByAssociation
     hasInput: HasInputAssociation
     occursIn: OccursInAssociation
-  }
-
-interface Occurrent
-  {
-    id: String!
   }
 
 type OccursInAssociation
@@ -185,12 +190,17 @@ interface PartOfAssociation
     object: Element!
   }
 
+interface ProcessOrPhase
+  {
+    id: String!
+  }
+
 type ProcessPartOfAssociation
   {
     hasEvidence: Evidence
     subject: DomainElement
     predicate: PredicateType
-    object: Occurrent!
+    object: ActivityOrProcess!
   }
 
 type Publication
