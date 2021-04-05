@@ -92,11 +92,17 @@
             <div class="section">
               
                 <h1 id="class-partofassociation">Class: PartOfAssociation</h1>
+<p>General grouping for associations that Link an entity to its wholes by a PartOfAssociation</p>
 <p>URI: <a href="https://w3id.org/gocam/PartOfAssociation">gocam:PartOfAssociation</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[MolecularActivity]++-%20part%20of%200..1&gt;[PartOfAssociation&#124;predicate(i):predicate_type],[CellularComponent]++-%20part%20of%200..1&gt;[PartOfAssociation],[AnatomicalEntity]++-%20part%20of%200..1&gt;[PartOfAssociation],[Association]^-[PartOfAssociation],[MolecularActivity],[Evidence],[Element],[CellularComponent],[Association],[AnatomicalEntity]" /></p>
+<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[ProcessPartOfAssociation],[MolecularActivity]++-%20part%20of(i)%200..1&gt;[PartOfAssociation&#124;predicate(i):predicate_type%20%3F],[AnatomicalEntity]++-%20part%20of(i)%200..1&gt;[PartOfAssociation],[PartOfAssociation]^-[ProcessPartOfAssociation],[PartOfAssociation]^-[AnatomicalPartOfAssociation],[Association]^-[PartOfAssociation],[MolecularActivity],[Evidence],[Element],[DomainElement],[Association],[AnatomicalPartOfAssociation],[AnatomicalEntity]" /></p>
 <h2 id="parents">Parents</h2>
 <ul>
-<li>is_a: <a href="../Association/">Association</a></li>
+<li>is_a: <a href="../Association/">Association</a> - An association between a domain element (e.g. a MolecularActivity) and another domain element (e.g. another MolecularActivity) with evidence and provenance attached</li>
+</ul>
+<h2 id="children">Children</h2>
+<ul>
+<li><a href="../AnatomicalPartOfAssociation/">AnatomicalPartOfAssociation</a> - Connects an anatomical entity (such as a component, cell, or gross anatomical entity) to its parent parts</li>
+<li><a href="../ProcessPartOfAssociation/">ProcessPartOfAssociation</a> - Connects a MA or BP to its parent parts</li>
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
@@ -106,6 +112,7 @@
 <h3 id="inherited-from-association">Inherited from association:</h3>
 <ul>
 <li><a href="../has_evidence/">has evidence</a>  <sub>OPT</sub><ul>
+<li>Description: Links an association to evidence for it</li>
 <li>range: <a href="../Evidence/">Evidence</a></li>
 </ul>
 </li>
@@ -114,14 +121,14 @@
 <li>range: <a href="../Element/">Element</a></li>
 </ul>
 </li>
-<li><a href="../predicate/">predicate</a>  <sub>REQ</sub><ul>
+<li><a href="../predicate/">predicate</a>  <sub>OPT</sub><ul>
 <li>Description: A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.</li>
 <li>range: <a href="../types/PredicateType/">PredicateType</a></li>
 </ul>
 </li>
-<li><a href="../subject/">subject</a>  <sub>REQ</sub><ul>
+<li><a href="../subject/">subject</a>  <sub>OPT</sub><ul>
 <li>Description: connects an association to the subject of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.</li>
-<li>range: <a href="../Element/">Element</a></li>
+<li>range: <a href="../DomainElement/">DomainElement</a></li>
 </ul>
 </li>
 </ul>

@@ -93,14 +93,26 @@
               
                 <h1 id="class-continuant">Class: Continuant</h1>
 <p>URI: <a href="https://w3id.org/gocam/Continuant">gocam:Continuant</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[CellularComponent]uses%20-.-&gt;[Continuant],[AnatomicalEntity]uses%20-.-&gt;[Continuant],[CellularComponent],[AnatomicalEntity]" /></p>
+<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[MacromoleculeHasPartAssociation],[HasInputAssociation],[HasInputAssociation]-%20object%201..1&gt;[Continuant&#124;id:string],[MacromoleculeHasPartAssociation]-%20object%201..1&gt;[Continuant],[InformationBiomacromolecule]uses%20-.-&gt;[Continuant],[AnatomicalEntity]uses%20-.-&gt;[Continuant],[InformationBiomacromolecule],[AnatomicalEntity]" /></p>
 <h2 id="mixin-for">Mixin for</h2>
 <ul>
-<li><a href="../AnatomicalEntity/">AnatomicalEntity</a> (mixin) </li>
-<li><a href="../CellularComponent/">CellularComponent</a> (mixin) </li>
+<li><a href="../AnatomicalEntity/">AnatomicalEntity</a> (mixin)  - An instance of a GO cellular anatomical entity, a cell type, or gross anatomical structure</li>
+<li><a href="../InformationBiomacromolecule/">InformationBiomacromolecule</a> (mixin) </li>
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
+<ul>
+<li><strong><a href="../HasInputAssociation/">HasInputAssociation</a></strong> <em><a href="../has_input_association_object/">has input association➞object</a></em>  <sub>REQ</sub>  <strong><a href="./">Continuant</a></strong></li>
+<li><strong><a href="../MacromoleculeHasPartAssociation/">MacromoleculeHasPartAssociation</a></strong> <em><a href="../macromolecule_has_part_association_object/">macromolecule has part association➞object</a></em>  <sub>REQ</sub>  <strong><a href="./">Continuant</a></strong></li>
+</ul>
 <h2 id="attributes">Attributes</h2>
+<h3 id="own">Own</h3>
+<ul>
+<li><a href="../id/">id</a>  <sub>REQ</sub><ul>
+<li>Description: A unique identifier for an element</li>
+<li>range: <a href="../types/String/">String</a></li>
+</ul>
+</li>
+</ul>
               
             </div>
           </div>

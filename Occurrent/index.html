@@ -93,17 +93,27 @@
               
                 <h1 id="class-occurrent">Class: Occurrent</h1>
 <p>URI: <a href="https://w3id.org/gocam/Occurrent">gocam:Occurrent</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[CausesAssociation]++-%20object%201..1&gt;[Occurrent],[MolecularActivity]uses%20-.-&gt;[Occurrent],[BiologicalProcess]uses%20-.-&gt;[Occurrent],[MolecularActivity],[CausesAssociation],[BiologicalProcess]" /></p>
+<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[ProcessPartOfAssociation],[CausesAssociation]-%20object%201..1&gt;[Occurrent&#124;id:string],[HappensDuringAssociation]-%20object%201..1&gt;[Occurrent],[ProcessPartOfAssociation]-%20object%201..1&gt;[Occurrent],[MolecularActivity]uses%20-.-&gt;[Occurrent],[BiologicalProcess]uses%20-.-&gt;[Occurrent],[MolecularActivity],[HappensDuringAssociation],[CausesAssociation],[BiologicalProcess]" /></p>
 <h2 id="mixin-for">Mixin for</h2>
 <ul>
-<li><a href="../BiologicalProcess/">BiologicalProcess</a> (mixin) </li>
-<li><a href="../MolecularActivity/">MolecularActivity</a> (mixin) </li>
+<li><a href="../BiologicalProcess/">BiologicalProcess</a> (mixin)  - An instance of a GO biological process</li>
+<li><a href="../MolecularActivity/">MolecularActivity</a> (mixin)  - An instance of a GO molecular function</li>
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
 <li><strong><a href="../CausesAssociation/">CausesAssociation</a></strong> <em><a href="../causes_association_object/">causes association➞object</a></em>  <sub>REQ</sub>  <strong><a href="./">Occurrent</a></strong></li>
+<li><strong><a href="../HappensDuringAssociation/">HappensDuringAssociation</a></strong> <em><a href="../happens_during_association_object/">happens during association➞object</a></em>  <sub>REQ</sub>  <strong><a href="./">Occurrent</a></strong></li>
+<li><strong><a href="../ProcessPartOfAssociation/">ProcessPartOfAssociation</a></strong> <em><a href="../process_part_of_association_object/">process part of association➞object</a></em>  <sub>REQ</sub>  <strong><a href="./">Occurrent</a></strong></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
+<h3 id="own">Own</h3>
+<ul>
+<li><a href="../id/">id</a>  <sub>REQ</sub><ul>
+<li>Description: A unique identifier for an element</li>
+<li>range: <a href="../types/String/">String</a></li>
+</ul>
+</li>
+</ul>
               
             </div>
           </div>

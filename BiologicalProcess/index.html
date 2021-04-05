@@ -92,39 +92,48 @@
             <div class="section">
               
                 <h1 id="class-biologicalprocess">Class: BiologicalProcess</h1>
+<p>An instance of a GO biological process</p>
 <p>URI: <a href="https://w3id.org/gocam/BiologicalProcess">gocam:BiologicalProcess</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[OntologyClass],[OccursInAssociation],[Occurrent],[HappensDuringAssociation],[Element],[CausesAssociation],[HappensDuringAssociation]&lt;happens%20during%200..1-++[BiologicalProcess&#124;id(i):string],[CausesAssociation]&lt;causes%200..1-++[BiologicalProcess],[OccursInAssociation]&lt;occurs%20in%200..1-++[BiologicalProcess],[BiologicalProcess]uses%20-.-&gt;[Occurrent],[Element]^-[BiologicalProcess]" /></p>
+<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[OntologyClass],[OccursInAssociation],[Occurrent],[HappensDuringAssociation],[DomainElement],[CausesAssociation],[HappensDuringAssociation]&lt;happens%20during%200..1-++[BiologicalProcess&#124;id(i):string],[CausesAssociation]&lt;causes%200..1-++[BiologicalProcess],[OccursInAssociation]&lt;occurs%20in%200..1-++[BiologicalProcess],[Model]++-%20biological%20process%20set%200..*&gt;[BiologicalProcess],[BiologicalProcess]uses%20-.-&gt;[Occurrent],[DomainElement]^-[BiologicalProcess],[Model]" /></p>
 <h2 id="parents">Parents</h2>
 <ul>
-<li>is_a: <a href="../Element/">Element</a> - Base class for any biological entity or occurrent in a GO-CAM model</li>
+<li>is_a: <a href="../DomainElement/">DomainElement</a> - An element that is part of a GO-CAM model</li>
 </ul>
 <h2 id="uses-mixins">Uses Mixins</h2>
 <ul>
 <li>mixin: <a href="../Occurrent/">Occurrent</a></li>
 </ul>
+<h2 id="referenced-by-class">Referenced by class</h2>
+<ul>
+<li><strong>None</strong> <em><a href="../biological_process_set/">biological process set</a></em>  <sub>0..<em></sub>  </em><em><a href="./">BiologicalProcess</a></em>*</li>
+</ul>
 <h2 id="attributes">Attributes</h2>
 <h3 id="own">Own</h3>
 <ul>
 <li><a href="../causes/">causes</a>  <sub>OPT</sub><ul>
+<li>Description: Links a subject domain entity (a MA or BP) to an object domain entity by way of an CausesAssociation</li>
 <li>range: <a href="../CausesAssociation/">CausesAssociation</a></li>
 </ul>
 </li>
 <li><a href="../happens_during/">happens during</a>  <sub>OPT</sub><ul>
+<li>Description: Links a subject domain entity (a MA or BP) to an object domain entity by way of a HappensDuringAssociation </li>
 <li>range: <a href="../HappensDuringAssociation/">HappensDuringAssociation</a></li>
 </ul>
 </li>
 <li><a href="../occurs_in/">occurs in</a>  <sub>OPT</sub><ul>
+<li>Description: Links a subject domain entity (a MA or BP) to an object domain entity by way of an OccursInAssociation</li>
 <li>range: <a href="../OccursInAssociation/">OccursInAssociation</a></li>
 </ul>
 </li>
 </ul>
-<h3 id="inherited-from-element">Inherited from element:</h3>
+<h3 id="inherited-from-domain-element">Inherited from domain element:</h3>
 <ul>
 <li><a href="../id/">id</a>  <sub>REQ</sub><ul>
+<li>Description: A unique identifier for an element</li>
 <li>range: <a href="../types/String/">String</a></li>
 </ul>
 </li>
-<li><a href="../type/">type</a>  <sub>OPT</sub><ul>
+<li><a href="../type/">type</a>  <sub>REQ</sub><ul>
 <li>Description: links a GOCAM element (an OWL individual) to the specific class it instantiates</li>
 <li>range: <a href="../OntologyClass/">OntologyClass</a></li>
 </ul>
@@ -145,6 +154,21 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><strong>Local names:</strong></td>
+<td></td>
+<td>Biological Process (paper)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Biological Process (go)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>BP (abbrev)</td>
+</tr>
 <tr>
 <td><strong>Exact Mappings:</strong></td>
 <td></td>

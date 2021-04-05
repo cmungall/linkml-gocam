@@ -94,34 +94,24 @@
                 <h1 id="class-element">Class: Element</h1>
 <p>Base class for any biological entity or occurrent in a GO-CAM model</p>
 <p>URI: <a href="https://w3id.org/gocam/Element">gocam:Element</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[OntologyClass],[MolecularActivity],[OntologyClass]&lt;type%20inferences%200..*-%20[Element&#124;id:string],[OntologyClass]&lt;type%200..1-%20[Element],[Association]-%20object%201..1&gt;[Element],[Association]-%20subject%201..1&gt;[Element],[Element]^-[MolecularActivity],[Element]^-[CellularComponent],[Element]^-[BiologicalProcess],[Element]^-[AnatomicalEntity],[CellularComponent],[BiologicalProcess],[Association],[AnatomicalEntity]" /></p>
+<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[Model],[InformationElement],[Association]-%20object%201..1&gt;[Element&#124;id:string],[Evidence]-%20with%20object%200..*&gt;[Element],[Element]^-[Model],[Element]^-[InformationElement],[Element]^-[DomainElement],[Evidence],[DomainElement],[Association]" /></p>
 <h2 id="children">Children</h2>
 <ul>
-<li><a href="../AnatomicalEntity/">AnatomicalEntity</a></li>
-<li><a href="../BiologicalProcess/">BiologicalProcess</a></li>
-<li><a href="../CellularComponent/">CellularComponent</a></li>
-<li><a href="../MolecularActivity/">MolecularActivity</a></li>
+<li><a href="../DomainElement/">DomainElement</a> - An element that is part of a GO-CAM model</li>
+<li><a href="../InformationElement/">InformationElement</a></li>
+<li><a href="../Model/">Model</a></li>
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
 <li><strong><a href="../Association/">Association</a></strong> <em><a href="../object/">object</a></em>  <sub>REQ</sub>  <strong><a href="./">Element</a></strong></li>
-<li><strong><a href="../Association/">Association</a></strong> <em><a href="../subject/">subject</a></em>  <sub>REQ</sub>  <strong><a href="./">Element</a></strong></li>
+<li><strong>None</strong> <em><a href="../with_object/">with object</a></em>  <sub>0..<em></sub>  </em><em><a href="./">Element</a></em>*</li>
 </ul>
 <h2 id="attributes">Attributes</h2>
 <h3 id="own">Own</h3>
 <ul>
 <li><a href="../id/">id</a>  <sub>REQ</sub><ul>
+<li>Description: A unique identifier for an element</li>
 <li>range: <a href="../types/String/">String</a></li>
-</ul>
-</li>
-<li><a href="../type/">type</a>  <sub>OPT</sub><ul>
-<li>Description: links a GOCAM element (an OWL individual) to the specific class it instantiates</li>
-<li>range: <a href="../OntologyClass/">OntologyClass</a></li>
-</ul>
-</li>
-<li><a href="../type_inferences/">type inferences</a>  <sub>0..*</sub><ul>
-<li>Description: links a GOCAM element (an OWL individual) to the specific class it instantiates</li>
-<li>range: <a href="../OntologyClass/">OntologyClass</a></li>
 </ul>
 </li>
 </ul>
