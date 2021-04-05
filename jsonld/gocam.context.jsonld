@@ -1,0 +1,133 @@
+{
+   "_comments": "Auto generated from gocam.yaml by jsonldcontextgen.py version: 0.1.1\n    Generation date: 2021-04-04 16:44\n    Schema: gocam\n    \n    id: https://w3id.org/gocam\n    description: GO CAM experimental LinkML schema\n    license: https://creativecommons.org/publicdomain/zero/1.0/\n    ",
+   "@context": {
+      "BFO": {
+         "@id": "http://purl.obolibrary.org/obo/BFO_",
+         "@prefix": true
+      },
+      "OBAN": "http://example.org/UNKNOWN/OBAN/",
+      "RO": {
+         "@id": "http://purl.obolibrary.org/obo/RO_",
+         "@prefix": true
+      },
+      "biolink": "https://w3id.org/biolink/",
+      "dce": "http://purl.org/dc/elements/1.1/",
+      "gocam": "https://w3id.org/gocam/",
+      "goshapes": "http://purl.obolibrary.org/obo/go/shapes/",
+      "lego": "http://geneontology.org/lego/",
+      "linkml": "https://w3id.org/linkml/",
+      "owl": "http://www.w3.org/2002/07/owl#",
+      "pav": "http://purl.org/pav/",
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "skos": "http://www.w3.org/2004/02/skos/core#",
+      "@vocab": "https://w3id.org/gocam/",
+      "biological_process_set": {
+         "@type": "@id"
+      },
+      "category": {
+         "@type": "@id"
+      },
+      "causes": {
+         "@type": "@id"
+      },
+      "chemical_entity_set": {
+         "@type": "@id"
+      },
+      "contributor": {
+         "@id": "dce:contributor"
+      },
+      "date": {
+         "@id": "dce:date"
+      },
+      "domain_element_set": {
+         "@type": "@id"
+      },
+      "enabled_by": {
+         "@type": "@id"
+      },
+      "evidence_type": {
+         "@type": "@id"
+      },
+      "happens_during": {
+         "@type": "@id"
+      },
+      "has_evidence": {
+         "@type": "@id"
+      },
+      "has_input": {
+         "@type": "@id"
+      },
+      "has_part": {
+         "@type": "@id"
+      },
+      "id": "@id",
+      "information_biomacromolecule_set": {
+         "@type": "@id"
+      },
+      "molecular_activity_set": {
+         "@type": "@id"
+      },
+      "name": {
+         "@id": "rdfs:label"
+      },
+      "object": {
+         "@type": "@id",
+         "@id": "rdf:object"
+      },
+      "occurs_in": {
+         "@type": "@id"
+      },
+      "ontology_class_set": {
+         "@type": "@id"
+      },
+      "part_of": {
+         "@type": "@id"
+      },
+      "predicate": {
+         "@type": "@id",
+         "@id": "rdf:predicate"
+      },
+      "provided_by": {
+         "@id": "pav:providedBy"
+      },
+      "reference": {
+         "@type": "@id",
+         "@id": "dce:source"
+      },
+      "related_to": {
+         "@type": "@id"
+      },
+      "state": {
+         "@context": {
+            "@vocab": "@null",
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "lego:modelstate"
+      },
+      "subject": {
+         "@type": "@id",
+         "@id": "rdf:subject"
+      },
+      "title": {
+         "@id": "dce:title"
+      },
+      "type": {
+         "@type": "@id",
+         "@id": "rdf:type"
+      },
+      "type_inferences": {
+         "@type": "@id"
+      },
+      "with_object": {
+         "@type": "@id",
+         "@id": "lego:evidence"
+      },
+      "Association": {
+         "@id": "rdf:Statement"
+      }
+   }
+}
+
