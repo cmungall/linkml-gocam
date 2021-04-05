@@ -128,7 +128,7 @@
 </li>
 </ul>
 </li>
-<li><a href="Element/">Element</a> - Base class for any biological entity or occurrent in a GO-CAM model<ul>
+<li><a href="Element/">Element</a> - Base class for any biological entity or activity or process in a GO-CAM model<ul>
 <li><a href="DomainElement/">DomainElement</a> - An element that is part of a GO-CAM model<ul>
 <li><a href="AnatomicalEntity/">AnatomicalEntity</a> - An instance of a GO cellular anatomical entity, a cell type, or gross anatomical structure</li>
 <li><a href="BiologicalProcess/">BiologicalProcess</a> - An instance of a GO biological process</li>
@@ -144,15 +144,22 @@
 <li><a href="Publication/">Publication</a></li>
 </ul>
 </li>
-<li><a href="Model/">Model</a></li>
+<li><a href="Model/">Model</a> - A collection of GO-CAM elements and associated metadata. A model combines multiple simple GO annotations into an integrated, semantically precise and computable model of biological function.</li>
 </ul>
 </li>
 <li><a href="OntologyClass/">OntologyClass</a></li>
 </ul>
 <h3 id="mixins">Mixins</h3>
 <ul>
+<li><a href="ActivityOrProcess/">ActivityOrProcess</a></li>
 <li><a href="Continuant/">Continuant</a></li>
-<li><a href="Occurrent/">Occurrent</a></li>
+<li><a href="DomainElementMixin/">DomainElementMixin</a> - Grouping for mixins that apply to GO-CAM elements. These mixins allow us to group together elements that are alike in some fashion<ul>
+<li><a href="ActivityOrProcess/">ActivityOrProcess</a></li>
+<li><a href="Continuant/">Continuant</a></li>
+<li><a href="ProcessOrPhase/">ProcessOrPhase</a></li>
+</ul>
+</li>
+<li><a href="ProcessOrPhase/">ProcessOrPhase</a></li>
 </ul>
 <h3 id="slots">Slots</h3>
 <ul>
@@ -322,5 +329,5 @@
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-04-05 17:54:39.052741+00:00
+Build Date UTC : 2021-04-05 20:31:25.372487+00:00
 -->

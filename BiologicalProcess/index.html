@@ -94,14 +94,15 @@
                 <h1 id="class-biologicalprocess">Class: BiologicalProcess</h1>
 <p>An instance of a GO biological process</p>
 <p>URI: <a href="https://w3id.org/gocam/BiologicalProcess">gocam:BiologicalProcess</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[OntologyClass],[OccursInAssociation],[Occurrent],[HappensDuringAssociation],[DomainElement],[CausesAssociation],[HappensDuringAssociation]&lt;happens%20during%200..1-++[BiologicalProcess&#124;id(i):string],[CausesAssociation]&lt;causes%200..1-++[BiologicalProcess],[OccursInAssociation]&lt;occurs%20in%200..1-++[BiologicalProcess],[Model]++-%20biological%20process%20set%200..*&gt;[BiologicalProcess],[BiologicalProcess]uses%20-.-&gt;[Occurrent],[DomainElement]^-[BiologicalProcess],[Model]" /></p>
+<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[ProcessOrPhase],[OntologyClass],[OccursInAssociation],[HappensDuringAssociation],[DomainElement],[CausesAssociation],[HappensDuringAssociation]&lt;happens%20during%200..1-++[BiologicalProcess&#124;id(i):string],[CausesAssociation]&lt;causes%200..1-++[BiologicalProcess],[OccursInAssociation]&lt;occurs%20in%200..1-++[BiologicalProcess],[Model]++-%20biological%20process%20set%200..*&gt;[BiologicalProcess],[BiologicalProcess]uses%20-.-&gt;[ActivityOrProcess],[BiologicalProcess]uses%20-.-&gt;[ProcessOrPhase],[DomainElement]^-[BiologicalProcess],[Model],[ActivityOrProcess]" /></p>
 <h2 id="parents">Parents</h2>
 <ul>
 <li>is_a: <a href="../DomainElement/">DomainElement</a> - An element that is part of a GO-CAM model</li>
 </ul>
 <h2 id="uses-mixins">Uses Mixins</h2>
 <ul>
-<li>mixin: <a href="../Occurrent/">Occurrent</a></li>
+<li>mixin: <a href="../ActivityOrProcess/">ActivityOrProcess</a></li>
+<li>mixin: <a href="../ProcessOrPhase/">ProcessOrPhase</a></li>
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
