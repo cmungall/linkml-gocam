@@ -29,6 +29,11 @@ More will be generated in future, e.g. SQL DDL, APIs, grcl queries
 
 ## Python Datamodel
 
+Here we show an example of using the Python object model to create a portion of [Figure3](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7012280/figure/F3/), specifically this fragment:
+
+![image](https://user-images.githubusercontent.com/50745/113606303-aeb00300-95fc-11eb-8f9f-95c13609a032.png)
+
+
 ```python
  m = Model(id=id('m1'),
                   title='test title',
