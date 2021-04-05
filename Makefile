@@ -5,12 +5,12 @@ SCHEMA_NAMES = $(patsubst $(SCHEMA_DIR)/%.yaml, %, $(SOURCE_FILES))
 
 SCHEMA_NAME = gocam
 SCHEMA_SRC = $(SCHEMA_DIR)/$(SCHEMA_NAME).yaml
-TGTS = graphql jsonschema docs shex owl csv graphql python
+TGTS = graphql jsonschema docs shex owl csv graphql python jsonld
 
 #GEN_OPTS = --no-mergeimports
 GEN_OPTS = 
 
-all: gen stage
+all: gen stage test
 gen: $(patsubst %,gen-%,$(TGTS))
 clean:
 	rm -rf target/
@@ -22,7 +22,10 @@ t:
 echo:
 	echo $(patsubst %,gen-%,$(TGTS))
 
-test: all
+test: pytest
+
+pytest:
+	pytest -s tests/test_*py
 
 install:
 	. environment.sh
@@ -36,7 +39,11 @@ docs:
 stage: $(patsubst %,stage-%,$(TGTS))
 stage-%: gen-%
 	cp -pr target/$* .
+stage-python: gen-python
+	cp target/gocam/*py gocam/
 
+stage-examples:
+	cp tests/target/* examples/
 
 ###  -- MARKDOWN DOCS --
 # Generate documentation ready for mkdocs
@@ -52,9 +59,9 @@ stage-docs: gen-docs
 
 ###  -- MARKDOWN DOCS --
 # TODO: modularize imports
-gen-python: $(patsubst %, target/python/%.py, $(SCHEMA_NAMES))
+gen-python: $(patsubst %, target/gocam/%.py, $(SCHEMA_NAMES))
 .PHONY: gen-python
-target/python/%.py: $(SCHEMA_DIR)/%.yaml  tdir-python
+target/gocam/%.py: $(SCHEMA_DIR)/%.yaml
 	gen-py-classes --no-mergeimports $(GEN_OPTS) $< > $@
 
 ###  -- MARKDOWN DOCS --
@@ -68,6 +75,11 @@ target/graphql/%.graphql: $(SCHEMA_DIR)/%.yaml tdir-graphql
 gen-jsonschema: target/jsonschema/$(SCHEMA_NAME).schema.json
 target/jsonschema/%.schema.json: $(SCHEMA_DIR)/%.yaml tdir-jsonschema
 	gen-json-schema $(GEN_OPTS) -t transaction $< > $@
+
+###  -- JSON-LD context --
+gen-jsonld: target/jsonld/$(SCHEMA_NAME).context.jsonld
+target/jsonld/%.context.jsonld: $(SCHEMA_DIR)/%.yaml tdir-jsonld
+	gen-jsonld-context $(GEN_OPTS)  $< > $@
 
 ###  -- Shex --
 # one file per module

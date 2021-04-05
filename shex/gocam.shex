@@ -2,6 +2,9 @@ BASE <https://w3id.org/gocam/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX pav: <http://purl.org/pav/>
+PREFIX dce: <http://purl.org/dc/elements/1.1/>
+PREFIX lego: <http://geneontology.org/lego/>
 PREFIX linkml: <https://w3id.org/linkml/>
 
 
@@ -48,14 +51,23 @@ linkml:Objectidentifier IRI
 linkml:Nodeidentifier NONLITERAL
 
 <AnatomicalEntity> CLOSED {
-    (  $<AnatomicalEntity_tes> (  &<Element_tes> ;
-          rdf:type [ <Element> ] ? ;
+    (  $<AnatomicalEntity_tes> (  &<DomainElement_tes> ;
+          rdf:type [ <DomainElement> ] ? ;
           &<Continuant_tes> ;
           rdf:type [ <Continuant> ] ? ;
-          <part_of> @<PartOfAssociation> ? ;
-          <category> @<AnatomicalEntityCategory> ?
+          <part_of> @<AnatomicalPartOfAssociation> ? ;
+          <category> @<AnatomicalEntityCategory>
        ) ;
        rdf:type [ <AnatomicalEntity> ]
+    )
+}
+
+<AnatomicalPartOfAssociation> CLOSED {
+    (  $<AnatomicalPartOfAssociation_tes> (  &<PartOfAssociation_tes> ;
+          rdf:type [ <PartOfAssociation> ] ? ;
+          <object> @<AnatomicalEntity>
+       ) ;
+       rdf:type [ <AnatomicalPartOfAssociation> ] ?
     )
 }
 
@@ -66,17 +78,17 @@ linkml:Nodeidentifier NONLITERAL
 
 <Association_struct> {
     (  $<Association_tes> (  <has_evidence> @<Evidence> ? ;
-          rdf:subject @<Element> ;
-          rdf:predicate @<PredicateType> ;
+          rdf:subject @<DomainElement> ? ;
+          rdf:predicate @<PredicateType> ? ;
           rdf:object @<Element>
        ) ;
-       rdf:type [ <Association> ] ?
+       rdf:type [ rdf:Statement ] ?
     )
 }
 
 <BiologicalProcess> CLOSED {
-    (  $<BiologicalProcess_tes> (  &<Element_tes> ;
-          rdf:type [ <Element> ] ? ;
+    (  $<BiologicalProcess_tes> (  &<DomainElement_tes> ;
+          rdf:type [ <DomainElement> ] ? ;
           &<Occurrent_tes> ;
           rdf:type [ <Occurrent> ] ? ;
           <occurs_in> @<OccursInAssociation> ? ;
@@ -89,62 +101,76 @@ linkml:Nodeidentifier NONLITERAL
 
 <CausesAssociation> CLOSED {
     (  $<CausesAssociation_tes> (  &<Association_tes> ;
-          rdf:type [ <Association> ] ? ;
-          <object> @<Occurrent>
+          rdf:type [ rdf:Statement ] ? ;
+          <object> @<Occurrent> ;
+          <predicate> @<PredicateType> ?
        ) ;
        rdf:type [ <CausesAssociation> ] ?
     )
 }
 
-<CellularComponent> CLOSED {
-    (  $<CellularComponent_tes> (  &<Element_tes> ;
-          rdf:type [ <Element> ] ? ;
-          &<Continuant_tes> ;
-          rdf:type [ <Continuant> ] ? ;
-          <part_of> @<PartOfAssociation> ?
-       ) ;
-       rdf:type [ <CellularComponent> ]
-    )
-}
+<ChemicalEntity>  (
+    CLOSED {
+       (  $<ChemicalEntity_tes> (  &<DomainElement_tes> ;
+             rdf:type [ <DomainElement> ] ?
+          ) ;
+          rdf:type [ <ChemicalEntity> ]
+       )
+    } OR @<InformationBiomacromolecule>
+)
 
 <Continuant> {
     (  $<Continuant_tes> rdf:type . * ;
-       rdf:type [ <Continuant> ] ?
+       rdf:type [ <Continuant> ]
     )
 }
 
-<Element>  (
+<DomainElement>  (
     CLOSED {
-       (  $<Element_tes> (  <type> @<OntologyClass> ? ;
+       (  $<DomainElement_tes> (  &<Element_tes> ;
+             rdf:type [ <Element> ] ? ;
+             rdf:type @<OntologyClass> ;
              <type_inferences> @<OntologyClass> *
           ) ;
+          rdf:type [ <DomainElement> ]
+       )
+    } OR @<AnatomicalEntity> OR @<BiologicalProcess> OR @<ChemicalEntity> OR @<MolecularActivity>
+)
+
+<Element>  (
+    CLOSED {
+       (  $<Element_tes> rdf:type . * ;
           rdf:type [ <Element> ]
        )
-    } OR @<AnatomicalEntity> OR @<BiologicalProcess> OR @<CellularComponent> OR @<MolecularActivity>
+    } OR @<DomainElement> OR @<InformationElement> OR @<Model>
 )
 
 <EnabledByAssociation> CLOSED {
     (  $<EnabledByAssociation_tes> (  &<Association_tes> ;
-          rdf:type [ <Association> ] ?
+          rdf:type [ rdf:Statement ] ? ;
+          <object> @<InformationBiomacromolecule>
        ) ;
        rdf:type [ <EnabledByAssociation> ] ?
     )
 }
 
 <Evidence> CLOSED {
-    (  $<Evidence_tes> (  <contributor> @linkml:String ? ;
-          <date> @linkml:String ? ;
-          <evidence_type> @<OntologyClass> ? ;
-          <reference> @linkml:String ? ;
-          <with> @linkml:String ?
+    (  $<Evidence_tes> (  &<InformationElement_tes> ;
+          rdf:type [ <InformationElement> ] ? ;
+          dce:contributor @linkml:String * ;
+          dce:date @linkml:String ? ;
+          <evidence_type> @<OntologyClass> ;
+          dce:source @<Publication> * ;
+          lego:evidence @<Element> *
        ) ;
-       rdf:type [ <Evidence> ] ?
+       rdf:type [ <Evidence> ]
     )
 }
 
 <HappensDuringAssociation> CLOSED {
     (  $<HappensDuringAssociation_tes> (  &<Association_tes> ;
-          rdf:type [ <Association> ] ?
+          rdf:type [ rdf:Statement ] ? ;
+          <object> @<Occurrent>
        ) ;
        rdf:type [ <HappensDuringAssociation> ] ?
     )
@@ -152,28 +178,82 @@ linkml:Nodeidentifier NONLITERAL
 
 <HasInputAssociation> CLOSED {
     (  $<HasInputAssociation_tes> (  &<Association_tes> ;
-          rdf:type [ <Association> ] ?
+          rdf:type [ rdf:Statement ] ? ;
+          <object> @<Continuant>
        ) ;
        rdf:type [ <HasInputAssociation> ] ?
     )
 }
 
-<HasPartAssociation> CLOSED {
-    (  $<HasPartAssociation_tes> (  &<Association_tes> ;
-          rdf:type [ <Association> ] ?
+<HasPartAssociation>  (
+    {
+       (  $<HasPartAssociation_tes> (  &<Association_tes> ;
+             rdf:type [ rdf:Statement ] ?
+          ) ;
+          rdf:type [ <HasPartAssociation> ] ?
+       )
+    } OR @<MacromoleculeHasPartAssociation>
+)
+
+<InformationBiomacromolecule> CLOSED {
+    (  $<InformationBiomacromolecule_tes> (  &<ChemicalEntity_tes> ;
+          rdf:type [ <ChemicalEntity> ] ? ;
+          &<Continuant_tes> ;
+          rdf:type [ <Continuant> ] ? ;
+          <has_part> @<MacromoleculeHasPartAssociation> ? ;
+          <category> @<InformationBiomacromoleculeCategory>
        ) ;
-       rdf:type [ <HasPartAssociation> ] ?
+       rdf:type [ <InformationBiomacromolecule> ]
+    )
+}
+
+<InformationElement>  (
+    @<Evidence> OR @<Publication>
+)
+
+<InformationElement_struct> {
+    (  $<InformationElement_tes> (  &<Element_tes> ;
+          rdf:type [ <Element> ] ?
+       ) ;
+       rdf:type [ <InformationElement> ]
+    )
+}
+
+<MacromoleculeHasPartAssociation> CLOSED {
+    (  $<MacromoleculeHasPartAssociation_tes> (  &<HasPartAssociation_tes> ;
+          rdf:type [ <HasPartAssociation> ] ? ;
+          <object> @<Continuant>
+       ) ;
+       rdf:type [ <MacromoleculeHasPartAssociation> ] ?
+    )
+}
+
+<Model> CLOSED {
+    (  $<Model_tes> (  &<Element_tes> ;
+          rdf:type [ <Element> ] ? ;
+          dce:title @linkml:String ? ;
+          dce:contributor @linkml:String * ;
+          dce:date @linkml:String ? ;
+          lego:modelstate @<ModelStateEnum> ? ;
+          pav:providedBy @linkml:String ? ;
+          <molecular_activity_set> @<MolecularActivity> * ;
+          <biological_process_set> @<BiologicalProcess> * ;
+          <information_biomacromolecule_set> @<InformationBiomacromolecule> * ;
+          <chemical_entity_set> @<ChemicalEntity> * ;
+          <ontology_class_set> @<OntologyClass> *
+       ) ;
+       rdf:type [ <Model> ]
     )
 }
 
 <MolecularActivity> CLOSED {
-    (  $<MolecularActivity_tes> (  &<Element_tes> ;
-          rdf:type [ <Element> ] ? ;
+    (  $<MolecularActivity_tes> (  &<DomainElement_tes> ;
+          rdf:type [ <DomainElement> ] ? ;
           &<Occurrent_tes> ;
           rdf:type [ <Occurrent> ] ? ;
           <causes> @<CausesAssociation> ? ;
           <happens_during> @<HappensDuringAssociation> ? ;
-          <part_of> @<PartOfAssociation> ? ;
+          <part_of> @<ProcessPartOfAssociation> ? ;
           <enabled_by> @<EnabledByAssociation> ? ;
           <has_input> @<HasInputAssociation> ? ;
           <occurs_in> @<OccursInAssociation> ?
@@ -184,13 +264,13 @@ linkml:Nodeidentifier NONLITERAL
 
 <Occurrent> {
     (  $<Occurrent_tes> rdf:type . * ;
-       rdf:type [ <Occurrent> ] ?
+       rdf:type [ <Occurrent> ]
     )
 }
 
 <OccursInAssociation> CLOSED {
     (  $<OccursInAssociation_tes> (  &<Association_tes> ;
-          rdf:type [ <Association> ] ? ;
+          rdf:type [ rdf:Statement ] ? ;
           <object> @<AnatomicalEntity>
        ) ;
        rdf:type [ <OccursInAssociation> ] ?
@@ -199,17 +279,38 @@ linkml:Nodeidentifier NONLITERAL
 
 <OntologyClass> CLOSED {
     (  $<OntologyClass_tes> (  rdfs:label @<LabelType> ? ;
-          <category> @<CategoryType> ?
+          <category> @<CategoryType>
        ) ;
        rdf:type [ <OntologyClass> ]
     )
 }
 
-<PartOfAssociation> CLOSED {
+<PartOfAssociation>  (
+    @<AnatomicalPartOfAssociation> OR @<ProcessPartOfAssociation>
+)
+
+<PartOfAssociation_struct> {
     (  $<PartOfAssociation_tes> (  &<Association_tes> ;
-          rdf:type [ <Association> ] ?
+          rdf:type [ rdf:Statement ] ?
        ) ;
        rdf:type [ <PartOfAssociation> ] ?
+    )
+}
+
+<ProcessPartOfAssociation> CLOSED {
+    (  $<ProcessPartOfAssociation_tes> (  &<PartOfAssociation_tes> ;
+          rdf:type [ <PartOfAssociation> ] ? ;
+          <object> @<Occurrent>
+       ) ;
+       rdf:type [ <ProcessPartOfAssociation> ] ?
+    )
+}
+
+<Publication> CLOSED {
+    (  $<Publication_tes> (  &<InformationElement_tes> ;
+          rdf:type [ <InformationElement> ] ?
+       ) ;
+       rdf:type [ <Publication> ]
     )
 }
 

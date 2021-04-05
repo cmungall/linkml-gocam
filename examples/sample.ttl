@@ -1,0 +1,59 @@
+@prefix : <https://w3id.org/gocam/> .
+@prefix dce: <http://purl.org/dc/elements/1.1/> .
+@prefix gocam: <https://w3id.org/gocam/> .
+@prefix lego: <http://geneontology.org/lego/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<model:a5g4ccd08-m1> a gocam:Model ;
+    lego:modelstate [ gocam:text "production" ] ;
+    dce:contributor "orcid:123",
+        "orcid:234" ;
+    dce:title "test title" ;
+    gocam:information_biomacromolecule_set <model:a5g4ccd08-g1>,
+        <model:a5g4ccd08-g2> ;
+    gocam:molecular_activity_set <model:a5g4ccd08-a1>,
+        <model:a5g4ccd08-a2> .
+
+<model:a5g4ccd08-a1> a <file:///Users/cjm/repos/linkml-gocam/GO:0048018> ;
+    gocam:causes [ rdf:object <model:a5g4ccd08-a2> ;
+            rdf:predicate <file:///Users/cjm/repos/linkml-gocam/regulates> ;
+            gocam:has_evidence <model:a5g4ccd08-e6> ] ;
+    gocam:enabled_by [ rdf:object <model:a5g4ccd08-g1> ;
+            gocam:has_evidence <model:a5g4ccd08-e4> ] ;
+    gocam:occurs_in [ rdf:object <model:a5g4ccd08-c1> ;
+            gocam:has_evidence <model:a5g4ccd08-e5> ] .
+
+<model:a5g4ccd08-e1> dce:source <file:///Users/cjm/repos/linkml-gocam/PMID:1234> ;
+    gocam:evidence_type <eco:nnn> .
+
+<model:a5g4ccd08-e2> dce:source <file:///Users/cjm/repos/linkml-gocam/PMID:1234> ;
+    gocam:evidence_type <eco:nnn> .
+
+<model:a5g4ccd08-e3> dce:source <file:///Users/cjm/repos/linkml-gocam/PMID:1234> ;
+    gocam:evidence_type <eco:nnn> .
+
+<model:a5g4ccd08-e4> dce:source <file:///Users/cjm/repos/linkml-gocam/PMID:1234> ;
+    gocam:evidence_type <eco:nnn> .
+
+<model:a5g4ccd08-e5> dce:source <file:///Users/cjm/repos/linkml-gocam/PMID:1234> ;
+    gocam:evidence_type <eco:nnn> .
+
+<model:a5g4ccd08-e6> dce:source <file:///Users/cjm/repos/linkml-gocam/PMID:1234> ;
+    gocam:evidence_type <eco:nnn> .
+
+<model:a5g4ccd08-a2> a <file:///Users/cjm/repos/linkml-gocam/GO:0042813> ;
+    gocam:enabled_by [ rdf:object <model:a5g4ccd08-g2> ;
+            gocam:has_evidence <model:a5g4ccd08-e1> ] ;
+    gocam:occurs_in [ rdf:object <model:a5g4ccd08-c2> ;
+            gocam:has_evidence <model:a5g4ccd08-e2> ] ;
+    gocam:part_of [ rdf:object <model:a5g4ccd08-p1> ;
+            gocam:has_evidence <model:a5g4ccd08-e3> ] .
+
+<model:a5g4ccd08-g1> a <uniprotkb:P56703> ;
+    gocam:category [ gocam:meaning "https://w3id.org/gocam/biolink.GeneOrGeneProduct" ;
+            gocam:text "GeneOrReferenceProtein" ] .
+
+<model:a5g4ccd08-g2> a <uniprotkb:Q9UP38> ;
+    gocam:category [ gocam:meaning "https://w3id.org/gocam/biolink.GeneOrGeneProduct" ;
+            gocam:text "GeneOrReferenceProtein" ] .
+

@@ -1,24 +1,32 @@
 type AnatomicalEntity implements Continuant
   {
     id: String!
-    type: OntologyClass
+    type: OntologyClass!
     typeInferences: [OntologyClass]
-    partOf: PartOfAssociation
-    category: AnatomicalEntityCategory
+    partOf: AnatomicalPartOfAssociation
+    category: AnatomicalEntityCategory!
+  }
+
+type AnatomicalPartOfAssociation
+  {
+    hasEvidence: Evidence
+    subject: DomainElement
+    predicate: PredicateType
+    object: AnatomicalEntity!
   }
 
 interface Association
   {
     hasEvidence: Evidence
-    subject: Element!
-    predicate: PredicateType!
+    subject: DomainElement
+    predicate: PredicateType
     object: Element!
   }
 
 type BiologicalProcess implements Occurrent
   {
     id: String!
-    type: OntologyClass
+    type: OntologyClass!
     typeInferences: [OntologyClass]
     occursIn: OccursInAssociation
     causes: CausesAssociation
@@ -28,79 +36,122 @@ type BiologicalProcess implements Occurrent
 type CausesAssociation
   {
     hasEvidence: Evidence
-    subject: Element!
-    predicate: PredicateType!
+    subject: DomainElement
     object: Occurrent!
+    predicate: PredicateType
   }
 
-type CellularComponent implements Continuant
+type ChemicalEntity
   {
     id: String!
-    type: OntologyClass
+    type: OntologyClass!
     typeInferences: [OntologyClass]
-    partOf: PartOfAssociation
   }
 
 interface Continuant
   {
+    id: String!
+  }
+
+type DomainElement
+  {
+    id: String!
+    type: OntologyClass!
+    typeInferences: [OntologyClass]
   }
 
 type Element
   {
     id: String!
-    type: OntologyClass
-    typeInferences: [OntologyClass]
   }
 
 type EnabledByAssociation
   {
     hasEvidence: Evidence
-    subject: Element!
-    predicate: PredicateType!
-    object: Element!
+    subject: DomainElement
+    predicate: PredicateType
+    object: InformationBiomacromolecule!
   }
 
 type Evidence
   {
-    contributor: String
+    id: String!
+    contributor: [String]
     date: String
-    evidenceType: OntologyClass
-    reference: String
-    with: String
+    evidenceType: OntologyClass!
+    reference: [Publication]
+    withObject: [Element]
   }
 
 type HappensDuringAssociation
   {
     hasEvidence: Evidence
-    subject: Element!
-    predicate: PredicateType!
-    object: Element!
+    subject: DomainElement
+    predicate: PredicateType
+    object: Occurrent!
   }
 
 type HasInputAssociation
   {
     hasEvidence: Evidence
-    subject: Element!
-    predicate: PredicateType!
+    subject: DomainElement
+    predicate: PredicateType
+    object: Continuant!
+  }
+
+interface HasPartAssociation
+  {
+    hasEvidence: Evidence
+    subject: DomainElement
+    predicate: PredicateType
     object: Element!
   }
 
-type HasPartAssociation
+type InformationBiomacromolecule implements Continuant
+  {
+    id: String!
+    type: OntologyClass!
+    typeInferences: [OntologyClass]
+    hasPart: MacromoleculeHasPartAssociation
+    category: InformationBiomacromoleculeCategory!
+  }
+
+interface InformationElement
+  {
+    id: String!
+  }
+
+type MacromoleculeHasPartAssociation
   {
     hasEvidence: Evidence
-    subject: Element!
-    predicate: PredicateType!
-    object: Element!
+    subject: DomainElement
+    predicate: PredicateType
+    object: Continuant!
+  }
+
+type Model
+  {
+    id: String!
+    title: String
+    contributor: [String]
+    date: String
+    state: ModelStateEnum
+    providedBy: String
+    molecularActivitySet: [MolecularActivity]
+    biologicalProcessSet: [BiologicalProcess]
+    informationBiomacromoleculeSet: [InformationBiomacromolecule]
+    chemicalEntitySet: [ChemicalEntity]
+    ontologyClassSet: [OntologyClass]
   }
 
 type MolecularActivity implements Occurrent
   {
     id: String!
-    type: OntologyClass
+    type: OntologyClass!
     typeInferences: [OntologyClass]
     causes: CausesAssociation
     happensDuring: HappensDuringAssociation
-    partOf: PartOfAssociation
+    partOf: ProcessPartOfAssociation
     enabledBy: EnabledByAssociation
     hasInput: HasInputAssociation
     occursIn: OccursInAssociation
@@ -108,13 +159,14 @@ type MolecularActivity implements Occurrent
 
 interface Occurrent
   {
+    id: String!
   }
 
 type OccursInAssociation
   {
     hasEvidence: Evidence
-    subject: Element!
-    predicate: PredicateType!
+    subject: DomainElement
+    predicate: PredicateType
     object: AnatomicalEntity!
   }
 
@@ -122,15 +174,28 @@ type OntologyClass
   {
     id: String!
     name: LabelType
-    category: CategoryType
+    category: CategoryType!
   }
 
-type PartOfAssociation
+interface PartOfAssociation
   {
     hasEvidence: Evidence
-    subject: Element!
-    predicate: PredicateType!
+    subject: DomainElement
+    predicate: PredicateType
     object: Element!
+  }
+
+type ProcessPartOfAssociation
+  {
+    hasEvidence: Evidence
+    subject: DomainElement
+    predicate: PredicateType
+    object: Occurrent!
+  }
+
+type Publication
+  {
+    id: String!
   }
 
 

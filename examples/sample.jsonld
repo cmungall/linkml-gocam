@@ -1,0 +1,230 @@
+{
+  "id": "model:a5g4ccd08-m1",
+  "title": "test title",
+  "contributor": [
+    "orcid:123",
+    "orcid:234"
+  ],
+  "state": {
+    "text": "production"
+  },
+  "molecular_activity_set": [
+    {
+      "id": "model:a5g4ccd08-a1",
+      "type": "GO:0048018",
+      "causes": {
+        "object": "model:a5g4ccd08-a2",
+        "has_evidence": {
+          "id": "model:a5g4ccd08-e6",
+          "evidence_type": "ECO:nnn",
+          "reference": [
+            "PMID:1234"
+          ]
+        },
+        "predicate": "regulates"
+      },
+      "enabled_by": {
+        "object": "model:a5g4ccd08-g1",
+        "has_evidence": {
+          "id": "model:a5g4ccd08-e4",
+          "evidence_type": "ECO:nnn",
+          "reference": [
+            "PMID:1234"
+          ]
+        }
+      },
+      "occurs_in": {
+        "object": "model:a5g4ccd08-c1",
+        "has_evidence": {
+          "id": "model:a5g4ccd08-e5",
+          "evidence_type": "ECO:nnn",
+          "reference": [
+            "PMID:1234"
+          ]
+        }
+      }
+    },
+    {
+      "id": "model:a5g4ccd08-a2",
+      "type": "GO:0042813",
+      "part_of": {
+        "object": "model:a5g4ccd08-p1",
+        "has_evidence": {
+          "id": "model:a5g4ccd08-e3",
+          "evidence_type": "ECO:nnn",
+          "reference": [
+            "PMID:1234"
+          ]
+        }
+      },
+      "enabled_by": {
+        "object": "model:a5g4ccd08-g2",
+        "has_evidence": {
+          "id": "model:a5g4ccd08-e1",
+          "evidence_type": "ECO:nnn",
+          "reference": [
+            "PMID:1234"
+          ]
+        }
+      },
+      "occurs_in": {
+        "object": "model:a5g4ccd08-c2",
+        "has_evidence": {
+          "id": "model:a5g4ccd08-e2",
+          "evidence_type": "ECO:nnn",
+          "reference": [
+            "PMID:1234"
+          ]
+        }
+      }
+    }
+  ],
+  "information_biomacromolecule_set": [
+    {
+      "id": "model:a5g4ccd08-g1",
+      "type": "UniprotKB:P56703",
+      "category": {
+        "text": "GeneOrReferenceProtein",
+        "meaning": "https://w3id.org/gocam/biolink.GeneOrGeneProduct"
+      }
+    },
+    {
+      "id": "model:a5g4ccd08-g2",
+      "type": "UniprotKB:Q9UP38",
+      "category": {
+        "text": "GeneOrReferenceProtein",
+        "meaning": "https://w3id.org/gocam/biolink.GeneOrGeneProduct"
+      }
+    }
+  ],
+  "@type": "Model",
+  "@context": {
+    "BFO": {
+      "@id": "http://purl.obolibrary.org/obo/BFO_",
+      "@prefix": true
+    },
+    "OBAN": "http://example.org/UNKNOWN/OBAN/",
+    "RO": {
+      "@id": "http://purl.obolibrary.org/obo/RO_",
+      "@prefix": true
+    },
+    "biolink": "https://w3id.org/biolink/",
+    "dce": "http://purl.org/dc/elements/1.1/",
+    "gocam": "https://w3id.org/gocam/",
+    "goshapes": "http://purl.obolibrary.org/obo/go/shapes/",
+    "lego": "http://geneontology.org/lego/",
+    "linkml": "https://w3id.org/linkml/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "pav": "http://purl.org/pav/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "@vocab": "https://w3id.org/gocam/",
+    "biological_process_set": {
+      "@type": "@id"
+    },
+    "category": {
+      "@type": "@id"
+    },
+    "causes": {
+      "@type": "@id"
+    },
+    "chemical_entity_set": {
+      "@type": "@id"
+    },
+    "contributor": {
+      "@id": "dce:contributor"
+    },
+    "date": {
+      "@id": "dce:date"
+    },
+    "domain_element_set": {
+      "@type": "@id"
+    },
+    "enabled_by": {
+      "@type": "@id"
+    },
+    "evidence_type": {
+      "@type": "@id"
+    },
+    "happens_during": {
+      "@type": "@id"
+    },
+    "has_evidence": {
+      "@type": "@id"
+    },
+    "has_input": {
+      "@type": "@id"
+    },
+    "has_part": {
+      "@type": "@id"
+    },
+    "id": "@id",
+    "information_biomacromolecule_set": {
+      "@type": "@id"
+    },
+    "molecular_activity_set": {
+      "@type": "@id"
+    },
+    "name": {
+      "@id": "rdfs:label"
+    },
+    "object": {
+      "@type": "@id",
+      "@id": "rdf:object"
+    },
+    "occurs_in": {
+      "@type": "@id"
+    },
+    "ontology_class_set": {
+      "@type": "@id"
+    },
+    "part_of": {
+      "@type": "@id"
+    },
+    "predicate": {
+      "@type": "@id",
+      "@id": "rdf:predicate"
+    },
+    "provided_by": {
+      "@id": "pav:providedBy"
+    },
+    "reference": {
+      "@type": "@id",
+      "@id": "dce:source"
+    },
+    "related_to": {
+      "@type": "@id"
+    },
+    "state": {
+      "@context": {
+        "@vocab": "@null",
+        "text": "skos:notation",
+        "description": "skos:prefLabel",
+        "meaning": "@id"
+      },
+      "@id": "lego:modelstate"
+    },
+    "subject": {
+      "@type": "@id",
+      "@id": "rdf:subject"
+    },
+    "title": {
+      "@id": "dce:title"
+    },
+    "type": {
+      "@type": "@id",
+      "@id": "rdf:type"
+    },
+    "type_inferences": {
+      "@type": "@id"
+    },
+    "with_object": {
+      "@type": "@id",
+      "@id": "lego:evidence"
+    },
+    "Association": {
+      "@id": "rdf:Statement"
+    }
+  }
+}

@@ -1,9 +1,9 @@
 # Auto generated from gocam.yaml by pythongen.py version: 0.9.0
-# Generation date: 2021-04-03 12:57
+# Generation date: 2021-04-03 16:56
 # Schema: gocam
 #
 # id: https://w3id.org/gocam
-# description: GO CAM
+# description: GO CAM experimental LinkML schema
 # license: https://creativecommons.org/publicdomain/zero/1.0/
 
 import dataclasses
@@ -120,6 +120,10 @@ class AnatomicalEntityId(ElementId):
     pass
 
 
+class InformationMacromoleculeId(ElementId):
+    pass
+
+
 class OntologyClassId(extended_str):
     pass
 
@@ -170,7 +174,7 @@ class MolecularActivity(Element):
     id: Union[str, MolecularActivityId] = None
     causes: Optional[Union[dict, "CausesAssociation"]] = None
     happens_during: Optional[Union[dict, "HappensDuringAssociation"]] = None
-    part_of: Optional[Union[dict, "PartOfAssociation"]] = None
+    part_of: Optional[Union[dict, "ProcessPartOfAssociation"]] = None
     enabled_by: Optional[Union[dict, "EnabledByAssociation"]] = None
     has_input: Optional[Union[dict, "HasInputAssociation"]] = None
     occurs_in: Optional[Union[dict, "OccursInAssociation"]] = None
@@ -187,8 +191,8 @@ class MolecularActivity(Element):
         if self.happens_during is not None and not isinstance(self.happens_during, HappensDuringAssociation):
             self.happens_during = HappensDuringAssociation(**self.happens_during)
 
-        if self.part_of is not None and not isinstance(self.part_of, PartOfAssociation):
-            self.part_of = PartOfAssociation(**self.part_of)
+        if self.part_of is not None and not isinstance(self.part_of, ProcessPartOfAssociation):
+            self.part_of = ProcessPartOfAssociation(**self.part_of)
 
         if self.enabled_by is not None and not isinstance(self.enabled_by, EnabledByAssociation):
             self.enabled_by = EnabledByAssociation(**self.enabled_by)
@@ -268,7 +272,7 @@ class AnatomicalEntity(Element):
     class_model_uri: ClassVar[URIRef] = GOCAM.AnatomicalEntity
 
     id: Union[str, AnatomicalEntityId] = None
-    part_of: Optional[Union[dict, "PartOfAssociation"]] = None
+    part_of: Optional[Union[dict, "EntityPartOfAssociation"]] = None
     category: Optional[Union[str, "AnatomicalEntityCategory"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -276,6 +280,34 @@ class AnatomicalEntity(Element):
             raise ValueError("id must be supplied")
         if not isinstance(self.id, AnatomicalEntityId):
             self.id = AnatomicalEntityId(self.id)
+
+        if self.part_of is not None and not isinstance(self.part_of, EntityPartOfAssociation):
+            self.part_of = EntityPartOfAssociation(**self.part_of)
+
+        if self.category is not None and not isinstance(self.category, AnatomicalEntityCategory):
+            self.category = AnatomicalEntityCategory(self.category)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class InformationMacromolecule(Element):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = GOCAM.InformationMacromolecule
+    class_class_curie: ClassVar[str] = "gocam:InformationMacromolecule"
+    class_name: ClassVar[str] = "information macromolecule"
+    class_model_uri: ClassVar[URIRef] = GOCAM.InformationMacromolecule
+
+    id: Union[str, InformationMacromoleculeId] = None
+    part_of: Optional[Union[dict, "PartOfAssociation"]] = None
+    category: Optional[Union[str, "AnatomicalEntityCategory"]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.id is None:
+            raise ValueError("id must be supplied")
+        if not isinstance(self.id, InformationMacromoleculeId):
+            self.id = InformationMacromoleculeId(self.id)
 
         if self.part_of is not None and not isinstance(self.part_of, PartOfAssociation):
             self.part_of = PartOfAssociation(**self.part_of)
@@ -378,6 +410,50 @@ class PartOfAssociation(Association):
     subject: Union[str, ElementId] = None
     predicate: Union[str, PredicateType] = None
     object: Union[str, ElementId] = None
+
+@dataclass
+class EntityPartOfAssociation(PartOfAssociation):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = GOCAM.EntityPartOfAssociation
+    class_class_curie: ClassVar[str] = "gocam:EntityPartOfAssociation"
+    class_name: ClassVar[str] = "entity part of association"
+    class_model_uri: ClassVar[URIRef] = GOCAM.EntityPartOfAssociation
+
+    subject: Union[str, ElementId] = None
+    predicate: Union[str, PredicateType] = None
+    object: Union[dict, "Continuant"] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.object is None:
+            raise ValueError("object must be supplied")
+        if not isinstance(self.object, Continuant):
+            self.object = Continuant()
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class ProcessPartOfAssociation(PartOfAssociation):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = GOCAM.ProcessPartOfAssociation
+    class_class_curie: ClassVar[str] = "gocam:ProcessPartOfAssociation"
+    class_name: ClassVar[str] = "process part of association"
+    class_model_uri: ClassVar[URIRef] = GOCAM.ProcessPartOfAssociation
+
+    subject: Union[str, ElementId] = None
+    predicate: Union[str, PredicateType] = None
+    object: Union[dict, "Occurrent"] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.object is None:
+            raise ValueError("object must be supplied")
+        if not isinstance(self.object, Occurrent):
+            self.object = Occurrent()
+
+        super().__post_init__(**kwargs)
+
 
 @dataclass
 class EnabledByAssociation(Association):
@@ -517,10 +593,50 @@ class AnatomicalEntityCategory(EnumDefinitionImpl):
     CellularAnatomicalEntity = PermissibleValue(text="CellularAnatomicalEntity")
     Cell = PermissibleValue(text="Cell")
     GrossAnatomicalStructure = PermissibleValue(text="GrossAnatomicalStructure")
+    Organism = PermissibleValue(text="Organism")
 
     _defn = EnumDefinition(
         name="AnatomicalEntityCategory",
     )
+
+class CausalPredicateEnum(EnumDefinitionImpl):
+
+    regulates = PermissibleValue(text="regulates",
+                                         meaning=RO["0002211"])
+
+    _defn = EnumDefinition(
+        name="CausalPredicateEnum",
+    )
+
+    @classmethod
+    def _addvals(cls):
+        setattr(cls, "causally upstream of, positive effect",
+                PermissibleValue(text="causally upstream of, positive effect",
+                                 meaning=RO["0002304"]) )
+        setattr(cls, "causally upstream of, negative effect",
+                PermissibleValue(text="causally upstream of, negative effect",
+                                 meaning=RO["0002305"]) )
+        setattr(cls, "causally upstream of",
+                PermissibleValue(text="causally upstream of",
+                                 meaning=RO["0002411"]) )
+        setattr(cls, "immediately causally upstream of",
+                PermissibleValue(text="immediately causally upstream of",
+                                 meaning=RO["0002412"]) )
+        setattr(cls, "causally upstream of or within",
+                PermissibleValue(text="causally upstream of or within",
+                                 meaning=RO["0002418"]) )
+        setattr(cls, "causally upstream of or within, negative effect",
+                PermissibleValue(text="causally upstream of or within, negative effect",
+                                 meaning=RO["0004046"]) )
+        setattr(cls, "causally upstream of or within, positive effect",
+                PermissibleValue(text="causally upstream of or within, positive effect",
+                                 meaning=RO["0004047"]) )
+        setattr(cls, "negatively regulates",
+                PermissibleValue(text="negatively regulates",
+                                 meaning=RO["0002212"]) )
+        setattr(cls, "positively regulates",
+                PermissibleValue(text="positively regulates",
+                                 meaning=RO["0002213"]) )
 
 # Slots
 class slots:
@@ -592,11 +708,26 @@ slots.object = Slot(uri=RDF.object, name="object", curie=RDF.curie('object'),
 slots.predicate = Slot(uri=RDF.predicate, name="predicate", curie=RDF.curie('predicate'),
                    model_uri=GOCAM.predicate, domain=Association, range=Union[str, PredicateType])
 
+slots.molecular_activity_part_of = Slot(uri=GOCAM.part_of, name="molecular activity_part of", curie=GOCAM.curie('part_of'),
+                   model_uri=GOCAM.molecular_activity_part_of, domain=MolecularActivity, range=Optional[Union[dict, "ProcessPartOfAssociation"]])
+
 slots.anatomical_entity_category = Slot(uri=GOCAM.category, name="anatomical entity_category", curie=GOCAM.curie('category'),
                    model_uri=GOCAM.anatomical_entity_category, domain=AnatomicalEntity, range=Optional[Union[str, "AnatomicalEntityCategory"]])
+
+slots.anatomical_entity_part_of = Slot(uri=GOCAM.part_of, name="anatomical entity_part of", curie=GOCAM.curie('part_of'),
+                   model_uri=GOCAM.anatomical_entity_part_of, domain=AnatomicalEntity, range=Optional[Union[dict, "EntityPartOfAssociation"]])
+
+slots.information_macromolecule_category = Slot(uri=GOCAM.category, name="information macromolecule_category", curie=GOCAM.curie('category'),
+                   model_uri=GOCAM.information_macromolecule_category, domain=InformationMacromolecule, range=Optional[Union[str, "AnatomicalEntityCategory"]])
 
 slots.occurs_in_association_object = Slot(uri=GOCAM.object, name="occurs in association_object", curie=GOCAM.curie('object'),
                    model_uri=GOCAM.occurs_in_association_object, domain=OccursInAssociation, range=Union[str, AnatomicalEntityId])
 
 slots.causes_association_object = Slot(uri=GOCAM.object, name="causes association_object", curie=GOCAM.curie('object'),
                    model_uri=GOCAM.causes_association_object, domain=CausesAssociation, range=Union[dict, "Occurrent"])
+
+slots.entity_part_of_association_object = Slot(uri=GOCAM.object, name="entity part of association_object", curie=GOCAM.curie('object'),
+                   model_uri=GOCAM.entity_part_of_association_object, domain=EntityPartOfAssociation, range=Union[dict, "Continuant"])
+
+slots.process_part_of_association_object = Slot(uri=GOCAM.object, name="process part of association_object", curie=GOCAM.curie('object'),
+                   model_uri=GOCAM.process_part_of_association_object, domain=ProcessPartOfAssociation, range=Union[dict, "Occurrent"])

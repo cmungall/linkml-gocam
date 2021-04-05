@@ -4,16 +4,17 @@
    "definitions": {
       "AnatomicalEntity": {
          "additionalProperties": false,
-         "description": "",
+         "description": "An instance of a GO cellular anatomical entity, a cell type, or gross anatomical structure",
          "properties": {
             "category": {
                "type": "string"
             },
             "id": {
+               "description": "A unique identifier for an element",
                "type": "string"
             },
             "part_of": {
-               "$ref": "#/definitions/PartOfAssociation"
+               "$ref": "#/definitions/AnatomicalPartOfAssociation"
             },
             "type": {
                "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
@@ -28,54 +29,23 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "type",
+            "category"
          ],
          "title": "AnatomicalEntity",
          "type": "object"
       },
-      "BiologicalProcess": {
+      "AnatomicalPartOfAssociation": {
          "additionalProperties": false,
-         "description": "",
-         "properties": {
-            "causes": {
-               "$ref": "#/definitions/CausesAssociation"
-            },
-            "happens_during": {
-               "$ref": "#/definitions/HappensDuringAssociation"
-            },
-            "id": {
-               "type": "string"
-            },
-            "occurs_in": {
-               "$ref": "#/definitions/OccursInAssociation"
-            },
-            "type": {
-               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
-               "type": "string"
-            },
-            "type_inferences": {
-               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
-               "items": {
-                  "type": "string"
-               },
-               "type": "array"
-            }
-         },
-         "required": [
-            "id"
-         ],
-         "title": "BiologicalProcess",
-         "type": "object"
-      },
-      "CausesAssociation": {
-         "additionalProperties": false,
-         "description": "",
+         "description": "Connects an anatomical entity (such as a component, cell, or gross anatomical entity) to its parent parts",
          "properties": {
             "has_evidence": {
-               "$ref": "#/definitions/Evidence"
+               "$ref": "#/definitions/Evidence",
+               "description": "Links an association to evidence for it"
             },
             "object": {
-               "$ref": "#/definitions/Occurrent"
+               "type": "string"
             },
             "predicate": {
                "description": "A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.",
@@ -87,22 +57,30 @@
             }
          },
          "required": [
-            "subject",
-            "predicate",
             "object"
          ],
-         "title": "CausesAssociation",
+         "title": "AnatomicalPartOfAssociation",
          "type": "object"
       },
-      "CellularComponent": {
+      "BiologicalProcess": {
          "additionalProperties": false,
-         "description": "",
+         "description": "An instance of a GO biological process",
          "properties": {
+            "causes": {
+               "$ref": "#/definitions/CausesAssociation",
+               "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of an CausesAssociation"
+            },
+            "happens_during": {
+               "$ref": "#/definitions/HappensDuringAssociation",
+               "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of a HappensDuringAssociation "
+            },
             "id": {
+               "description": "A unique identifier for an element",
                "type": "string"
             },
-            "part_of": {
-               "$ref": "#/definitions/PartOfAssociation"
+            "occurs_in": {
+               "$ref": "#/definitions/OccursInAssociation",
+               "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of an OccursInAssociation"
             },
             "type": {
                "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
@@ -117,16 +95,44 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "type"
          ],
-         "title": "CellularComponent",
+         "title": "BiologicalProcess",
          "type": "object"
       },
-      "Element": {
+      "CausesAssociation": {
          "additionalProperties": false,
-         "description": "Base class for any biological entity or occurrent in a GO-CAM model",
+         "description": "An association owned by an upstream MA or BP that connects to a downstream MA or BP. The nature of the causal relationship is indicated with the predicate.",
+         "properties": {
+            "has_evidence": {
+               "$ref": "#/definitions/Evidence",
+               "description": "Links an association to evidence for it"
+            },
+            "object": {
+               "type": "string"
+            },
+            "predicate": {
+               "description": "This must be drawn from the causal relation hierarchy in RO",
+               "type": "string"
+            },
+            "subject": {
+               "description": "connects an association to the subject of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
+               "type": "string"
+            }
+         },
+         "required": [
+            "object"
+         ],
+         "title": "CausesAssociation",
+         "type": "object"
+      },
+      "ChemicalEntity": {
+         "additionalProperties": false,
+         "description": "An instance of a chemical entity, as defined in CHEBI, including macromolecules defined in NEO",
          "properties": {
             "id": {
+               "description": "A unique identifier for an element",
                "type": "string"
             },
             "type": {
@@ -139,6 +145,49 @@
                   "type": "string"
                },
                "type": "array"
+            }
+         },
+         "required": [
+            "id",
+            "type"
+         ],
+         "title": "ChemicalEntity",
+         "type": "object"
+      },
+      "DomainElement": {
+         "additionalProperties": false,
+         "description": "An element that is part of a GO-CAM model",
+         "properties": {
+            "id": {
+               "description": "A unique identifier for an element",
+               "type": "string"
+            },
+            "type": {
+               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "type": "string"
+            },
+            "type_inferences": {
+               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            }
+         },
+         "required": [
+            "id",
+            "type"
+         ],
+         "title": "DomainElement",
+         "type": "object"
+      },
+      "Element": {
+         "additionalProperties": false,
+         "description": "Base class for any biological entity or occurrent in a GO-CAM model",
+         "properties": {
+            "id": {
+               "description": "A unique identifier for an element",
+               "type": "string"
             }
          },
          "required": [
@@ -149,13 +198,13 @@
       },
       "EnabledByAssociation": {
          "additionalProperties": false,
-         "description": "",
+         "description": "Connects an MA to the information biomacromolecule that executes the activity",
          "properties": {
             "has_evidence": {
-               "$ref": "#/definitions/Evidence"
+               "$ref": "#/definitions/Evidence",
+               "description": "Links an association to evidence for it"
             },
             "object": {
-               "description": "connects an association to the object of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
                "type": "string"
             },
             "predicate": {
@@ -168,8 +217,6 @@
             }
          },
          "required": [
-            "subject",
-            "predicate",
             "object"
          ],
          "title": "EnabledByAssociation",
@@ -177,10 +224,13 @@
       },
       "Evidence": {
          "additionalProperties": false,
-         "description": "",
+         "description": "An instance of a piece of evidence. Evidence attributes such as type, reference, hang off of here",
          "properties": {
             "contributor": {
-               "type": "string"
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
             },
             "date": {
                "type": "string"
@@ -188,26 +238,39 @@
             "evidence_type": {
                "type": "string"
             },
-            "reference": {
+            "id": {
+               "description": "A unique identifier for an element",
                "type": "string"
             },
-            "with": {
-               "type": "string"
+            "reference": {
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "with_object": {
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
             }
          },
-         "required": [],
+         "required": [
+            "id",
+            "evidence_type"
+         ],
          "title": "Evidence",
          "type": "object"
       },
       "HappensDuringAssociation": {
          "additionalProperties": false,
-         "description": "",
+         "description": "Connects an MF to a process or phase in which the process occurs",
          "properties": {
             "has_evidence": {
-               "$ref": "#/definitions/Evidence"
+               "$ref": "#/definitions/Evidence",
+               "description": "Links an association to evidence for it"
             },
             "object": {
-               "description": "connects an association to the object of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
                "type": "string"
             },
             "predicate": {
@@ -220,8 +283,6 @@
             }
          },
          "required": [
-            "subject",
-            "predicate",
             "object"
          ],
          "title": "HappensDuringAssociation",
@@ -229,13 +290,13 @@
       },
       "HasInputAssociation": {
          "additionalProperties": false,
-         "description": "",
+         "description": "Connects an MF or BP to ats input entity, which may be a chemical entity, an information macromolecule, or a larger structure",
          "properties": {
             "has_evidence": {
-               "$ref": "#/definitions/Evidence"
+               "$ref": "#/definitions/Evidence",
+               "description": "Links an association to evidence for it"
             },
             "object": {
-               "description": "connects an association to the object of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
                "type": "string"
             },
             "predicate": {
@@ -248,65 +309,24 @@
             }
          },
          "required": [
-            "subject",
-            "predicate",
             "object"
          ],
          "title": "HasInputAssociation",
          "type": "object"
       },
-      "HasPartAssociation": {
+      "InformationBiomacromolecule": {
          "additionalProperties": false,
          "description": "",
          "properties": {
-            "has_evidence": {
-               "$ref": "#/definitions/Evidence"
-            },
-            "object": {
-               "description": "connects an association to the object of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
+            "category": {
                "type": "string"
             },
-            "predicate": {
-               "description": "A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.",
-               "type": "string"
-            },
-            "subject": {
-               "description": "connects an association to the subject of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
-               "type": "string"
-            }
-         },
-         "required": [
-            "subject",
-            "predicate",
-            "object"
-         ],
-         "title": "HasPartAssociation",
-         "type": "object"
-      },
-      "MolecularActivity": {
-         "additionalProperties": false,
-         "description": "",
-         "properties": {
-            "causes": {
-               "$ref": "#/definitions/CausesAssociation"
-            },
-            "enabled_by": {
-               "$ref": "#/definitions/EnabledByAssociation"
-            },
-            "happens_during": {
-               "$ref": "#/definitions/HappensDuringAssociation"
-            },
-            "has_input": {
-               "$ref": "#/definitions/HasInputAssociation"
+            "has_part": {
+               "$ref": "#/definitions/MacromoleculeHasPartAssociation"
             },
             "id": {
+               "description": "A unique identifier for an element",
                "type": "string"
-            },
-            "occurs_in": {
-               "$ref": "#/definitions/OccursInAssociation"
-            },
-            "part_of": {
-               "$ref": "#/definitions/PartOfAssociation"
             },
             "type": {
                "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
@@ -321,17 +341,20 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "type",
+            "category"
          ],
-         "title": "MolecularActivity",
+         "title": "InformationBiomacromolecule",
          "type": "object"
       },
-      "OccursInAssociation": {
+      "MacromoleculeHasPartAssociation": {
          "additionalProperties": false,
-         "description": "",
+         "description": "Connects a macromolecule (such as a protein complex) to its parts (gene products or chemical entities)",
          "properties": {
             "has_evidence": {
-               "$ref": "#/definitions/Evidence"
+               "$ref": "#/definitions/Evidence",
+               "description": "Links an association to evidence for it"
             },
             "object": {
                "type": "string"
@@ -346,8 +369,151 @@
             }
          },
          "required": [
-            "subject",
-            "predicate",
+            "object"
+         ],
+         "title": "MacromoleculeHasPartAssociation",
+         "type": "object"
+      },
+      "Model": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "biological_process_set": {
+               "description": "All biological process instances that are part of this model",
+               "items": {
+                  "$ref": "#/definitions/BiologicalProcess"
+               },
+               "type": "array"
+            },
+            "chemical_entity_set": {
+               "description": "All chemical entity instances that are part of this model.",
+               "items": {
+                  "$ref": "#/definitions/ChemicalEntity"
+               },
+               "type": "array"
+            },
+            "contributor": {
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "date": {
+               "type": "string"
+            },
+            "id": {
+               "description": "A unique identifier for an element",
+               "type": "string"
+            },
+            "information_biomacromolecule_set": {
+               "description": "All information macromolecule instances that are part of this model",
+               "items": {
+                  "$ref": "#/definitions/InformationBiomacromolecule"
+               },
+               "type": "array"
+            },
+            "molecular_activity_set": {
+               "description": "All molecular activity instances that are part of this model",
+               "items": {
+                  "$ref": "#/definitions/MolecularActivity"
+               },
+               "type": "array"
+            },
+            "ontology_class_set": {
+               "description": "All ontology class objects used in this model",
+               "items": {
+                  "$ref": "#/definitions/OntologyClass"
+               },
+               "type": "array"
+            },
+            "provided_by": {
+               "type": "string"
+            },
+            "state": {
+               "description": "State of the model",
+               "type": "string"
+            },
+            "title": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Model",
+         "type": "object"
+      },
+      "MolecularActivity": {
+         "additionalProperties": false,
+         "description": "An instance of a GO molecular function",
+         "properties": {
+            "causes": {
+               "$ref": "#/definitions/CausesAssociation",
+               "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of an CausesAssociation"
+            },
+            "enabled_by": {
+               "$ref": "#/definitions/EnabledByAssociation",
+               "description": "Links a MolecularActivity to the InformationBiomacromolecule by way of a EnabledByAssociation"
+            },
+            "happens_during": {
+               "$ref": "#/definitions/HappensDuringAssociation",
+               "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of a HappensDuringAssociation "
+            },
+            "has_input": {
+               "$ref": "#/definitions/HasInputAssociation",
+               "description": "Links a MA or BP to its input by way of a HasInputAssociation"
+            },
+            "id": {
+               "description": "A unique identifier for an element",
+               "type": "string"
+            },
+            "occurs_in": {
+               "$ref": "#/definitions/OccursInAssociation",
+               "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of an OccursInAssociation"
+            },
+            "part_of": {
+               "$ref": "#/definitions/ProcessPartOfAssociation"
+            },
+            "type": {
+               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "type": "string"
+            },
+            "type_inferences": {
+               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            }
+         },
+         "required": [
+            "id",
+            "type"
+         ],
+         "title": "MolecularActivity",
+         "type": "object"
+      },
+      "OccursInAssociation": {
+         "additionalProperties": false,
+         "description": "An association owned by a MA or BP that connect to an AE object in which the activity/process is carried out",
+         "properties": {
+            "has_evidence": {
+               "$ref": "#/definitions/Evidence",
+               "description": "Links an association to evidence for it"
+            },
+            "object": {
+               "type": "string"
+            },
+            "predicate": {
+               "description": "A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.",
+               "type": "string"
+            },
+            "subject": {
+               "description": "connects an association to the subject of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
+               "type": "string"
+            }
+         },
+         "required": [
             "object"
          ],
          "title": "OccursInAssociation",
@@ -362,6 +528,7 @@
                "type": "string"
             },
             "id": {
+               "description": "A unique identifier for an element",
                "type": "string"
             },
             "name": {
@@ -370,20 +537,21 @@
             }
          },
          "required": [
-            "id"
+            "id",
+            "category"
          ],
          "title": "OntologyClass",
          "type": "object"
       },
-      "PartOfAssociation": {
+      "ProcessPartOfAssociation": {
          "additionalProperties": false,
-         "description": "",
+         "description": "Connects a MA or BP to its parent parts",
          "properties": {
             "has_evidence": {
-               "$ref": "#/definitions/Evidence"
+               "$ref": "#/definitions/Evidence",
+               "description": "Links an association to evidence for it"
             },
             "object": {
-               "description": "connects an association to the object of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
                "type": "string"
             },
             "predicate": {
@@ -396,11 +564,24 @@
             }
          },
          "required": [
-            "subject",
-            "predicate",
             "object"
          ],
-         "title": "PartOfAssociation",
+         "title": "ProcessPartOfAssociation",
+         "type": "object"
+      },
+      "Publication": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "id": {
+               "description": "A unique identifier for an element",
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Publication",
          "type": "object"
       }
    },
