@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="css/theme.css" />
   <link rel="stylesheet" href="css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -25,9 +25,8 @@
   
   <script src="js/jquery-2.1.1.min.js" defer></script>
   <script src="js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
-  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -38,27 +37,29 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-        <a href="." class="icon icon-home"> gocam in linkml demo</a>
+        <a href="index.html" class="icon icon-home"> gocam in linkml demo</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="home/">Home</a>
+                    <li class="toctree-l1"><a class="reference internal" href="home.html">Home</a>
                     </li>
                 </ul>
                 <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href=".">Index</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="index.html">Index</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#classes">Classes</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#mixins">Mixins</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#slots">Slots</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#enums">Enums</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#types">Types</a>
         <ul>
@@ -72,7 +73,7 @@
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="credits/">Credits</a>
+                    <li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a>
                     </li>
                 </ul>
       </div>
@@ -84,7 +85,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href=".">gocam in linkml demo</a>
+        <a href="index.html">gocam in linkml demo</a>
       </nav>
 
       
@@ -92,7 +93,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".">Docs</a> &raquo;</li>
+    <li><a href="index.html">Docs</a> &raquo;</li>
     
       
     
@@ -104,132 +105,145 @@
   
   <hr/>
 </div>
+
           <div role="main">
             <div class="section">
               
-                <h1 id="gocam-schema">Gocam schema</h1>
-<p>GO CAM experimental LinkML schema</p>
+                <h1 id="gocam-schema">gocam schema</h1>
+<p>GO CAM LinkML schema (experimental)</p>
+<p>The central class in this datamodel is a <a href="Model.html">Model</a>. A model consists of a set of
+<a href="MolecularActivity.html">MolecularActivity</a> objects, from which hangs various elements connected by different kinds of <a href="Association.html">Association</a></p>
+<p>See:
+  * <a href="https://github.com/cmungall/linkml-gocam">https://github.com/cmungall/linkml-gocam</a>
+  * <a href="https://cmungall.github.io/linkml-gocam/">https://cmungall.github.io/linkml-gocam/</a></p>
 <h3 id="classes">Classes</h3>
 <ul>
-<li><a href="Association/">Association</a> - An association between a domain element (e.g. a MolecularActivity) and another domain element (e.g. another MolecularActivity) with evidence and provenance attached<ul>
-<li><a href="CausesAssociation/">CausesAssociation</a> - An association owned by an upstream MA or BP that connects to a downstream MA or BP. The nature of the causal relationship is indicated with the predicate.</li>
-<li><a href="EnabledByAssociation/">EnabledByAssociation</a> - Connects an MA to the information biomacromolecule that executes the activity</li>
-<li><a href="HappensDuringAssociation/">HappensDuringAssociation</a> - Connects an MF to a process or phase in which the process occurs</li>
-<li><a href="HasInputAssociation/">HasInputAssociation</a> - Connects an MF or BP to its input entity, which may be a chemical entity, an information biomacromolecule, or a larger structure</li>
-<li><a href="HasPartAssociation/">HasPartAssociation</a> - General grouping for associations that Link an entity to its parts by a HasPartAssociation<ul>
-<li><a href="MacromoleculeHasPartAssociation/">MacromoleculeHasPartAssociation</a> - Connects a macromolecule (such as a protein complex) to its parts (gene products or chemical entities)</li>
+<li><a href="Association.html">Association</a> - An association between a domain element (e.g. a MolecularActivity) and another domain element (e.g. another MolecularActivity) with evidence and provenance attached<ul>
+<li><a href="CausalAssociation.html">CausalAssociation</a> - An association owned by an upstream MA or BP that connects to a downstream MA or BP. The nature of the causal relationship is indicated with the predicate.</li>
+<li><a href="EnabledByAssociation.html">EnabledByAssociation</a> - Connects an MA to the information biomacromolecule that executes the activity</li>
+<li><a href="HappensDuringAssociation.html">HappensDuringAssociation</a> - Connects an MF to a process or phase in which the process occurs</li>
+<li><a href="HasInputAssociation.html">HasInputAssociation</a> - Connects an MF or BP to its input entity, which may be a chemical entity, an information biomacromolecule, or a larger structure</li>
+<li><a href="HasPartAssociation.html">HasPartAssociation</a> - General grouping for associations that Link an entity to its parts by a HasPartAssociation<ul>
+<li><a href="MacromoleculeHasPartAssociation.html">MacromoleculeHasPartAssociation</a> - Connects a macromolecule (such as a protein complex) to its parts (gene products or chemical entities)</li>
 </ul>
 </li>
-<li><a href="OccursInAssociation/">OccursInAssociation</a> - An association owned by a MA or BP that connect to an AE object in which the activity/process is carried out</li>
-<li><a href="PartOfAssociation/">PartOfAssociation</a> - General grouping for associations that Link an entity to its wholes by a PartOfAssociation<ul>
-<li><a href="AnatomicalPartOfAssociation/">AnatomicalPartOfAssociation</a> - Connects an anatomical entity (such as a component, cell, or gross anatomical entity) to its parent parts</li>
-<li><a href="ProcessPartOfAssociation/">ProcessPartOfAssociation</a> - Connects a MA or BP to its parent parts</li>
+<li><a href="OccursInAssociation.html">OccursInAssociation</a> - An association owned by a MA or BP that connect to an AE object in which the activity/process is carried out</li>
+<li><a href="PartOfAssociation.html">PartOfAssociation</a> - General grouping for associations that Link an entity to its wholes by a PartOfAssociation<ul>
+<li><a href="AnatomicalPartOfAssociation.html">AnatomicalPartOfAssociation</a> - Connects an anatomical entity (such as a component, cell, or gross anatomical entity) to its parent parts</li>
+<li><a href="ProcessPartOfAssociation.html">ProcessPartOfAssociation</a> - Connects a MA or BP to its parent parts</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="Element/">Element</a> - Base class for any biological entity or activity or process in a GO-CAM model<ul>
-<li><a href="DomainElement/">DomainElement</a> - An element that is part of a GO-CAM model<ul>
-<li><a href="AnatomicalEntity/">AnatomicalEntity</a> - An instance of a GO cellular anatomical entity, a cell type, or gross anatomical structure</li>
-<li><a href="BiologicalProcess/">BiologicalProcess</a> - An instance of a GO biological process</li>
-<li><a href="ChemicalEntity/">ChemicalEntity</a> - An instance of a chemical entity, as defined in CHEBI, including macromolecules defined in NEO<ul>
-<li><a href="InformationBiomacromolecule/">InformationBiomacromolecule</a> - This class groups gene, gene product (protein on ncRNA), or a macromolecular complex that is capable of carrying out a molecular activity</li>
+<li><a href="Element.html">Element</a> - Base class for any biological entity or activity or process in a GO-CAM model<ul>
+<li><a href="DomainElement.html">DomainElement</a> - An element that is part of a GO-CAM model<ul>
+<li><a href="AnatomicalEntity.html">AnatomicalEntity</a> - An instance of a GO cellular anatomical entity, a cell type, or gross anatomical structure</li>
+<li><a href="BiologicalProcess.html">BiologicalProcess</a> - An instance of a GO biological process</li>
+<li><a href="ChemicalEntity.html">ChemicalEntity</a> - An instance of a chemical entity, as defined in CHEBI, including macromolecules defined in NEO<ul>
+<li><a href="InformationBiomacromolecule.html">InformationBiomacromolecule</a> - This class groups gene, gene product (protein on ncRNA), or a macromolecular complex that is capable of carrying out a molecular activity</li>
 </ul>
 </li>
-<li><a href="MolecularActivity/">MolecularActivity</a> - An instance of a GO molecular function</li>
+<li><a href="MolecularActivity.html">MolecularActivity</a> - An instance of a GO molecular function</li>
 </ul>
 </li>
-<li><a href="InformationElement/">InformationElement</a><ul>
-<li><a href="Evidence/">Evidence</a> - An instance of a piece of evidence. Evidence attributes such as type, reference, hang off of here</li>
-<li><a href="Publication/">Publication</a></li>
+<li><a href="InformationElement.html">InformationElement</a><ul>
+<li><a href="Evidence.html">Evidence</a> - An instance of a piece of evidence. Evidence attributes such as type, reference, hang off of here</li>
+<li><a href="Publication.html">Publication</a> - A published entity such as a paper in pubmed</li>
 </ul>
 </li>
-<li><a href="Model/">Model</a> - A collection of GO-CAM elements and associated metadata. A model combines multiple simple GO annotations into an integrated, semantically precise and computable model of biological function.</li>
+<li><a href="Model.html">Model</a> - A collection of GO-CAM elements and associated metadata. A model combines multiple simple GO annotations into an integrated, semantically precise and computable model of biological function.</li>
 </ul>
 </li>
-<li><a href="OntologyClass/">OntologyClass</a></li>
+<li><a href="OntologyClass.html">OntologyClass</a></li>
 </ul>
 <h3 id="mixins">Mixins</h3>
 <ul>
-<li><a href="ActivityOrProcess/">ActivityOrProcess</a></li>
-<li><a href="Continuant/">Continuant</a></li>
-<li><a href="DomainElementMixin/">DomainElementMixin</a> - Grouping for mixins that apply to GO-CAM elements. These mixins allow us to group together elements that are alike in some fashion<ul>
-<li><a href="ActivityOrProcess/">ActivityOrProcess</a></li>
-<li><a href="Continuant/">Continuant</a></li>
-<li><a href="ProcessOrPhase/">ProcessOrPhase</a></li>
+<li><a href="ActivityOrProcess.html">ActivityOrProcess</a></li>
+<li><a href="Continuant.html">Continuant</a></li>
+<li><a href="DomainElementMixin.html">DomainElementMixin</a> - Grouping for mixins that apply to GO-CAM elements. These mixins allow us to group together elements that are alike in some fashion<ul>
+<li><a href="ActivityOrProcess.html">ActivityOrProcess</a></li>
+<li><a href="Continuant.html">Continuant</a></li>
+<li><a href="ProcessOrPhase.html">ProcessOrPhase</a></li>
 </ul>
 </li>
-<li><a href="ProcessOrPhase/">ProcessOrPhase</a></li>
+<li><a href="ProcessOrPhase.html">ProcessOrPhase</a></li>
 </ul>
 <h3 id="slots">Slots</h3>
 <ul>
-<li><a href="association_slot/">association slot</a> - any slot that relates an association to another entity<ul>
-<li><a href="object/">object</a> - connects an association to the object of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.<ul>
-<li><a href="anatomical_part_of_association_object/">anatomical part of association➞object</a></li>
-<li><a href="causes_association_object/">causes association➞object</a></li>
-<li><a href="enabled_by_association_object/">enabled by association➞object</a></li>
-<li><a href="happens_during_association_object/">happens during association➞object</a></li>
-<li><a href="has_input_association_object/">has input association➞object</a></li>
-<li><a href="macromolecule_has_part_association_object/">macromolecule has part association➞object</a></li>
-<li><a href="occurs_in_association_object/">occurs in association➞object</a></li>
-<li><a href="process_part_of_association_object/">process part of association➞object</a></li>
+<li><a href="association_slot.html">association slot</a> - any slot that relates an association to another entity<ul>
+<li><a href="object.html">object</a> - connects an association to the object of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.<ul>
+<li><a href="anatomical_part_of_association_object.html">anatomical part of association➞object</a></li>
+<li><a href="causal_association_object.html">causal association➞object</a></li>
+<li><a href="enabled_by_association_object.html">enabled by association➞object</a></li>
+<li><a href="happens_during_association_object.html">happens during association➞object</a></li>
+<li><a href="has_input_association_object.html">has input association➞object</a></li>
+<li><a href="macromolecule_has_part_association_object.html">macromolecule has part association➞object</a></li>
+<li><a href="occurs_in_association_object.html">occurs in association➞object</a></li>
+<li><a href="process_part_of_association_object.html">process part of association➞object</a></li>
 </ul>
 </li>
-<li><a href="predicate/">predicate</a> - A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.<ul>
-<li><a href="causes_association_predicate/">causes association➞predicate</a> - This must be drawn from the causal relation hierarchy in RO</li>
+<li><a href="predicate.html">predicate</a> - A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.<ul>
+<li><a href="causal_association_predicate.html">causal association➞predicate</a> - This must be drawn from the causal relation hierarchy in RO</li>
 </ul>
 </li>
-<li><a href="subject/">subject</a> - connects an association to the subject of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.</li>
+<li><a href="subject.html">subject</a> - connects an association to the subject of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.</li>
 </ul>
 </li>
-<li><a href="contributor/">contributor</a></li>
-<li><a href="date/">date</a></li>
-<li><a href="domain_element_set/">domain element set</a> - Grouping field for all domain elements 'owned' by a model<ul>
-<li><a href="biological_process_set/">biological process set</a> - All biological process instances that are part of this model</li>
-<li><a href="chemical_entity_set/">chemical entity set</a> - All chemical entity instances that are part of this model.</li>
-<li><a href="information_biomacromolecule_set/">information biomacromolecule set</a> - All information macromolecule instances that are part of this model</li>
-<li><a href="molecular_activity_set/">molecular activity set</a> - All molecular activity instances that are part of this model</li>
-<li><a href="ontology_class_set/">ontology class set</a> - All ontology class objects used in this model</li>
+<li><a href="contributor.html">contributor</a> - connects an assertion to the individual that made a contribution to it</li>
+<li><a href="date.html">date</a> - connects anything to the date</li>
+<li><a href="domain_element_set.html">domain element set</a> - Grouping field for all domain elements 'owned' by a model<ul>
+<li><a href="biological_process_set.html">biological process set</a> - All biological process instances that are part of this model</li>
+<li><a href="chemical_entity_set.html">chemical entity set</a> - All chemical entity instances that are part of this model.</li>
+<li><a href="information_biomacromolecule_set.html">information biomacromolecule set</a> - All information macromolecule instances that are part of this model</li>
+<li><a href="molecular_activity_set.html">molecular activity set</a> - All molecular activity instances that are part of this model</li>
+<li><a href="ontology_class_set.html">ontology class set</a> - All ontology class objects used in this model</li>
 </ul>
 </li>
-<li><a href="has_evidence/">has evidence</a> - Links an association to evidence for it</li>
-<li><a href="id/">id</a> - A unique identifier for an element</li>
-<li><a href="model_property/">model property</a><ul>
-<li><a href="state/">state</a> - State of the model</li>
-<li><a href="title/">title</a></li>
+<li><a href="has_evidence.html">has evidence</a> - Links an association to evidence for it</li>
+<li><a href="id.html">id</a> - A unique identifier for an element</li>
+<li><a href="model_property.html">model property</a><ul>
+<li><a href="state.html">state</a> - State of the model</li>
+<li><a href="title.html">title</a></li>
 </ul>
 </li>
-<li><a href="name/">name</a> - A human-readable name for an attribute or entity.</li>
-<li><a href="provided_by/">provided by</a></li>
-<li><a href="reference/">reference</a></li>
-<li><a href="related_to/">related to</a> - Links a subject domain entity to an object domain entity by way of an Association object<ul>
-<li><a href="causes/">causes</a> - Links a subject domain entity (a MA or BP) to an object domain entity by way of an CausesAssociation</li>
-<li><a href="enabled_by/">enabled by</a> - Links a MolecularActivity to the InformationBiomacromolecule by way of a EnabledByAssociation</li>
-<li><a href="happens_during/">happens during</a> - Links a subject domain entity (a MA or BP) to an object domain entity by way of a HappensDuringAssociation </li>
-<li><a href="has_input/">has input</a> - Links a MA or BP to its input by way of a HasInputAssociation</li>
-<li><a href="has_part/">has part</a> - Links a subject domain entity to an object domain entity by way of a HasPartAssociation<ul>
-<li><a href="information_biomacromolecule_has_part/">information biomacromolecule➞has part</a></li>
+<li><a href="name.html">name</a> - A human-readable name for an attribute or entity.</li>
+<li><a href="provided_by.html">provided by</a> - connects an assertion to a group that provided it</li>
+<li><a href="reference.html">reference</a> - A publication or other reference that supports a piece of evidence</li>
+<li><a href="related_to.html">related to</a> - Links a subject domain entity to an object domain entity by way of an Association object<ul>
+<li><a href="enabled_by.html">enabled by</a> - Links a MolecularActivity to the InformationBiomacromolecule by way of a EnabledByAssociation</li>
+<li><a href="happens_during.html">happens during</a> - Links a subject domain entity (a MA or BP) to an object domain entity by way of a HappensDuringAssociation </li>
+<li><a href="has_input.html">has input</a> - Links a MA or BP to its input by way of a HasInputAssociation</li>
+<li><a href="has_part.html">has part</a> - Links a subject domain entity to an object domain entity by way of a HasPartAssociation<ul>
+<li><a href="information_biomacromolecule_has_part.html">information biomacromolecule➞has part</a></li>
 </ul>
 </li>
-<li><a href="occurs_in/">occurs in</a> - Links a subject domain entity (a MA or BP) to an object domain entity by way of an OccursInAssociation</li>
-<li><a href="part_of/">part of</a> - Links a subject domain entity to an object domain entity by way of a PartOfAssociation<ul>
-<li><a href="anatomical_entity_part_of/">anatomical entity➞part of</a></li>
-<li><a href="molecular_activity_part_of/">molecular activity➞part of</a></li>
+<li><a href="influences.html">influences</a> - Links a subject domain entity (a MA or BP) to an object domain entity by way of an CausalAssociation</li>
+<li><a href="occurs_in.html">occurs in</a> - Links a subject domain entity (a MA or BP) to an object domain entity by way of an OccursInAssociation</li>
+<li><a href="part_of.html">part of</a> - Links a subject domain entity to an object domain entity by way of a PartOfAssociation<ul>
+<li><a href="anatomical_entity_part_of.html">anatomical entity➞part of</a></li>
+<li><a href="molecular_activity_part_of.html">molecular activity➞part of</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="type/">type</a> - links a GOCAM element (an OWL individual) to the specific class it instantiates<ul>
-<li><a href="category/">category</a> - Name of the high level ontology class in which this entity is categorized<ul>
-<li><a href="anatomical_entity_category/">anatomical entity➞category</a></li>
-<li><a href="information_biomacromolecule_category/">information biomacromolecule➞category</a></li>
+<li><a href="type.html">type</a> - links a GOCAM element (an OWL individual) to the specific class it instantiates<ul>
+<li><a href="category.html">category</a> - Name of the high level ontology class in which this entity is categorized<ul>
+<li><a href="anatomical_entity_category.html">anatomical entity➞category</a></li>
+<li><a href="information_biomacromolecule_category.html">information biomacromolecule➞category</a></li>
 </ul>
 </li>
-<li><a href="evidence_type/">evidence type</a></li>
+<li><a href="evidence_type.html">evidence type</a> - Connectes a piece of evidence to the evidence type from ECO</li>
 </ul>
 </li>
-<li><a href="type_inferences/">type inferences</a> - links a GOCAM element (an OWL individual) to the specific class it instantiates</li>
-<li><a href="with_object/">with object</a></li>
+<li><a href="type_inferences.html">type inferences</a> - links a GOCAM element (an OWL individual) to the specific class it instantiates</li>
+<li><a href="with_object.html">with object</a> - An object that supports a piece of evidence</li>
+</ul>
+<h3 id="enums">Enums</h3>
+<ul>
+<li><a href="anatomical_entity_category.html">anatomical_entity_category</a></li>
+<li><a href="causal_predicate_enum.html">causal_predicate_enum</a></li>
+<li><a href="information_biomacromolecule_category.html">information_biomacromolecule_category</a></li>
+<li><a href="model_state_enum.html">model_state_enum</a></li>
 </ul>
 <h3 id="types">Types</h3>
 <h4 id="built-in">Built in</h4>
@@ -250,27 +264,27 @@
 </ul>
 <h4 id="defined">Defined</h4>
 <ul>
-<li><a href="types/Boolean/">Boolean</a>  (<strong>Bool</strong>)  - A binary (true or false) value</li>
-<li><a href="types/CategoryType/">CategoryType</a>  (<a href="types/Uriorcurie/">Uriorcurie</a>)  - A primitive type in which the value denotes a class within the biolink model. The value must be a URI or a CURIE. In a Neo4j representation, the value should be the CURIE for the biolink class, for example biolink:Gene. For an RDF representation, the value should be a URI such as https://w3id.org/biolink/vocab/Gene</li>
-<li><a href="types/ChemicalFormulaValue/">ChemicalFormulaValue</a>  (<strong>str</strong>)  - A chemical formula</li>
-<li><a href="types/Date/">Date</a>  (<strong>XSDDate</strong>)  - a date (year, month and day) in an idealized calendar</li>
-<li><a href="types/Datetime/">Datetime</a>  (<strong>XSDDateTime</strong>)  - The combination of a date and time</li>
-<li><a href="types/Decimal/">Decimal</a>  (<strong>Decimal</strong>)  - A real number with arbitrary precision that conforms to the xsd:decimal specification</li>
-<li><a href="types/Double/">Double</a>  (<strong>float</strong>)  - A real number that conforms to the xsd:double specification</li>
-<li><a href="types/Float/">Float</a>  (<strong>float</strong>)  - A real number that conforms to the xsd:float specification</li>
-<li><a href="types/Integer/">Integer</a>  (<strong>int</strong>)  - An integer</li>
-<li><a href="types/IriType/">IriType</a>  (<a href="types/Uriorcurie/">Uriorcurie</a>)  - An IRI</li>
-<li><a href="types/LabelType/">LabelType</a>  (<a href="types/String/">String</a>)  - A string that provides a human-readable name for an entity</li>
-<li><a href="types/NarrativeText/">NarrativeText</a>  (<a href="types/String/">String</a>)  - A string that provides a human-readable description of something</li>
-<li><a href="types/Ncname/">Ncname</a>  (<strong>NCName</strong>)  - Prefix part of CURIE</li>
-<li><a href="types/Nodeidentifier/">Nodeidentifier</a>  (<strong>NodeIdentifier</strong>)  - A URI, CURIE or BNODE that represents a node in a model.</li>
-<li><a href="types/Objectidentifier/">Objectidentifier</a>  (<strong>ElementIdentifier</strong>)  - A URI or CURIE that represents an object in the model.</li>
-<li><a href="types/PredicateType/">PredicateType</a>  (<a href="types/Uriorcurie/">Uriorcurie</a>)  - A CURIE from the biolink related_to hierarchy. For example, biolink:related_to, biolink:causes, biolink:treats.</li>
-<li><a href="types/String/">String</a>  (<strong>str</strong>)  - A character string</li>
-<li><a href="types/SymbolType/">SymbolType</a>  (<a href="types/String/">String</a>) </li>
-<li><a href="types/Time/">Time</a>  (<strong>XSDTime</strong>)  - A time object represents a (local) time of day, independent of any particular day</li>
-<li><a href="types/Uri/">Uri</a>  (<strong>URI</strong>)  - a complete URI</li>
-<li><a href="types/Uriorcurie/">Uriorcurie</a>  (<strong>URIorCURIE</strong>)  - a URI or a CURIE</li>
+<li><a href="types/Boolean.html">Boolean</a>  (<strong>Bool</strong>)  - A binary (true or false) value</li>
+<li><a href="types/CategoryType.html">CategoryType</a>  (<a href="types/Uriorcurie.html">Uriorcurie</a>)  - A primitive type in which the value denotes a class within the biolink model. The value must be a URI or a CURIE. In a Neo4j representation, the value should be the CURIE for the biolink class, for example biolink:Gene. For an RDF representation, the value should be a URI such as https://w3id.org/biolink/vocab/Gene</li>
+<li><a href="types/ChemicalFormulaValue.html">ChemicalFormulaValue</a>  (<strong>str</strong>)  - A chemical formula</li>
+<li><a href="types/Date.html">Date</a>  (<strong>XSDDate</strong>)  - a date (year, month and day) in an idealized calendar</li>
+<li><a href="types/Datetime.html">Datetime</a>  (<strong>XSDDateTime</strong>)  - The combination of a date and time</li>
+<li><a href="types/Decimal.html">Decimal</a>  (<strong>Decimal</strong>)  - A real number with arbitrary precision that conforms to the xsd:decimal specification</li>
+<li><a href="types/Double.html">Double</a>  (<strong>float</strong>)  - A real number that conforms to the xsd:double specification</li>
+<li><a href="types/Float.html">Float</a>  (<strong>float</strong>)  - A real number that conforms to the xsd:float specification</li>
+<li><a href="types/Integer.html">Integer</a>  (<strong>int</strong>)  - An integer</li>
+<li><a href="types/IriType.html">IriType</a>  (<a href="types/Uriorcurie.html">Uriorcurie</a>)  - An IRI</li>
+<li><a href="types/LabelType.html">LabelType</a>  (<a href="types/String.html">String</a>)  - A string that provides a human-readable name for an entity</li>
+<li><a href="types/NarrativeText.html">NarrativeText</a>  (<a href="types/String.html">String</a>)  - A string that provides a human-readable description of something</li>
+<li><a href="types/Ncname.html">Ncname</a>  (<strong>NCName</strong>)  - Prefix part of CURIE</li>
+<li><a href="types/Nodeidentifier.html">Nodeidentifier</a>  (<strong>NodeIdentifier</strong>)  - A URI, CURIE or BNODE that represents a node in a model.</li>
+<li><a href="types/Objectidentifier.html">Objectidentifier</a>  (<strong>ElementIdentifier</strong>)  - A URI or CURIE that represents an object in the model.</li>
+<li><a href="types/PredicateType.html">PredicateType</a>  (<a href="types/Uriorcurie.html">Uriorcurie</a>)  - A RO identifier</li>
+<li><a href="types/String.html">String</a>  (<strong>str</strong>)  - A character string</li>
+<li><a href="types/SymbolType.html">SymbolType</a>  (<a href="types/String.html">String</a>) </li>
+<li><a href="types/Time.html">Time</a>  (<strong>XSDTime</strong>)  - A time object represents a (local) time of day, independent of any particular day</li>
+<li><a href="types/Uri.html">Uri</a>  (<strong>URI</strong>)  - a complete URI</li>
+<li><a href="types/Uriorcurie.html">Uriorcurie</a>  (<strong>URIorCURIE</strong>)  - a URI or a CURIE</li>
 </ul>
               
             </div>
@@ -279,10 +293,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="credits/" class="btn btn-neutral float-right" title="Credits">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="credits.html" class="btn btn-neutral float-right" title="Credits">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="home/" class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="home.html" class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -305,17 +319,18 @@
   </div>
 
   <div class="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-      
-        <span><a href="home/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="credits/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="home.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="credits.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
     <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
     <script src="js/theme.js" defer></script>
       <script src="search/main.js" defer></script>
     <script defer>
@@ -328,6 +343,6 @@
 </html>
 
 <!--
-MkDocs version : 1.1.2
-Build Date UTC : 2021-04-05 20:31:25.372487+00:00
+MkDocs version : 1.2.1
+Build Date UTC : 2021-06-25 23:55:39.515563+00:00
 -->
