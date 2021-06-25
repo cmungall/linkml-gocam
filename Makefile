@@ -70,7 +70,13 @@ gen-graphql:target/graphql/$(SCHEMA_NAME).graphql
 target/graphql/%.graphql: $(SCHEMA_DIR)/%.yaml tdir-graphql
 	gen-graphql $(GEN_OPTS) $< > $@
 
-###  -- JSON schema --
+###  -- SQL DDL --
+# TODO: modularize imports. For now imports are merged.
+gen-sqlddl: target/sqlddl/$(SCHEMA_NAME).sql
+target/sqlddl/%.sql: $(SCHEMA_DIR)/%.yaml tdir-sqlddl
+	gen-sqlddl $(GEN_OPTS) $< > $@
+
+####  -- JSON schema --
 # TODO: modularize imports. For now imports are merged.
 gen-jsonschema: target/jsonschema/$(SCHEMA_NAME).schema.json
 target/jsonschema/%.schema.json: $(SCHEMA_DIR)/%.yaml tdir-jsonschema
