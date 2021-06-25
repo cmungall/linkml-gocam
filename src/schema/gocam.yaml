@@ -1,7 +1,15 @@
 id: https://w3id.org/gocam
 name: gocam
-description: >-
-  GO CAM experimental LinkML schema
+description: |-
+  GO CAM LinkML schema (experimental)
+
+  The central class in this datamodel is a [Model](Model.md). A model consists of a set of
+  [MolecularActivity](MolecularActivity.md) objects, from which hangs various elements connected by different kinds of [Association](Association.md)
+
+  See:
+    * [https://github.com/cmungall/linkml-gocam](https://github.com/cmungall/linkml-gocam)
+    * [https://cmungall.github.io/linkml-gocam/](https://cmungall.github.io/linkml-gocam/)
+    
 default_curi_maps:
   - obo_context
   - go_context
@@ -19,6 +27,9 @@ prefixes:
   goshapes: http://purl.obolibrary.org/obo/go/shapes/
   RO: http://purl.obolibrary.org/obo/RO_
   BFO: http://purl.obolibrary.org/obo/BFO_
+  GO: http://purl.obolibrary.org/obo/GO_
+  ECO: http://purl.obolibrary.org/obo/ECO_
+  gomodel: http://model.geneontology.org/
 default_prefix: gocam
 see_also:
   - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7012280/
@@ -88,26 +99,39 @@ slots:
 
   with object:
     range: element
+    description: >-
+      An object that supports a piece of evidence
     slot_uri: lego:evidence
     multivalued: true
     
   reference:
     range: publication
+    description: >-
+      A publication or other reference that supports a piece of evidence
     slot_uri: dce:source
     multivalued: true
     
   provided by:
+    description: >-
+      connects an assertion to a group that provided it
     slot_uri: pav:providedBy
     
   contributor:
     slot_uri: dce:contributor
+    description: >-
+      connects an assertion to the individual that made a contribution to it
     multivalued: true
     
   date:
     slot_uri: dce:date
+    description: >-
+      connects anything to the date
     
   evidence type:
     is_a: type
+    description: >-
+      Connectes a piece of evidence to the evidence type from ECO
+    pattern: '^ECO:\d+$'
     
   type inferences:
     description: >-
@@ -129,14 +153,14 @@ slots:
     description: >-
       Links a subject domain entity (a MA or BP) to an object domain entity by way of an OccursInAssociation
     
-  causes:
+  influences:
     is_a: related to
-    range: causes association
+    range: causal association
     domain: activity or process
     description: >-
-      Links a subject domain entity (a MA or BP) to an object domain entity by way of an CausesAssociation
+      Links a subject domain entity (a MA or BP) to an object domain entity by way of an CausalAssociation
     comments:
-      - the specific type of causation is indicated on the CausesAssocation predicate slot
+      - the specific type of causation is indicated on the CausalAssocation predicate slot
 
   happens during:
     is_a: related to
@@ -354,7 +378,7 @@ classes:
     mixins:
       - activity or process
     slots:
-      - causes
+      - influences
       - happens during
       - part of
       - enabled by
@@ -379,7 +403,7 @@ classes:
       - process or phase
     slots:
       - occurs in
-      - causes
+      - influences
       - happens during
     exact_mappings:
       - goshapes:BiologicalProcess
@@ -459,7 +483,7 @@ classes:
         range: anatomical entity
         role: location
 
-  causes association:
+  causal association:
     is_a: association
     description: >-
       An association owned by an upstream MA or BP that connects to a downstream MA or BP. The nature of the causal relationship is indicated with the predicate.
@@ -554,6 +578,11 @@ classes:
 
   publication:
     is_a: information element
+    description: >-
+      A published entity such as a paper in pubmed
+    id_prefixes:
+      - PMID
+      - DOI
     
   evidence:
     is_a: information element
@@ -626,8 +655,7 @@ types:
   predicate type:
     typeof: uriorcurie
     description: >-
-      A CURIE from the biolink related_to hierarchy.
-      For example, biolink:related_to, biolink:causes, biolink:treats.
+      A RO identifier
 
   narrative text:
     typeof: string

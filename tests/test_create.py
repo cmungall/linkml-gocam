@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-
 from gocam.gocam import *
-from types import ModuleType
-
-import json
-from jsonasobj import as_json
 from rdflib import Graph
+import json
 
-from linkml.generators.jsonldcontextgen import ContextGenerator
-from linkml.generators.pythongen import PythonGenerator
-from linkml.generators.shexgen import ShExGenerator
-from linkml.generators.yumlgen import YumlGenerator
-from linkml.utils.yamlutils import DupCheckYamlLoader
-from linkml.dumpers.json_dumper import dumps
+from hbreader import hbread
+from linkml_runtime.loaders import yaml_loader, json_loader, rdf_loader
+from linkml_runtime.dumpers import json_dumper, yaml_dumper, rdf_dumper
+
 import os
 from tests import JSONLD_DIR, TARGET_DIR
 
@@ -26,18 +21,19 @@ RECEPTOR_LIGAND = 'GO:0048018' ## receptor ligand activity
 RECEPTOR_ACTIVITY = 'GO:0042813' ## Wnt-activated receptor activity
 EXTRACELLULAR = 'GO:0005615' ## extracellular space
 PM = 'GO:0005886' ## plasma membrane
-WNT3 = 'UniprotKB:P56703'
-FZD1 = 'UniprotKB:Q9UP38'
+WNT3 = 'UniProtKB:P56703'
+FZD1 = 'UniProtKB:Q9UP38'
 
 ttl_out = os.path.join(TARGET_DIR, 'sample.ttl')
 jsonld_out = os.path.join(TARGET_DIR, 'sample.jsonld')
+ttl_roundtrip_out = os.path.join(TARGET_DIR, 'sample-roundtrip.ttl')
+ttl_out = os.path.join(TARGET_DIR, 'sample.ttl')
 cntxt_file =  os.path.join(JSONLD_DIR, 'gocam.context.jsonld')
-f = open(cntxt_file)
-#cntxt = json.load(f)
-cntxt = f.read()
+
+#cntxt = f.read()
 
 def id(s):
-    return f'model:a5g4ccd08-{s}'
+    return f'gomodel:a5g4ccd08-{s}'
 
 counter = 0
 def gen_evidence(eco: str, ref: str = 'PMID:1234') -> Evidence:
@@ -46,10 +42,21 @@ def gen_evidence(eco: str, ref: str = 'PMID:1234') -> Evidence:
     return Evidence(id=id(f'e{counter}'),
                     evidence_type=eco, reference=ref)
 
+def add_prefixes(cntxt: dict, p: str, url: str) -> None:
+    cntxt['@context'][p] = {'@id': url, '@prefix': True}
+
+
 class TestCreate(unittest.TestCase):
     """A test case for create tests."""
 
     def test_create(self):
+        f = open(cntxt_file)
+        cntxt = json.load(f)
+        add_prefixes(cntxt, 'UniProtKB', 'http://purl.identifiers.org/uniprot/')
+        add_prefixes(cntxt, 'PMID', 'http://identifiers.org/pmid/')
+        add_prefixes(cntxt, 'orcid', 'http://identifiers.org/orcid/')
+        cntxt = json.dumps(cntxt)
+        #print(f'C={cntxt}')
         m = Model(id=id('m1'),
                   title='test model: see https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7012280/figure/F3/',
                   contributor=['orcid:123', 'orcid:234'],
@@ -80,7 +87,7 @@ class TestCreate(unittest.TestCase):
                                occurs_in=OccursInAssociation(
                                    has_evidence=gen_evidence('ECO:nnn'),
                                    object=c1.id),
-                               causes=CausesAssociation(has_evidence=gen_evidence('ECO:nnn'),
+                               influences=CausalAssociation(has_evidence=gen_evidence('ECO:nnn'),
                                                         predicate='regulates',
                                                         object=id('a2')),
                                part_of=ProcessPartOfAssociation(
@@ -89,15 +96,28 @@ class TestCreate(unittest.TestCase):
 
         m.molecular_activity_set = [a1, a2]
         m.information_biomacromolecule_set = [g1, g2]
-        jsonld = dumps(m, cntxt)
-        print(jsonld)
-        with open(jsonld_out, 'w') as io:
-            io.write(jsonld)
-        #print(cntxt)
+        json_dumper.dump(element=m, to_file=jsonld_out, contexts=cntxt)
+        #rdf_dumper.dump(element=m, to_file=ttl_out, contexts=cntxt)
         g = Graph()
-        g.parse(data=jsonld, format="json-ld")
-        print(f'Writing to {ttl_out}')
-        g.serialize(destination=ttl_out, format='turtle')
-        ttl = g.serialize(format="turtle").decode()
-        print(ttl)
-        print(f'P1={p1.id} // {p1}')
+
+        g.parse(jsonld_out, format="json-ld")
+        qres = g.query(
+            """SELECT DISTINCT ?g
+               WHERE {
+                   ?ai rdf:type <http://purl.obolibrary.org/obo/GO_0048018> ;
+                       gocam:enabled_by [rdf:object [ rdf:type ?g ]]
+               }""")
+        found = False
+        for row in qres:
+            gene = row[0]
+            print(f'row={gene}')
+            if str(gene) == 'http://purl.identifiers.org/uniprot/P56703':
+                found = True
+        assert found
+        print(f'Writing to {ttl_roundtrip_out}')
+        g.serialize(ttl_roundtrip_out, format='turtle')
+        #ttl = g.serialize(ttl_roundtrip_out, format="turtle").decode()
+        #print(ttl)
+        # TEST THIS AFTER: https://github.com/linkml/linkml/issues/157
+        #new_obj = json_loader.load(jsonld_out, Model)
+        #print(new_obj)

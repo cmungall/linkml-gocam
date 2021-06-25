@@ -66,10 +66,6 @@
          "additionalProperties": false,
          "description": "An instance of a GO biological process",
          "properties": {
-            "causes": {
-               "$ref": "#/definitions/CausesAssociation",
-               "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of an CausesAssociation"
-            },
             "happens_during": {
                "$ref": "#/definitions/HappensDuringAssociation",
                "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of a HappensDuringAssociation "
@@ -77,6 +73,10 @@
             "id": {
                "description": "A unique identifier for an element",
                "type": "string"
+            },
+            "influences": {
+               "$ref": "#/definitions/CausalAssociation",
+               "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of an CausalAssociation"
             },
             "occurs_in": {
                "$ref": "#/definitions/OccursInAssociation",
@@ -101,7 +101,7 @@
          "title": "BiologicalProcess",
          "type": "object"
       },
-      "CausesAssociation": {
+      "CausalAssociation": {
          "additionalProperties": false,
          "description": "An association owned by an upstream MA or BP that connects to a downstream MA or BP. The nature of the causal relationship is indicated with the predicate.",
          "properties": {
@@ -124,7 +124,7 @@
          "required": [
             "object"
          ],
-         "title": "CausesAssociation",
+         "title": "CausalAssociation",
          "type": "object"
       },
       "ChemicalEntity": {
@@ -227,15 +227,18 @@
          "description": "An instance of a piece of evidence. Evidence attributes such as type, reference, hang off of here",
          "properties": {
             "contributor": {
+               "description": "connects an assertion to the individual that made a contribution to it",
                "items": {
                   "type": "string"
                },
                "type": "array"
             },
             "date": {
+               "description": "connects anything to the date",
                "type": "string"
             },
             "evidence_type": {
+               "description": "Connectes a piece of evidence to the evidence type from ECO",
                "type": "string"
             },
             "id": {
@@ -243,12 +246,14 @@
                "type": "string"
             },
             "reference": {
+               "description": "A publication or other reference that supports a piece of evidence",
                "items": {
                   "type": "string"
                },
                "type": "array"
             },
             "with_object": {
+               "description": "An object that supports a piece of evidence",
                "items": {
                   "type": "string"
                },
@@ -393,12 +398,14 @@
                "type": "array"
             },
             "contributor": {
+               "description": "connects an assertion to the individual that made a contribution to it",
                "items": {
                   "type": "string"
                },
                "type": "array"
             },
             "date": {
+               "description": "connects anything to the date",
                "type": "string"
             },
             "id": {
@@ -427,6 +434,7 @@
                "type": "array"
             },
             "provided_by": {
+               "description": "connects an assertion to a group that provided it",
                "type": "string"
             },
             "state": {
@@ -447,10 +455,6 @@
          "additionalProperties": false,
          "description": "An instance of a GO molecular function",
          "properties": {
-            "causes": {
-               "$ref": "#/definitions/CausesAssociation",
-               "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of an CausesAssociation"
-            },
             "enabled_by": {
                "$ref": "#/definitions/EnabledByAssociation",
                "description": "Links a MolecularActivity to the InformationBiomacromolecule by way of a EnabledByAssociation"
@@ -466,6 +470,10 @@
             "id": {
                "description": "A unique identifier for an element",
                "type": "string"
+            },
+            "influences": {
+               "$ref": "#/definitions/CausalAssociation",
+               "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of an CausalAssociation"
             },
             "occurs_in": {
                "$ref": "#/definitions/OccursInAssociation",
@@ -571,7 +579,7 @@
       },
       "Publication": {
          "additionalProperties": false,
-         "description": "",
+         "description": "A published entity such as a paper in pubmed",
          "properties": {
             "id": {
                "description": "A unique identifier for an element",

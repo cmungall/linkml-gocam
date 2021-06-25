@@ -4,7 +4,7 @@ anatomical_entity,,"An instance of a GO cellular anatomical entity, a cell type,
 anatomical_part_of_association,,"Connects an anatomical entity (such as a component, cell, or gross anatomical entity) to its parent parts"
 association,,An association between a domain element (e.g. a MolecularActivity) and another domain element (e.g. another MolecularActivity) with evidence and provenance attached
 biological_process,,An instance of a GO biological process
-causes_association,,An association owned by an upstream MA or BP that connects to a downstream MA or BP. The nature of the causal relationship is indicated with the predicate.
+causal_association,,An association owned by an upstream MA or BP that connects to a downstream MA or BP. The nature of the causal relationship is indicated with the predicate.
 chemical_entity,,"An instance of a chemical entity, as defined in CHEBI, including macromolecules defined in NEO"
 continuant,,
 domain_element,,An element that is part of a GO-CAM model
@@ -25,5 +25,5 @@ ontology_class,,
 part_of_association,,General grouping for associations that Link an entity to its wholes by a PartOfAssociation
 process_or_phase,,
 process_part_of_association,,Connects a MA or BP to its parent parts
-publication,,
+publication,,A published entity such as a paper in pubmed
 

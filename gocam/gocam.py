@@ -1,28 +1,33 @@
 # Auto generated from gocam.yaml by pythongen.py version: 0.9.0
-# Generation date: 2021-04-05 13:22
+# Generation date: 2021-06-25 16:20
 # Schema: gocam
 #
 # id: https://w3id.org/gocam
-# description: GO CAM experimental LinkML schema
+# description: GO CAM LinkML schema (experimental) The central class in this datamodel is a [Model](Model.md). A
+#              model consists of a set of [MolecularActivity](MolecularActivity.md) objects, from which hangs
+#              various elements connected by different kinds of [Association](Association.md) See: *
+#              [https://github.com/cmungall/linkml-gocam](https://github.com/cmungall/linkml-gocam) *
+#              [https://cmungall.github.io/linkml-gocam/](https://cmungall.github.io/linkml-gocam/)
 # license: https://creativecommons.org/publicdomain/zero/1.0/
 
 import dataclasses
 import sys
 import re
+from jsonasobj2 import JsonObj
 from typing import Optional, List, Union, Dict, ClassVar, Any
 from dataclasses import dataclass
-from linkml_model.meta import EnumDefinition, PermissibleValue, PvFormulaOptions
+from linkml_runtime.linkml_model.meta import EnumDefinition, PermissibleValue, PvFormulaOptions
 
-from linkml.utils.slot import Slot
-from linkml.utils.metamodelcore import empty_list, empty_dict, bnode
-from linkml.utils.yamlutils import YAMLRoot, extended_str, extended_float, extended_int
-from linkml.utils.dataclass_extensions_376 import dataclasses_init_fn_with_kwargs
-from linkml.utils.formatutils import camelcase, underscore, sfx
-from linkml.utils.enumerations import EnumDefinitionImpl
+from linkml_runtime.utils.slot import Slot
+from linkml_runtime.utils.metamodelcore import empty_list, empty_dict, bnode
+from linkml_runtime.utils.yamlutils import YAMLRoot, extended_str, extended_float, extended_int
+from linkml_runtime.utils.dataclass_extensions_376 import dataclasses_init_fn_with_kwargs
+from linkml_runtime.utils.formatutils import camelcase, underscore, sfx
+from linkml_runtime.utils.enumerations import EnumDefinitionImpl
 from rdflib import Namespace, URIRef
-from linkml.utils.curienamespace import CurieNamespace
-from linkml.utils.metamodelcore import URIorCURIE
-from linkml_model.types import String, Uriorcurie
+from linkml_runtime.utils.curienamespace import CurieNamespace
+from linkml_runtime.linkml_model.types import String, Uriorcurie
+from linkml_runtime.utils.metamodelcore import URIorCURIE
 
 metamodel_version = "1.7.0"
 
@@ -31,10 +36,15 @@ dataclasses._init_fn = dataclasses_init_fn_with_kwargs
 
 # Namespaces
 BFO = CurieNamespace('BFO', 'http://purl.obolibrary.org/obo/BFO_')
+DOI = CurieNamespace('DOI', 'http://dx.doi.org/')
+ECO = CurieNamespace('ECO', 'http://purl.obolibrary.org/obo/ECO_')
+GO = CurieNamespace('GO', 'http://purl.obolibrary.org/obo/GO_')
+PMID = CurieNamespace('PMID', 'http://www.ncbi.nlm.nih.gov/pubmed/')
 RO = CurieNamespace('RO', 'http://purl.obolibrary.org/obo/RO_')
 BIOLINK = CurieNamespace('biolink', 'https://w3id.org/biolink/')
 DCE = CurieNamespace('dce', 'http://purl.org/dc/elements/1.1/')
 GOCAM = CurieNamespace('gocam', 'https://w3id.org/gocam/')
+GOMODEL = CurieNamespace('gomodel', 'http://model.geneontology.org/')
 GOSHAPES = CurieNamespace('goshapes', 'http://purl.obolibrary.org/obo/go/shapes/')
 LEGO = CurieNamespace('lego', 'http://geneontology.org/lego/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
@@ -79,7 +89,7 @@ class LabelType(String):
 
 
 class PredicateType(Uriorcurie):
-    """ A CURIE from the biolink related_to hierarchy. For example, biolink:related_to, biolink:causes, biolink:treats. """
+    """ A RO identifier """
     type_class_uri = XSD.anyURI
     type_class_curie = "xsd:anyURI"
     type_name = "predicate type"
@@ -181,8 +191,8 @@ class Element(YAMLRoot):
     id: Union[str, ElementId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, ElementId):
             self.id = ElementId(self.id)
 
@@ -215,18 +225,16 @@ class Model(Element):
     ontology_class_set: Optional[Union[Dict[Union[str, OntologyClassId], Union[dict, "OntologyClass"]], List[Union[dict, "OntologyClass"]]]] = empty_dict()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, ModelId):
             self.id = ModelId(self.id)
 
         if self.title is not None and not isinstance(self.title, str):
             self.title = str(self.title)
 
-        if self.contributor is None:
-            self.contributor = []
         if not isinstance(self.contributor, list):
-            self.contributor = [self.contributor]
+            self.contributor = [self.contributor] if self.contributor is not None else []
         self.contributor = [v if isinstance(v, str) else str(v) for v in self.contributor]
 
         if self.date is not None and not isinstance(self.date, str):
@@ -238,35 +246,15 @@ class Model(Element):
         if self.provided_by is not None and not isinstance(self.provided_by, str):
             self.provided_by = str(self.provided_by)
 
-        if self.molecular_activity_set is None:
-            self.molecular_activity_set = []
-        if not isinstance(self.molecular_activity_set, (list, dict)):
-            self.molecular_activity_set = [self.molecular_activity_set]
-        self._normalize_inlined_slot(slot_name="molecular_activity_set", slot_type=MolecularActivity, key_name="id", inlined_as_list=None, keyed=True)
+        self._normalize_inlined_as_dict(slot_name="molecular_activity_set", slot_type=MolecularActivity, key_name="id", keyed=True)
 
-        if self.biological_process_set is None:
-            self.biological_process_set = []
-        if not isinstance(self.biological_process_set, (list, dict)):
-            self.biological_process_set = [self.biological_process_set]
-        self._normalize_inlined_slot(slot_name="biological_process_set", slot_type=BiologicalProcess, key_name="id", inlined_as_list=None, keyed=True)
+        self._normalize_inlined_as_dict(slot_name="biological_process_set", slot_type=BiologicalProcess, key_name="id", keyed=True)
 
-        if self.information_biomacromolecule_set is None:
-            self.information_biomacromolecule_set = []
-        if not isinstance(self.information_biomacromolecule_set, (list, dict)):
-            self.information_biomacromolecule_set = [self.information_biomacromolecule_set]
-        self._normalize_inlined_slot(slot_name="information_biomacromolecule_set", slot_type=InformationBiomacromolecule, key_name="id", inlined_as_list=None, keyed=True)
+        self._normalize_inlined_as_dict(slot_name="information_biomacromolecule_set", slot_type=InformationBiomacromolecule, key_name="id", keyed=True)
 
-        if self.chemical_entity_set is None:
-            self.chemical_entity_set = []
-        if not isinstance(self.chemical_entity_set, (list, dict)):
-            self.chemical_entity_set = [self.chemical_entity_set]
-        self._normalize_inlined_slot(slot_name="chemical_entity_set", slot_type=ChemicalEntity, key_name="id", inlined_as_list=None, keyed=True)
+        self._normalize_inlined_as_dict(slot_name="chemical_entity_set", slot_type=ChemicalEntity, key_name="id", keyed=True)
 
-        if self.ontology_class_set is None:
-            self.ontology_class_set = []
-        if not isinstance(self.ontology_class_set, (list, dict)):
-            self.ontology_class_set = [self.ontology_class_set]
-        self._normalize_inlined_slot(slot_name="ontology_class_set", slot_type=OntologyClass, key_name="id", inlined_as_list=None, keyed=True)
+        self._normalize_inlined_as_dict(slot_name="ontology_class_set", slot_type=OntologyClass, key_name="id", keyed=True)
 
         super().__post_init__(**kwargs)
 
@@ -288,20 +276,18 @@ class DomainElement(Element):
     type_inferences: Optional[Union[Union[str, OntologyClassId], List[Union[str, OntologyClassId]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, DomainElementId):
             self.id = DomainElementId(self.id)
 
-        if self.type is None:
-            raise ValueError("type must be supplied")
+        if self._is_empty(self.type):
+            self.MissingRequiredField("type")
         if not isinstance(self.type, OntologyClassId):
             self.type = OntologyClassId(self.type)
 
-        if self.type_inferences is None:
-            self.type_inferences = []
         if not isinstance(self.type_inferences, list):
-            self.type_inferences = [self.type_inferences]
+            self.type_inferences = [self.type_inferences] if self.type_inferences is not None else []
         self.type_inferences = [v if isinstance(v, OntologyClassId) else OntologyClassId(v) for v in self.type_inferences]
 
         super().__post_init__(**kwargs)
@@ -321,7 +307,7 @@ class MolecularActivity(DomainElement):
 
     id: Union[str, MolecularActivityId] = None
     type: Union[str, OntologyClassId] = None
-    causes: Optional[Union[dict, "CausesAssociation"]] = None
+    influences: Optional[Union[dict, "CausalAssociation"]] = None
     happens_during: Optional[Union[dict, "HappensDuringAssociation"]] = None
     part_of: Optional[Union[dict, "ProcessPartOfAssociation"]] = None
     enabled_by: Optional[Union[dict, "EnabledByAssociation"]] = None
@@ -329,13 +315,13 @@ class MolecularActivity(DomainElement):
     occurs_in: Optional[Union[dict, "OccursInAssociation"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, MolecularActivityId):
             self.id = MolecularActivityId(self.id)
 
-        if self.causes is not None and not isinstance(self.causes, CausesAssociation):
-            self.causes = CausesAssociation(**self.causes)
+        if self.influences is not None and not isinstance(self.influences, CausalAssociation):
+            self.influences = CausalAssociation(**self.influences)
 
         if self.happens_during is not None and not isinstance(self.happens_during, HappensDuringAssociation):
             self.happens_during = HappensDuringAssociation(**self.happens_during)
@@ -370,20 +356,20 @@ class BiologicalProcess(DomainElement):
     id: Union[str, BiologicalProcessId] = None
     type: Union[str, OntologyClassId] = None
     occurs_in: Optional[Union[dict, "OccursInAssociation"]] = None
-    causes: Optional[Union[dict, "CausesAssociation"]] = None
+    influences: Optional[Union[dict, "CausalAssociation"]] = None
     happens_during: Optional[Union[dict, "HappensDuringAssociation"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, BiologicalProcessId):
             self.id = BiologicalProcessId(self.id)
 
         if self.occurs_in is not None and not isinstance(self.occurs_in, OccursInAssociation):
             self.occurs_in = OccursInAssociation(**self.occurs_in)
 
-        if self.causes is not None and not isinstance(self.causes, CausesAssociation):
-            self.causes = CausesAssociation(**self.causes)
+        if self.influences is not None and not isinstance(self.influences, CausalAssociation):
+            self.influences = CausalAssociation(**self.influences)
 
         if self.happens_during is not None and not isinstance(self.happens_during, HappensDuringAssociation):
             self.happens_during = HappensDuringAssociation(**self.happens_during)
@@ -409,13 +395,13 @@ class AnatomicalEntity(DomainElement):
     part_of: Optional[Union[dict, "AnatomicalPartOfAssociation"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, AnatomicalEntityId):
             self.id = AnatomicalEntityId(self.id)
 
-        if self.category is None:
-            raise ValueError("category must be supplied")
+        if self._is_empty(self.category):
+            self.MissingRequiredField("category")
         if not isinstance(self.category, AnatomicalEntityCategory):
             self.category = AnatomicalEntityCategory(self.category)
 
@@ -441,8 +427,8 @@ class ChemicalEntity(DomainElement):
     type: Union[str, OntologyClassId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, ChemicalEntityId):
             self.id = ChemicalEntityId(self.id)
 
@@ -468,13 +454,13 @@ class InformationBiomacromolecule(ChemicalEntity):
     has_part: Optional[Union[dict, "MacromoleculeHasPartAssociation"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, InformationBiomacromoleculeId):
             self.id = InformationBiomacromoleculeId(self.id)
 
-        if self.category is None:
-            raise ValueError("category must be supplied")
+        if self._is_empty(self.category):
+            self.MissingRequiredField("category")
         if not isinstance(self.category, InformationBiomacromoleculeCategory):
             self.category = InformationBiomacromoleculeCategory(self.category)
 
@@ -503,8 +489,8 @@ class Association(YAMLRoot):
     predicate: Optional[Union[str, PredicateType]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.object is None:
-            raise ValueError("object must be supplied")
+        if self._is_empty(self.object):
+            self.MissingRequiredField("object")
         if not isinstance(self.object, ElementId):
             self.object = ElementId(self.object)
 
@@ -535,8 +521,8 @@ class OccursInAssociation(Association):
     object: Union[str, AnatomicalEntityId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.object is None:
-            raise ValueError("object must be supplied")
+        if self._is_empty(self.object):
+            self.MissingRequiredField("object")
         if not isinstance(self.object, AnatomicalEntityId):
             self.object = AnatomicalEntityId(self.object)
 
@@ -544,24 +530,24 @@ class OccursInAssociation(Association):
 
 
 @dataclass
-class CausesAssociation(Association):
+class CausalAssociation(Association):
     """
     An association owned by an upstream MA or BP that connects to a downstream MA or BP. The nature of the causal
     relationship is indicated with the predicate.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = GOCAM.CausesAssociation
-    class_class_curie: ClassVar[str] = "gocam:CausesAssociation"
-    class_name: ClassVar[str] = "causes association"
-    class_model_uri: ClassVar[URIRef] = GOCAM.CausesAssociation
+    class_class_uri: ClassVar[URIRef] = GOCAM.CausalAssociation
+    class_class_curie: ClassVar[str] = "gocam:CausalAssociation"
+    class_name: ClassVar[str] = "causal association"
+    class_model_uri: ClassVar[URIRef] = GOCAM.CausalAssociation
 
     object: Union[str, ActivityOrProcessId] = None
     predicate: Optional[Union[str, PredicateType]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.object is None:
-            raise ValueError("object must be supplied")
+        if self._is_empty(self.object):
+            self.MissingRequiredField("object")
         if not isinstance(self.object, ActivityOrProcessId):
             self.object = ActivityOrProcessId(self.object)
 
@@ -600,8 +586,8 @@ class MacromoleculeHasPartAssociation(HasPartAssociation):
     object: Union[str, ContinuantId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.object is None:
-            raise ValueError("object must be supplied")
+        if self._is_empty(self.object):
+            self.MissingRequiredField("object")
         if not isinstance(self.object, ContinuantId):
             self.object = ContinuantId(self.object)
 
@@ -637,8 +623,8 @@ class AnatomicalPartOfAssociation(PartOfAssociation):
     object: Union[str, AnatomicalEntityId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.object is None:
-            raise ValueError("object must be supplied")
+        if self._is_empty(self.object):
+            self.MissingRequiredField("object")
         if not isinstance(self.object, AnatomicalEntityId):
             self.object = AnatomicalEntityId(self.object)
 
@@ -660,8 +646,8 @@ class ProcessPartOfAssociation(PartOfAssociation):
     object: Union[str, ActivityOrProcessId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.object is None:
-            raise ValueError("object must be supplied")
+        if self._is_empty(self.object):
+            self.MissingRequiredField("object")
         if not isinstance(self.object, ActivityOrProcessId):
             self.object = ActivityOrProcessId(self.object)
 
@@ -683,8 +669,8 @@ class EnabledByAssociation(Association):
     object: Union[str, InformationBiomacromoleculeId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.object is None:
-            raise ValueError("object must be supplied")
+        if self._is_empty(self.object):
+            self.MissingRequiredField("object")
         if not isinstance(self.object, InformationBiomacromoleculeId):
             self.object = InformationBiomacromoleculeId(self.object)
 
@@ -706,8 +692,8 @@ class HappensDuringAssociation(Association):
     object: Union[str, ActivityOrProcessId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.object is None:
-            raise ValueError("object must be supplied")
+        if self._is_empty(self.object):
+            self.MissingRequiredField("object")
         if not isinstance(self.object, ActivityOrProcessId):
             self.object = ActivityOrProcessId(self.object)
 
@@ -730,8 +716,8 @@ class HasInputAssociation(Association):
     object: Union[str, ContinuantId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.object is None:
-            raise ValueError("object must be supplied")
+        if self._is_empty(self.object):
+            self.MissingRequiredField("object")
         if not isinstance(self.object, ContinuantId):
             self.object = ContinuantId(self.object)
 
@@ -752,13 +738,13 @@ class OntologyClass(YAMLRoot):
     name: Optional[Union[str, LabelType]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, OntologyClassId):
             self.id = OntologyClassId(self.id)
 
-        if self.category is None:
-            raise ValueError("category must be supplied")
+        if self._is_empty(self.category):
+            self.MissingRequiredField("category")
         if not isinstance(self.category, CategoryType):
             self.category = CategoryType(self.category)
 
@@ -781,6 +767,9 @@ class InformationElement(Element):
 
 @dataclass
 class Publication(InformationElement):
+    """
+    A published entity such as a paper in pubmed
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = GOCAM.Publication
@@ -791,8 +780,8 @@ class Publication(InformationElement):
     id: Union[str, PublicationId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, PublicationId):
             self.id = PublicationId(self.id)
 
@@ -819,35 +808,29 @@ class Evidence(InformationElement):
     with_object: Optional[Union[Union[str, ElementId], List[Union[str, ElementId]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, EvidenceId):
             self.id = EvidenceId(self.id)
 
-        if self.evidence_type is None:
-            raise ValueError("evidence_type must be supplied")
+        if self._is_empty(self.evidence_type):
+            self.MissingRequiredField("evidence_type")
         if not isinstance(self.evidence_type, OntologyClassId):
             self.evidence_type = OntologyClassId(self.evidence_type)
 
-        if self.contributor is None:
-            self.contributor = []
         if not isinstance(self.contributor, list):
-            self.contributor = [self.contributor]
+            self.contributor = [self.contributor] if self.contributor is not None else []
         self.contributor = [v if isinstance(v, str) else str(v) for v in self.contributor]
 
         if self.date is not None and not isinstance(self.date, str):
             self.date = str(self.date)
 
-        if self.reference is None:
-            self.reference = []
         if not isinstance(self.reference, list):
-            self.reference = [self.reference]
+            self.reference = [self.reference] if self.reference is not None else []
         self.reference = [v if isinstance(v, PublicationId) else PublicationId(v) for v in self.reference]
 
-        if self.with_object is None:
-            self.with_object = []
         if not isinstance(self.with_object, list):
-            self.with_object = [self.with_object]
+            self.with_object = [self.with_object] if self.with_object is not None else []
         self.with_object = [v if isinstance(v, ElementId) else ElementId(v) for v in self.with_object]
 
         super().__post_init__(**kwargs)
@@ -869,8 +852,8 @@ class DomainElementMixin(YAMLRoot):
     id: Union[str, DomainElementMixinId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.id is None:
-            raise ValueError("id must be supplied")
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
         if not isinstance(self.id, DomainElementMixinId):
             self.id = DomainElementMixinId(self.id)
 
@@ -1014,7 +997,8 @@ slots.date = Slot(uri=DCE.date, name="date", curie=DCE.curie('date'),
                    model_uri=GOCAM.date, domain=None, range=Optional[str])
 
 slots.evidence_type = Slot(uri=GOCAM.evidence_type, name="evidence type", curie=GOCAM.curie('evidence_type'),
-                   model_uri=GOCAM.evidence_type, domain=None, range=Union[str, OntologyClassId])
+                   model_uri=GOCAM.evidence_type, domain=None, range=Union[str, OntologyClassId],
+                   pattern=re.compile(r'^ECO:\d+$'))
 
 slots.type_inferences = Slot(uri=GOCAM.type_inferences, name="type inferences", curie=GOCAM.curie('type_inferences'),
                    model_uri=GOCAM.type_inferences, domain=None, range=Optional[Union[Union[str, OntologyClassId], List[Union[str, OntologyClassId]]]])
@@ -1025,8 +1009,8 @@ slots.related_to = Slot(uri=GOCAM.related_to, name="related to", curie=GOCAM.cur
 slots.occurs_in = Slot(uri=GOCAM.occurs_in, name="occurs in", curie=GOCAM.curie('occurs_in'),
                    model_uri=GOCAM.occurs_in, domain=None, range=Optional[Union[dict, OccursInAssociation]])
 
-slots.causes = Slot(uri=GOCAM.causes, name="causes", curie=GOCAM.curie('causes'),
-                   model_uri=GOCAM.causes, domain=None, range=Optional[Union[dict, CausesAssociation]])
+slots.influences = Slot(uri=GOCAM.influences, name="influences", curie=GOCAM.curie('influences'),
+                   model_uri=GOCAM.influences, domain=None, range=Optional[Union[dict, CausalAssociation]])
 
 slots.happens_during = Slot(uri=GOCAM.happens_during, name="happens during", curie=GOCAM.curie('happens_during'),
                    model_uri=GOCAM.happens_during, domain=None, range=Optional[Union[dict, HappensDuringAssociation]])
@@ -1103,11 +1087,11 @@ slots.information_biomacromolecule_has_part = Slot(uri=GOCAM.has_part, name="inf
 slots.occurs_in_association_object = Slot(uri=GOCAM.object, name="occurs in association_object", curie=GOCAM.curie('object'),
                    model_uri=GOCAM.occurs_in_association_object, domain=OccursInAssociation, range=Union[str, AnatomicalEntityId])
 
-slots.causes_association_object = Slot(uri=GOCAM.object, name="causes association_object", curie=GOCAM.curie('object'),
-                   model_uri=GOCAM.causes_association_object, domain=CausesAssociation, range=Union[str, ActivityOrProcessId])
+slots.causal_association_object = Slot(uri=GOCAM.object, name="causal association_object", curie=GOCAM.curie('object'),
+                   model_uri=GOCAM.causal_association_object, domain=CausalAssociation, range=Union[str, ActivityOrProcessId])
 
-slots.causes_association_predicate = Slot(uri=GOCAM.predicate, name="causes association_predicate", curie=GOCAM.curie('predicate'),
-                   model_uri=GOCAM.causes_association_predicate, domain=CausesAssociation, range=Optional[Union[str, PredicateType]])
+slots.causal_association_predicate = Slot(uri=GOCAM.predicate, name="causal association_predicate", curie=GOCAM.curie('predicate'),
+                   model_uri=GOCAM.causal_association_predicate, domain=CausalAssociation, range=Optional[Union[str, PredicateType]])
 
 slots.macromolecule_has_part_association_object = Slot(uri=GOCAM.object, name="macromolecule has part association_object", curie=GOCAM.curie('object'),
                    model_uri=GOCAM.macromolecule_has_part_association_object, domain=MacromoleculeHasPartAssociation, range=Union[str, ContinuantId])

@@ -34,11 +34,11 @@ type BiologicalProcess implements ActivityOrProcess, ProcessOrPhase
     type: OntologyClass!
     typeInferences: [OntologyClass]
     occursIn: OccursInAssociation
-    causes: CausesAssociation
+    influences: CausalAssociation
     happensDuring: HappensDuringAssociation
   }
 
-type CausesAssociation
+type CausalAssociation
   {
     hasEvidence: Evidence
     subject: DomainElement
@@ -159,7 +159,7 @@ type MolecularActivity implements ActivityOrProcess
     id: String!
     type: OntologyClass!
     typeInferences: [OntologyClass]
-    causes: CausesAssociation
+    influences: CausalAssociation
     happensDuring: HappensDuringAssociation
     partOf: ProcessPartOfAssociation
     enabledBy: EnabledByAssociation

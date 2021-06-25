@@ -80,7 +80,7 @@ linkml:Nodeidentifier NONLITERAL
 }
 
 <Association>  (
-    @<CausesAssociation> OR @<EnabledByAssociation> OR @<HappensDuringAssociation> OR @<HasInputAssociation> OR
+    @<CausalAssociation> OR @<EnabledByAssociation> OR @<HappensDuringAssociation> OR @<HasInputAssociation> OR
     @<HasPartAssociation> OR @<OccursInAssociation> OR @<PartOfAssociation>
 )
 
@@ -102,20 +102,20 @@ linkml:Nodeidentifier NONLITERAL
           &<ProcessOrPhase_tes> ;
           rdf:type [ <ProcessOrPhase> ] ? ;
           <occurs_in> @<OccursInAssociation> ? ;
-          <causes> @<CausesAssociation> ? ;
+          <influences> @<CausalAssociation> ? ;
           <happens_during> @<HappensDuringAssociation> ?
        ) ;
        rdf:type [ <BiologicalProcess> ]
     )
 }
 
-<CausesAssociation> CLOSED {
-    (  $<CausesAssociation_tes> (  &<Association_tes> ;
+<CausalAssociation> CLOSED {
+    (  $<CausalAssociation_tes> (  &<Association_tes> ;
           rdf:type [ rdf:Statement ] ? ;
           <object> @<ActivityOrProcess> ;
           <predicate> @<PredicateType> ?
        ) ;
-       rdf:type [ <CausesAssociation> ] ?
+       rdf:type [ <CausalAssociation> ] ?
     )
 }
 
@@ -273,7 +273,7 @@ linkml:Nodeidentifier NONLITERAL
           rdf:type [ <DomainElement> ] ? ;
           &<ActivityOrProcess_tes> ;
           rdf:type [ <ActivityOrProcess> ] ? ;
-          <causes> @<CausesAssociation> ? ;
+          <influences> @<CausalAssociation> ? ;
           <happens_during> @<HappensDuringAssociation> ? ;
           <part_of> @<ProcessPartOfAssociation> ? ;
           <enabled_by> @<EnabledByAssociation> ? ;

@@ -11,12 +11,20 @@
     dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
     rdfs:seeAlso "https://docs.google.com/presentation/d/1ja0Vkw0AoENJ58emM77dGnqPtY1nfIJMeyVnObBxIxI/edit#slide=id.p8",
         "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7012280/" ;
-    skos:definition "GO CAM experimental LinkML schema" ;
-    linkml:generation_date "2021-04-05 13:22" ;
+    skos:definition """GO CAM LinkML schema (experimental)
+
+The central class in this datamodel is a [Model](Model.md). A model consists of a set of
+[MolecularActivity](MolecularActivity.md) objects, from which hangs various elements connected by different kinds of [Association](Association.md)
+
+See:
+  * [https://github.com/cmungall/linkml-gocam](https://github.com/cmungall/linkml-gocam)
+  * [https://cmungall.github.io/linkml-gocam/](https://cmungall.github.io/linkml-gocam/)
+  """ ;
+    linkml:generation_date "2021-06-25 16:20" ;
     linkml:metamodel_version "1.7.0" ;
     linkml:source_file "gocam.yaml" ;
-    linkml:source_file_date "Mon Apr  5 13:21:58 2021" ;
-    linkml:source_file_size 18864 .
+    linkml:source_file_date "Fri Jun 25 16:20:28 2021" ;
+    linkml:source_file_size 19995 .
 
 <https://w3id.org/gocam/ChemicalFormulaValue> a owl:Class,
         linkml:TypeDefinition ;
@@ -43,6 +51,13 @@
             owl:onProperty <https://w3id.org/gocam/provided_by> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/gocam/date> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/gocam/BiologicalProcess> ;
+            owl:onProperty <https://w3id.org/gocam/biological_process_set> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
             owl:onClass <http://UNKNOWN.org/model_state_enum> ;
             owl:onProperty <https://w3id.org/gocam/state> ],
         [ a owl:Restriction ;
@@ -52,18 +67,11 @@
             owl:allValuesFrom <https://w3id.org/gocam/ChemicalEntity> ;
             owl:onProperty <https://w3id.org/gocam/chemical_entity_set> ],
         [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/gocam/date> ],
+            owl:allValuesFrom <https://w3id.org/gocam/InformationBiomacromolecule> ;
+            owl:onProperty <https://w3id.org/gocam/information_biomacromolecule_set> ],
         [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/gocam/MolecularActivity> ;
             owl:onProperty <https://w3id.org/gocam/molecular_activity_set> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/gocam/BiologicalProcess> ;
-            owl:onProperty <https://w3id.org/gocam/biological_process_set> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/gocam/InformationBiomacromolecule> ;
-            owl:onProperty <https://w3id.org/gocam/information_biomacromolecule_set> ],
         [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/gocam/OntologyClass> ;
             owl:onProperty <https://w3id.org/gocam/ontology_class_set> ],
@@ -221,17 +229,17 @@ linkml:anatomical_part_of_association_object a owl:ObjectProperty,
     rdfs:range <https://w3id.org/gocam/AnatomicalEntity> ;
     rdfs:subPropertyOf <https://w3id.org/gocam/object> .
 
-linkml:causes_association_object a owl:ObjectProperty,
+linkml:causal_association_object a owl:ObjectProperty,
         linkml:SlotDefinition ;
-    rdfs:label "causes association_object" ;
-    rdfs:domain <https://w3id.org/gocam/CausesAssociation> ;
+    rdfs:label "causal association_object" ;
+    rdfs:domain <https://w3id.org/gocam/CausalAssociation> ;
     rdfs:range <https://w3id.org/gocam/ActivityOrProcess> ;
     rdfs:subPropertyOf <https://w3id.org/gocam/object> .
 
-linkml:causes_association_predicate a owl:ObjectProperty,
+linkml:causal_association_predicate a owl:ObjectProperty,
         linkml:SlotDefinition ;
-    rdfs:label "causes association_predicate" ;
-    rdfs:domain <https://w3id.org/gocam/CausesAssociation> ;
+    rdfs:label "causal association_predicate" ;
+    rdfs:domain <https://w3id.org/gocam/CausalAssociation> ;
     rdfs:range <https://w3id.org/gocam/PredicateType> ;
     rdfs:subPropertyOf <https://w3id.org/gocam/predicate> ;
     skos:definition "This must be drawn from the causal relation hierarchy in RO" .
@@ -332,7 +340,8 @@ linkml:process_part_of_association_object a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "evidence type" ;
     rdfs:range <https://w3id.org/gocam/OntologyClass> ;
-    rdfs:subPropertyOf <https://w3id.org/gocam/type> .
+    rdfs:subPropertyOf <https://w3id.org/gocam/type> ;
+    skos:definition "Connectes a piece of evidence to the evidence type from ECO" .
 
 <https://w3id.org/gocam/has_evidence> a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -380,12 +389,14 @@ linkml:process_part_of_association_object a owl:ObjectProperty,
 <https://w3id.org/gocam/provided_by> a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "provided by" ;
-    rdfs:range linkml:String .
+    rdfs:range linkml:String ;
+    skos:definition "connects an assertion to a group that provided it" .
 
 <https://w3id.org/gocam/reference> a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "reference" ;
-    rdfs:range <https://w3id.org/gocam/Publication> .
+    rdfs:range <https://w3id.org/gocam/Publication> ;
+    skos:definition "A publication or other reference that supports a piece of evidence" .
 
 <https://w3id.org/gocam/state> a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -417,27 +428,29 @@ linkml:process_part_of_association_object a owl:ObjectProperty,
 <https://w3id.org/gocam/with_object> a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "with object" ;
-    rdfs:range <https://w3id.org/gocam/Element> .
+    rdfs:range <https://w3id.org/gocam/Element> ;
+    skos:definition "An object that supports a piece of evidence" .
 
 <https://w3id.org/gocam/BiologicalProcess> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "biological process" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/OccursInAssociation> ;
-            owl:onProperty <https://w3id.org/gocam/occurs_in> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/gocam/HappensDuringAssociation> ;
             owl:onProperty <https://w3id.org/gocam/happens_during> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/CausesAssociation> ;
-            owl:onProperty <https://w3id.org/gocam/causes> ],
+            owl:onClass <https://w3id.org/gocam/CausalAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/influences> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/OccursInAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/occurs_in> ],
         <https://w3id.org/gocam/ActivityOrProcess>,
         <https://w3id.org/gocam/DomainElement>,
         <https://w3id.org/gocam/ProcessOrPhase> ;
-    skos:definition "An instance of a GO biological process" .
+    skos:definition "An instance of a GO biological process" ;
+    skos:exactMatch <http://purl.obolibrary.org/obo/go/shapes/BiologicalProcess> .
 
 <https://w3id.org/gocam/CategoryType> a owl:Class,
         linkml:TypeDefinition ;
@@ -454,15 +467,15 @@ linkml:process_part_of_association_object a owl:ObjectProperty,
             owl:onProperty <https://w3id.org/gocam/evidence_type> ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/gocam/contributor> ],
-        [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/gocam/Element> ;
             owl:onProperty <https://w3id.org/gocam/with_object> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty <https://w3id.org/gocam/date> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/gocam/contributor> ],
         [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/gocam/Publication> ;
             owl:onProperty <https://w3id.org/gocam/reference> ],
@@ -489,26 +502,20 @@ linkml:process_part_of_association_object a owl:ObjectProperty,
 <https://w3id.org/gocam/Publication> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "publication" ;
-    rdfs:subClassOf <https://w3id.org/gocam/InformationElement> .
-
-<https://w3id.org/gocam/causes> a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "causes" ;
-    rdfs:domain <https://w3id.org/gocam/ActivityOrProcess> ;
-    rdfs:range <https://w3id.org/gocam/CausesAssociation> ;
-    rdfs:subPropertyOf <https://w3id.org/gocam/related_to> ;
-    skos:definition "Links a subject domain entity (a MA or BP) to an object domain entity by way of an CausesAssociation" ;
-    skos:note "the specific type of causation is indicated on the CausesAssocation predicate slot" .
+    rdfs:subClassOf <https://w3id.org/gocam/InformationElement> ;
+    skos:definition "A published entity such as a paper in pubmed" .
 
 <https://w3id.org/gocam/contributor> a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "contributor" ;
-    rdfs:range linkml:String .
+    rdfs:range linkml:String ;
+    skos:definition "connects an assertion to the individual that made a contribution to it" .
 
 <https://w3id.org/gocam/date> a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "date" ;
-    rdfs:range linkml:String .
+    rdfs:range linkml:String ;
+    skos:definition "connects anything to the date" .
 
 <https://w3id.org/gocam/happens_during> a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -524,6 +531,15 @@ linkml:process_part_of_association_object a owl:ObjectProperty,
     rdfs:range <https://w3id.org/gocam/HasPartAssociation> ;
     rdfs:subPropertyOf <https://w3id.org/gocam/related_to> ;
     skos:definition "Links a subject domain entity to an object domain entity by way of a HasPartAssociation" .
+
+<https://w3id.org/gocam/influences> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "influences" ;
+    rdfs:domain <https://w3id.org/gocam/ActivityOrProcess> ;
+    rdfs:range <https://w3id.org/gocam/CausalAssociation> ;
+    rdfs:subPropertyOf <https://w3id.org/gocam/related_to> ;
+    skos:definition "Links a subject domain entity (a MA or BP) to an object domain entity by way of an CausalAssociation" ;
+    skos:note "the specific type of causation is indicated on the CausalAssocation predicate slot" .
 
 <https://w3id.org/gocam/model_property> a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -663,20 +679,20 @@ linkml:Uriorcurie a owl:Class,
     rdfs:label "molecular activity" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/EnabledByAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/enabled_by> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/gocam/OccursInAssociation> ;
             owl:onProperty <https://w3id.org/gocam/occurs_in> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/CausalAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/influences> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/gocam/HasInputAssociation> ;
             owl:onProperty <https://w3id.org/gocam/has_input> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/CausesAssociation> ;
-            owl:onProperty <https://w3id.org/gocam/causes> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/EnabledByAssociation> ;
-            owl:onProperty <https://w3id.org/gocam/enabled_by> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/gocam/HappensDuringAssociation> ;
@@ -687,7 +703,8 @@ linkml:Uriorcurie a owl:Class,
             owl:onProperty <https://w3id.org/gocam/part_of> ],
         <https://w3id.org/gocam/ActivityOrProcess>,
         <https://w3id.org/gocam/DomainElement> ;
-    skos:definition "An instance of a GO molecular function" .
+    skos:definition "An instance of a GO molecular function" ;
+    skos:exactMatch <http://purl.obolibrary.org/obo/go/shapes/MolecularFunction> .
 
 <https://w3id.org/gocam/OccursInAssociation> a owl:Class,
         linkml:ClassDefinition ;
@@ -703,7 +720,7 @@ linkml:Uriorcurie a owl:Class,
         linkml:TypeDefinition ;
     rdfs:label "predicate type" ;
     rdfs:subClassOf linkml:Uriorcurie ;
-    skos:definition "A CURIE from the biolink related_to hierarchy. For example, biolink:related_to, biolink:causes, biolink:treats." .
+    skos:definition "A RO identifier" .
 
 <https://w3id.org/gocam/part_of> a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -713,17 +730,17 @@ linkml:Uriorcurie a owl:Class,
     skos:definition "Links a subject domain entity to an object domain entity by way of a PartOfAssociation" ;
     skos:note "part of can be used with domain elements of any time, but must connect like with like" .
 
-<https://w3id.org/gocam/CausesAssociation> a owl:Class,
+<https://w3id.org/gocam/CausalAssociation> a owl:Class,
         linkml:ClassDefinition ;
-    rdfs:label "causes association" ;
+    rdfs:label "causal association" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass <https://w3id.org/gocam/ActivityOrProcess> ;
-            owl:onProperty <https://w3id.org/gocam/object> ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/gocam/PredicateType> ;
             owl:onProperty <https://w3id.org/gocam/predicate> ],
+        [ a owl:Restriction ;
+            owl:onClass <https://w3id.org/gocam/ActivityOrProcess> ;
+            owl:onProperty <https://w3id.org/gocam/object> ;
+            owl:qualifiedCardinality 1 ],
         <https://w3id.org/gocam/Association> ;
     skos:definition "An association owned by an upstream MA or BP that connects to a downstream MA or BP. The nature of the causal relationship is indicated with the predicate." .
 
@@ -744,16 +761,17 @@ linkml:Uriorcurie a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "anatomical entity" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass <http://UNKNOWN.org/anatomical_entity_category> ;
-            owl:onProperty <https://w3id.org/gocam/category> ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/gocam/AnatomicalPartOfAssociation> ;
             owl:onProperty <https://w3id.org/gocam/part_of> ],
+        [ a owl:Restriction ;
+            owl:onClass <http://UNKNOWN.org/anatomical_entity_category> ;
+            owl:onProperty <https://w3id.org/gocam/category> ;
+            owl:qualifiedCardinality 1 ],
         <https://w3id.org/gocam/Continuant>,
         <https://w3id.org/gocam/DomainElement> ;
-    skos:definition "An instance of a GO cellular anatomical entity, a cell type, or gross anatomical structure" .
+    skos:definition "An instance of a GO cellular anatomical entity, a cell type, or gross anatomical structure" ;
+    skos:exactMatch <http://purl.obolibrary.org/obo/go/shapes/AnatomicalEntity> .
 
 <https://w3id.org/gocam/Continuant> a owl:Class,
         linkml:ClassDefinition ;
@@ -765,27 +783,28 @@ linkml:Uriorcurie a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "information biomacromolecule" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass <http://UNKNOWN.org/information_biomacromolecule_category> ;
-            owl:onProperty <https://w3id.org/gocam/category> ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/gocam/MacromoleculeHasPartAssociation> ;
             owl:onProperty <https://w3id.org/gocam/has_part> ],
+        [ a owl:Restriction ;
+            owl:onClass <http://UNKNOWN.org/information_biomacromolecule_category> ;
+            owl:onProperty <https://w3id.org/gocam/category> ;
+            owl:qualifiedCardinality 1 ],
         <https://w3id.org/gocam/ChemicalEntity>,
         <https://w3id.org/gocam/Continuant> ;
-    skos:definition "This class groups gene, gene product (protein on ncRNA), or a macromolecular complex that is capable of carrying out a molecular activity" .
+    skos:definition "This class groups gene, gene product (protein on ncRNA), or a macromolecular complex that is capable of carrying out a molecular activity" ;
+    skos:exactMatch <http://purl.obolibrary.org/obo/go/shapes/AnatomicalEntity> .
 
 <https://w3id.org/gocam/DomainElement> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "domain element" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/gocam/OntologyClass> ;
+            owl:onProperty <https://w3id.org/gocam/type_inferences> ],
+        [ a owl:Restriction ;
             owl:onClass <https://w3id.org/gocam/OntologyClass> ;
             owl:onProperty <https://w3id.org/gocam/type> ;
             owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/gocam/OntologyClass> ;
-            owl:onProperty <https://w3id.org/gocam/type_inferences> ],
         <https://w3id.org/gocam/Element> ;
     skos:altLabel "GO-CAM instance",
         "contextualized ontology class",
@@ -800,6 +819,7 @@ linkml:Uriorcurie a owl:Class,
             owl:onProperty <https://w3id.org/gocam/id> ;
             owl:qualifiedCardinality 1 ] ;
     skos:definition "Base class for any biological entity or activity or process in a GO-CAM model" ;
+    skos:exactMatch <http://purl.obolibrary.org/obo/go/shapes/GoCamEntity> ;
     skos:note "An OWL individual representing a particular element in a context",
         "Here element is generic and encompasses causal entities as well as processes, activities" .
 
@@ -836,8 +856,8 @@ linkml:Uriorcurie a owl:Class,
     rdfs:label "association" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/DomainElement> ;
-            owl:onProperty <https://w3id.org/gocam/subject> ],
+            owl:onClass <https://w3id.org/gocam/Evidence> ;
+            owl:onProperty <https://w3id.org/gocam/has_evidence> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/gocam/PredicateType> ;
@@ -848,8 +868,8 @@ linkml:Uriorcurie a owl:Class,
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/Evidence> ;
-            owl:onProperty <https://w3id.org/gocam/has_evidence> ] ;
+            owl:onClass <https://w3id.org/gocam/DomainElement> ;
+            owl:onProperty <https://w3id.org/gocam/subject> ] ;
     skos:definition "An association between a domain element (e.g. a MolecularActivity) and another domain element (e.g. another MolecularActivity) with evidence and provenance attached" ;
     skos:exactMatch rdf:Statement ;
     skos:note "Note this is modeled as a class rather than property/slot to allow for attachment of evidence",
