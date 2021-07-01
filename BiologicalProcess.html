@@ -94,10 +94,10 @@
                 <h1 id="class-biologicalprocess">Class: BiologicalProcess</h1>
 <p>An instance of a GO biological process</p>
 <p>URI: <a href="https://w3id.org/gocam/BiologicalProcess">gocam:BiologicalProcess</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[ProcessOrPhase],[OntologyClass],[OccursInAssociation],[HappensDuringAssociation],[DomainElement],[CausalAssociation],[HappensDuringAssociation]&lt;happens%20during%200..1-++[BiologicalProcess&#124;id(i):string],[CausalAssociation]&lt;influences%200..1-++[BiologicalProcess],[OccursInAssociation]&lt;occurs%20in%200..1-++[BiologicalProcess],[Model]++-%20biological%20process%20set%200..*&gt;[BiologicalProcess],[BiologicalProcess]uses%20-.-&gt;[ActivityOrProcess],[BiologicalProcess]uses%20-.-&gt;[ProcessOrPhase],[DomainElement]^-[BiologicalProcess],[Model],[ActivityOrProcess]" /></p>
+<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[ProcessToProcessCausalAssociation],[ProcessToActivityCausalAssociation],[ProcessOrPhase],[OntologyClass],[OccursInAssociation],[HappensDuringAssociation],[DomainEntity],[CausalAssociationToProcess],[CausalAssociationToActivity],[HappensDuringAssociation]&lt;happens%20during%200..1-++[BiologicalProcess&#124;id(i):string],[CausalAssociationToProcess]&lt;has%20process%20causal%20associations%200..1-++[BiologicalProcess],[CausalAssociationToActivity]&lt;has%20activity%20causal%20associations%200..1-++[BiologicalProcess],[OccursInAssociation]&lt;occurs%20in%200..1-++[BiologicalProcess],[ActivityToProcessCausalAssociation]-%20object%201..1&gt;[BiologicalProcess],[Model]++-%20biological%20process%20set%200..*&gt;[BiologicalProcess],[CausalAssociationToProcess]-%20object%201..1&gt;[BiologicalProcess],[ProcessToActivityCausalAssociation]-%20subject%200..1&gt;[BiologicalProcess],[ProcessToProcessCausalAssociation]-%20object%201..1&gt;[BiologicalProcess],[ProcessToProcessCausalAssociation]-%20subject%200..1&gt;[BiologicalProcess],[BiologicalProcess]uses%20-.-&gt;[ActivityOrProcess],[BiologicalProcess]uses%20-.-&gt;[ProcessOrPhase],[DomainEntity]^-[BiologicalProcess],[Model],[ActivityToProcessCausalAssociation],[ActivityOrProcess]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[ProcessToProcessCausalAssociation],[ProcessToActivityCausalAssociation],[ProcessOrPhase],[OntologyClass],[OccursInAssociation],[HappensDuringAssociation],[DomainEntity],[CausalAssociationToProcess],[CausalAssociationToActivity],[HappensDuringAssociation]&lt;happens%20during%200..1-++[BiologicalProcess&#124;id(i):string],[CausalAssociationToProcess]&lt;has%20process%20causal%20associations%200..1-++[BiologicalProcess],[CausalAssociationToActivity]&lt;has%20activity%20causal%20associations%200..1-++[BiologicalProcess],[OccursInAssociation]&lt;occurs%20in%200..1-++[BiologicalProcess],[ActivityToProcessCausalAssociation]-%20object%201..1&gt;[BiologicalProcess],[Model]++-%20biological%20process%20set%200..*&gt;[BiologicalProcess],[CausalAssociationToProcess]-%20object%201..1&gt;[BiologicalProcess],[ProcessToActivityCausalAssociation]-%20subject%200..1&gt;[BiologicalProcess],[ProcessToProcessCausalAssociation]-%20object%201..1&gt;[BiologicalProcess],[ProcessToProcessCausalAssociation]-%20subject%200..1&gt;[BiologicalProcess],[BiologicalProcess]uses%20-.-&gt;[ActivityOrProcess],[BiologicalProcess]uses%20-.-&gt;[ProcessOrPhase],[DomainEntity]^-[BiologicalProcess],[Model],[ActivityToProcessCausalAssociation],[ActivityOrProcess]" /></a></p>
 <h2 id="parents">Parents</h2>
 <ul>
-<li>is_a: <a href="DomainElement.html">DomainElement</a> - An element that is part of a GO-CAM model</li>
+<li>is_a: <a href="DomainEntity.html">DomainEntity</a> - Abstract entity for representing any part of a GO-CAM model</li>
 </ul>
 <h2 id="uses-mixins">Uses Mixins</h2>
 <ul>
@@ -106,41 +106,51 @@
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
+<li><strong><a href="ActivityToProcessCausalAssociation.html">ActivityToProcessCausalAssociation</a></strong> <em><a href="activity_to_process_causal_association_object.html">activity to process causal association➞object</a></em>  <sub>1..1</sub>  <strong><a href="BiologicalProcess.html">BiologicalProcess</a></strong></li>
 <li><strong>None</strong> <em><a href="biological_process_set.html">biological process set</a></em>  <sub>0..*</sub>  <strong><a href="BiologicalProcess.html">BiologicalProcess</a></strong></li>
+<li><strong><a href="CausalAssociationToProcess.html">CausalAssociationToProcess</a></strong> <em><a href="causal_association_to_process_object.html">causal association to process➞object</a></em>  <sub>1..1</sub>  <strong><a href="BiologicalProcess.html">BiologicalProcess</a></strong></li>
+<li><strong><a href="ProcessToActivityCausalAssociation.html">ProcessToActivityCausalAssociation</a></strong> <em><a href="process_to_activity_causal_association_subject.html">process to activity causal association➞subject</a></em>  <sub>0..1</sub>  <strong><a href="BiologicalProcess.html">BiologicalProcess</a></strong></li>
+<li><strong><a href="ProcessToProcessCausalAssociation.html">ProcessToProcessCausalAssociation</a></strong> <em><a href="process_to_process_causal_association_object.html">process to process causal association➞object</a></em>  <sub>1..1</sub>  <strong><a href="BiologicalProcess.html">BiologicalProcess</a></strong></li>
+<li><strong><a href="ProcessToProcessCausalAssociation.html">ProcessToProcessCausalAssociation</a></strong> <em><a href="process_to_process_causal_association_subject.html">process to process causal association➞subject</a></em>  <sub>0..1</sub>  <strong><a href="BiologicalProcess.html">BiologicalProcess</a></strong></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
 <h3 id="own">Own</h3>
 <ul>
-<li><a href="happens_during.html">happens during</a>  <sub>OPT</sub><ul>
-<li>Description: Links a subject domain entity (a MA or BP) to an object domain entity by way of a HappensDuringAssociation </li>
-<li>Range: <a href="HappensDuringAssociation.html">HappensDuringAssociation</a></li>
-</ul>
-</li>
-<li><a href="influences.html">influences</a>  <sub>OPT</sub><ul>
-<li>Description: Links a subject domain entity (a MA or BP) to an object domain entity by way of an CausalAssociation</li>
-<li>Range: <a href="CausalAssociation.html">CausalAssociation</a></li>
-</ul>
-</li>
-<li><a href="occurs_in.html">occurs in</a>  <sub>OPT</sub><ul>
+<li><a href="occurs_in.html">occurs in</a>  <sub>0..1</sub><ul>
 <li>Description: Links a subject domain entity (a MA or BP) to an object domain entity by way of an OccursInAssociation</li>
 <li>Range: <a href="OccursInAssociation.html">OccursInAssociation</a></li>
 </ul>
 </li>
+<li><a href="has_activity_causal_associations.html">has activity causal associations</a>  <sub>0..1</sub><ul>
+<li>Description: Links a subject domain entity (a MA or BP) to a molecular activity by way of an CausalAssociation</li>
+<li>Range: <a href="CausalAssociationToActivity.html">CausalAssociationToActivity</a></li>
 </ul>
-<h3 id="inherited-from-domain-element">Inherited from domain element:</h3>
+</li>
+<li><a href="has_process_causal_associations.html">has process causal associations</a>  <sub>0..1</sub><ul>
+<li>Description: Links a subject domain entity (a MA or BP) to a biological process by way of an CausalAssociation</li>
+<li>Range: <a href="CausalAssociationToProcess.html">CausalAssociationToProcess</a></li>
+</ul>
+</li>
+<li><a href="happens_during.html">happens during</a>  <sub>0..1</sub><ul>
+<li>Description: Links a subject domain entity (a MA or BP) to an object domain entity by way of a HappensDuringAssociation </li>
+<li>Range: <a href="HappensDuringAssociation.html">HappensDuringAssociation</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="inherited-from-domain-entity">Inherited from domain entity:</h3>
 <ul>
-<li><a href="id.html">id</a>  <sub>REQ</sub><ul>
-<li>Description: A unique identifier for an element</li>
+<li><a href="id.html">id</a>  <sub>1..1</sub><ul>
+<li>Description: A unique identifier for an entity</li>
 <li>Range: <a href="types/String.html">String</a></li>
 </ul>
 </li>
-<li><a href="type.html">type</a>  <sub>REQ</sub><ul>
-<li>Description: links a GOCAM element (an OWL individual) to the specific class it instantiates</li>
+<li><a href="type.html">type</a>  <sub>1..1</sub><ul>
+<li>Description: links a GOCAM entity (an OWL individual) to the specific class it instantiates</li>
 <li>Range: <a href="OntologyClass.html">OntologyClass</a></li>
 </ul>
 </li>
 <li><a href="type_inferences.html">type inferences</a>  <sub>0..*</sub><ul>
-<li>Description: links a GOCAM element (an OWL individual) to the specific class it instantiates</li>
+<li>Description: links a GOCAM entity (an OWL individual) to the specific class it instantiates</li>
 <li>Range: <a href="OntologyClass.html">OntologyClass</a></li>
 </ul>
 </li>

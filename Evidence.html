@@ -94,14 +94,14 @@
                 <h1 id="class-evidence">Class: Evidence</h1>
 <p>An instance of a piece of evidence. Evidence attributes such as type, reference, hang off of here</p>
 <p>URI: <a href="https://w3id.org/gocam/Evidence">gocam:Evidence</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[Publication],[OntologyClass],[InformationElement],[Element]&lt;with%20object%200..*-%20[Evidence&#124;contributor:string%20*;date:string%20%3F;id(i):string],[Publication]&lt;reference%200..*-%20[Evidence],[OntologyClass]&lt;evidence%20type%201..1-%20[Evidence],[Association]++-%20has%20evidence%200..1&gt;[Evidence],[InformationElement]^-[Evidence],[Element],[Association]" /></p>
+<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[Publication],[OntologyClass],[InformationEntity],[Entity]&lt;with%20object%200..*-%20[Evidence&#124;contributor:string%20*;date:string%20%3F;id(i):string],[Publication]&lt;reference%200..*-%20[Evidence],[OntologyClass]&lt;evidence%20type%201..1-%20[Evidence],[Association]++-%20has%20evidence%200..1&gt;[Evidence],[InformationEntity]^-[Evidence],[Entity],[Association]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[Publication],[OntologyClass],[InformationEntity],[Entity]&lt;with%20object%200..*-%20[Evidence&#124;contributor:string%20*;date:string%20%3F;id(i):string],[Publication]&lt;reference%200..*-%20[Evidence],[OntologyClass]&lt;evidence%20type%201..1-%20[Evidence],[Association]++-%20has%20evidence%200..1&gt;[Evidence],[InformationEntity]^-[Evidence],[Entity],[Association]" /></a></p>
 <h2 id="parents">Parents</h2>
 <ul>
-<li>is_a: <a href="InformationElement.html">InformationElement</a></li>
+<li>is_a: <a href="InformationEntity.html">InformationEntity</a></li>
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
-<li><strong><a href="Association.html">Association</a></strong> <em><a href="has_evidence.html">has evidence</a></em>  <sub>OPT</sub>  <strong><a href="Evidence.html">Evidence</a></strong></li>
+<li><strong><a href="Association.html">Association</a></strong> <em><a href="has_evidence.html">has evidence</a></em>  <sub>0..1</sub>  <strong><a href="Evidence.html">Evidence</a></strong></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
 <h3 id="own">Own</h3>
@@ -111,12 +111,12 @@
 <li>Range: <a href="types/String.html">String</a></li>
 </ul>
 </li>
-<li><a href="date.html">date</a>  <sub>OPT</sub><ul>
+<li><a href="date.html">date</a>  <sub>0..1</sub><ul>
 <li>Description: connects anything to the date</li>
 <li>Range: <a href="types/String.html">String</a></li>
 </ul>
 </li>
-<li><a href="evidence_type.html">evidence type</a>  <sub>REQ</sub><ul>
+<li><a href="evidence_type.html">evidence type</a>  <sub>1..1</sub><ul>
 <li>Description: Connectes a piece of evidence to the evidence type from ECO</li>
 <li>Range: <a href="OntologyClass.html">OntologyClass</a></li>
 </ul>
@@ -128,14 +128,14 @@
 </li>
 <li><a href="with_object.html">with object</a>  <sub>0..*</sub><ul>
 <li>Description: An object that supports a piece of evidence</li>
-<li>Range: <a href="Element.html">Element</a></li>
+<li>Range: <a href="Entity.html">Entity</a></li>
 </ul>
 </li>
 </ul>
-<h3 id="inherited-from-information-element">Inherited from information element:</h3>
+<h3 id="inherited-from-information-entity">Inherited from information entity:</h3>
 <ul>
-<li><a href="id.html">id</a>  <sub>REQ</sub><ul>
-<li>Description: A unique identifier for an element</li>
+<li><a href="id.html">id</a>  <sub>1..1</sub><ul>
+<li>Description: A unique identifier for an entity</li>
 <li>Range: <a href="types/String.html">String</a></li>
 </ul>
 </li>

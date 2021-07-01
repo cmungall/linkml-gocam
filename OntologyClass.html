@@ -93,31 +93,31 @@
               
                 <h1 id="class-ontologyclass">Class: OntologyClass</h1>
 <p>URI: <a href="https://w3id.org/gocam/OntologyClass">gocam:OntologyClass</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[Evidence]-%20evidence%20type%201..1&gt;[OntologyClass&#124;id:string;name:label_type%20%3F;category:category_type],[Model]++-%20ontology%20class%20set%200..*&gt;[OntologyClass],[DomainElement]-%20type%201..1&gt;[OntologyClass],[DomainElement]-%20type%20inferences%200..*&gt;[OntologyClass],[Model],[Evidence],[DomainElement]" /></p>
+<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[Evidence]-%20evidence%20type%201..1&gt;[OntologyClass&#124;id:string;name:label_type%20%3F;category:category_type],[Model]++-%20ontology%20class%20set%200..*&gt;[OntologyClass],[DomainEntity]-%20type%201..1&gt;[OntologyClass],[DomainEntity]-%20type%20inferences%200..*&gt;[OntologyClass],[Model],[Evidence],[DomainEntity]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[Evidence]-%20evidence%20type%201..1&gt;[OntologyClass&#124;id:string;name:label_type%20%3F;category:category_type],[Model]++-%20ontology%20class%20set%200..*&gt;[OntologyClass],[DomainEntity]-%20type%201..1&gt;[OntologyClass],[DomainEntity]-%20type%20inferences%200..*&gt;[OntologyClass],[Model],[Evidence],[DomainEntity]" /></a></p>
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
-<li><strong>None</strong> <em><a href="evidence_type.html">evidence type</a></em>  <sub>REQ</sub>  <strong><a href="OntologyClass.html">OntologyClass</a></strong></li>
+<li><strong>None</strong> <em><a href="evidence_type.html">evidence type</a></em>  <sub>1..1</sub>  <strong><a href="OntologyClass.html">OntologyClass</a></strong></li>
 <li><strong>None</strong> <em><a href="ontology_class_set.html">ontology class set</a></em>  <sub>0..*</sub>  <strong><a href="OntologyClass.html">OntologyClass</a></strong></li>
-<li><strong>None</strong> <em><a href="type.html">type</a></em>  <sub>REQ</sub>  <strong><a href="OntologyClass.html">OntologyClass</a></strong></li>
+<li><strong>None</strong> <em><a href="type.html">type</a></em>  <sub>1..1</sub>  <strong><a href="OntologyClass.html">OntologyClass</a></strong></li>
 <li><strong>None</strong> <em><a href="type_inferences.html">type inferences</a></em>  <sub>0..*</sub>  <strong><a href="OntologyClass.html">OntologyClass</a></strong></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
 <h3 id="own">Own</h3>
 <ul>
-<li><a href="category.html">category</a>  <sub>REQ</sub><ul>
-<li>Description: Name of the high level ontology class in which this entity is categorized</li>
-<li>Range: <a href="types/CategoryType.html">CategoryType</a></li>
-</ul>
-</li>
-<li><a href="id.html">id</a>  <sub>REQ</sub><ul>
-<li>Description: A unique identifier for an element</li>
+<li><a href="id.html">id</a>  <sub>1..1</sub><ul>
+<li>Description: A unique identifier for an entity</li>
 <li>Range: <a href="types/String.html">String</a></li>
 </ul>
 </li>
-<li><a href="name.html">name</a>  <sub>OPT</sub><ul>
+<li><a href="name.html">name</a>  <sub>0..1</sub><ul>
 <li>Description: A human-readable name for an attribute or entity.</li>
 <li>Range: <a href="types/LabelType.html">LabelType</a></li>
 <li>in subsets: (not in original specification)</li>
+</ul>
+</li>
+<li><a href="category.html">category</a>  <sub>1..1</sub><ul>
+<li>Description: Name of the high level ontology class in which this entity is categorized</li>
+<li>Range: <a href="types/CategoryType.html">CategoryType</a></li>
 </ul>
 </li>
 </ul>

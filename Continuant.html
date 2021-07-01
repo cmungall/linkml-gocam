@@ -93,10 +93,10 @@
               
                 <h1 id="class-continuant">Class: Continuant</h1>
 <p>URI: <a href="https://w3id.org/gocam/Continuant">gocam:Continuant</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[MacromoleculeHasPartAssociation],[HasInputAssociation],[DomainElementMixin],[HasInputAssociation]-%20object%201..1&gt;[Continuant&#124;id(i):string],[MacromoleculeHasPartAssociation]-%20object%201..1&gt;[Continuant],[InformationBiomacromolecule]uses%20-.-&gt;[Continuant],[AnatomicalEntity]uses%20-.-&gt;[Continuant],[DomainElementMixin]^-[Continuant],[InformationBiomacromolecule],[AnatomicalEntity]" /></p>
+<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[MacromoleculeHasPartAssociation],[HasInputAssociation],[DomainEntityMixin],[HasInputAssociation]-%20object%201..1&gt;[Continuant&#124;id(i):string],[MacromoleculeHasPartAssociation]-%20object%201..1&gt;[Continuant],[InformationBiomacromolecule]uses%20-.-&gt;[Continuant],[AnatomicalEntity]uses%20-.-&gt;[Continuant],[DomainEntityMixin]^-[Continuant],[InformationBiomacromolecule],[AnatomicalEntity]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[MacromoleculeHasPartAssociation],[HasInputAssociation],[DomainEntityMixin],[HasInputAssociation]-%20object%201..1&gt;[Continuant&#124;id(i):string],[MacromoleculeHasPartAssociation]-%20object%201..1&gt;[Continuant],[InformationBiomacromolecule]uses%20-.-&gt;[Continuant],[AnatomicalEntity]uses%20-.-&gt;[Continuant],[DomainEntityMixin]^-[Continuant],[InformationBiomacromolecule],[AnatomicalEntity]" /></a></p>
 <h2 id="parents">Parents</h2>
 <ul>
-<li>is_a: <a href="DomainElementMixin.html">DomainElementMixin</a> - Grouping for mixins that apply to GO-CAM elements. These mixins allow us to group together elements that are alike in some fashion</li>
+<li>is_a: <a href="DomainEntityMixin.html">DomainEntityMixin</a> - Grouping for mixins that apply to GO-CAM entities. These mixins allow us to group together entities that are alike in some fashion</li>
 </ul>
 <h2 id="mixin-for">Mixin for</h2>
 <ul>
@@ -105,14 +105,14 @@
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
-<li><strong><a href="HasInputAssociation.html">HasInputAssociation</a></strong> <em><a href="has_input_association_object.html">has input association➞object</a></em>  <sub>REQ</sub>  <strong><a href="Continuant.html">Continuant</a></strong></li>
-<li><strong><a href="MacromoleculeHasPartAssociation.html">MacromoleculeHasPartAssociation</a></strong> <em><a href="macromolecule_has_part_association_object.html">macromolecule has part association➞object</a></em>  <sub>REQ</sub>  <strong><a href="Continuant.html">Continuant</a></strong></li>
+<li><strong><a href="HasInputAssociation.html">HasInputAssociation</a></strong> <em><a href="has_input_association_object.html">has input association➞object</a></em>  <sub>1..1</sub>  <strong><a href="Continuant.html">Continuant</a></strong></li>
+<li><strong><a href="MacromoleculeHasPartAssociation.html">MacromoleculeHasPartAssociation</a></strong> <em><a href="macromolecule_has_part_association_object.html">macromolecule has part association➞object</a></em>  <sub>1..1</sub>  <strong><a href="Continuant.html">Continuant</a></strong></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
-<h3 id="inherited-from-domain-element-mixin">Inherited from domain element mixin:</h3>
+<h3 id="inherited-from-domain-entity-mixin">Inherited from domain entity mixin:</h3>
 <ul>
-<li><a href="id.html">id</a>  <sub>REQ</sub><ul>
-<li>Description: A unique identifier for an element</li>
+<li><a href="id.html">id</a>  <sub>1..1</sub><ul>
+<li>Description: A unique identifier for an entity</li>
 <li>Range: <a href="types/String.html">String</a></li>
 </ul>
 </li>

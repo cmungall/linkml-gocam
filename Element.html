@@ -94,7 +94,7 @@
                 <h1 id="class-element">Class: Element</h1>
 <p>Base class for any biological entity or activity or process in a GO-CAM model</p>
 <p>URI: <a href="https://w3id.org/gocam/Element">gocam:Element</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[Model],[InformationElement],[Association]-%20object%201..1&gt;[Element&#124;id:string],[Evidence]-%20with%20object%200..*&gt;[Element],[Element]^-[Model],[Element]^-[InformationElement],[Element]^-[DomainElement],[Evidence],[DomainElement],[Association]" /></p>
+<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[Model],[InformationElement],[Association]-%20object%201..1&gt;[Element&#124;id:string],[Evidence]-%20with%20object%200..*&gt;[Element],[Element]^-[Model],[Element]^-[InformationElement],[Element]^-[DomainElement],[Evidence],[DomainElement],[Association]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[Model],[InformationElement],[Association]-%20object%201..1&gt;[Element&#124;id:string],[Evidence]-%20with%20object%200..*&gt;[Element],[Element]^-[Model],[Element]^-[InformationElement],[Element]^-[DomainElement],[Evidence],[DomainElement],[Association]" /></a></p>
 <h2 id="children">Children</h2>
 <ul>
 <li><a href="DomainElement.html">DomainElement</a> - An element that is part of a GO-CAM model</li>
@@ -103,13 +103,13 @@
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
-<li><strong><a href="Association.html">Association</a></strong> <em><a href="object.html">object</a></em>  <sub>REQ</sub>  <strong><a href="Element.html">Element</a></strong></li>
+<li><strong><a href="Association.html">Association</a></strong> <em><a href="object.html">object</a></em>  <sub>1..1</sub>  <strong><a href="Element.html">Element</a></strong></li>
 <li><strong>None</strong> <em><a href="with_object.html">with object</a></em>  <sub>0..*</sub>  <strong><a href="Element.html">Element</a></strong></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
 <h3 id="own">Own</h3>
 <ul>
-<li><a href="id.html">id</a>  <sub>REQ</sub><ul>
+<li><a href="id.html">id</a>  <sub>1..1</sub><ul>
 <li>Description: A unique identifier for an element</li>
 <li>Range: <a href="types/String.html">String</a></li>
 </ul>

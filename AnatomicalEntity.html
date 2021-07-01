@@ -94,10 +94,10 @@
                 <h1 id="class-anatomicalentity">Class: AnatomicalEntity</h1>
 <p>An instance of a GO cellular anatomical entity, a cell type, or gross anatomical structure</p>
 <p>URI: <a href="https://w3id.org/gocam/AnatomicalEntity">gocam:AnatomicalEntity</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[OntologyClass],[OccursInAssociation],[DomainElement],[Continuant],[AnatomicalPartOfAssociation],[AnatomicalPartOfAssociation]&lt;part%20of%200..1-++[AnatomicalEntity&#124;category:anatomical_entity_category;id(i):string],[AnatomicalPartOfAssociation]-%20object%201..1&gt;[AnatomicalEntity],[OccursInAssociation]-%20object%201..1&gt;[AnatomicalEntity],[AnatomicalEntity]uses%20-.-&gt;[Continuant],[DomainElement]^-[AnatomicalEntity]" /></p>
+<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[OntologyClass],[OccursInAssociation],[DomainEntity],[Continuant],[AnatomicalPartOfAssociation],[AnatomicalPartOfAssociation]&lt;part%20of%200..1-++[AnatomicalEntity&#124;category:anatomical_entity_category;id(i):string],[AnatomicalPartOfAssociation]-%20object%201..1&gt;[AnatomicalEntity],[OccursInAssociation]-%20object%201..1&gt;[AnatomicalEntity],[AnatomicalEntity]uses%20-.-&gt;[Continuant],[DomainEntity]^-[AnatomicalEntity]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[OntologyClass],[OccursInAssociation],[DomainEntity],[Continuant],[AnatomicalPartOfAssociation],[AnatomicalPartOfAssociation]&lt;part%20of%200..1-++[AnatomicalEntity&#124;category:anatomical_entity_category;id(i):string],[AnatomicalPartOfAssociation]-%20object%201..1&gt;[AnatomicalEntity],[OccursInAssociation]-%20object%201..1&gt;[AnatomicalEntity],[AnatomicalEntity]uses%20-.-&gt;[Continuant],[DomainEntity]^-[AnatomicalEntity]" /></a></p>
 <h2 id="parents">Parents</h2>
 <ul>
-<li>is_a: <a href="DomainElement.html">DomainElement</a> - An element that is part of a GO-CAM model</li>
+<li>is_a: <a href="DomainEntity.html">DomainEntity</a> - Abstract entity for representing any part of a GO-CAM model</li>
 </ul>
 <h2 id="uses-mixins">Uses Mixins</h2>
 <ul>
@@ -105,35 +105,35 @@
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
-<li><strong><a href="AnatomicalPartOfAssociation.html">AnatomicalPartOfAssociation</a></strong> <em><a href="anatomical_part_of_association_object.html">anatomical part of association➞object</a></em>  <sub>REQ</sub>  <strong><a href="AnatomicalEntity.html">AnatomicalEntity</a></strong></li>
-<li><strong><a href="OccursInAssociation.html">OccursInAssociation</a></strong> <em><a href="occurs_in_association_object.html">occurs in association➞object</a></em>  <sub>REQ</sub>  <strong><a href="AnatomicalEntity.html">AnatomicalEntity</a></strong></li>
+<li><strong><a href="AnatomicalPartOfAssociation.html">AnatomicalPartOfAssociation</a></strong> <em><a href="anatomical_part_of_association_object.html">anatomical part of association➞object</a></em>  <sub>1..1</sub>  <strong><a href="AnatomicalEntity.html">AnatomicalEntity</a></strong></li>
+<li><strong><a href="OccursInAssociation.html">OccursInAssociation</a></strong> <em><a href="occurs_in_association_object.html">occurs in association➞object</a></em>  <sub>1..1</sub>  <strong><a href="AnatomicalEntity.html">AnatomicalEntity</a></strong></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
 <h3 id="own">Own</h3>
 <ul>
-<li><a href="anatomical_entity_category.html">anatomical entity➞category</a>  <sub>REQ</sub><ul>
-<li>Range: <a href="anatomical_entity_category.html">anatomical_entity_category</a></li>
-</ul>
-</li>
-<li><a href="anatomical_entity_part_of.html">anatomical entity➞part of</a>  <sub>OPT</sub><ul>
+<li><a href="anatomical_entity_part_of.html">anatomical entity➞part of</a>  <sub>0..1</sub><ul>
 <li>Range: <a href="AnatomicalPartOfAssociation.html">AnatomicalPartOfAssociation</a></li>
 </ul>
 </li>
+<li><a href="anatomical_entity_category.html">anatomical entity➞category</a>  <sub>1..1</sub><ul>
+<li>Range: <a href="anatomical_entity_category.html">anatomical_entity_category</a></li>
 </ul>
-<h3 id="inherited-from-domain-element">Inherited from domain element:</h3>
+</li>
+</ul>
+<h3 id="inherited-from-domain-entity">Inherited from domain entity:</h3>
 <ul>
-<li><a href="id.html">id</a>  <sub>REQ</sub><ul>
-<li>Description: A unique identifier for an element</li>
+<li><a href="id.html">id</a>  <sub>1..1</sub><ul>
+<li>Description: A unique identifier for an entity</li>
 <li>Range: <a href="types/String.html">String</a></li>
 </ul>
 </li>
-<li><a href="type.html">type</a>  <sub>REQ</sub><ul>
-<li>Description: links a GOCAM element (an OWL individual) to the specific class it instantiates</li>
+<li><a href="type.html">type</a>  <sub>1..1</sub><ul>
+<li>Description: links a GOCAM entity (an OWL individual) to the specific class it instantiates</li>
 <li>Range: <a href="OntologyClass.html">OntologyClass</a></li>
 </ul>
 </li>
 <li><a href="type_inferences.html">type inferences</a>  <sub>0..*</sub><ul>
-<li>Description: links a GOCAM element (an OWL individual) to the specific class it instantiates</li>
+<li>Description: links a GOCAM entity (an OWL individual) to the specific class it instantiates</li>
 <li>Range: <a href="OntologyClass.html">OntologyClass</a></li>
 </ul>
 </li>

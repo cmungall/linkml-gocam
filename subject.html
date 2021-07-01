@@ -95,17 +95,19 @@
 <p>connects an association to the subject of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.</p>
 <p>URI: <a href="https://w3id.org/gocam/subject">gocam:subject</a></p>
 <h2 id="domain-and-range">Domain and Range</h2>
-<p><a href="Association.html">Association</a> &#8594;  <sub>OPT</sub> <a href="DomainElement.html">DomainElement</a></p>
+<p><a href="Association.html">Association</a> &#8594;  <sub>0..1</sub> <a href="DomainEntity.html">DomainEntity</a></p>
 <h2 id="parents">Parents</h2>
 <ul>
 <li>is_a: <a href="association_slot.html">association slot</a></li>
 </ul>
 <h2 id="children">Children</h2>
+<ul>
+<li><a href="causal_association_subject.html">causal association➞subject</a></li>
+</ul>
 <h2 id="used-by">Used by</h2>
 <ul>
 <li><a href="AnatomicalPartOfAssociation.html">AnatomicalPartOfAssociation</a></li>
 <li><a href="Association.html">Association</a></li>
-<li><a href="CausalAssociation.html">CausalAssociation</a></li>
 <li><a href="EnabledByAssociation.html">EnabledByAssociation</a></li>
 <li><a href="HappensDuringAssociation.html">HappensDuringAssociation</a></li>
 <li><a href="HasInputAssociation.html">HasInputAssociation</a></li>

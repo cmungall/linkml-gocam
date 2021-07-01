@@ -94,10 +94,10 @@
                 <h1 id="class-chemicalentity">Class: ChemicalEntity</h1>
 <p>An instance of a chemical entity, as defined in CHEBI, including macromolecules defined in NEO</p>
 <p>URI: <a href="https://w3id.org/gocam/ChemicalEntity">gocam:ChemicalEntity</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[OntologyClass],[InformationBiomacromolecule],[DomainElement],[Model]++-%20chemical%20entity%20set%200..*&gt;[ChemicalEntity&#124;id(i):string],[ChemicalEntity]^-[InformationBiomacromolecule],[DomainElement]^-[ChemicalEntity],[Model]" /></p>
+<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[OntologyClass],[InformationBiomacromolecule],[DomainEntity],[Model]++-%20chemical%20entity%20set%200..*&gt;[ChemicalEntity&#124;id(i):string],[ChemicalEntity]^-[InformationBiomacromolecule],[DomainEntity]^-[ChemicalEntity],[Model]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[OntologyClass],[InformationBiomacromolecule],[DomainEntity],[Model]++-%20chemical%20entity%20set%200..*&gt;[ChemicalEntity&#124;id(i):string],[ChemicalEntity]^-[InformationBiomacromolecule],[DomainEntity]^-[ChemicalEntity],[Model]" /></a></p>
 <h2 id="parents">Parents</h2>
 <ul>
-<li>is_a: <a href="DomainElement.html">DomainElement</a> - An element that is part of a GO-CAM model</li>
+<li>is_a: <a href="DomainEntity.html">DomainEntity</a> - Abstract entity for representing any part of a GO-CAM model</li>
 </ul>
 <h2 id="children">Children</h2>
 <ul>
@@ -108,20 +108,20 @@
 <li><strong>None</strong> <em><a href="chemical_entity_set.html">chemical entity set</a></em>  <sub>0..*</sub>  <strong><a href="ChemicalEntity.html">ChemicalEntity</a></strong></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
-<h3 id="inherited-from-domain-element">Inherited from domain element:</h3>
+<h3 id="inherited-from-domain-entity">Inherited from domain entity:</h3>
 <ul>
-<li><a href="id.html">id</a>  <sub>REQ</sub><ul>
-<li>Description: A unique identifier for an element</li>
+<li><a href="id.html">id</a>  <sub>1..1</sub><ul>
+<li>Description: A unique identifier for an entity</li>
 <li>Range: <a href="types/String.html">String</a></li>
 </ul>
 </li>
-<li><a href="type.html">type</a>  <sub>REQ</sub><ul>
-<li>Description: links a GOCAM element (an OWL individual) to the specific class it instantiates</li>
+<li><a href="type.html">type</a>  <sub>1..1</sub><ul>
+<li>Description: links a GOCAM entity (an OWL individual) to the specific class it instantiates</li>
 <li>Range: <a href="OntologyClass.html">OntologyClass</a></li>
 </ul>
 </li>
 <li><a href="type_inferences.html">type inferences</a>  <sub>0..*</sub><ul>
-<li>Description: links a GOCAM element (an OWL individual) to the specific class it instantiates</li>
+<li>Description: links a GOCAM entity (an OWL individual) to the specific class it instantiates</li>
 <li>Range: <a href="OntologyClass.html">OntologyClass</a></li>
 </ul>
 </li>

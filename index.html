@@ -118,8 +118,14 @@
   * <a href="https://cmungall.github.io/linkml-gocam/">https://cmungall.github.io/linkml-gocam/</a></p>
 <h3 id="classes">Classes</h3>
 <ul>
-<li><a href="Association.html">Association</a> - An association between a domain element (e.g. a MolecularActivity) and another domain element (e.g. another MolecularActivity) with evidence and provenance attached<ul>
-<li><a href="CausalAssociation.html">CausalAssociation</a> - An association owned by an upstream MA or BP that connects to a downstream MA or BP. The nature of the causal relationship is indicated with the predicate.</li>
+<li><a href="Association.html">Association</a> - An association between a domain entity (e.g. a MolecularActivity) and another domain entity (e.g. another MolecularActivity) with evidence and provenance attached<ul>
+<li><a href="CausalAssociation.html">CausalAssociation</a> - An association owned by an upstream MA or BP that connects to a downstream MA or BP. The nature of the causal relationship is indicated with the predicate.<ul>
+<li><a href="ActivityToActivityCausalAssociation.html">ActivityToActivityCausalAssociation</a> - A causal association between two molecular activities</li>
+<li><a href="ActivityToProcessCausalAssociation.html">ActivityToProcessCausalAssociation</a> - A causal association between a molecular activity and a biological process</li>
+<li><a href="ProcessToActivityCausalAssociation.html">ProcessToActivityCausalAssociation</a> - A causal association between a biological process and a molecular activity</li>
+<li><a href="ProcessToProcessCausalAssociation.html">ProcessToProcessCausalAssociation</a> - A causal association between two biological processes</li>
+</ul>
+</li>
 <li><a href="EnabledByAssociation.html">EnabledByAssociation</a> - Connects an MA to the information biomacromolecule that executes the activity</li>
 <li><a href="HappensDuringAssociation.html">HappensDuringAssociation</a> - Connects an MF to a process or phase in which the process occurs</li>
 <li><a href="HasInputAssociation.html">HasInputAssociation</a> - Connects an MF or BP to its input entity, which may be a chemical entity, an information biomacromolecule, or a larger structure</li>
@@ -135,8 +141,8 @@
 </li>
 </ul>
 </li>
-<li><a href="Element.html">Element</a> - Base class for any biological entity or activity or process in a GO-CAM model<ul>
-<li><a href="DomainElement.html">DomainElement</a> - An element that is part of a GO-CAM model<ul>
+<li><a href="Entity.html">Entity</a> - Abstract base class for any biological entity or activity or process in a GO-CAM model<ul>
+<li><a href="DomainEntity.html">DomainEntity</a> - Abstract entity for representing any part of a GO-CAM model<ul>
 <li><a href="AnatomicalEntity.html">AnatomicalEntity</a> - An instance of a GO cellular anatomical entity, a cell type, or gross anatomical structure</li>
 <li><a href="BiologicalProcess.html">BiologicalProcess</a> - An instance of a GO biological process</li>
 <li><a href="ChemicalEntity.html">ChemicalEntity</a> - An instance of a chemical entity, as defined in CHEBI, including macromolecules defined in NEO<ul>
@@ -146,12 +152,12 @@
 <li><a href="MolecularActivity.html">MolecularActivity</a> - An instance of a GO molecular function</li>
 </ul>
 </li>
-<li><a href="InformationElement.html">InformationElement</a><ul>
+<li><a href="InformationEntity.html">InformationEntity</a><ul>
 <li><a href="Evidence.html">Evidence</a> - An instance of a piece of evidence. Evidence attributes such as type, reference, hang off of here</li>
 <li><a href="Publication.html">Publication</a> - A published entity such as a paper in pubmed</li>
 </ul>
 </li>
-<li><a href="Model.html">Model</a> - A collection of GO-CAM elements and associated metadata. A model combines multiple simple GO annotations into an integrated, semantically precise and computable model of biological function.</li>
+<li><a href="Model.html">Model</a> - A collection of GO-CAM entities and associated metadata. A model combines multiple simple GO annotations into an integrated, semantically precise and computable model of biological function.</li>
 </ul>
 </li>
 <li><a href="OntologyClass.html">OntologyClass</a></li>
@@ -159,8 +165,10 @@
 <h3 id="mixins">Mixins</h3>
 <ul>
 <li><a href="ActivityOrProcess.html">ActivityOrProcess</a></li>
+<li><a href="CausalAssociationToActivity.html">CausalAssociationToActivity</a></li>
+<li><a href="CausalAssociationToProcess.html">CausalAssociationToProcess</a></li>
 <li><a href="Continuant.html">Continuant</a></li>
-<li><a href="DomainElementMixin.html">DomainElementMixin</a> - Grouping for mixins that apply to GO-CAM elements. These mixins allow us to group together elements that are alike in some fashion<ul>
+<li><a href="DomainEntityMixin.html">DomainEntityMixin</a> - Grouping for mixins that apply to GO-CAM entities. These mixins allow us to group together entities that are alike in some fashion<ul>
 <li><a href="ActivityOrProcess.html">ActivityOrProcess</a></li>
 <li><a href="Continuant.html">Continuant</a></li>
 <li><a href="ProcessOrPhase.html">ProcessOrPhase</a></li>
@@ -173,7 +181,15 @@
 <li><a href="association_slot.html">association slot</a> - any slot that relates an association to another entity<ul>
 <li><a href="object.html">object</a> - connects an association to the object of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.<ul>
 <li><a href="anatomical_part_of_association_object.html">anatomical part of association➞object</a></li>
-<li><a href="causal_association_object.html">causal association➞object</a></li>
+<li><a href="causal_association_to_activity_object.html">causal association to activity➞object</a> - The downstream molecular activity</li>
+<li><a href="causal_association_to_process_object.html">causal association to process➞object</a> - The downstream biological process</li>
+<li><a href="causal_association_object.html">causal association➞object</a> - The upstream activity or process<ul>
+<li><a href="activity_to_activity_causal_association_object.html">activity to activity causal association➞object</a> - The downstream molecular activity</li>
+<li><a href="activity_to_process_causal_association_object.html">activity to process causal association➞object</a> - The upstream biological process</li>
+<li><a href="process_to_activity_causal_association_object.html">process to activity causal association➞object</a> - The downstream molecular activity</li>
+<li><a href="process_to_process_causal_association_object.html">process to process causal association➞object</a> - The downstream biological process</li>
+</ul>
+</li>
 <li><a href="enabled_by_association_object.html">enabled by association➞object</a></li>
 <li><a href="happens_during_association_object.html">happens during association➞object</a></li>
 <li><a href="has_input_association_object.html">has input association➞object</a></li>
@@ -183,15 +199,24 @@
 </ul>
 </li>
 <li><a href="predicate.html">predicate</a> - A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.<ul>
-<li><a href="causal_association_predicate.html">causal association➞predicate</a> - This must be drawn from the causal relation hierarchy in RO</li>
+<li><a href="causal_association_predicate.html">causal association➞predicate</a> - The causal relationship type which holds between the two activities/processes. This must be drawn from the causal relation hierarchy in RO</li>
 </ul>
 </li>
-<li><a href="subject.html">subject</a> - connects an association to the subject of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.</li>
+<li><a href="subject.html">subject</a> - connects an association to the subject of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.<ul>
+<li><a href="causal_association_subject.html">causal association➞subject</a> - The upstream activity or process<ul>
+<li><a href="activity_to_activity_causal_association_subject.html">activity to activity causal association➞subject</a> - The upstream molecular activity</li>
+<li><a href="activity_to_process_causal_association_subject.html">activity to process causal association➞subject</a> - The downstream molecular activity</li>
+<li><a href="process_to_activity_causal_association_subject.html">process to activity causal association➞subject</a> - The upstream biological process</li>
+<li><a href="process_to_process_causal_association_subject.html">process to process causal association➞subject</a> - The upstream biological process</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="contributor.html">contributor</a> - connects an assertion to the individual that made a contribution to it</li>
 <li><a href="date.html">date</a> - connects anything to the date</li>
-<li><a href="domain_element_set.html">domain element set</a> - Grouping field for all domain elements 'owned' by a model<ul>
+<li><a href="domain_entity_set.html">domain entity set</a> - Grouping field for all domain entities 'owned' by a model<ul>
 <li><a href="biological_process_set.html">biological process set</a> - All biological process instances that are part of this model</li>
 <li><a href="chemical_entity_set.html">chemical entity set</a> - All chemical entity instances that are part of this model.</li>
 <li><a href="information_biomacromolecule_set.html">information biomacromolecule set</a> - All information macromolecule instances that are part of this model</li>
@@ -200,7 +225,7 @@
 </ul>
 </li>
 <li><a href="has_evidence.html">has evidence</a> - Links an association to evidence for it</li>
-<li><a href="id.html">id</a> - A unique identifier for an element</li>
+<li><a href="id.html">id</a> - A unique identifier for an entity</li>
 <li><a href="model_property.html">model property</a><ul>
 <li><a href="state.html">state</a> - State of the model</li>
 <li><a href="title.html">title</a></li>
@@ -212,12 +237,16 @@
 <li><a href="related_to.html">related to</a> - Links a subject domain entity to an object domain entity by way of an Association object<ul>
 <li><a href="enabled_by.html">enabled by</a> - Links a MolecularActivity to the InformationBiomacromolecule by way of a EnabledByAssociation</li>
 <li><a href="happens_during.html">happens during</a> - Links a subject domain entity (a MA or BP) to an object domain entity by way of a HappensDuringAssociation </li>
+<li><a href="has_causal_associations.html">has causal associations</a> - Links a subject domain entity (a MA or BP) to an object domain entity by way of an CausalAssociation<ul>
+<li><a href="has_activity_causal_associations.html">has activity causal associations</a> - Links a subject domain entity (a MA or BP) to a molecular activity by way of an CausalAssociation</li>
+<li><a href="has_process_causal_associations.html">has process causal associations</a> - Links a subject domain entity (a MA or BP) to a biological process by way of an CausalAssociation</li>
+</ul>
+</li>
 <li><a href="has_input.html">has input</a> - Links a MA or BP to its input by way of a HasInputAssociation</li>
 <li><a href="has_part.html">has part</a> - Links a subject domain entity to an object domain entity by way of a HasPartAssociation<ul>
 <li><a href="information_biomacromolecule_has_part.html">information biomacromolecule➞has part</a></li>
 </ul>
 </li>
-<li><a href="influences.html">influences</a> - Links a subject domain entity (a MA or BP) to an object domain entity by way of an CausalAssociation</li>
 <li><a href="occurs_in.html">occurs in</a> - Links a subject domain entity (a MA or BP) to an object domain entity by way of an OccursInAssociation</li>
 <li><a href="part_of.html">part of</a> - Links a subject domain entity to an object domain entity by way of a PartOfAssociation<ul>
 <li><a href="anatomical_entity_part_of.html">anatomical entity➞part of</a></li>
@@ -226,7 +255,7 @@
 </li>
 </ul>
 </li>
-<li><a href="type.html">type</a> - links a GOCAM element (an OWL individual) to the specific class it instantiates<ul>
+<li><a href="type.html">type</a> - links a GOCAM entity (an OWL individual) to the specific class it instantiates<ul>
 <li><a href="category.html">category</a> - Name of the high level ontology class in which this entity is categorized<ul>
 <li><a href="anatomical_entity_category.html">anatomical entity➞category</a></li>
 <li><a href="information_biomacromolecule_category.html">information biomacromolecule➞category</a></li>
@@ -235,7 +264,7 @@
 <li><a href="evidence_type.html">evidence type</a> - Connectes a piece of evidence to the evidence type from ECO</li>
 </ul>
 </li>
-<li><a href="type_inferences.html">type inferences</a> - links a GOCAM element (an OWL individual) to the specific class it instantiates</li>
+<li><a href="type_inferences.html">type inferences</a> - links a GOCAM entity (an OWL individual) to the specific class it instantiates</li>
 <li><a href="with_object.html">with object</a> - An object that supports a piece of evidence</li>
 </ul>
 <h3 id="enums">Enums</h3>
@@ -344,5 +373,5 @@
 
 <!--
 MkDocs version : 1.2.1
-Build Date UTC : 2021-06-25 23:55:39.515563+00:00
+Build Date UTC : 2021-07-01 23:21:59.724393+00:00
 -->

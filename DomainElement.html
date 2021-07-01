@@ -94,7 +94,7 @@
                 <h1 id="class-domainelement">Class: DomainElement</h1>
 <p>An element that is part of a GO-CAM model</p>
 <p>URI: <a href="https://w3id.org/gocam/DomainElement">gocam:DomainElement</a></p>
-<p><img alt="img" src="http://yuml.me/diagram/nofunky;dir:TB/class/[OntologyClass],[MolecularActivity],[Element],[OntologyClass]&lt;type%20inferences%200..*-%20[DomainElement&#124;id(i):string],[OntologyClass]&lt;type%201..1-%20[DomainElement],[Association]-%20subject%200..1&gt;[DomainElement],[DomainElement]^-[MolecularActivity],[DomainElement]^-[ChemicalEntity],[DomainElement]^-[BiologicalProcess],[DomainElement]^-[AnatomicalEntity],[Element]^-[DomainElement],[ChemicalEntity],[BiologicalProcess],[Association],[AnatomicalEntity]" /></p>
+<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[OntologyClass],[MolecularActivity],[Element],[OntologyClass]&lt;type%20inferences%200..*-%20[DomainElement&#124;id(i):string],[OntologyClass]&lt;type%201..1-%20[DomainElement],[Association]-%20subject%200..1&gt;[DomainElement],[DomainElement]^-[MolecularActivity],[DomainElement]^-[ChemicalEntity],[DomainElement]^-[BiologicalProcess],[DomainElement]^-[AnatomicalEntity],[Element]^-[DomainElement],[ChemicalEntity],[BiologicalProcess],[Association],[AnatomicalEntity]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[OntologyClass],[MolecularActivity],[Element],[OntologyClass]&lt;type%20inferences%200..*-%20[DomainElement&#124;id(i):string],[OntologyClass]&lt;type%201..1-%20[DomainElement],[Association]-%20subject%200..1&gt;[DomainElement],[DomainElement]^-[MolecularActivity],[DomainElement]^-[ChemicalEntity],[DomainElement]^-[BiologicalProcess],[DomainElement]^-[AnatomicalEntity],[Element]^-[DomainElement],[ChemicalEntity],[BiologicalProcess],[Association],[AnatomicalEntity]" /></a></p>
 <h2 id="parents">Parents</h2>
 <ul>
 <li>is_a: <a href="Element.html">Element</a> - Base class for any biological entity or activity or process in a GO-CAM model</li>
@@ -109,17 +109,17 @@
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
 <li><strong>None</strong> <em><a href="domain_element_set.html">domain element set</a></em>  <sub>0..*</sub>  <strong><a href="DomainElement.html">DomainElement</a></strong></li>
-<li><strong><a href="Association.html">Association</a></strong> <em><a href="subject.html">subject</a></em>  <sub>OPT</sub>  <strong><a href="DomainElement.html">DomainElement</a></strong></li>
+<li><strong><a href="Association.html">Association</a></strong> <em><a href="subject.html">subject</a></em>  <sub>0..1</sub>  <strong><a href="DomainElement.html">DomainElement</a></strong></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
 <h3 id="own">Own</h3>
 <ul>
-<li><a href="id.html">id</a>  <sub>REQ</sub><ul>
+<li><a href="id.html">id</a>  <sub>1..1</sub><ul>
 <li>Description: A unique identifier for an element</li>
 <li>Range: <a href="types/String.html">String</a></li>
 </ul>
 </li>
-<li><a href="type.html">type</a>  <sub>REQ</sub><ul>
+<li><a href="type.html">type</a>  <sub>1..1</sub><ul>
 <li>Description: links a GOCAM element (an OWL individual) to the specific class it instantiates</li>
 <li>Range: <a href="OntologyClass.html">OntologyClass</a></li>
 </ul>
