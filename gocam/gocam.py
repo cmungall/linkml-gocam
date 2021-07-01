@@ -1,5 +1,5 @@
 # Auto generated from gocam.yaml by pythongen.py version: 0.9.0
-# Generation date: 2021-06-25 16:20
+# Generation date: 2021-07-01 16:17
 # Schema: gocam
 #
 # id: https://w3id.org/gocam
@@ -112,31 +112,31 @@ class SymbolType(String):
 
 
 # Class references
-class ElementId(extended_str):
+class EntityId(extended_str):
     pass
 
 
-class ModelId(ElementId):
+class ModelId(EntityId):
     pass
 
 
-class DomainElementId(ElementId):
+class DomainEntityId(EntityId):
     pass
 
 
-class MolecularActivityId(DomainElementId):
+class MolecularActivityId(DomainEntityId):
     pass
 
 
-class BiologicalProcessId(DomainElementId):
+class BiologicalProcessId(DomainEntityId):
     pass
 
 
-class AnatomicalEntityId(DomainElementId):
+class AnatomicalEntityId(DomainEntityId):
     pass
 
 
-class ChemicalEntityId(DomainElementId):
+class ChemicalEntityId(DomainEntityId):
     pass
 
 
@@ -148,61 +148,61 @@ class OntologyClassId(extended_str):
     pass
 
 
-class InformationElementId(ElementId):
+class InformationEntityId(EntityId):
     pass
 
 
-class PublicationId(InformationElementId):
+class PublicationId(InformationEntityId):
     pass
 
 
-class EvidenceId(InformationElementId):
+class EvidenceId(InformationEntityId):
     pass
 
 
-class DomainElementMixinId(extended_str):
+class DomainEntityMixinId(extended_str):
     pass
 
 
-class ActivityOrProcessId(DomainElementMixinId):
+class ActivityOrProcessId(DomainEntityMixinId):
     pass
 
 
-class ProcessOrPhaseId(DomainElementMixinId):
+class ProcessOrPhaseId(DomainEntityMixinId):
     pass
 
 
-class ContinuantId(DomainElementMixinId):
+class ContinuantId(DomainEntityMixinId):
     pass
 
 
 @dataclass
-class Element(YAMLRoot):
+class Entity(YAMLRoot):
     """
-    Base class for any biological entity or activity or process in a GO-CAM model
+    Abstract base class for any biological entity or activity or process in a GO-CAM model
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = GOCAM.Element
-    class_class_curie: ClassVar[str] = "gocam:Element"
-    class_name: ClassVar[str] = "element"
-    class_model_uri: ClassVar[URIRef] = GOCAM.Element
+    class_class_uri: ClassVar[URIRef] = GOCAM.Entity
+    class_class_curie: ClassVar[str] = "gocam:Entity"
+    class_name: ClassVar[str] = "entity"
+    class_model_uri: ClassVar[URIRef] = GOCAM.Entity
 
-    id: Union[str, ElementId] = None
+    id: Union[str, EntityId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
-        if not isinstance(self.id, ElementId):
-            self.id = ElementId(self.id)
+        if not isinstance(self.id, EntityId):
+            self.id = EntityId(self.id)
 
         super().__post_init__(**kwargs)
 
 
 @dataclass
-class Model(Element):
+class Model(Entity):
     """
-    A collection of GO-CAM elements and associated metadata. A model combines multiple simple GO annotations into an
+    A collection of GO-CAM entities and associated metadata. A model combines multiple simple GO annotations into an
     integrated, semantically precise and computable model of biological function.
     """
     _inherited_slots: ClassVar[List[str]] = []
@@ -260,26 +260,26 @@ class Model(Element):
 
 
 @dataclass
-class DomainElement(Element):
+class DomainEntity(Entity):
     """
-    An element that is part of a GO-CAM model
+    Abstract entity for representing any part of a GO-CAM model
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = GOCAM.DomainElement
-    class_class_curie: ClassVar[str] = "gocam:DomainElement"
-    class_name: ClassVar[str] = "domain element"
-    class_model_uri: ClassVar[URIRef] = GOCAM.DomainElement
+    class_class_uri: ClassVar[URIRef] = GOCAM.DomainEntity
+    class_class_curie: ClassVar[str] = "gocam:DomainEntity"
+    class_name: ClassVar[str] = "domain entity"
+    class_model_uri: ClassVar[URIRef] = GOCAM.DomainEntity
 
-    id: Union[str, DomainElementId] = None
+    id: Union[str, DomainEntityId] = None
     type: Union[str, OntologyClassId] = None
     type_inferences: Optional[Union[Union[str, OntologyClassId], List[Union[str, OntologyClassId]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
-        if not isinstance(self.id, DomainElementId):
-            self.id = DomainElementId(self.id)
+        if not isinstance(self.id, DomainEntityId):
+            self.id = DomainEntityId(self.id)
 
         if self._is_empty(self.type):
             self.MissingRequiredField("type")
@@ -294,7 +294,7 @@ class DomainElement(Element):
 
 
 @dataclass
-class MolecularActivity(DomainElement):
+class MolecularActivity(DomainEntity):
     """
     An instance of a GO molecular function
     """
@@ -307,7 +307,8 @@ class MolecularActivity(DomainElement):
 
     id: Union[str, MolecularActivityId] = None
     type: Union[str, OntologyClassId] = None
-    influences: Optional[Union[dict, "CausalAssociation"]] = None
+    has_activity_causal_associations: Optional[Union[Union[dict, "ActivityToActivityCausalAssociation"], List[Union[dict, "ActivityToActivityCausalAssociation"]]]] = empty_list()
+    has_process_causal_associations: Optional[Union[Union[dict, "ActivityToProcessCausalAssociation"], List[Union[dict, "ActivityToProcessCausalAssociation"]]]] = empty_list()
     happens_during: Optional[Union[dict, "HappensDuringAssociation"]] = None
     part_of: Optional[Union[dict, "ProcessPartOfAssociation"]] = None
     enabled_by: Optional[Union[dict, "EnabledByAssociation"]] = None
@@ -320,8 +321,9 @@ class MolecularActivity(DomainElement):
         if not isinstance(self.id, MolecularActivityId):
             self.id = MolecularActivityId(self.id)
 
-        if self.influences is not None and not isinstance(self.influences, CausalAssociation):
-            self.influences = CausalAssociation(**self.influences)
+        self._normalize_inlined_as_list(slot_name="has_activity_causal_associations", slot_type=ActivityToActivityCausalAssociation, key_name="object", keyed=False)
+
+        self._normalize_inlined_as_list(slot_name="has_process_causal_associations", slot_type=ActivityToProcessCausalAssociation, key_name="object", keyed=False)
 
         if self.happens_during is not None and not isinstance(self.happens_during, HappensDuringAssociation):
             self.happens_during = HappensDuringAssociation(**self.happens_during)
@@ -342,7 +344,7 @@ class MolecularActivity(DomainElement):
 
 
 @dataclass
-class BiologicalProcess(DomainElement):
+class BiologicalProcess(DomainEntity):
     """
     An instance of a GO biological process
     """
@@ -356,7 +358,8 @@ class BiologicalProcess(DomainElement):
     id: Union[str, BiologicalProcessId] = None
     type: Union[str, OntologyClassId] = None
     occurs_in: Optional[Union[dict, "OccursInAssociation"]] = None
-    influences: Optional[Union[dict, "CausalAssociation"]] = None
+    has_activity_causal_associations: Optional[Union[Union[dict, "ProcessToActivityCausalAssociation"], List[Union[dict, "ProcessToActivityCausalAssociation"]]]] = empty_list()
+    has_process_causal_associations: Optional[Union[Union[dict, "ProcessToProcessCausalAssociation"], List[Union[dict, "ProcessToProcessCausalAssociation"]]]] = empty_list()
     happens_during: Optional[Union[dict, "HappensDuringAssociation"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -368,8 +371,9 @@ class BiologicalProcess(DomainElement):
         if self.occurs_in is not None and not isinstance(self.occurs_in, OccursInAssociation):
             self.occurs_in = OccursInAssociation(**self.occurs_in)
 
-        if self.influences is not None and not isinstance(self.influences, CausalAssociation):
-            self.influences = CausalAssociation(**self.influences)
+        self._normalize_inlined_as_list(slot_name="has_activity_causal_associations", slot_type=ProcessToActivityCausalAssociation, key_name="object", keyed=False)
+
+        self._normalize_inlined_as_list(slot_name="has_process_causal_associations", slot_type=ProcessToProcessCausalAssociation, key_name="object", keyed=False)
 
         if self.happens_during is not None and not isinstance(self.happens_during, HappensDuringAssociation):
             self.happens_during = HappensDuringAssociation(**self.happens_during)
@@ -378,7 +382,7 @@ class BiologicalProcess(DomainElement):
 
 
 @dataclass
-class AnatomicalEntity(DomainElement):
+class AnatomicalEntity(DomainEntity):
     """
     An instance of a GO cellular anatomical entity, a cell type, or gross anatomical structure
     """
@@ -412,7 +416,7 @@ class AnatomicalEntity(DomainElement):
 
 
 @dataclass
-class ChemicalEntity(DomainElement):
+class ChemicalEntity(DomainEntity):
     """
     An instance of a chemical entity, as defined in CHEBI, including macromolecules defined in NEO
     """
@@ -473,7 +477,7 @@ class InformationBiomacromolecule(ChemicalEntity):
 @dataclass
 class Association(YAMLRoot):
     """
-    An association between a domain element (e.g. a MolecularActivity) and another domain element (e.g. another
+    An association between a domain entity (e.g. a MolecularActivity) and another domain entity (e.g. another
     MolecularActivity) with evidence and provenance attached
     """
     _inherited_slots: ClassVar[List[str]] = []
@@ -483,22 +487,22 @@ class Association(YAMLRoot):
     class_name: ClassVar[str] = "association"
     class_model_uri: ClassVar[URIRef] = GOCAM.Association
 
-    object: Union[str, ElementId] = None
+    object: Union[str, EntityId] = None
     has_evidence: Optional[Union[dict, "Evidence"]] = None
-    subject: Optional[Union[str, DomainElementId]] = None
+    subject: Optional[Union[str, DomainEntityId]] = None
     predicate: Optional[Union[str, PredicateType]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.object):
             self.MissingRequiredField("object")
-        if not isinstance(self.object, ElementId):
-            self.object = ElementId(self.object)
+        if not isinstance(self.object, EntityId):
+            self.object = EntityId(self.object)
 
         if self.has_evidence is not None and not isinstance(self.has_evidence, Evidence):
             self.has_evidence = Evidence(self.has_evidence)
 
-        if self.subject is not None and not isinstance(self.subject, DomainElementId):
-            self.subject = DomainElementId(self.subject)
+        if self.subject is not None and not isinstance(self.subject, DomainEntityId):
+            self.subject = DomainEntityId(self.subject)
 
         if self.predicate is not None and not isinstance(self.predicate, PredicateType):
             self.predicate = PredicateType(self.predicate)
@@ -543,6 +547,7 @@ class CausalAssociation(Association):
     class_model_uri: ClassVar[URIRef] = GOCAM.CausalAssociation
 
     object: Union[str, ActivityOrProcessId] = None
+    subject: Optional[Union[str, DomainEntityId]] = None
     predicate: Optional[Union[str, PredicateType]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -551,8 +556,159 @@ class CausalAssociation(Association):
         if not isinstance(self.object, ActivityOrProcessId):
             self.object = ActivityOrProcessId(self.object)
 
+        if self.subject is not None and not isinstance(self.subject, DomainEntityId):
+            self.subject = DomainEntityId(self.subject)
+
         if self.predicate is not None and not isinstance(self.predicate, PredicateType):
             self.predicate = PredicateType(self.predicate)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class CausalAssociationToActivity(YAMLRoot):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = GOCAM.CausalAssociationToActivity
+    class_class_curie: ClassVar[str] = "gocam:CausalAssociationToActivity"
+    class_name: ClassVar[str] = "causal association to activity"
+    class_model_uri: ClassVar[URIRef] = GOCAM.CausalAssociationToActivity
+
+    object: Union[str, MolecularActivityId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.object):
+            self.MissingRequiredField("object")
+        if not isinstance(self.object, MolecularActivityId):
+            self.object = MolecularActivityId(self.object)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class CausalAssociationToProcess(YAMLRoot):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = GOCAM.CausalAssociationToProcess
+    class_class_curie: ClassVar[str] = "gocam:CausalAssociationToProcess"
+    class_name: ClassVar[str] = "causal association to process"
+    class_model_uri: ClassVar[URIRef] = GOCAM.CausalAssociationToProcess
+
+    object: Union[str, BiologicalProcessId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.object):
+            self.MissingRequiredField("object")
+        if not isinstance(self.object, BiologicalProcessId):
+            self.object = BiologicalProcessId(self.object)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class ActivityToActivityCausalAssociation(CausalAssociation):
+    """
+    A causal association between two molecular activities
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = GOCAM.ActivityToActivityCausalAssociation
+    class_class_curie: ClassVar[str] = "gocam:ActivityToActivityCausalAssociation"
+    class_name: ClassVar[str] = "activity to activity causal association"
+    class_model_uri: ClassVar[URIRef] = GOCAM.ActivityToActivityCausalAssociation
+
+    object: Union[str, MolecularActivityId] = None
+    subject: Optional[Union[str, MolecularActivityId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.object):
+            self.MissingRequiredField("object")
+        if not isinstance(self.object, MolecularActivityId):
+            self.object = MolecularActivityId(self.object)
+
+        if self.subject is not None and not isinstance(self.subject, MolecularActivityId):
+            self.subject = MolecularActivityId(self.subject)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class ProcessToProcessCausalAssociation(CausalAssociation):
+    """
+    A causal association between two biological processes
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = GOCAM.ProcessToProcessCausalAssociation
+    class_class_curie: ClassVar[str] = "gocam:ProcessToProcessCausalAssociation"
+    class_name: ClassVar[str] = "process to process causal association"
+    class_model_uri: ClassVar[URIRef] = GOCAM.ProcessToProcessCausalAssociation
+
+    object: Union[str, BiologicalProcessId] = None
+    subject: Optional[Union[str, BiologicalProcessId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.object):
+            self.MissingRequiredField("object")
+        if not isinstance(self.object, BiologicalProcessId):
+            self.object = BiologicalProcessId(self.object)
+
+        if self.subject is not None and not isinstance(self.subject, BiologicalProcessId):
+            self.subject = BiologicalProcessId(self.subject)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class ProcessToActivityCausalAssociation(CausalAssociation):
+    """
+    A causal association between a biological process and a molecular activity
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = GOCAM.ProcessToActivityCausalAssociation
+    class_class_curie: ClassVar[str] = "gocam:ProcessToActivityCausalAssociation"
+    class_name: ClassVar[str] = "process to activity causal association"
+    class_model_uri: ClassVar[URIRef] = GOCAM.ProcessToActivityCausalAssociation
+
+    object: Union[str, MolecularActivityId] = None
+    subject: Optional[Union[str, BiologicalProcessId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.object):
+            self.MissingRequiredField("object")
+        if not isinstance(self.object, MolecularActivityId):
+            self.object = MolecularActivityId(self.object)
+
+        if self.subject is not None and not isinstance(self.subject, BiologicalProcessId):
+            self.subject = BiologicalProcessId(self.subject)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class ActivityToProcessCausalAssociation(CausalAssociation):
+    """
+    A causal association between a molecular activity and a biological process
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = GOCAM.ActivityToProcessCausalAssociation
+    class_class_curie: ClassVar[str] = "gocam:ActivityToProcessCausalAssociation"
+    class_name: ClassVar[str] = "activity to process causal association"
+    class_model_uri: ClassVar[URIRef] = GOCAM.ActivityToProcessCausalAssociation
+
+    object: Union[str, BiologicalProcessId] = None
+    subject: Optional[Union[str, MolecularActivityId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.object):
+            self.MissingRequiredField("object")
+        if not isinstance(self.object, BiologicalProcessId):
+            self.object = BiologicalProcessId(self.object)
+
+        if self.subject is not None and not isinstance(self.subject, MolecularActivityId):
+            self.subject = MolecularActivityId(self.subject)
 
         super().__post_init__(**kwargs)
 
@@ -569,7 +725,7 @@ class HasPartAssociation(Association):
     class_name: ClassVar[str] = "has part association"
     class_model_uri: ClassVar[URIRef] = GOCAM.HasPartAssociation
 
-    object: Union[str, ElementId] = None
+    object: Union[str, EntityId] = None
 
 @dataclass
 class MacromoleculeHasPartAssociation(HasPartAssociation):
@@ -606,7 +762,7 @@ class PartOfAssociation(Association):
     class_name: ClassVar[str] = "part of association"
     class_model_uri: ClassVar[URIRef] = GOCAM.PartOfAssociation
 
-    object: Union[str, ElementId] = None
+    object: Union[str, EntityId] = None
 
 @dataclass
 class AnatomicalPartOfAssociation(PartOfAssociation):
@@ -643,13 +799,13 @@ class ProcessPartOfAssociation(PartOfAssociation):
     class_name: ClassVar[str] = "process part of association"
     class_model_uri: ClassVar[URIRef] = GOCAM.ProcessPartOfAssociation
 
-    object: Union[str, ActivityOrProcessId] = None
+    object: Union[str, BiologicalProcessId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.object):
             self.MissingRequiredField("object")
-        if not isinstance(self.object, ActivityOrProcessId):
-            self.object = ActivityOrProcessId(self.object)
+        if not isinstance(self.object, BiologicalProcessId):
+            self.object = BiologicalProcessId(self.object)
 
         super().__post_init__(**kwargs)
 
@@ -755,18 +911,18 @@ class OntologyClass(YAMLRoot):
 
 
 @dataclass
-class InformationElement(Element):
+class InformationEntity(Entity):
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = GOCAM.InformationElement
-    class_class_curie: ClassVar[str] = "gocam:InformationElement"
-    class_name: ClassVar[str] = "information element"
-    class_model_uri: ClassVar[URIRef] = GOCAM.InformationElement
+    class_class_uri: ClassVar[URIRef] = GOCAM.InformationEntity
+    class_class_curie: ClassVar[str] = "gocam:InformationEntity"
+    class_name: ClassVar[str] = "information entity"
+    class_model_uri: ClassVar[URIRef] = GOCAM.InformationEntity
 
-    id: Union[str, InformationElementId] = None
+    id: Union[str, InformationEntityId] = None
 
 @dataclass
-class Publication(InformationElement):
+class Publication(InformationEntity):
     """
     A published entity such as a paper in pubmed
     """
@@ -789,7 +945,7 @@ class Publication(InformationElement):
 
 
 @dataclass
-class Evidence(InformationElement):
+class Evidence(InformationEntity):
     """
     An instance of a piece of evidence. Evidence attributes such as type, reference, hang off of here
     """
@@ -805,7 +961,7 @@ class Evidence(InformationElement):
     contributor: Optional[Union[str, List[str]]] = empty_list()
     date: Optional[str] = None
     reference: Optional[Union[Union[str, PublicationId], List[Union[str, PublicationId]]]] = empty_list()
-    with_object: Optional[Union[Union[str, ElementId], List[Union[str, ElementId]]]] = empty_list()
+    with_object: Optional[Union[Union[str, EntityId], List[Union[str, EntityId]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -831,37 +987,37 @@ class Evidence(InformationElement):
 
         if not isinstance(self.with_object, list):
             self.with_object = [self.with_object] if self.with_object is not None else []
-        self.with_object = [v if isinstance(v, ElementId) else ElementId(v) for v in self.with_object]
+        self.with_object = [v if isinstance(v, EntityId) else EntityId(v) for v in self.with_object]
 
         super().__post_init__(**kwargs)
 
 
 @dataclass
-class DomainElementMixin(YAMLRoot):
+class DomainEntityMixin(YAMLRoot):
     """
-    Grouping for mixins that apply to GO-CAM elements. These mixins allow us to group together elements that are alike
+    Grouping for mixins that apply to GO-CAM entities. These mixins allow us to group together entities that are alike
     in some fashion
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = GOCAM.DomainElementMixin
-    class_class_curie: ClassVar[str] = "gocam:DomainElementMixin"
-    class_name: ClassVar[str] = "domain element mixin"
-    class_model_uri: ClassVar[URIRef] = GOCAM.DomainElementMixin
+    class_class_uri: ClassVar[URIRef] = GOCAM.DomainEntityMixin
+    class_class_curie: ClassVar[str] = "gocam:DomainEntityMixin"
+    class_name: ClassVar[str] = "domain entity mixin"
+    class_model_uri: ClassVar[URIRef] = GOCAM.DomainEntityMixin
 
-    id: Union[str, DomainElementMixinId] = None
+    id: Union[str, DomainEntityMixinId] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
-        if not isinstance(self.id, DomainElementMixinId):
-            self.id = DomainElementMixinId(self.id)
+        if not isinstance(self.id, DomainEntityMixinId):
+            self.id = DomainEntityMixinId(self.id)
 
         super().__post_init__(**kwargs)
 
 
 @dataclass
-class ActivityOrProcess(DomainElementMixin):
+class ActivityOrProcess(DomainEntityMixin):
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = GOCAM.ActivityOrProcess
@@ -872,7 +1028,7 @@ class ActivityOrProcess(DomainElementMixin):
     id: Union[str, ActivityOrProcessId] = None
 
 @dataclass
-class ProcessOrPhase(DomainElementMixin):
+class ProcessOrPhase(DomainEntityMixin):
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = GOCAM.ProcessOrPhase
@@ -883,7 +1039,7 @@ class ProcessOrPhase(DomainElementMixin):
     id: Union[str, ProcessOrPhaseId] = None
 
 @dataclass
-class Continuant(DomainElementMixin):
+class Continuant(DomainEntityMixin):
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = GOCAM.Continuant
@@ -982,7 +1138,7 @@ slots.category = Slot(uri=GOCAM.category, name="category", curie=GOCAM.curie('ca
                    model_uri=GOCAM.category, domain=None, range=Union[str, CategoryType])
 
 slots.with_object = Slot(uri=LEGO.evidence, name="with object", curie=LEGO.curie('evidence'),
-                   model_uri=GOCAM.with_object, domain=None, range=Optional[Union[Union[str, ElementId], List[Union[str, ElementId]]]])
+                   model_uri=GOCAM.with_object, domain=None, range=Optional[Union[Union[str, EntityId], List[Union[str, EntityId]]]])
 
 slots.reference = Slot(uri=DCE.source, name="reference", curie=DCE.curie('source'),
                    model_uri=GOCAM.reference, domain=None, range=Optional[Union[Union[str, PublicationId], List[Union[str, PublicationId]]]])
@@ -1009,8 +1165,14 @@ slots.related_to = Slot(uri=GOCAM.related_to, name="related to", curie=GOCAM.cur
 slots.occurs_in = Slot(uri=GOCAM.occurs_in, name="occurs in", curie=GOCAM.curie('occurs_in'),
                    model_uri=GOCAM.occurs_in, domain=None, range=Optional[Union[dict, OccursInAssociation]])
 
-slots.influences = Slot(uri=GOCAM.influences, name="influences", curie=GOCAM.curie('influences'),
-                   model_uri=GOCAM.influences, domain=None, range=Optional[Union[dict, CausalAssociation]])
+slots.has_causal_associations = Slot(uri=GOCAM.has_causal_associations, name="has causal associations", curie=GOCAM.curie('has_causal_associations'),
+                   model_uri=GOCAM.has_causal_associations, domain=None, range=Optional[Union[Union[dict, CausalAssociation], List[Union[dict, CausalAssociation]]]])
+
+slots.has_activity_causal_associations = Slot(uri=GOCAM.has_activity_causal_associations, name="has activity causal associations", curie=GOCAM.curie('has_activity_causal_associations'),
+                   model_uri=GOCAM.has_activity_causal_associations, domain=None, range=Optional[Union[Union[dict, CausalAssociationToActivity], List[Union[dict, CausalAssociationToActivity]]]])
+
+slots.has_process_causal_associations = Slot(uri=GOCAM.has_process_causal_associations, name="has process causal associations", curie=GOCAM.curie('has_process_causal_associations'),
+                   model_uri=GOCAM.has_process_causal_associations, domain=None, range=Optional[Union[Union[dict, CausalAssociationToProcess], List[Union[dict, CausalAssociationToProcess]]]])
 
 slots.happens_during = Slot(uri=GOCAM.happens_during, name="happens during", curie=GOCAM.curie('happens_during'),
                    model_uri=GOCAM.happens_during, domain=None, range=Optional[Union[dict, HappensDuringAssociation]])
@@ -1034,10 +1196,10 @@ slots.association_slot = Slot(uri=GOCAM.association_slot, name="association slot
                    model_uri=GOCAM.association_slot, domain=Association, range=Optional[str])
 
 slots.subject = Slot(uri=RDF.subject, name="subject", curie=RDF.curie('subject'),
-                   model_uri=GOCAM.subject, domain=Association, range=Optional[Union[str, DomainElementId]])
+                   model_uri=GOCAM.subject, domain=Association, range=Optional[Union[str, DomainEntityId]])
 
 slots.object = Slot(uri=RDF.object, name="object", curie=RDF.curie('object'),
-                   model_uri=GOCAM.object, domain=Association, range=Union[str, ElementId])
+                   model_uri=GOCAM.object, domain=Association, range=Union[str, EntityId])
 
 slots.predicate = Slot(uri=RDF.predicate, name="predicate", curie=RDF.curie('predicate'),
                    model_uri=GOCAM.predicate, domain=Association, range=Optional[Union[str, PredicateType]])
@@ -1051,8 +1213,8 @@ slots.title = Slot(uri=DCE.title, name="title", curie=DCE.curie('title'),
 slots.state = Slot(uri=LEGO.modelstate, name="state", curie=LEGO.curie('modelstate'),
                    model_uri=GOCAM.state, domain=None, range=Optional[Union[str, "ModelStateEnum"]])
 
-slots.domain_element_set = Slot(uri=GOCAM.domain_element_set, name="domain element set", curie=GOCAM.curie('domain_element_set'),
-                   model_uri=GOCAM.domain_element_set, domain=None, range=Optional[Union[Dict[Union[str, DomainElementId], Union[dict, DomainElement]], List[Union[dict, DomainElement]]]])
+slots.domain_entity_set = Slot(uri=GOCAM.domain_entity_set, name="domain entity set", curie=GOCAM.curie('domain_entity_set'),
+                   model_uri=GOCAM.domain_entity_set, domain=None, range=Optional[Union[Dict[Union[str, DomainEntityId], Union[dict, DomainEntity]], List[Union[dict, DomainEntity]]]])
 
 slots.molecular_activity_set = Slot(uri=GOCAM.molecular_activity_set, name="molecular activity set", curie=GOCAM.curie('molecular_activity_set'),
                    model_uri=GOCAM.molecular_activity_set, domain=None, range=Optional[Union[Dict[Union[str, MolecularActivityId], Union[dict, MolecularActivity]], List[Union[dict, MolecularActivity]]]])
@@ -1072,6 +1234,18 @@ slots.ontology_class_set = Slot(uri=GOCAM.ontology_class_set, name="ontology cla
 slots.molecular_activity_part_of = Slot(uri=GOCAM.part_of, name="molecular activity_part of", curie=GOCAM.curie('part_of'),
                    model_uri=GOCAM.molecular_activity_part_of, domain=MolecularActivity, range=Optional[Union[dict, "ProcessPartOfAssociation"]])
 
+slots.molecular_activity_has_activity_causal_associations = Slot(uri=GOCAM.has_activity_causal_associations, name="molecular activity_has activity causal associations", curie=GOCAM.curie('has_activity_causal_associations'),
+                   model_uri=GOCAM.molecular_activity_has_activity_causal_associations, domain=MolecularActivity, range=Optional[Union[Union[dict, "ActivityToActivityCausalAssociation"], List[Union[dict, "ActivityToActivityCausalAssociation"]]]])
+
+slots.molecular_activity_has_process_causal_associations = Slot(uri=GOCAM.has_process_causal_associations, name="molecular activity_has process causal associations", curie=GOCAM.curie('has_process_causal_associations'),
+                   model_uri=GOCAM.molecular_activity_has_process_causal_associations, domain=MolecularActivity, range=Optional[Union[Union[dict, "ActivityToProcessCausalAssociation"], List[Union[dict, "ActivityToProcessCausalAssociation"]]]])
+
+slots.biological_process_has_activity_causal_associations = Slot(uri=GOCAM.has_activity_causal_associations, name="biological process_has activity causal associations", curie=GOCAM.curie('has_activity_causal_associations'),
+                   model_uri=GOCAM.biological_process_has_activity_causal_associations, domain=BiologicalProcess, range=Optional[Union[Union[dict, "ProcessToActivityCausalAssociation"], List[Union[dict, "ProcessToActivityCausalAssociation"]]]])
+
+slots.biological_process_has_process_causal_associations = Slot(uri=GOCAM.has_process_causal_associations, name="biological process_has process causal associations", curie=GOCAM.curie('has_process_causal_associations'),
+                   model_uri=GOCAM.biological_process_has_process_causal_associations, domain=BiologicalProcess, range=Optional[Union[Union[dict, "ProcessToProcessCausalAssociation"], List[Union[dict, "ProcessToProcessCausalAssociation"]]]])
+
 slots.anatomical_entity_category = Slot(uri=GOCAM.category, name="anatomical entity_category", curie=GOCAM.curie('category'),
                    model_uri=GOCAM.anatomical_entity_category, domain=AnatomicalEntity, range=Union[str, "AnatomicalEntityCategory"])
 
@@ -1087,11 +1261,44 @@ slots.information_biomacromolecule_has_part = Slot(uri=GOCAM.has_part, name="inf
 slots.occurs_in_association_object = Slot(uri=GOCAM.object, name="occurs in association_object", curie=GOCAM.curie('object'),
                    model_uri=GOCAM.occurs_in_association_object, domain=OccursInAssociation, range=Union[str, AnatomicalEntityId])
 
+slots.causal_association_subject = Slot(uri=GOCAM.subject, name="causal association_subject", curie=GOCAM.curie('subject'),
+                   model_uri=GOCAM.causal_association_subject, domain=CausalAssociation, range=Optional[Union[str, DomainEntityId]])
+
 slots.causal_association_object = Slot(uri=GOCAM.object, name="causal association_object", curie=GOCAM.curie('object'),
                    model_uri=GOCAM.causal_association_object, domain=CausalAssociation, range=Union[str, ActivityOrProcessId])
 
 slots.causal_association_predicate = Slot(uri=GOCAM.predicate, name="causal association_predicate", curie=GOCAM.curie('predicate'),
                    model_uri=GOCAM.causal_association_predicate, domain=CausalAssociation, range=Optional[Union[str, PredicateType]])
+
+slots.causal_association_to_activity_object = Slot(uri=GOCAM.object, name="causal association to activity_object", curie=GOCAM.curie('object'),
+                   model_uri=GOCAM.causal_association_to_activity_object, domain=None, range=Union[str, MolecularActivityId])
+
+slots.causal_association_to_process_object = Slot(uri=GOCAM.object, name="causal association to process_object", curie=GOCAM.curie('object'),
+                   model_uri=GOCAM.causal_association_to_process_object, domain=None, range=Union[str, BiologicalProcessId])
+
+slots.activity_to_activity_causal_association_subject = Slot(uri=GOCAM.subject, name="activity to activity causal association_subject", curie=GOCAM.curie('subject'),
+                   model_uri=GOCAM.activity_to_activity_causal_association_subject, domain=ActivityToActivityCausalAssociation, range=Optional[Union[str, MolecularActivityId]])
+
+slots.activity_to_activity_causal_association_object = Slot(uri=GOCAM.object, name="activity to activity causal association_object", curie=GOCAM.curie('object'),
+                   model_uri=GOCAM.activity_to_activity_causal_association_object, domain=ActivityToActivityCausalAssociation, range=Union[str, MolecularActivityId])
+
+slots.process_to_process_causal_association_subject = Slot(uri=GOCAM.subject, name="process to process causal association_subject", curie=GOCAM.curie('subject'),
+                   model_uri=GOCAM.process_to_process_causal_association_subject, domain=ProcessToProcessCausalAssociation, range=Optional[Union[str, BiologicalProcessId]])
+
+slots.process_to_process_causal_association_object = Slot(uri=GOCAM.object, name="process to process causal association_object", curie=GOCAM.curie('object'),
+                   model_uri=GOCAM.process_to_process_causal_association_object, domain=ProcessToProcessCausalAssociation, range=Union[str, BiologicalProcessId])
+
+slots.process_to_activity_causal_association_subject = Slot(uri=GOCAM.subject, name="process to activity causal association_subject", curie=GOCAM.curie('subject'),
+                   model_uri=GOCAM.process_to_activity_causal_association_subject, domain=ProcessToActivityCausalAssociation, range=Optional[Union[str, BiologicalProcessId]])
+
+slots.process_to_activity_causal_association_object = Slot(uri=GOCAM.object, name="process to activity causal association_object", curie=GOCAM.curie('object'),
+                   model_uri=GOCAM.process_to_activity_causal_association_object, domain=ProcessToActivityCausalAssociation, range=Union[str, MolecularActivityId])
+
+slots.activity_to_process_causal_association_subject = Slot(uri=GOCAM.subject, name="activity to process causal association_subject", curie=GOCAM.curie('subject'),
+                   model_uri=GOCAM.activity_to_process_causal_association_subject, domain=ActivityToProcessCausalAssociation, range=Optional[Union[str, MolecularActivityId]])
+
+slots.activity_to_process_causal_association_object = Slot(uri=GOCAM.object, name="activity to process causal association_object", curie=GOCAM.curie('object'),
+                   model_uri=GOCAM.activity_to_process_causal_association_object, domain=ActivityToProcessCausalAssociation, range=Union[str, BiologicalProcessId])
 
 slots.macromolecule_has_part_association_object = Slot(uri=GOCAM.object, name="macromolecule has part association_object", curie=GOCAM.curie('object'),
                    model_uri=GOCAM.macromolecule_has_part_association_object, domain=MacromoleculeHasPartAssociation, range=Union[str, ContinuantId])
@@ -1100,7 +1307,7 @@ slots.anatomical_part_of_association_object = Slot(uri=GOCAM.object, name="anato
                    model_uri=GOCAM.anatomical_part_of_association_object, domain=AnatomicalPartOfAssociation, range=Union[str, AnatomicalEntityId])
 
 slots.process_part_of_association_object = Slot(uri=GOCAM.object, name="process part of association_object", curie=GOCAM.curie('object'),
-                   model_uri=GOCAM.process_part_of_association_object, domain=ProcessPartOfAssociation, range=Union[str, ActivityOrProcessId])
+                   model_uri=GOCAM.process_part_of_association_object, domain=ProcessPartOfAssociation, range=Union[str, BiologicalProcessId])
 
 slots.enabled_by_association_object = Slot(uri=GOCAM.object, name="enabled by association_object", curie=GOCAM.curie('object'),
                    model_uri=GOCAM.enabled_by_association_object, domain=EnabledByAssociation, range=Union[str, InformationBiomacromoleculeId])

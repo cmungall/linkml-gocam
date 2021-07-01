@@ -2,6 +2,60 @@
    "$id": "https://w3id.org/gocam",
    "$schema": "http://json-schema.org/draft-07/schema#",
    "definitions": {
+      "ActivityToActivityCausalAssociation": {
+         "additionalProperties": false,
+         "description": "A causal association between two molecular activities",
+         "properties": {
+            "has_evidence": {
+               "$ref": "#/definitions/Evidence",
+               "description": "Links an association to evidence for it"
+            },
+            "object": {
+               "description": "The downstream molecular activity",
+               "type": "string"
+            },
+            "predicate": {
+               "description": "The causal relationship type which holds between the two activities/processes. This must be drawn from the causal relation hierarchy in RO",
+               "type": "string"
+            },
+            "subject": {
+               "description": "The upstream molecular activity",
+               "type": "string"
+            }
+         },
+         "required": [
+            "object"
+         ],
+         "title": "ActivityToActivityCausalAssociation",
+         "type": "object"
+      },
+      "ActivityToProcessCausalAssociation": {
+         "additionalProperties": false,
+         "description": "A causal association between a molecular activity and a biological process",
+         "properties": {
+            "has_evidence": {
+               "$ref": "#/definitions/Evidence",
+               "description": "Links an association to evidence for it"
+            },
+            "object": {
+               "description": "The upstream biological process",
+               "type": "string"
+            },
+            "predicate": {
+               "description": "The causal relationship type which holds between the two activities/processes. This must be drawn from the causal relation hierarchy in RO",
+               "type": "string"
+            },
+            "subject": {
+               "description": "The downstream molecular activity",
+               "type": "string"
+            }
+         },
+         "required": [
+            "object"
+         ],
+         "title": "ActivityToProcessCausalAssociation",
+         "type": "object"
+      },
       "AnatomicalEntity": {
          "additionalProperties": false,
          "description": "An instance of a GO cellular anatomical entity, a cell type, or gross anatomical structure",
@@ -10,18 +64,18 @@
                "type": "string"
             },
             "id": {
-               "description": "A unique identifier for an element",
+               "description": "A unique identifier for an entity",
                "type": "string"
             },
             "part_of": {
                "$ref": "#/definitions/AnatomicalPartOfAssociation"
             },
             "type": {
-               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "description": "links a GOCAM entity (an OWL individual) to the specific class it instantiates",
                "type": "string"
             },
             "type_inferences": {
-               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "description": "links a GOCAM entity (an OWL individual) to the specific class it instantiates",
                "items": {
                   "type": "string"
                },
@@ -70,24 +124,28 @@
                "$ref": "#/definitions/HappensDuringAssociation",
                "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of a HappensDuringAssociation "
             },
-            "id": {
-               "description": "A unique identifier for an element",
-               "type": "string"
+            "has_activity_causal_associations": {
+               "$ref": "#/definitions/CausalAssociationToActivity",
+               "description": "Links a subject domain entity (a MA or BP) to a molecular activity by way of an CausalAssociation"
             },
-            "influences": {
-               "$ref": "#/definitions/CausalAssociation",
-               "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of an CausalAssociation"
+            "has_process_causal_associations": {
+               "$ref": "#/definitions/CausalAssociationToProcess",
+               "description": "Links a subject domain entity (a MA or BP) to a biological process by way of an CausalAssociation"
+            },
+            "id": {
+               "description": "A unique identifier for an entity",
+               "type": "string"
             },
             "occurs_in": {
                "$ref": "#/definitions/OccursInAssociation",
                "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of an OccursInAssociation"
             },
             "type": {
-               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "description": "links a GOCAM entity (an OWL individual) to the specific class it instantiates",
                "type": "string"
             },
             "type_inferences": {
-               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "description": "links a GOCAM entity (an OWL individual) to the specific class it instantiates",
                "items": {
                   "type": "string"
                },
@@ -101,46 +159,20 @@
          "title": "BiologicalProcess",
          "type": "object"
       },
-      "CausalAssociation": {
-         "additionalProperties": false,
-         "description": "An association owned by an upstream MA or BP that connects to a downstream MA or BP. The nature of the causal relationship is indicated with the predicate.",
-         "properties": {
-            "has_evidence": {
-               "$ref": "#/definitions/Evidence",
-               "description": "Links an association to evidence for it"
-            },
-            "object": {
-               "type": "string"
-            },
-            "predicate": {
-               "description": "This must be drawn from the causal relation hierarchy in RO",
-               "type": "string"
-            },
-            "subject": {
-               "description": "connects an association to the subject of the association. For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.",
-               "type": "string"
-            }
-         },
-         "required": [
-            "object"
-         ],
-         "title": "CausalAssociation",
-         "type": "object"
-      },
       "ChemicalEntity": {
          "additionalProperties": false,
          "description": "An instance of a chemical entity, as defined in CHEBI, including macromolecules defined in NEO",
          "properties": {
             "id": {
-               "description": "A unique identifier for an element",
+               "description": "A unique identifier for an entity",
                "type": "string"
             },
             "type": {
-               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "description": "links a GOCAM entity (an OWL individual) to the specific class it instantiates",
                "type": "string"
             },
             "type_inferences": {
-               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "description": "links a GOCAM entity (an OWL individual) to the specific class it instantiates",
                "items": {
                   "type": "string"
                },
@@ -152,48 +184,6 @@
             "type"
          ],
          "title": "ChemicalEntity",
-         "type": "object"
-      },
-      "DomainElement": {
-         "additionalProperties": false,
-         "description": "An element that is part of a GO-CAM model",
-         "properties": {
-            "id": {
-               "description": "A unique identifier for an element",
-               "type": "string"
-            },
-            "type": {
-               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
-               "type": "string"
-            },
-            "type_inferences": {
-               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
-               "items": {
-                  "type": "string"
-               },
-               "type": "array"
-            }
-         },
-         "required": [
-            "id",
-            "type"
-         ],
-         "title": "DomainElement",
-         "type": "object"
-      },
-      "Element": {
-         "additionalProperties": false,
-         "description": "Base class for any biological entity or activity or process in a GO-CAM model",
-         "properties": {
-            "id": {
-               "description": "A unique identifier for an element",
-               "type": "string"
-            }
-         },
-         "required": [
-            "id"
-         ],
-         "title": "Element",
          "type": "object"
       },
       "EnabledByAssociation": {
@@ -239,10 +229,11 @@
             },
             "evidence_type": {
                "description": "Connectes a piece of evidence to the evidence type from ECO",
+               "pattern": "^ECO:\\d+$",
                "type": "string"
             },
             "id": {
-               "description": "A unique identifier for an element",
+               "description": "A unique identifier for an entity",
                "type": "string"
             },
             "reference": {
@@ -330,15 +321,15 @@
                "$ref": "#/definitions/MacromoleculeHasPartAssociation"
             },
             "id": {
-               "description": "A unique identifier for an element",
+               "description": "A unique identifier for an entity",
                "type": "string"
             },
             "type": {
-               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "description": "links a GOCAM entity (an OWL individual) to the specific class it instantiates",
                "type": "string"
             },
             "type_inferences": {
-               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "description": "links a GOCAM entity (an OWL individual) to the specific class it instantiates",
                "items": {
                   "type": "string"
                },
@@ -381,7 +372,7 @@
       },
       "Model": {
          "additionalProperties": false,
-         "description": "A collection of GO-CAM elements and associated metadata. A model combines multiple simple GO annotations into an integrated, semantically precise and computable model of biological function.",
+         "description": "A collection of GO-CAM entities and associated metadata. A model combines multiple simple GO annotations into an integrated, semantically precise and computable model of biological function.",
          "properties": {
             "biological_process_set": {
                "description": "All biological process instances that are part of this model",
@@ -409,7 +400,7 @@
                "type": "string"
             },
             "id": {
-               "description": "A unique identifier for an element",
+               "description": "A unique identifier for an entity",
                "type": "string"
             },
             "information_biomacromolecule_set": {
@@ -463,17 +454,21 @@
                "$ref": "#/definitions/HappensDuringAssociation",
                "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of a HappensDuringAssociation "
             },
+            "has_activity_causal_associations": {
+               "$ref": "#/definitions/CausalAssociationToActivity",
+               "description": "Links a subject domain entity (a MA or BP) to a molecular activity by way of an CausalAssociation"
+            },
             "has_input": {
                "$ref": "#/definitions/HasInputAssociation",
                "description": "Links a MA or BP to its input by way of a HasInputAssociation"
             },
-            "id": {
-               "description": "A unique identifier for an element",
-               "type": "string"
+            "has_process_causal_associations": {
+               "$ref": "#/definitions/CausalAssociationToProcess",
+               "description": "Links a subject domain entity (a MA or BP) to a biological process by way of an CausalAssociation"
             },
-            "influences": {
-               "$ref": "#/definitions/CausalAssociation",
-               "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of an CausalAssociation"
+            "id": {
+               "description": "A unique identifier for an entity",
+               "type": "string"
             },
             "occurs_in": {
                "$ref": "#/definitions/OccursInAssociation",
@@ -483,11 +478,11 @@
                "$ref": "#/definitions/ProcessPartOfAssociation"
             },
             "type": {
-               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "description": "links a GOCAM entity (an OWL individual) to the specific class it instantiates",
                "type": "string"
             },
             "type_inferences": {
-               "description": "links a GOCAM element (an OWL individual) to the specific class it instantiates",
+               "description": "links a GOCAM entity (an OWL individual) to the specific class it instantiates",
                "items": {
                   "type": "string"
                },
@@ -536,7 +531,7 @@
                "type": "string"
             },
             "id": {
-               "description": "A unique identifier for an element",
+               "description": "A unique identifier for an entity",
                "type": "string"
             },
             "name": {
@@ -577,12 +572,66 @@
          "title": "ProcessPartOfAssociation",
          "type": "object"
       },
+      "ProcessToActivityCausalAssociation": {
+         "additionalProperties": false,
+         "description": "A causal association between a biological process and a molecular activity",
+         "properties": {
+            "has_evidence": {
+               "$ref": "#/definitions/Evidence",
+               "description": "Links an association to evidence for it"
+            },
+            "object": {
+               "description": "The downstream molecular activity",
+               "type": "string"
+            },
+            "predicate": {
+               "description": "The causal relationship type which holds between the two activities/processes. This must be drawn from the causal relation hierarchy in RO",
+               "type": "string"
+            },
+            "subject": {
+               "description": "The upstream biological process",
+               "type": "string"
+            }
+         },
+         "required": [
+            "object"
+         ],
+         "title": "ProcessToActivityCausalAssociation",
+         "type": "object"
+      },
+      "ProcessToProcessCausalAssociation": {
+         "additionalProperties": false,
+         "description": "A causal association between two biological processes",
+         "properties": {
+            "has_evidence": {
+               "$ref": "#/definitions/Evidence",
+               "description": "Links an association to evidence for it"
+            },
+            "object": {
+               "description": "The downstream biological process",
+               "type": "string"
+            },
+            "predicate": {
+               "description": "The causal relationship type which holds between the two activities/processes. This must be drawn from the causal relation hierarchy in RO",
+               "type": "string"
+            },
+            "subject": {
+               "description": "The upstream biological process",
+               "type": "string"
+            }
+         },
+         "required": [
+            "object"
+         ],
+         "title": "ProcessToProcessCausalAssociation",
+         "type": "object"
+      },
       "Publication": {
          "additionalProperties": false,
          "description": "A published entity such as a paper in pubmed",
          "properties": {
             "id": {
-               "description": "A unique identifier for an element",
+               "description": "A unique identifier for an entity",
                "type": "string"
             }
          },

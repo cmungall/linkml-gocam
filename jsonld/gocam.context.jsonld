@@ -1,5 +1,5 @@
 {
-   "_comments": "Auto generated from gocam.yaml by jsonldcontextgen.py version: 0.1.1\n    Generation date: 2021-06-25 16:20\n    Schema: gocam\n    \n    id: https://w3id.org/gocam\n    description: GO CAM LinkML schema (experimental)\n\nThe central class in this datamodel is a [Model](Model.md). A model consists of a set of\n[MolecularActivity](MolecularActivity.md) objects, from which hangs various elements connected by different kinds of [Association](Association.md)\n\nSee:\n  * [https://github.com/cmungall/linkml-gocam](https://github.com/cmungall/linkml-gocam)\n  * [https://cmungall.github.io/linkml-gocam/](https://cmungall.github.io/linkml-gocam/)\n    license: https://creativecommons.org/publicdomain/zero/1.0/\n    ",
+   "_comments": "Auto generated from gocam.yaml by jsonldcontextgen.py version: 0.1.1\n    Generation date: 2021-07-01 15:10\n    Schema: gocam\n    \n    id: https://w3id.org/gocam\n    description: GO CAM LinkML schema (experimental)\n\nThe central class in this datamodel is a [Model](Model.md). A model consists of a set of\n[MolecularActivity](MolecularActivity.md) objects, from which hangs various elements connected by different kinds of [Association](Association.md)\n\nSee:\n  * [https://github.com/cmungall/linkml-gocam](https://github.com/cmungall/linkml-gocam)\n  * [https://cmungall.github.io/linkml-gocam/](https://cmungall.github.io/linkml-gocam/)\n    license: https://creativecommons.org/publicdomain/zero/1.0/\n    ",
    "@context": {
       "BFO": {
          "@id": "http://purl.obolibrary.org/obo/BFO_",
@@ -48,7 +48,7 @@
       "date": {
          "@id": "dce:date"
       },
-      "domain_element_set": {
+      "domain_entity_set": {
          "@type": "@id"
       },
       "enabled_by": {
@@ -60,6 +60,12 @@
       "happens_during": {
          "@type": "@id"
       },
+      "has_activity_causal_associations": {
+         "@type": "@id"
+      },
+      "has_causal_associations": {
+         "@type": "@id"
+      },
       "has_evidence": {
          "@type": "@id"
       },
@@ -69,10 +75,10 @@
       "has_part": {
          "@type": "@id"
       },
-      "id": "@id",
-      "influences": {
+      "has_process_causal_associations": {
          "@type": "@id"
       },
+      "id": "@id",
       "information_biomacromolecule_set": {
          "@type": "@id"
       },

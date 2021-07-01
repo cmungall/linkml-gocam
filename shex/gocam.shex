@@ -51,16 +51,40 @@ linkml:Objectidentifier IRI
 linkml:Nodeidentifier NONLITERAL
 
 <ActivityOrProcess> {
-    (  $<ActivityOrProcess_tes> (  &<DomainElementMixin_tes> ;
-          rdf:type [ <DomainElementMixin> ] ?
+    (  $<ActivityOrProcess_tes> (  &<DomainEntityMixin_tes> ;
+          rdf:type [ <DomainEntityMixin> ] ?
        ) ;
        rdf:type [ <ActivityOrProcess> ]
     )
 }
 
+<ActivityToActivityCausalAssociation> CLOSED {
+    (  $<ActivityToActivityCausalAssociation_tes> (  &<CausalAssociation_tes> ;
+          rdf:type [ <CausalAssociation> ] ? ;
+          &<CausalAssociationToActivity_tes> ;
+          rdf:type [ <CausalAssociationToActivity> ] ? ;
+          <subject> @<MolecularActivity> ? ;
+          <object> @<MolecularActivity>
+       ) ;
+       rdf:type [ <ActivityToActivityCausalAssociation> ] ?
+    )
+}
+
+<ActivityToProcessCausalAssociation> CLOSED {
+    (  $<ActivityToProcessCausalAssociation_tes> (  &<CausalAssociation_tes> ;
+          rdf:type [ <CausalAssociation> ] ? ;
+          &<CausalAssociationToProcess_tes> ;
+          rdf:type [ <CausalAssociationToProcess> ] ? ;
+          <subject> @<MolecularActivity> ? ;
+          <object> @<BiologicalProcess>
+       ) ;
+       rdf:type [ <ActivityToProcessCausalAssociation> ] ?
+    )
+}
+
 <AnatomicalEntity> CLOSED {
-    (  $<AnatomicalEntity_tes> (  &<DomainElement_tes> ;
-          rdf:type [ <DomainElement> ] ? ;
+    (  $<AnatomicalEntity_tes> (  &<DomainEntity_tes> ;
+          rdf:type [ <DomainEntity> ] ? ;
           &<Continuant_tes> ;
           rdf:type [ <Continuant> ] ? ;
           <part_of> @<AnatomicalPartOfAssociation> ? ;
@@ -86,32 +110,39 @@ linkml:Nodeidentifier NONLITERAL
 
 <Association_struct> {
     (  $<Association_tes> (  <has_evidence> @<Evidence> ? ;
-          rdf:subject @<DomainElement> ? ;
+          rdf:subject @<DomainEntity> ? ;
           rdf:predicate @<PredicateType> ? ;
-          rdf:object @<Element>
+          rdf:object @<Entity>
        ) ;
        rdf:type [ rdf:Statement ] ?
     )
 }
 
 <BiologicalProcess> CLOSED {
-    (  $<BiologicalProcess_tes> (  &<DomainElement_tes> ;
-          rdf:type [ <DomainElement> ] ? ;
+    (  $<BiologicalProcess_tes> (  &<DomainEntity_tes> ;
+          rdf:type [ <DomainEntity> ] ? ;
           &<ActivityOrProcess_tes> ;
           rdf:type [ <ActivityOrProcess> ] ? ;
           &<ProcessOrPhase_tes> ;
           rdf:type [ <ProcessOrPhase> ] ? ;
           <occurs_in> @<OccursInAssociation> ? ;
-          <influences> @<CausalAssociation> ? ;
+          <has_activity_causal_associations> @<CausalAssociationToActivity> ? ;
+          <has_process_causal_associations> @<CausalAssociationToProcess> ? ;
           <happens_during> @<HappensDuringAssociation> ?
        ) ;
        rdf:type [ <BiologicalProcess> ]
     )
 }
 
-<CausalAssociation> CLOSED {
+<CausalAssociation>  (
+    @<ActivityToActivityCausalAssociation> OR @<ActivityToProcessCausalAssociation> OR @<ProcessToActivityCausalAssociation> OR
+    @<ProcessToProcessCausalAssociation>
+)
+
+<CausalAssociation_struct> {
     (  $<CausalAssociation_tes> (  &<Association_tes> ;
           rdf:type [ rdf:Statement ] ? ;
+          <subject> @<DomainEntity> ? ;
           <object> @<ActivityOrProcess> ;
           <predicate> @<PredicateType> ?
        ) ;
@@ -119,10 +150,22 @@ linkml:Nodeidentifier NONLITERAL
     )
 }
 
+<CausalAssociationToActivity> {
+    (  $<CausalAssociationToActivity_tes> <object> @<MolecularActivity> ;
+       rdf:type [ <CausalAssociationToActivity> ] ?
+    )
+}
+
+<CausalAssociationToProcess> {
+    (  $<CausalAssociationToProcess_tes> <object> @<BiologicalProcess> ;
+       rdf:type [ <CausalAssociationToProcess> ] ?
+    )
+}
+
 <ChemicalEntity>  (
     CLOSED {
-       (  $<ChemicalEntity_tes> (  &<DomainElement_tes> ;
-             rdf:type [ <DomainElement> ] ?
+       (  $<ChemicalEntity_tes> (  &<DomainEntity_tes> ;
+             rdf:type [ <DomainEntity> ] ?
           ) ;
           rdf:type [ <ChemicalEntity> ]
        )
@@ -130,42 +173,36 @@ linkml:Nodeidentifier NONLITERAL
 )
 
 <Continuant> {
-    (  $<Continuant_tes> (  &<DomainElementMixin_tes> ;
-          rdf:type [ <DomainElementMixin> ] ?
+    (  $<Continuant_tes> (  &<DomainEntityMixin_tes> ;
+          rdf:type [ <DomainEntityMixin> ] ?
        ) ;
        rdf:type [ <Continuant> ]
     )
 }
 
-<DomainElement>  (
-    CLOSED {
-       (  $<DomainElement_tes> (  &<Element_tes> ;
-             rdf:type [ <Element> ] ? ;
-             rdf:type @<OntologyClass> ;
-             <type_inferences> @<OntologyClass> *
-          ) ;
-          rdf:type [ <DomainElement> ]
-       )
-    } OR @<AnatomicalEntity> OR @<BiologicalProcess> OR @<ChemicalEntity> OR @<MolecularActivity>
+<DomainEntity>  (
+    @<AnatomicalEntity> OR @<BiologicalProcess> OR @<ChemicalEntity> OR @<MolecularActivity>
 )
 
-<DomainElementMixin>  (
-    @<ActivityOrProcess> OR @<Continuant> OR @<ProcessOrPhase>
-)
-
-<DomainElementMixin_struct> {
-    (  $<DomainElementMixin_tes> rdf:type . * ;
-       rdf:type [ <DomainElementMixin> ]
+<DomainEntity_struct> {
+    (  $<DomainEntity_tes> (  &<Entity_tes> ;
+          rdf:type [ <Entity> ] ? ;
+          rdf:type @<OntologyClass> ;
+          <type_inferences> @<OntologyClass> *
+       ) ;
+       rdf:type [ <DomainEntity> ]
     )
 }
 
-<Element>  (
-    CLOSED {
-       (  $<Element_tes> rdf:type . * ;
-          rdf:type [ <Element> ]
-       )
-    } OR @<DomainElement> OR @<InformationElement> OR @<Model>
+<DomainEntityMixin>  (
+    @<ActivityOrProcess> OR @<Continuant> OR @<ProcessOrPhase>
 )
+
+<DomainEntityMixin_struct> {
+    (  $<DomainEntityMixin_tes> rdf:type . * ;
+       rdf:type [ <DomainEntityMixin> ]
+    )
+}
 
 <EnabledByAssociation> CLOSED {
     (  $<EnabledByAssociation_tes> (  &<Association_tes> ;
@@ -176,14 +213,24 @@ linkml:Nodeidentifier NONLITERAL
     )
 }
 
+<Entity>  (
+    @<DomainEntity> OR @<InformationEntity> OR @<Model>
+)
+
+<Entity_struct> {
+    (  $<Entity_tes> rdf:type . * ;
+       rdf:type [ <Entity> ]
+    )
+}
+
 <Evidence> CLOSED {
-    (  $<Evidence_tes> (  &<InformationElement_tes> ;
-          rdf:type [ <InformationElement> ] ? ;
+    (  $<Evidence_tes> (  &<InformationEntity_tes> ;
+          rdf:type [ <InformationEntity> ] ? ;
           dce:contributor @linkml:String * ;
           dce:date @linkml:String ? ;
           <evidence_type> @<OntologyClass> ;
           dce:source @<Publication> * ;
-          lego:evidence @<Element> *
+          lego:evidence @<Entity> *
        ) ;
        rdf:type [ <Evidence> ]
     )
@@ -229,15 +276,15 @@ linkml:Nodeidentifier NONLITERAL
     )
 }
 
-<InformationElement>  (
+<InformationEntity>  (
     @<Evidence> OR @<Publication>
 )
 
-<InformationElement_struct> {
-    (  $<InformationElement_tes> (  &<Element_tes> ;
-          rdf:type [ <Element> ] ?
+<InformationEntity_struct> {
+    (  $<InformationEntity_tes> (  &<Entity_tes> ;
+          rdf:type [ <Entity> ] ?
        ) ;
-       rdf:type [ <InformationElement> ]
+       rdf:type [ <InformationEntity> ]
     )
 }
 
@@ -251,8 +298,8 @@ linkml:Nodeidentifier NONLITERAL
 }
 
 <Model> CLOSED {
-    (  $<Model_tes> (  &<Element_tes> ;
-          rdf:type [ <Element> ] ? ;
+    (  $<Model_tes> (  &<Entity_tes> ;
+          rdf:type [ <Entity> ] ? ;
           dce:title @linkml:String ? ;
           dce:contributor @linkml:String * ;
           dce:date @linkml:String ? ;
@@ -269,11 +316,12 @@ linkml:Nodeidentifier NONLITERAL
 }
 
 <MolecularActivity> CLOSED {
-    (  $<MolecularActivity_tes> (  &<DomainElement_tes> ;
-          rdf:type [ <DomainElement> ] ? ;
+    (  $<MolecularActivity_tes> (  &<DomainEntity_tes> ;
+          rdf:type [ <DomainEntity> ] ? ;
           &<ActivityOrProcess_tes> ;
           rdf:type [ <ActivityOrProcess> ] ? ;
-          <influences> @<CausalAssociation> ? ;
+          <has_activity_causal_associations> @<CausalAssociationToActivity> ? ;
+          <has_process_causal_associations> @<CausalAssociationToProcess> ? ;
           <happens_during> @<HappensDuringAssociation> ? ;
           <part_of> @<ProcessPartOfAssociation> ? ;
           <enabled_by> @<EnabledByAssociation> ? ;
@@ -314,8 +362,8 @@ linkml:Nodeidentifier NONLITERAL
 }
 
 <ProcessOrPhase> {
-    (  $<ProcessOrPhase_tes> (  &<DomainElementMixin_tes> ;
-          rdf:type [ <DomainElementMixin> ] ?
+    (  $<ProcessOrPhase_tes> (  &<DomainEntityMixin_tes> ;
+          rdf:type [ <DomainEntityMixin> ] ?
        ) ;
        rdf:type [ <ProcessOrPhase> ]
     )
@@ -330,9 +378,33 @@ linkml:Nodeidentifier NONLITERAL
     )
 }
 
+<ProcessToActivityCausalAssociation> CLOSED {
+    (  $<ProcessToActivityCausalAssociation_tes> (  &<CausalAssociation_tes> ;
+          rdf:type [ <CausalAssociation> ] ? ;
+          &<CausalAssociationToActivity_tes> ;
+          rdf:type [ <CausalAssociationToActivity> ] ? ;
+          <subject> @<BiologicalProcess> ? ;
+          <object> @<MolecularActivity>
+       ) ;
+       rdf:type [ <ProcessToActivityCausalAssociation> ] ?
+    )
+}
+
+<ProcessToProcessCausalAssociation> CLOSED {
+    (  $<ProcessToProcessCausalAssociation_tes> (  &<CausalAssociation_tes> ;
+          rdf:type [ <CausalAssociation> ] ? ;
+          &<CausalAssociationToProcess_tes> ;
+          rdf:type [ <CausalAssociationToProcess> ] ? ;
+          <subject> @<BiologicalProcess> ? ;
+          <object> @<BiologicalProcess>
+       ) ;
+       rdf:type [ <ProcessToProcessCausalAssociation> ] ?
+    )
+}
+
 <Publication> CLOSED {
-    (  $<Publication_tes> (  &<InformationElement_tes> ;
-          rdf:type [ <InformationElement> ] ?
+    (  $<Publication_tes> (  &<InformationEntity_tes> ;
+          rdf:type [ <InformationEntity> ] ?
        ) ;
        rdf:type [ <Publication> ]
     )

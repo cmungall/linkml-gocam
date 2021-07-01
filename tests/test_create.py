@@ -26,6 +26,7 @@ FZD1 = 'UniProtKB:Q9UP38'
 
 ttl_out = os.path.join(TARGET_DIR, 'sample.ttl')
 jsonld_out = os.path.join(TARGET_DIR, 'sample.jsonld')
+json_out = os.path.join(TARGET_DIR, 'sample.json')
 ttl_roundtrip_out = os.path.join(TARGET_DIR, 'sample-roundtrip.ttl')
 ttl_out = os.path.join(TARGET_DIR, 'sample.ttl')
 cntxt_file =  os.path.join(JSONLD_DIR, 'gocam.context.jsonld')
@@ -52,6 +53,7 @@ class TestCreate(unittest.TestCase):
     def test_create(self):
         f = open(cntxt_file)
         cntxt = json.load(f)
+        # TODO: centralize this
         add_prefixes(cntxt, 'UniProtKB', 'http://purl.identifiers.org/uniprot/')
         add_prefixes(cntxt, 'PMID', 'http://identifiers.org/pmid/')
         add_prefixes(cntxt, 'orcid', 'http://identifiers.org/orcid/')
@@ -80,6 +82,10 @@ class TestCreate(unittest.TestCase):
                                part_of=ProcessPartOfAssociation(
                                    has_evidence=gen_evidence('ECO:nnn'),
                                    object=p1.id))
+        a1_to_a2_assoc = \
+            ActivityToActivityCausalAssociation(has_evidence=gen_evidence('ECO:nnn'),
+                                                predicate='regulates',
+                                                object=id('a2'))
         a1 = MolecularActivity(id=id('a1'), type=RECEPTOR_LIGAND,
                                enabled_by=EnabledByAssociation(
                                    has_evidence=gen_evidence('ECO:nnn'),
@@ -87,16 +93,16 @@ class TestCreate(unittest.TestCase):
                                occurs_in=OccursInAssociation(
                                    has_evidence=gen_evidence('ECO:nnn'),
                                    object=c1.id),
-                               influences=CausalAssociation(has_evidence=gen_evidence('ECO:nnn'),
-                                                        predicate='regulates',
-                                                        object=id('a2')),
+                               #has_activity_causal_associations=[a1_to_a2_assoc],
                                part_of=ProcessPartOfAssociation(
                                    has_evidence=gen_evidence('ECO:nnn'),
                                    object=p1.id))
+        a1.has_activity_causal_associations = [a1_to_a2_assoc]
 
         m.molecular_activity_set = [a1, a2]
         m.information_biomacromolecule_set = [g1, g2]
         json_dumper.dump(element=m, to_file=jsonld_out, contexts=cntxt)
+        json_dumper.dump(element=m, to_file=json_out)
         #rdf_dumper.dump(element=m, to_file=ttl_out, contexts=cntxt)
         g = Graph()
 

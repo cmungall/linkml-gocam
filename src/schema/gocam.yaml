@@ -36,7 +36,6 @@ see_also:
   - https://docs.google.com/presentation/d/1ja0Vkw0AoENJ58emM77dGnqPtY1nfIJMeyVnObBxIxI/edit#slide=id.p8
 
 subsets:
-
   faithful to original specification:
     description: >-
       Subset that deviates from the data model in the original paper [https://pubmed.ncbi.nlm.nih.gov/31548717/]
@@ -54,15 +53,14 @@ subsets:
       Subset that is not explicitly mentioned in the original paper [https://pubmed.ncbi.nlm.nih.gov/31548717/] but is not necessarily a departure
     see_also:
       - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7012280/bin/nihms-1067180-f0002.jpg
-  
 
 slots:
   id:
     identifier: true
     description: >-
-      A unique identifier for an element
+      A unique identifier for an entity
     comments:
-      - for individuals / gocam elements, these will typically be CURIEs of the form model:xxxx
+      - for individuals / gocam entities, these will typically be CURIEs of the form model:xxxx
       - for ontology classes, these will be standard OBO CURIEs
     
   name:
@@ -70,7 +68,7 @@ slots:
     description: >-
       A human-readable name for an attribute or entity.
     notes:
-      GO-CAM elements typically do not have names. However, some imported from sources such as Reactome may include names
+      GO-CAM entities typically do not have names. However, some imported from sources such as Reactome may include names
     todos:
       - document uniqueness conditions
     range: label type
@@ -82,7 +80,7 @@ slots:
 
   type:
     description: >-
-      links a GOCAM element (an OWL individual) to the specific class it instantiates
+      links a GOCAM entity (an OWL individual) to the specific class it instantiates
     range: ontology class
     slot_uri: rdf:type
     exact_mappings:
@@ -98,7 +96,7 @@ slots:
       - biolink:category
 
   with object:
-    range: element
+    range: entity
     description: >-
       An object that supports a piece of evidence
     slot_uri: lego:evidence
@@ -135,7 +133,7 @@ slots:
     
   type inferences:
     description: >-
-      links a GOCAM element (an OWL individual) to the specific class it instantiates
+      links a GOCAM entity (an OWL individual) to the specific class it instantiates
     range: ontology class
     multivalued: true
 
@@ -150,18 +148,35 @@ slots:
     is_a: related to
     range: occurs in association
     domain: activity or process
+    inlined: true
     description: >-
       Links a subject domain entity (a MA or BP) to an object domain entity by way of an OccursInAssociation
     
-  influences:
+  has causal associations:
     is_a: related to
     range: causal association
+    inlined: true
+    inlined_as_list: true
     domain: activity or process
+    multivalued: true
     description: >-
       Links a subject domain entity (a MA or BP) to an object domain entity by way of an CausalAssociation
     comments:
       - the specific type of causation is indicated on the CausalAssocation predicate slot
 
+  has activity causal associations:
+    is_a: has causal associations
+    range: causal association to activity
+    description: >-
+      Links a subject domain entity (a MA or BP) to a molecular activity by way of an CausalAssociation
+      
+  has process causal associations:
+    is_a: has causal associations
+    range: causal association to process
+    description: >-
+      Links a subject domain entity (a MA or BP) to a biological process by way of an CausalAssociation
+      
+      
   happens during:
     is_a: related to
     range: happens during association
@@ -175,7 +190,7 @@ slots:
     description: >-
       Links a subject domain entity to an object domain entity by way of a PartOfAssociation
     comments:
-      - part of can be used with domain elements of any time, but must connect like with like
+      - part of can be used with domain entities of any time, but must connect like with like
 
   has part:
     is_a: related to
@@ -218,7 +233,7 @@ slots:
     description: >-
       connects an association to the subject of the association.
       For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.
-    range: domain element
+    range: domain entity
     slot_uri: rdf:subject
     exact_mappings:
       - owl:annotatedSource
@@ -230,7 +245,7 @@ slots:
       connects an association to the object of the association.
       For example, in a gene-to-phenotype association, the gene is subject and phenotype is object.
     required: true
-    range: element
+    range: entity
     local_names:
       ga4gh: descriptor
       neo4j: node with incoming relationship
@@ -271,37 +286,37 @@ slots:
     slot_uri: lego:modelstate
 
     
-  domain element set:
+  domain entity set:
     abstract: true
     description: >-
-      Grouping field for all domain elements 'owned' by a model
-    range: domain element
+      Grouping field for all domain entities 'owned' by a model
+    range: domain entity
     multivalued: true
     inlined: true
     
   molecular activity set:
-    is_a: domain element set
+    is_a: domain entity set
     description: >-
       All molecular activity instances that are part of this model
     range: molecular activity
     multivalued: true
     inlined: true
   biological process set:
-    is_a: domain element set
+    is_a: domain entity set
     description: >-
       All biological process instances that are part of this model
     range: biological process
     multivalued: true
     inlined: true
   information biomacromolecule set:
-    is_a: domain element set
+    is_a: domain entity set
     description: >-
       All information macromolecule instances that are part of this model
     range: information biomacromolecule
     multivalued: true
     inlined: true
   chemical entity set:
-    is_a: domain element set
+    is_a: domain entity set
     description: >-
       All chemical entity instances that are part of this model.
     notes:
@@ -310,7 +325,7 @@ slots:
     multivalued: true
     inlined: true
   ontology class set:
-    is_a: domain element set
+    is_a: domain entity set
     description: >-
       All ontology class objects used in this model
     notes:
@@ -322,14 +337,15 @@ slots:
       
 classes:
 
-   ## -- ELEMENTS --
+   ## -- ENTITIES --
 
-  element:
+  entity:
+    abstract: true
     description: >-
-      Base class for any biological entity or activity or process in a GO-CAM model
+      Abstract base class for any biological entity or activity or process in a GO-CAM model
     comments:
-      - An OWL individual representing a particular element in a context
-      - Here element is generic and encompasses causal entities as well as processes, activities
+      - An OWL individual representing a particular entity in a context
+      - Here entity is generic and encompasses causal entities as well as processes, activities
     slots:
       - id
     exact_mappings:
@@ -338,9 +354,9 @@ classes:
   model:
     local_names:
       gocam: GO-CAM model
-    is_a: element
+    is_a: entity
     description: >-
-      A collection of GO-CAM elements and associated metadata. A model combines multiple simple GO annotations into an integrated, semantically precise and computable model of biological function.
+      A collection of GO-CAM entities and associated metadata. A model combines multiple simple GO annotations into an integrated, semantically precise and computable model of biological function.
     slots:
       - id
       - title
@@ -354,14 +370,15 @@ classes:
       - chemical entity set
       - ontology class set
   
-  domain element:
+  domain entity:
+    abstract: true
     description: >-
-      An element that is part of a GO-CAM model
+      Abstract entity for representing any part of a GO-CAM model
     aliases:
       - contextualized ontology class
       - instance
       - GO-CAM instance
-    is_a: element
+    is_a: entity
     slots:
       - id
       - type
@@ -372,13 +389,14 @@ classes:
       paper: Molecular Activity
       go: Molecular Function
       abbrev: MA
-    is_a: domain element
+    is_a: domain entity
     description: >-
       An instance of a GO molecular function
     mixins:
       - activity or process
     slots:
-      - influences
+      - has activity causal associations
+      - has process causal associations
       - happens during
       - part of
       - enabled by
@@ -387,6 +405,10 @@ classes:
     slot_usage:
       part of:
         range: process part of association
+      has activity causal associations:
+        range: activity to activity causal association
+      has process causal associations:
+        range: activity to process causal association
     exact_mappings:
       - goshapes:MolecularFunction
 
@@ -395,7 +417,7 @@ classes:
       paper: Biological Process
       go: Biological Process
       abbrev: BP
-    is_a: domain element
+    is_a: domain entity
     description: >-
       An instance of a GO biological process
     mixins:
@@ -403,8 +425,14 @@ classes:
       - process or phase
     slots:
       - occurs in
-      - influences
+      - has activity causal associations
+      - has process causal associations
       - happens during
+    slot_usage:
+      has activity causal associations:
+        range: process to activity causal association
+      has process causal associations:
+        range: process to process causal association
     exact_mappings:
       - goshapes:BiologicalProcess
 
@@ -415,7 +443,7 @@ classes:
       abbrev: AE
     description: >-
       An instance of a GO cellular anatomical entity, a cell type, or gross anatomical structure
-    is_a: domain element
+    is_a: domain entity
     mixins:
       - continuant
     slots:
@@ -434,7 +462,7 @@ classes:
       abbrev: CE
     description: >-
       An instance of a chemical entity, as defined in CHEBI, including macromolecules defined in NEO
-    is_a: domain element
+    is_a: domain entity
     
   information biomacromolecule:
     description: >-
@@ -461,7 +489,7 @@ classes:
   association:
     abstract: true
     description: >-
-      An association between a domain element (e.g. a MolecularActivity) and another domain element (e.g. another MolecularActivity) with evidence and provenance attached
+      An association between a domain entity (e.g. a MolecularActivity) and another domain entity (e.g. another MolecularActivity) with evidence and provenance attached
     comments:
       - Note this is modeled as a class rather than property/slot to allow for attachment of evidence
       - This class cannot be instantiated directly. Use a subclass
@@ -484,17 +512,120 @@ classes:
         role: location
 
   causal association:
+    abstract: true
     is_a: association
     description: >-
       An association owned by an upstream MA or BP that connects to a downstream MA or BP. The nature of the causal relationship is indicated with the predicate.
     slot_usage:
+      subject:
+        role: upstream activity or process
+        description: >-
+          The upstream activity or process
       object:
         range: activity or process
-        role: target
+        role: downstream activity or process
+        description: >-
+          The upstream activity or process
       predicate:
         description: >-
-          This must be drawn from the causal relation hierarchy in RO
+          The causal relationship type which holds between the two activities/processes. This must be drawn from the causal relation hierarchy in RO
 
+  causal association to activity:
+    mixin: true
+    slot_usage:
+      object:
+        range: molecular activity
+        role: downstream activity
+        description: >-
+          The downstream molecular activity
+
+  causal association to process:
+    mixin: true
+    slot_usage:
+      object:
+        range: biological process
+        role: downstream process
+        description: >-
+          The downstream biological process
+          
+  activity to activity causal association:
+    is_a: causal association
+    mixins:
+      - causal association to activity
+    description: >-
+      A causal association between two molecular activities
+    in_subset:
+      - faithful to original specification
+    slot_usage:
+      subject:
+        range: molecular activity
+        role: upstream activity
+        description: >-
+          The upstream molecular activity
+      object:
+        range: molecular activity
+        role: downstream activity
+        description: >-
+          The downstream molecular activity
+          
+  process to process causal association:
+    is_a: causal association
+    description: >-
+      A causal association between two biological processes
+    mixins:
+      - causal association to process
+    slot_usage:
+      subject:
+        range: biological process
+        role: upstream process
+        description: >-
+          The upstream biological process
+      object:
+        range: biological process
+        role: downstream process
+        description: >-
+          The downstream biological process
+          
+  process to activity causal association:
+    is_a: causal association
+    in_subset:
+      - deviates from original specification
+    mixins:
+      - causal association to activity
+    description: >-
+      A causal association between a biological process and a molecular activity
+    slot_usage:
+      subject:
+        range: biological process
+        role: upstream process
+        description: >-
+          The upstream biological process
+      object:
+        range: molecular activity
+        role: downstream activity
+        description: >-
+          The downstream molecular activity
+          
+  activity to process causal association:
+    is_a: causal association
+    in_subset:
+      - deviates from original specification
+    mixins:
+      - causal association to process
+    description: >-
+      A causal association between a molecular activity and a biological process
+    slot_usage:
+      subject:
+        range: molecular activity
+        role: downstream activity
+        description: >-
+          The downstream molecular activity
+      object:
+        range: biological process
+        role: upstream process
+        description: >-
+          The upstream biological process
+          
   has part association:
     abstract: true
     is_a: association
@@ -529,7 +660,7 @@ classes:
     is_a: part of association
     slot_usage:
       object:
-        range: activity or process
+        range: biological process
         role: whole
     description: >-
       Connects a MA or BP to its parent parts
@@ -562,8 +693,8 @@ classes:
       Connects an MF or BP to its input entity, which may be a chemical entity, an information biomacromolecule, or a larger structure
 
   ## -- Ontologies --
-    
 
+  # TODO: map
   ontology class:
     slots:
       - id
@@ -572,12 +703,12 @@ classes:
 
   ## -- Evidence --
 
-  information element:
-    is_a: element
+  information entity:
+    is_a: entity
     abstract: true
 
   publication:
-    is_a: information element
+    is_a: information entity
     description: >-
       A published entity such as a paper in pubmed
     id_prefixes:
@@ -585,7 +716,7 @@ classes:
       - DOI
     
   evidence:
-    is_a: information element
+    is_a: information entity
     description: >-
       An instance of a piece of evidence. Evidence attributes such as type, reference, hang off of here
     slots:
@@ -600,29 +731,29 @@ classes:
 
   ## -- MIXINS --
 
-  domain element mixin:
+  domain entity mixin:
     description: >-
-      Grouping for mixins that apply to GO-CAM elements. These mixins allow us to group together elements that are alike in some fashion
+      Grouping for mixins that apply to GO-CAM entities. These mixins allow us to group together entities that are alike in some fashion
     abstract: true
     mixin: true
     slots:
       - id
   
   activity or process:
-    is_a: domain element mixin
+    is_a: domain entity mixin
     mixin: true
     union_of:
       - molecular activity
       - biological process
       
   process or phase:
-    is_a: domain element mixin
+    is_a: domain entity mixin
     mixin: true
     union_of:
       - biological process
       
   continuant:
-    is_a: domain element mixin
+    is_a: domain entity mixin
     mixin: true
 
 types:

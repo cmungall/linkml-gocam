@@ -3,6 +3,22 @@ interface ActivityOrProcess
     id: String!
   }
 
+type ActivityToActivityCausalAssociation implements CausalAssociationToActivity
+  {
+    hasEvidence: Evidence
+    predicate: PredicateType
+    subject: MolecularActivity
+    object: MolecularActivity!
+  }
+
+type ActivityToProcessCausalAssociation implements CausalAssociationToProcess
+  {
+    hasEvidence: Evidence
+    predicate: PredicateType
+    subject: MolecularActivity
+    object: BiologicalProcess!
+  }
+
 type AnatomicalEntity implements Continuant
   {
     id: String!
@@ -15,7 +31,7 @@ type AnatomicalEntity implements Continuant
 type AnatomicalPartOfAssociation
   {
     hasEvidence: Evidence
-    subject: DomainElement
+    subject: DomainEntity
     predicate: PredicateType
     object: AnatomicalEntity!
   }
@@ -23,9 +39,9 @@ type AnatomicalPartOfAssociation
 interface Association
   {
     hasEvidence: Evidence
-    subject: DomainElement
+    subject: DomainEntity
     predicate: PredicateType
-    object: Element!
+    object: Entity!
   }
 
 type BiologicalProcess implements ActivityOrProcess, ProcessOrPhase
@@ -34,16 +50,27 @@ type BiologicalProcess implements ActivityOrProcess, ProcessOrPhase
     type: OntologyClass!
     typeInferences: [OntologyClass]
     occursIn: OccursInAssociation
-    influences: CausalAssociation
+    hasActivityCausalAssociations: CausalAssociationToActivity
+    hasProcessCausalAssociations: CausalAssociationToProcess
     happensDuring: HappensDuringAssociation
   }
 
-type CausalAssociation
+interface CausalAssociation
   {
     hasEvidence: Evidence
-    subject: DomainElement
+    subject: DomainEntity
     object: ActivityOrProcess!
     predicate: PredicateType
+  }
+
+interface CausalAssociationToActivity
+  {
+    object: MolecularActivity!
+  }
+
+interface CausalAssociationToProcess
+  {
+    object: BiologicalProcess!
   }
 
 type ChemicalEntity
@@ -58,19 +85,14 @@ interface Continuant
     id: String!
   }
 
-type DomainElement
+interface DomainEntity
   {
     id: String!
     type: OntologyClass!
     typeInferences: [OntologyClass]
   }
 
-interface DomainElementMixin
-  {
-    id: String!
-  }
-
-type Element
+interface DomainEntityMixin
   {
     id: String!
   }
@@ -78,9 +100,14 @@ type Element
 type EnabledByAssociation
   {
     hasEvidence: Evidence
-    subject: DomainElement
+    subject: DomainEntity
     predicate: PredicateType
     object: InformationBiomacromolecule!
+  }
+
+interface Entity
+  {
+    id: String!
   }
 
 type Evidence
@@ -90,13 +117,13 @@ type Evidence
     date: String
     evidenceType: OntologyClass!
     reference: [Publication]
-    withObject: [Element]
+    withObject: [Entity]
   }
 
 type HappensDuringAssociation
   {
     hasEvidence: Evidence
-    subject: DomainElement
+    subject: DomainEntity
     predicate: PredicateType
     object: ActivityOrProcess!
   }
@@ -104,7 +131,7 @@ type HappensDuringAssociation
 type HasInputAssociation
   {
     hasEvidence: Evidence
-    subject: DomainElement
+    subject: DomainEntity
     predicate: PredicateType
     object: Continuant!
   }
@@ -112,9 +139,9 @@ type HasInputAssociation
 interface HasPartAssociation
   {
     hasEvidence: Evidence
-    subject: DomainElement
+    subject: DomainEntity
     predicate: PredicateType
-    object: Element!
+    object: Entity!
   }
 
 type InformationBiomacromolecule implements Continuant
@@ -126,7 +153,7 @@ type InformationBiomacromolecule implements Continuant
     category: InformationBiomacromoleculeCategory!
   }
 
-interface InformationElement
+interface InformationEntity
   {
     id: String!
   }
@@ -134,7 +161,7 @@ interface InformationElement
 type MacromoleculeHasPartAssociation
   {
     hasEvidence: Evidence
-    subject: DomainElement
+    subject: DomainEntity
     predicate: PredicateType
     object: Continuant!
   }
@@ -159,7 +186,8 @@ type MolecularActivity implements ActivityOrProcess
     id: String!
     type: OntologyClass!
     typeInferences: [OntologyClass]
-    influences: CausalAssociation
+    hasActivityCausalAssociations: CausalAssociationToActivity
+    hasProcessCausalAssociations: CausalAssociationToProcess
     happensDuring: HappensDuringAssociation
     partOf: ProcessPartOfAssociation
     enabledBy: EnabledByAssociation
@@ -170,7 +198,7 @@ type MolecularActivity implements ActivityOrProcess
 type OccursInAssociation
   {
     hasEvidence: Evidence
-    subject: DomainElement
+    subject: DomainEntity
     predicate: PredicateType
     object: AnatomicalEntity!
   }
@@ -185,9 +213,9 @@ type OntologyClass
 interface PartOfAssociation
   {
     hasEvidence: Evidence
-    subject: DomainElement
+    subject: DomainEntity
     predicate: PredicateType
-    object: Element!
+    object: Entity!
   }
 
 interface ProcessOrPhase
@@ -198,9 +226,25 @@ interface ProcessOrPhase
 type ProcessPartOfAssociation
   {
     hasEvidence: Evidence
-    subject: DomainElement
+    subject: DomainEntity
     predicate: PredicateType
     object: ActivityOrProcess!
+  }
+
+type ProcessToActivityCausalAssociation implements CausalAssociationToActivity
+  {
+    hasEvidence: Evidence
+    predicate: PredicateType
+    subject: BiologicalProcess
+    object: MolecularActivity!
+  }
+
+type ProcessToProcessCausalAssociation implements CausalAssociationToProcess
+  {
+    hasEvidence: Evidence
+    predicate: PredicateType
+    subject: BiologicalProcess
+    object: BiologicalProcess!
   }
 
 type Publication

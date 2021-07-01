@@ -5,7 +5,7 @@ SCHEMA_NAMES = $(patsubst $(SCHEMA_DIR)/%.yaml, %, $(SOURCE_FILES))
 
 SCHEMA_NAME = gocam
 SCHEMA_SRC = $(SCHEMA_DIR)/$(SCHEMA_NAME).yaml
-TGTS = graphql jsonschema docs shex owl csv graphql python jsonld
+TGTS = graphql jsonschema docs shex owl csv graphql python jsonld sqlddl
 
 #GEN_OPTS = --no-mergeimports
 GEN_OPTS = 
@@ -40,7 +40,7 @@ stage: $(patsubst %,stage-%,$(TGTS))
 stage-%: gen-%
 	cp -pr target/$* .
 stage-python: gen-python
-	cp target/gocam/*py gocam/
+	cp target/gocam/*.py target/sqlddl/*.py gocam/
 
 stage-examples:
 	cp tests/target/* examples/
@@ -74,7 +74,7 @@ target/graphql/%.graphql: $(SCHEMA_DIR)/%.yaml tdir-graphql
 # TODO: modularize imports. For now imports are merged.
 gen-sqlddl: target/sqlddl/$(SCHEMA_NAME).sql
 target/sqlddl/%.sql: $(SCHEMA_DIR)/%.yaml tdir-sqlddl
-	gen-sqlddl $(GEN_OPTS) $< > $@
+	gen-sqlddl $(GEN_OPTS) --sqla-file target/sqlddl/$*_db_mappings.py $< > $@
 
 ####  -- JSON schema --
 # TODO: modularize imports. For now imports are merged.
