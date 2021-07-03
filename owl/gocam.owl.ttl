@@ -20,11 +20,11 @@ See:
   * [https://github.com/cmungall/linkml-gocam](https://github.com/cmungall/linkml-gocam)
   * [https://cmungall.github.io/linkml-gocam/](https://cmungall.github.io/linkml-gocam/)
   """ ;
-    linkml:generation_date "2021-07-01 15:10" ;
+    linkml:generation_date "2021-07-02 10:35" ;
     linkml:metamodel_version "1.7.0" ;
     linkml:source_file "gocam.yaml" ;
-    linkml:source_file_date "Thu Jul  1 15:10:07 2021" ;
-    linkml:source_file_size 23734 .
+    linkml:source_file_date "Fri Jul  2 10:34:57 2021" ;
+    linkml:source_file_size 24217 .
 
 <https://w3id.org/gocam/ChemicalFormulaValue> a owl:Class,
         linkml:TypeDefinition ;
@@ -46,12 +46,12 @@ See:
         linkml:ClassDefinition ;
     rdfs:label "model" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/gocam/BiologicalProcess> ;
-            owl:onProperty <https://w3id.org/gocam/biological_process_set> ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <http://UNKNOWN.org/model_state_enum> ;
             owl:onProperty <https://w3id.org/gocam/state> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty <https://w3id.org/gocam/contributor> ],
         [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/gocam/MolecularActivity> ;
             owl:onProperty <https://w3id.org/gocam/molecular_activity_set> ],
@@ -59,26 +59,26 @@ See:
             owl:allValuesFrom <https://w3id.org/gocam/InformationBiomacromolecule> ;
             owl:onProperty <https://w3id.org/gocam/information_biomacromolecule_set> ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty <https://w3id.org/gocam/contributor> ],
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty <https://w3id.org/gocam/title> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty <https://w3id.org/gocam/provided_by> ],
         [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/gocam/ChemicalEntity> ;
-            owl:onProperty <https://w3id.org/gocam/chemical_entity_set> ],
+            owl:allValuesFrom <https://w3id.org/gocam/BiologicalProcess> ;
+            owl:onProperty <https://w3id.org/gocam/biological_process_set> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty <https://w3id.org/gocam/date> ],
         [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty <https://w3id.org/gocam/title> ],
-        [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/gocam/OntologyClass> ;
             owl:onProperty <https://w3id.org/gocam/ontology_class_set> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/gocam/ChemicalEntity> ;
+            owl:onProperty <https://w3id.org/gocam/chemical_entity_set> ],
         <https://w3id.org/gocam/Entity> ;
     skos:definition "A collection of GO-CAM entities and associated metadata. A model combines multiple simple GO annotations into an integrated, semantically precise and computable model of biological function." .
 
@@ -261,6 +261,20 @@ linkml:anatomical_part_of_association_object a owl:ObjectProperty,
     rdfs:range <https://w3id.org/gocam/AnatomicalEntity> ;
     rdfs:subPropertyOf <https://w3id.org/gocam/object> .
 
+linkml:biological_process_has_activity_causal_associations a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "biological process_has activity causal associations" ;
+    rdfs:domain <https://w3id.org/gocam/BiologicalProcess> ;
+    rdfs:range <https://w3id.org/gocam/ProcessToActivityCausalAssociation> ;
+    rdfs:subPropertyOf <https://w3id.org/gocam/has_activity_causal_associations> .
+
+linkml:biological_process_has_process_causal_associations a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "biological process_has process causal associations" ;
+    rdfs:domain <https://w3id.org/gocam/BiologicalProcess> ;
+    rdfs:range <https://w3id.org/gocam/ProcessToProcessCausalAssociation> ;
+    rdfs:subPropertyOf <https://w3id.org/gocam/has_process_causal_associations> .
+
 linkml:causal_association_predicate a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "causal association_predicate" ;
@@ -327,6 +341,20 @@ linkml:macromolecule_has_part_association_object a owl:ObjectProperty,
     rdfs:range <https://w3id.org/gocam/Continuant> ;
     rdfs:subPropertyOf <https://w3id.org/gocam/object> .
 
+linkml:molecular_activity_has_activity_causal_associations a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "molecular activity_has activity causal associations" ;
+    rdfs:domain <https://w3id.org/gocam/MolecularActivity> ;
+    rdfs:range <https://w3id.org/gocam/ActivityToActivityCausalAssociation> ;
+    rdfs:subPropertyOf <https://w3id.org/gocam/has_activity_causal_associations> .
+
+linkml:molecular_activity_has_process_causal_associations a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "molecular activity_has process causal associations" ;
+    rdfs:domain <https://w3id.org/gocam/MolecularActivity> ;
+    rdfs:range <https://w3id.org/gocam/ActivityToProcessCausalAssociation> ;
+    rdfs:subPropertyOf <https://w3id.org/gocam/has_process_causal_associations> .
+
 linkml:molecular_activity_part_of a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "molecular activity_part of" ;
@@ -345,7 +373,7 @@ linkml:process_part_of_association_object a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "process part of association_object" ;
     rdfs:domain <https://w3id.org/gocam/ProcessPartOfAssociation> ;
-    rdfs:range <https://w3id.org/gocam/ActivityOrProcess> ;
+    rdfs:range <https://w3id.org/gocam/BiologicalProcess> ;
     rdfs:subPropertyOf <https://w3id.org/gocam/object> .
 
 linkml:process_to_activity_causal_association_object a owl:ObjectProperty,
@@ -496,36 +524,6 @@ linkml:process_to_process_causal_association_subject a owl:ObjectProperty,
     rdfs:range <https://w3id.org/gocam/Entity> ;
     skos:definition "An object that supports a piece of evidence" .
 
-<https://w3id.org/gocam/ActivityToActivityCausalAssociation> a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "activity to activity causal association" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass <https://w3id.org/gocam/MolecularActivity> ;
-            owl:onProperty <https://w3id.org/gocam/object> ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/MolecularActivity> ;
-            owl:onProperty <https://w3id.org/gocam/subject> ],
-        <https://w3id.org/gocam/CausalAssociation>,
-        <https://w3id.org/gocam/CausalAssociationToActivity> ;
-    skos:definition "A causal association between two molecular activities" .
-
-<https://w3id.org/gocam/ActivityToProcessCausalAssociation> a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "activity to process causal association" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass <https://w3id.org/gocam/BiologicalProcess> ;
-            owl:onProperty <https://w3id.org/gocam/object> ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/MolecularActivity> ;
-            owl:onProperty <https://w3id.org/gocam/subject> ],
-        <https://w3id.org/gocam/CausalAssociation>,
-        <https://w3id.org/gocam/CausalAssociationToProcess> ;
-    skos:definition "A causal association between a molecular activity and a biological process" .
-
 <https://w3id.org/gocam/CategoryType> a owl:Class,
         linkml:TypeDefinition ;
     rdfs:label "category type" ;
@@ -537,22 +535,22 @@ linkml:process_to_process_causal_association_subject a owl:ObjectProperty,
     rdfs:label "evidence" ;
     rdfs:seeAlso "https://docs.google.com/presentation/d/1ja0Vkw0AoENJ58emM77dGnqPtY1nfIJMeyVnObBxIxI/edit#slide=id.p9" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass <https://w3id.org/gocam/OntologyClass> ;
+            owl:onProperty <https://w3id.org/gocam/evidence_type> ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty <https://w3id.org/gocam/date> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/gocam/Publication> ;
+            owl:onProperty <https://w3id.org/gocam/reference> ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty <https://w3id.org/gocam/contributor> ],
         [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/gocam/Entity> ;
             owl:onProperty <https://w3id.org/gocam/with_object> ],
-        [ a owl:Restriction ;
-            owl:onClass <https://w3id.org/gocam/OntologyClass> ;
-            owl:onProperty <https://w3id.org/gocam/evidence_type> ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/gocam/Publication> ;
-            owl:onProperty <https://w3id.org/gocam/reference> ],
         <https://w3id.org/gocam/InformationEntity> ;
     skos:definition "An instance of a piece of evidence. Evidence attributes such as type, reference, hang off of here" .
 
@@ -572,36 +570,6 @@ linkml:process_to_process_causal_association_subject a owl:ObjectProperty,
     rdfs:label "label type" ;
     rdfs:subClassOf linkml:String ;
     skos:definition "A string that provides a human-readable name for an entity" .
-
-<https://w3id.org/gocam/ProcessToActivityCausalAssociation> a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "process to activity causal association" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass <https://w3id.org/gocam/MolecularActivity> ;
-            owl:onProperty <https://w3id.org/gocam/object> ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/BiologicalProcess> ;
-            owl:onProperty <https://w3id.org/gocam/subject> ],
-        <https://w3id.org/gocam/CausalAssociation>,
-        <https://w3id.org/gocam/CausalAssociationToActivity> ;
-    skos:definition "A causal association between a biological process and a molecular activity" .
-
-<https://w3id.org/gocam/ProcessToProcessCausalAssociation> a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "process to process causal association" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass <https://w3id.org/gocam/BiologicalProcess> ;
-            owl:onProperty <https://w3id.org/gocam/object> ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/BiologicalProcess> ;
-            owl:onProperty <https://w3id.org/gocam/subject> ],
-        <https://w3id.org/gocam/CausalAssociation>,
-        <https://w3id.org/gocam/CausalAssociationToProcess> ;
-    skos:definition "A causal association between two biological processes" .
 
 <https://w3id.org/gocam/Publication> a owl:Class,
         linkml:ClassDefinition ;
@@ -629,14 +597,6 @@ linkml:process_to_process_causal_association_subject a owl:ObjectProperty,
     rdfs:subPropertyOf <https://w3id.org/gocam/related_to> ;
     skos:definition "Links a subject domain entity (a MA or BP) to an object domain entity by way of a HappensDuringAssociation " .
 
-<https://w3id.org/gocam/has_activity_causal_associations> a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "has activity causal associations" ;
-    rdfs:domain <https://w3id.org/gocam/ActivityOrProcess> ;
-    rdfs:range <https://w3id.org/gocam/CausalAssociationToActivity> ;
-    rdfs:subPropertyOf <https://w3id.org/gocam/has_causal_associations> ;
-    skos:definition "Links a subject domain entity (a MA or BP) to a molecular activity by way of an CausalAssociation" .
-
 <https://w3id.org/gocam/has_causal_associations> a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "has causal associations" ;
@@ -652,14 +612,6 @@ linkml:process_to_process_causal_association_subject a owl:ObjectProperty,
     rdfs:range <https://w3id.org/gocam/HasPartAssociation> ;
     rdfs:subPropertyOf <https://w3id.org/gocam/related_to> ;
     skos:definition "Links a subject domain entity to an object domain entity by way of a HasPartAssociation" .
-
-<https://w3id.org/gocam/has_process_causal_associations> a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "has process causal associations" ;
-    rdfs:domain <https://w3id.org/gocam/ActivityOrProcess> ;
-    rdfs:range <https://w3id.org/gocam/CausalAssociationToProcess> ;
-    rdfs:subPropertyOf <https://w3id.org/gocam/has_causal_associations> ;
-    skos:definition "Links a subject domain entity (a MA or BP) to a biological process by way of an CausalAssociation" .
 
 <https://w3id.org/gocam/model_property> a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -740,7 +692,7 @@ linkml:process_to_process_causal_association_subject a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "process part of association" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass <https://w3id.org/gocam/ActivityOrProcess> ;
+            owl:onClass <https://w3id.org/gocam/BiologicalProcess> ;
             owl:onProperty <https://w3id.org/gocam/object> ;
             owl:qualifiedCardinality 1 ],
         <https://w3id.org/gocam/PartOfAssociation> ;
@@ -784,6 +736,54 @@ linkml:Uriorcurie a owl:Class,
             owl:qualifiedCardinality 1 ] ;
     skos:definition "a URI or a CURIE" .
 
+<https://w3id.org/gocam/ActivityToActivityCausalAssociation> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "activity to activity causal association" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/MolecularActivity> ;
+            owl:onProperty <https://w3id.org/gocam/subject> ],
+        [ a owl:Restriction ;
+            owl:onClass <https://w3id.org/gocam/MolecularActivity> ;
+            owl:onProperty <https://w3id.org/gocam/object> ;
+            owl:qualifiedCardinality 1 ],
+        <https://w3id.org/gocam/CausalAssociation>,
+        <https://w3id.org/gocam/CausalAssociationToActivity> ;
+    skos:definition "A causal association between two molecular activities" .
+
+<https://w3id.org/gocam/ActivityToProcessCausalAssociation> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "activity to process causal association" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass <https://w3id.org/gocam/BiologicalProcess> ;
+            owl:onProperty <https://w3id.org/gocam/object> ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/MolecularActivity> ;
+            owl:onProperty <https://w3id.org/gocam/subject> ],
+        <https://w3id.org/gocam/CausalAssociation>,
+        <https://w3id.org/gocam/CausalAssociationToProcess> ;
+    skos:definition "A causal association between a molecular activity and a biological process" .
+
+<https://w3id.org/gocam/CausalAssociationToActivity> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "causal association to activity" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass <https://w3id.org/gocam/MolecularActivity> ;
+            owl:onProperty <https://w3id.org/gocam/object> ;
+            owl:qualifiedCardinality 1 ],
+        linkml:mixin .
+
+<https://w3id.org/gocam/CausalAssociationToProcess> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "causal association to process" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass <https://w3id.org/gocam/BiologicalProcess> ;
+            owl:onProperty <https://w3id.org/gocam/object> ;
+            owl:qualifiedCardinality 1 ],
+        linkml:mixin .
+
 <https://w3id.org/gocam/HappensDuringAssociation> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "happens during association" ;
@@ -809,6 +809,52 @@ linkml:Uriorcurie a owl:Class,
     rdfs:label "predicate type" ;
     rdfs:subClassOf linkml:Uriorcurie ;
     skos:definition "A RO identifier" .
+
+<https://w3id.org/gocam/ProcessToActivityCausalAssociation> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "process to activity causal association" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass <https://w3id.org/gocam/MolecularActivity> ;
+            owl:onProperty <https://w3id.org/gocam/object> ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/BiologicalProcess> ;
+            owl:onProperty <https://w3id.org/gocam/subject> ],
+        <https://w3id.org/gocam/CausalAssociation>,
+        <https://w3id.org/gocam/CausalAssociationToActivity> ;
+    skos:definition "A causal association between a biological process and a molecular activity" .
+
+<https://w3id.org/gocam/ProcessToProcessCausalAssociation> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "process to process causal association" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/BiologicalProcess> ;
+            owl:onProperty <https://w3id.org/gocam/subject> ],
+        [ a owl:Restriction ;
+            owl:onClass <https://w3id.org/gocam/BiologicalProcess> ;
+            owl:onProperty <https://w3id.org/gocam/object> ;
+            owl:qualifiedCardinality 1 ],
+        <https://w3id.org/gocam/CausalAssociation>,
+        <https://w3id.org/gocam/CausalAssociationToProcess> ;
+    skos:definition "A causal association between two biological processes" .
+
+<https://w3id.org/gocam/has_activity_causal_associations> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "has activity causal associations" ;
+    rdfs:domain <https://w3id.org/gocam/ActivityOrProcess> ;
+    rdfs:range <https://w3id.org/gocam/CausalAssociationToActivity> ;
+    rdfs:subPropertyOf <https://w3id.org/gocam/has_causal_associations> ;
+    skos:definition "Links a subject domain entity (a MA or BP) to a molecular activity by way of an CausalAssociation" .
+
+<https://w3id.org/gocam/has_process_causal_associations> a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "has process causal associations" ;
+    rdfs:domain <https://w3id.org/gocam/ActivityOrProcess> ;
+    rdfs:range <https://w3id.org/gocam/CausalAssociationToProcess> ;
+    rdfs:subPropertyOf <https://w3id.org/gocam/has_causal_associations> ;
+    skos:definition "Links a subject domain entity (a MA or BP) to a biological process by way of an CausalAssociation" .
 
 <https://w3id.org/gocam/part_of> a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -863,24 +909,6 @@ linkml:causal_association_subject a owl:ObjectProperty,
     skos:definition "An instance of a GO cellular anatomical entity, a cell type, or gross anatomical structure" ;
     skos:exactMatch <http://purl.obolibrary.org/obo/go/shapes/AnatomicalEntity> .
 
-<https://w3id.org/gocam/CausalAssociationToActivity> a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "causal association to activity" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass <https://w3id.org/gocam/MolecularActivity> ;
-            owl:onProperty <https://w3id.org/gocam/object> ;
-            owl:qualifiedCardinality 1 ],
-        linkml:mixin .
-
-<https://w3id.org/gocam/CausalAssociationToProcess> a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "causal association to process" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass <https://w3id.org/gocam/BiologicalProcess> ;
-            owl:onProperty <https://w3id.org/gocam/object> ;
-            owl:qualifiedCardinality 1 ],
-        linkml:mixin .
-
 <https://w3id.org/gocam/Continuant> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "continuant" ;
@@ -933,6 +961,10 @@ linkml:causal_association_subject a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "causal association" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/DomainEntity> ;
+            owl:onProperty <https://w3id.org/gocam/subject> ],
+        [ a owl:Restriction ;
             owl:onClass <https://w3id.org/gocam/ActivityOrProcess> ;
             owl:onProperty <https://w3id.org/gocam/object> ;
             owl:qualifiedCardinality 1 ],
@@ -940,10 +972,6 @@ linkml:causal_association_subject a owl:ObjectProperty,
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/gocam/PredicateType> ;
             owl:onProperty <https://w3id.org/gocam/predicate> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/DomainEntity> ;
-            owl:onProperty <https://w3id.org/gocam/subject> ],
         <https://w3id.org/gocam/Association> ;
     skos:definition "An association owned by an upstream MA or BP that connects to a downstream MA or BP. The nature of the causal relationship is indicated with the predicate." .
 
@@ -967,42 +995,17 @@ linkml:causal_association_subject a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "domain entity" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/gocam/OntologyClass> ;
+            owl:onProperty <https://w3id.org/gocam/type_inferences> ],
+        [ a owl:Restriction ;
             owl:onClass <https://w3id.org/gocam/OntologyClass> ;
             owl:onProperty <https://w3id.org/gocam/type> ;
             owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/gocam/OntologyClass> ;
-            owl:onProperty <https://w3id.org/gocam/type_inferences> ],
         <https://w3id.org/gocam/Entity> ;
     skos:altLabel "GO-CAM instance",
         "contextualized ontology class",
         "instance" ;
     skos:definition "Abstract entity for representing any part of a GO-CAM model" .
-
-<https://w3id.org/gocam/BiologicalProcess> a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "biological process" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/OccursInAssociation> ;
-            owl:onProperty <https://w3id.org/gocam/occurs_in> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/HappensDuringAssociation> ;
-            owl:onProperty <https://w3id.org/gocam/happens_during> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/CausalAssociationToProcess> ;
-            owl:onProperty <https://w3id.org/gocam/has_process_causal_associations> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/CausalAssociationToActivity> ;
-            owl:onProperty <https://w3id.org/gocam/has_activity_causal_associations> ],
-        <https://w3id.org/gocam/ActivityOrProcess>,
-        <https://w3id.org/gocam/DomainEntity>,
-        <https://w3id.org/gocam/ProcessOrPhase> ;
-    skos:definition "An instance of a GO biological process" ;
-    skos:exactMatch <http://purl.obolibrary.org/obo/go/shapes/BiologicalProcess> .
 
 <https://w3id.org/gocam/ActivityOrProcess> a owl:Class,
         linkml:ClassDefinition ;
@@ -1014,30 +1017,67 @@ linkml:causal_association_subject a owl:ObjectProperty,
         linkml:ClassDefinition ;
     rdfs:label "association" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/Evidence> ;
-            owl:onProperty <https://w3id.org/gocam/has_evidence> ],
-        [ a owl:Restriction ;
             owl:onClass <https://w3id.org/gocam/Entity> ;
             owl:onProperty <https://w3id.org/gocam/object> ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/DomainEntity> ;
-            owl:onProperty <https://w3id.org/gocam/subject> ],
+            owl:onClass <https://w3id.org/gocam/Evidence> ;
+            owl:onProperty <https://w3id.org/gocam/has_evidence> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/gocam/PredicateType> ;
-            owl:onProperty <https://w3id.org/gocam/predicate> ] ;
+            owl:onProperty <https://w3id.org/gocam/predicate> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/DomainEntity> ;
+            owl:onProperty <https://w3id.org/gocam/subject> ] ;
     skos:definition "An association between a domain entity (e.g. a MolecularActivity) and another domain entity (e.g. another MolecularActivity) with evidence and provenance attached" ;
     skos:exactMatch rdf:Statement ;
     skos:note "Note this is modeled as a class rather than property/slot to allow for attachment of evidence",
         "This class cannot be instantiated directly. Use a subclass" .
 
+linkml:topValue a owl:DatatypeProperty ;
+    rdfs:label "value" .
+
+<https://w3id.org/gocam/BiologicalProcess> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "biological process" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/gocam/ProcessToProcessCausalAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/has_process_causal_associations> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/HappensDuringAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/happens_during> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/OccursInAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/occurs_in> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/gocam/ProcessToActivityCausalAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/has_activity_causal_associations> ],
+        <https://w3id.org/gocam/ActivityOrProcess>,
+        <https://w3id.org/gocam/DomainEntity>,
+        <https://w3id.org/gocam/ProcessOrPhase> ;
+    skos:definition "An instance of a GO biological process" ;
+    skos:exactMatch <http://purl.obolibrary.org/obo/go/shapes/BiologicalProcess> .
+
 <https://w3id.org/gocam/MolecularActivity> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "molecular activity" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/gocam/ActivityToProcessCausalAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/has_process_causal_associations> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/HasInputAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/has_input> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/gocam/OccursInAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/occurs_in> ],
+        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/gocam/ProcessPartOfAssociation> ;
             owl:onProperty <https://w3id.org/gocam/part_of> ],
@@ -1047,31 +1087,15 @@ linkml:causal_association_subject a owl:ObjectProperty,
             owl:onProperty <https://w3id.org/gocam/happens_during> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/CausalAssociationToProcess> ;
-            owl:onProperty <https://w3id.org/gocam/has_process_causal_associations> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/CausalAssociationToActivity> ;
-            owl:onProperty <https://w3id.org/gocam/has_activity_causal_associations> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/OccursInAssociation> ;
-            owl:onProperty <https://w3id.org/gocam/occurs_in> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/gocam/HasInputAssociation> ;
-            owl:onProperty <https://w3id.org/gocam/has_input> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/gocam/EnabledByAssociation> ;
             owl:onProperty <https://w3id.org/gocam/enabled_by> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/gocam/ActivityToActivityCausalAssociation> ;
+            owl:onProperty <https://w3id.org/gocam/has_activity_causal_associations> ],
         <https://w3id.org/gocam/ActivityOrProcess>,
         <https://w3id.org/gocam/DomainEntity> ;
     skos:definition "An instance of a GO molecular function" ;
     skos:exactMatch <http://purl.obolibrary.org/obo/go/shapes/MolecularFunction> .
-
-linkml:topValue a owl:DatatypeProperty ;
-    rdfs:label "value" .
 
 linkml:String a owl:Class,
         linkml:TypeDefinition ;

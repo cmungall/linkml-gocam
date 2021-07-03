@@ -50,8 +50,8 @@ type BiologicalProcess implements ActivityOrProcess, ProcessOrPhase
     type: OntologyClass!
     typeInferences: [OntologyClass]
     occursIn: OccursInAssociation
-    hasActivityCausalAssociations: CausalAssociationToActivity
-    hasProcessCausalAssociations: CausalAssociationToProcess
+    hasActivityCausalAssociations: [ProcessToActivityCausalAssociation]
+    hasProcessCausalAssociations: [ProcessToProcessCausalAssociation]
     happensDuring: HappensDuringAssociation
   }
 
@@ -186,8 +186,8 @@ type MolecularActivity implements ActivityOrProcess
     id: String!
     type: OntologyClass!
     typeInferences: [OntologyClass]
-    hasActivityCausalAssociations: CausalAssociationToActivity
-    hasProcessCausalAssociations: CausalAssociationToProcess
+    hasActivityCausalAssociations: [ActivityToActivityCausalAssociation]
+    hasProcessCausalAssociations: [ActivityToProcessCausalAssociation]
     happensDuring: HappensDuringAssociation
     partOf: ProcessPartOfAssociation
     enabledBy: EnabledByAssociation
@@ -228,7 +228,7 @@ type ProcessPartOfAssociation
     hasEvidence: Evidence
     subject: DomainEntity
     predicate: PredicateType
-    object: ActivityOrProcess!
+    object: BiologicalProcess!
   }
 
 type ProcessToActivityCausalAssociation implements CausalAssociationToActivity

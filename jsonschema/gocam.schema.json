@@ -125,12 +125,16 @@
                "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of a HappensDuringAssociation "
             },
             "has_activity_causal_associations": {
-               "$ref": "#/definitions/CausalAssociationToActivity",
-               "description": "Links a subject domain entity (a MA or BP) to a molecular activity by way of an CausalAssociation"
+               "items": {
+                  "$ref": "#/definitions/ProcessToActivityCausalAssociation"
+               },
+               "type": "array"
             },
             "has_process_causal_associations": {
-               "$ref": "#/definitions/CausalAssociationToProcess",
-               "description": "Links a subject domain entity (a MA or BP) to a biological process by way of an CausalAssociation"
+               "items": {
+                  "$ref": "#/definitions/ProcessToProcessCausalAssociation"
+               },
+               "type": "array"
             },
             "id": {
                "description": "A unique identifier for an entity",
@@ -455,16 +459,20 @@
                "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of a HappensDuringAssociation "
             },
             "has_activity_causal_associations": {
-               "$ref": "#/definitions/CausalAssociationToActivity",
-               "description": "Links a subject domain entity (a MA or BP) to a molecular activity by way of an CausalAssociation"
+               "items": {
+                  "$ref": "#/definitions/ActivityToActivityCausalAssociation"
+               },
+               "type": "array"
             },
             "has_input": {
                "$ref": "#/definitions/HasInputAssociation",
                "description": "Links a MA or BP to its input by way of a HasInputAssociation"
             },
             "has_process_causal_associations": {
-               "$ref": "#/definitions/CausalAssociationToProcess",
-               "description": "Links a subject domain entity (a MA or BP) to a biological process by way of an CausalAssociation"
+               "items": {
+                  "$ref": "#/definitions/ActivityToProcessCausalAssociation"
+               },
+               "type": "array"
             },
             "id": {
                "description": "A unique identifier for an entity",

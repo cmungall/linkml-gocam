@@ -35,8 +35,6 @@ CREATE TABLE biological_process (
 	type TEXT NOT NULL, 
 	type_inferences TEXT, 
 	occurs_in TEXT, 
-	has_activity_causal_associations TEXT, 
-	has_process_causal_associations TEXT, 
 	happens_during TEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(type) REFERENCES ontology_class (id)
@@ -74,8 +72,6 @@ CREATE TABLE molecular_activity (
 	id TEXT NOT NULL, 
 	type TEXT NOT NULL, 
 	type_inferences TEXT, 
-	has_activity_causal_associations TEXT, 
-	has_process_causal_associations TEXT, 
 	happens_during TEXT, 
 	part_of TEXT, 
 	enabled_by TEXT, 
@@ -97,10 +93,12 @@ CREATE TABLE activity_to_activity_causal_association (
 	predicate TEXT, 
 	subject TEXT, 
 	object TEXT NOT NULL, 
-	PRIMARY KEY (has_evidence, predicate, subject, object), 
+	molecular_activity_id TEXT, 
+	PRIMARY KEY (has_evidence, predicate, subject, object, molecular_activity_id), 
 	FOREIGN KEY(has_evidence) REFERENCES evidence (id), 
 	FOREIGN KEY(subject) REFERENCES molecular_activity (id), 
-	FOREIGN KEY(object) REFERENCES molecular_activity (id)
+	FOREIGN KEY(object) REFERENCES molecular_activity (id), 
+	FOREIGN KEY(molecular_activity_id) REFERENCES molecular_activity (id)
 );
 
 CREATE TABLE activity_to_process_causal_association (
@@ -108,10 +106,12 @@ CREATE TABLE activity_to_process_causal_association (
 	predicate TEXT, 
 	subject TEXT, 
 	object TEXT NOT NULL, 
-	PRIMARY KEY (has_evidence, predicate, subject, object), 
+	molecular_activity_id TEXT, 
+	PRIMARY KEY (has_evidence, predicate, subject, object, molecular_activity_id), 
 	FOREIGN KEY(has_evidence) REFERENCES evidence (id), 
 	FOREIGN KEY(subject) REFERENCES molecular_activity (id), 
-	FOREIGN KEY(object) REFERENCES biological_process (id)
+	FOREIGN KEY(object) REFERENCES biological_process (id), 
+	FOREIGN KEY(molecular_activity_id) REFERENCES molecular_activity (id)
 );
 
 CREATE TABLE anatomical_part_of_association (
@@ -177,7 +177,8 @@ CREATE TABLE process_part_of_association (
 	predicate TEXT, 
 	object TEXT NOT NULL, 
 	PRIMARY KEY (has_evidence, subject, predicate, object), 
-	FOREIGN KEY(has_evidence) REFERENCES evidence (id)
+	FOREIGN KEY(has_evidence) REFERENCES evidence (id), 
+	FOREIGN KEY(object) REFERENCES biological_process (id)
 );
 
 CREATE TABLE process_to_activity_causal_association (
@@ -185,10 +186,12 @@ CREATE TABLE process_to_activity_causal_association (
 	predicate TEXT, 
 	subject TEXT, 
 	object TEXT NOT NULL, 
-	PRIMARY KEY (has_evidence, predicate, subject, object), 
+	biological_process_id TEXT, 
+	PRIMARY KEY (has_evidence, predicate, subject, object, biological_process_id), 
 	FOREIGN KEY(has_evidence) REFERENCES evidence (id), 
 	FOREIGN KEY(subject) REFERENCES biological_process (id), 
-	FOREIGN KEY(object) REFERENCES molecular_activity (id)
+	FOREIGN KEY(object) REFERENCES molecular_activity (id), 
+	FOREIGN KEY(biological_process_id) REFERENCES biological_process (id)
 );
 
 CREATE TABLE process_to_process_causal_association (
@@ -196,10 +199,12 @@ CREATE TABLE process_to_process_causal_association (
 	predicate TEXT, 
 	subject TEXT, 
 	object TEXT NOT NULL, 
-	PRIMARY KEY (has_evidence, predicate, subject, object), 
+	biological_process_id TEXT, 
+	PRIMARY KEY (has_evidence, predicate, subject, object, biological_process_id), 
 	FOREIGN KEY(has_evidence) REFERENCES evidence (id), 
 	FOREIGN KEY(subject) REFERENCES biological_process (id), 
-	FOREIGN KEY(object) REFERENCES biological_process (id)
+	FOREIGN KEY(object) REFERENCES biological_process (id), 
+	FOREIGN KEY(biological_process_id) REFERENCES biological_process (id)
 );
 
 CREATE TABLE publication (

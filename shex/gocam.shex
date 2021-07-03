@@ -126,8 +126,8 @@ linkml:Nodeidentifier NONLITERAL
           &<ProcessOrPhase_tes> ;
           rdf:type [ <ProcessOrPhase> ] ? ;
           <occurs_in> @<OccursInAssociation> ? ;
-          <has_activity_causal_associations> @<CausalAssociationToActivity> ? ;
-          <has_process_causal_associations> @<CausalAssociationToProcess> ? ;
+          <has_activity_causal_associations> @<ProcessToActivityCausalAssociation> * ;
+          <has_process_causal_associations> @<ProcessToProcessCausalAssociation> * ;
           <happens_during> @<HappensDuringAssociation> ?
        ) ;
        rdf:type [ <BiologicalProcess> ]
@@ -320,8 +320,8 @@ linkml:Nodeidentifier NONLITERAL
           rdf:type [ <DomainEntity> ] ? ;
           &<ActivityOrProcess_tes> ;
           rdf:type [ <ActivityOrProcess> ] ? ;
-          <has_activity_causal_associations> @<CausalAssociationToActivity> ? ;
-          <has_process_causal_associations> @<CausalAssociationToProcess> ? ;
+          <has_activity_causal_associations> @<ActivityToActivityCausalAssociation> * ;
+          <has_process_causal_associations> @<ActivityToProcessCausalAssociation> * ;
           <happens_during> @<HappensDuringAssociation> ? ;
           <part_of> @<ProcessPartOfAssociation> ? ;
           <enabled_by> @<EnabledByAssociation> ? ;
@@ -372,7 +372,7 @@ linkml:Nodeidentifier NONLITERAL
 <ProcessPartOfAssociation> CLOSED {
     (  $<ProcessPartOfAssociation_tes> (  &<PartOfAssociation_tes> ;
           rdf:type [ <PartOfAssociation> ] ? ;
-          <object> @<ActivityOrProcess>
+          <object> @<BiologicalProcess>
        ) ;
        rdf:type [ <ProcessPartOfAssociation> ] ?
     )

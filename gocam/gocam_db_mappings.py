@@ -25,12 +25,14 @@ tbl_activity_to_activity_causal_association = Table('activity_to_activity_causal
     Column('predicate', Text, primary_key=True),
     Column('subject', Text, ForeignKey('molecular_activity.id'), primary_key=True),
     Column('object', Text, ForeignKey('molecular_activity.id'), primary_key=True),
+    Column('molecular_activity_id', Text, ForeignKey('molecular_activity.id'), primary_key=True),
 )
 tbl_activity_to_process_causal_association = Table('activity_to_process_causal_association', metadata, 
     Column('has_evidence', Text, ForeignKey('evidence.id'), primary_key=True),
     Column('predicate', Text, primary_key=True),
     Column('subject', Text, ForeignKey('molecular_activity.id'), primary_key=True),
     Column('object', Text, ForeignKey('biological_process.id'), primary_key=True),
+    Column('molecular_activity_id', Text, ForeignKey('molecular_activity.id'), primary_key=True),
 )
 tbl_anatomical_entity = Table('anatomical_entity', metadata, 
     Column('id', Text, primary_key=True),
@@ -50,8 +52,6 @@ tbl_biological_process = Table('biological_process', metadata,
     Column('type', Text, ForeignKey('ontology_class.id')),
     Column('type_inferences', Text),
     Column('occurs_in', Text),
-    Column('has_activity_causal_associations', Text),
-    Column('has_process_causal_associations', Text),
     Column('happens_during', Text),
 )
 tbl_chemical_entity = Table('chemical_entity', metadata, 
@@ -111,8 +111,6 @@ tbl_molecular_activity = Table('molecular_activity', metadata,
     Column('id', Text, primary_key=True),
     Column('type', Text, ForeignKey('ontology_class.id')),
     Column('type_inferences', Text),
-    Column('has_activity_causal_associations', Text),
-    Column('has_process_causal_associations', Text),
     Column('happens_during', Text),
     Column('part_of', Text),
     Column('enabled_by', Text),
@@ -134,19 +132,21 @@ tbl_process_part_of_association = Table('process_part_of_association', metadata,
     Column('has_evidence', Text, ForeignKey('evidence.id'), primary_key=True),
     Column('subject', Text, primary_key=True),
     Column('predicate', Text, primary_key=True),
-    Column('object', Text, primary_key=True),
+    Column('object', Text, ForeignKey('biological_process.id'), primary_key=True),
 )
 tbl_process_to_activity_causal_association = Table('process_to_activity_causal_association', metadata, 
     Column('has_evidence', Text, ForeignKey('evidence.id'), primary_key=True),
     Column('predicate', Text, primary_key=True),
     Column('subject', Text, ForeignKey('biological_process.id'), primary_key=True),
     Column('object', Text, ForeignKey('molecular_activity.id'), primary_key=True),
+    Column('biological_process_id', Text, ForeignKey('biological_process.id'), primary_key=True),
 )
 tbl_process_to_process_causal_association = Table('process_to_process_causal_association', metadata, 
     Column('has_evidence', Text, ForeignKey('evidence.id'), primary_key=True),
     Column('predicate', Text, primary_key=True),
     Column('subject', Text, ForeignKey('biological_process.id'), primary_key=True),
     Column('object', Text, ForeignKey('biological_process.id'), primary_key=True),
+    Column('biological_process_id', Text, ForeignKey('biological_process.id'), primary_key=True),
 )
 tbl_publication = Table('publication', metadata, 
     Column('id', Text, primary_key=True),
@@ -173,6 +173,18 @@ mapper_registry.map_imperatively(AnatomicalEntity, tbl_anatomical_entity, proper
 mapper_registry.map_imperatively(AnatomicalPartOfAssociation, tbl_anatomical_part_of_association, properties={
 })
 mapper_registry.map_imperatively(BiologicalProcess, tbl_biological_process, properties={
+
+    'has_activity_causal_associations': 
+        relationship(process to activity causal association, 
+                      foreign_keys=tbl_process_to_activity_causal_association.columns["biological_process_id"],
+                      backref='BiologicalProcess'),
+
+
+    'has_process_causal_associations': 
+        relationship(process to process causal association, 
+                      foreign_keys=tbl_process_to_process_causal_association.columns["biological_process_id"],
+                      backref='BiologicalProcess'),
+
 })
 mapper_registry.map_imperatively(ChemicalEntity, tbl_chemical_entity, properties={
 })
@@ -203,6 +215,18 @@ mapper_registry.map_imperatively(Model, tbl_model, properties={
 
 })
 mapper_registry.map_imperatively(MolecularActivity, tbl_molecular_activity, properties={
+
+    'has_activity_causal_associations': 
+        relationship(activity to activity causal association, 
+                      foreign_keys=tbl_activity_to_activity_causal_association.columns["molecular_activity_id"],
+                      backref='MolecularActivity'),
+
+
+    'has_process_causal_associations': 
+        relationship(activity to process causal association, 
+                      foreign_keys=tbl_activity_to_process_causal_association.columns["molecular_activity_id"],
+                      backref='MolecularActivity'),
+
 })
 mapper_registry.map_imperatively(OccursInAssociation, tbl_occurs_in_association, properties={
 })

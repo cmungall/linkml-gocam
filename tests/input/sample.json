@@ -1,0 +1,136 @@
+{
+  "id": "gomodel:a5g4ccd08-m1",
+  "title": "test model: see https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7012280/figure/F3/",
+  "contributor": [
+    "orcid:123",
+    "orcid:234"
+  ],
+    "state": "development",
+    "molecular_activity_set": [
+    {
+      "id": "gomodel:a5g4ccd08-a1",
+        "type": "GO:0048018",
+      "occurs_in": {
+        "object": "gomodel:a5g4ccd08-c1",
+        "has_evidence": {
+          "id": "gomodel:a5g4ccd08-e6",
+          "evidence_type": "ECO:nnn",
+          "contributor": [],
+          "date": null,
+          "reference": [
+            "PMID:1234"
+          ],
+          "with_object": []
+        },
+        "subject": null,
+        "predicate": null
+      }
+    },
+    {
+      "id": "gomodel:a5g4ccd08-a2",
+      "type": "GO:0042813",
+      "part_of": {
+        "object": "gomodel:a5g4ccd08-p1",
+        "has_evidence": {
+          "id": "gomodel:a5g4ccd08-e3",
+          "evidence_type": "ECO:nnn",
+          "contributor": [],
+          "date": null,
+          "reference": [
+            "PMID:1234"
+          ],
+          "with_object": []
+        },
+        "subject": null,
+        "predicate": null
+      },
+      "enabled_by": {
+        "object": "gomodel:a5g4ccd08-g2",
+        "has_evidence": {
+          "id": "gomodel:a5g4ccd08-e1",
+          "evidence_type": "ECO:nnn",
+          "contributor": [],
+          "date": null,
+          "reference": [
+            "PMID:1234"
+          ],
+          "with_object": []
+        },
+        "subject": null,
+        "predicate": null
+      },
+      "occurs_in": {
+        "object": "gomodel:a5g4ccd08-c2",
+        "has_evidence": {
+          "id": "gomodel:a5g4ccd08-e2",
+          "evidence_type": "ECO:nnn",
+          "contributor": [],
+          "date": null,
+          "reference": [
+            "PMID:1234"
+          ],
+          "with_object": []
+        },
+        "subject": null,
+        "predicate": null
+      }
+    }
+  ],
+  "information_biomacromolecule_set": [
+    {
+      "id": "gomodel:a5g4ccd08-g1",
+      "type": "UniProtKB:P56703",
+      "category": {
+        "_code": {
+          "text": "GeneOrReferenceProtein",
+          "description": null,
+          "meaning": "https://w3id.org/gocam/biolink.GeneOrGeneProduct",
+          "alt_descriptions": {},
+          "deprecated": null,
+          "todos": [],
+          "notes": [],
+          "comments": [],
+          "examples": [],
+          "in_subset": [],
+          "from_schema": null,
+          "imported_from": null,
+          "see_also": [],
+          "deprecated_element_has_exact_replacement": null,
+          "deprecated_element_has_possible_replacement": null,
+          "is_a": null,
+          "mixins": [],
+          "extensions": {},
+          "annotations": {}
+        }
+      }
+    },
+    {
+      "id": "gomodel:a5g4ccd08-g2",
+      "type": "UniProtKB:Q9UP38",
+      "category": {
+        "_code": {
+          "text": "GeneOrReferenceProtein",
+          "description": null,
+          "meaning": "https://w3id.org/gocam/biolink.GeneOrGeneProduct",
+          "alt_descriptions": {},
+          "deprecated": null,
+          "todos": [],
+          "notes": [],
+          "comments": [],
+          "examples": [],
+          "in_subset": [],
+          "from_schema": null,
+          "imported_from": null,
+          "see_also": [],
+          "deprecated_element_has_exact_replacement": null,
+          "deprecated_element_has_possible_replacement": null,
+          "is_a": null,
+          "mixins": [],
+          "extensions": {},
+          "annotations": {}
+        }
+      }
+    }
+  ],
+  "@type": "Model"
+}
