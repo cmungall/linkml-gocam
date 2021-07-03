@@ -24,9 +24,9 @@ class TestLoad(unittest.TestCase):
         a = {
             "id": 'activity-instance:001',
             "type": "GO:0048018",
-            #"occurs_in": {
-            #    "object": "gomodel:a5g4ccd08-c1"
-            #}
+            "occurs_in": {
+                "object": "gomodel:a5g4ccd08-c1"
+            }
         }
         a = json_loader.loads(a, MolecularActivity)
         #print(a)
