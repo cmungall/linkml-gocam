@@ -1,5 +1,5 @@
 # Auto generated from gocam.yaml by pythongen.py version: 0.9.0
-# Generation date: 2021-07-02 10:35
+# Generation date: 2021-07-07 20:08
 # Schema: gocam
 #
 # id: https://w3id.org/gocam
@@ -309,11 +309,11 @@ class MolecularActivity(DomainEntity):
     type: Union[str, OntologyClassId] = None
     has_activity_causal_associations: Optional[Union[Union[dict, "ActivityToActivityCausalAssociation"], List[Union[dict, "ActivityToActivityCausalAssociation"]]]] = empty_list()
     has_process_causal_associations: Optional[Union[Union[dict, "ActivityToProcessCausalAssociation"], List[Union[dict, "ActivityToProcessCausalAssociation"]]]] = empty_list()
-    happens_during: Optional[Union[dict, "HappensDuringAssociation"]] = None
-    part_of: Optional[Union[dict, "ProcessPartOfAssociation"]] = None
-    enabled_by: Optional[Union[dict, "EnabledByAssociation"]] = None
-    has_input: Optional[Union[dict, "HasInputAssociation"]] = None
-    occurs_in: Optional[Union[dict, "OccursInAssociation"]] = None
+    happens_during: Optional[Union[Union[dict, "HappensDuringAssociation"], List[Union[dict, "HappensDuringAssociation"]]]] = empty_list()
+    part_of: Optional[Union[Union[dict, "ProcessPartOfAssociation"], List[Union[dict, "ProcessPartOfAssociation"]]]] = empty_list()
+    enabled_by: Optional[Union[Union[dict, "EnabledByAssociation"], List[Union[dict, "EnabledByAssociation"]]]] = empty_list()
+    has_input: Optional[Union[Union[dict, "HasInputAssociation"], List[Union[dict, "HasInputAssociation"]]]] = empty_list()
+    occurs_in: Optional[Union[Union[dict, "OccursInAssociation"], List[Union[dict, "OccursInAssociation"]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -325,20 +325,15 @@ class MolecularActivity(DomainEntity):
 
         self._normalize_inlined_as_list(slot_name="has_process_causal_associations", slot_type=ActivityToProcessCausalAssociation, key_name="object", keyed=False)
 
-        if self.happens_during is not None and not isinstance(self.happens_during, HappensDuringAssociation):
-            self.happens_during = HappensDuringAssociation(**self.happens_during)
+        self._normalize_inlined_as_list(slot_name="happens_during", slot_type=HappensDuringAssociation, key_name="object", keyed=False)
 
-        if self.part_of is not None and not isinstance(self.part_of, ProcessPartOfAssociation):
-            self.part_of = ProcessPartOfAssociation(**self.part_of)
+        self._normalize_inlined_as_list(slot_name="part_of", slot_type=ProcessPartOfAssociation, key_name="object", keyed=False)
 
-        if self.enabled_by is not None and not isinstance(self.enabled_by, EnabledByAssociation):
-            self.enabled_by = EnabledByAssociation(**self.enabled_by)
+        self._normalize_inlined_as_list(slot_name="enabled_by", slot_type=EnabledByAssociation, key_name="object", keyed=False)
 
-        if self.has_input is not None and not isinstance(self.has_input, HasInputAssociation):
-            self.has_input = HasInputAssociation(**self.has_input)
+        self._normalize_inlined_as_list(slot_name="has_input", slot_type=HasInputAssociation, key_name="object", keyed=False)
 
-        if self.occurs_in is not None and not isinstance(self.occurs_in, OccursInAssociation):
-            self.occurs_in = OccursInAssociation(**self.occurs_in)
+        self._normalize_inlined_as_list(slot_name="occurs_in", slot_type=OccursInAssociation, key_name="object", keyed=False)
 
         super().__post_init__(**kwargs)
 
@@ -357,10 +352,10 @@ class BiologicalProcess(DomainEntity):
 
     id: Union[str, BiologicalProcessId] = None
     type: Union[str, OntologyClassId] = None
-    occurs_in: Optional[Union[dict, "OccursInAssociation"]] = None
+    occurs_in: Optional[Union[Union[dict, "OccursInAssociation"], List[Union[dict, "OccursInAssociation"]]]] = empty_list()
     has_activity_causal_associations: Optional[Union[Union[dict, "ProcessToActivityCausalAssociation"], List[Union[dict, "ProcessToActivityCausalAssociation"]]]] = empty_list()
     has_process_causal_associations: Optional[Union[Union[dict, "ProcessToProcessCausalAssociation"], List[Union[dict, "ProcessToProcessCausalAssociation"]]]] = empty_list()
-    happens_during: Optional[Union[dict, "HappensDuringAssociation"]] = None
+    happens_during: Optional[Union[Union[dict, "HappensDuringAssociation"], List[Union[dict, "HappensDuringAssociation"]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -368,15 +363,13 @@ class BiologicalProcess(DomainEntity):
         if not isinstance(self.id, BiologicalProcessId):
             self.id = BiologicalProcessId(self.id)
 
-        if self.occurs_in is not None and not isinstance(self.occurs_in, OccursInAssociation):
-            self.occurs_in = OccursInAssociation(**self.occurs_in)
+        self._normalize_inlined_as_list(slot_name="occurs_in", slot_type=OccursInAssociation, key_name="object", keyed=False)
 
         self._normalize_inlined_as_list(slot_name="has_activity_causal_associations", slot_type=ProcessToActivityCausalAssociation, key_name="object", keyed=False)
 
         self._normalize_inlined_as_list(slot_name="has_process_causal_associations", slot_type=ProcessToProcessCausalAssociation, key_name="object", keyed=False)
 
-        if self.happens_during is not None and not isinstance(self.happens_during, HappensDuringAssociation):
-            self.happens_during = HappensDuringAssociation(**self.happens_during)
+        self._normalize_inlined_as_list(slot_name="happens_during", slot_type=HappensDuringAssociation, key_name="object", keyed=False)
 
         super().__post_init__(**kwargs)
 
@@ -396,7 +389,7 @@ class AnatomicalEntity(DomainEntity):
     id: Union[str, AnatomicalEntityId] = None
     type: Union[str, OntologyClassId] = None
     category: Union[str, "AnatomicalEntityCategory"] = None
-    part_of: Optional[Union[dict, "AnatomicalPartOfAssociation"]] = None
+    part_of: Optional[Union[Union[dict, "AnatomicalPartOfAssociation"], List[Union[dict, "AnatomicalPartOfAssociation"]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -409,8 +402,7 @@ class AnatomicalEntity(DomainEntity):
         if not isinstance(self.category, AnatomicalEntityCategory):
             self.category = AnatomicalEntityCategory(self.category)
 
-        if self.part_of is not None and not isinstance(self.part_of, AnatomicalPartOfAssociation):
-            self.part_of = AnatomicalPartOfAssociation(**self.part_of)
+        self._normalize_inlined_as_list(slot_name="part_of", slot_type=AnatomicalPartOfAssociation, key_name="object", keyed=False)
 
         super().__post_init__(**kwargs)
 
@@ -455,7 +447,7 @@ class InformationBiomacromolecule(ChemicalEntity):
     id: Union[str, InformationBiomacromoleculeId] = None
     type: Union[str, OntologyClassId] = None
     category: Union[str, "InformationBiomacromoleculeCategory"] = None
-    has_part: Optional[Union[dict, "MacromoleculeHasPartAssociation"]] = None
+    has_part: Optional[Union[Union[dict, "MacromoleculeHasPartAssociation"], List[Union[dict, "MacromoleculeHasPartAssociation"]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -468,8 +460,7 @@ class InformationBiomacromolecule(ChemicalEntity):
         if not isinstance(self.category, InformationBiomacromoleculeCategory):
             self.category = InformationBiomacromoleculeCategory(self.category)
 
-        if self.has_part is not None and not isinstance(self.has_part, MacromoleculeHasPartAssociation):
-            self.has_part = MacromoleculeHasPartAssociation(**self.has_part)
+        self._normalize_inlined_as_list(slot_name="has_part", slot_type=MacromoleculeHasPartAssociation, key_name="object", keyed=False)
 
         super().__post_init__(**kwargs)
 
@@ -488,7 +479,7 @@ class Association(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = GOCAM.Association
 
     object: Union[str, EntityId] = None
-    has_evidence: Optional[Union[dict, "Evidence"]] = None
+    has_evidence: Optional[Union[Dict[Union[str, EvidenceId], Union[dict, "Evidence"]], List[Union[dict, "Evidence"]]]] = empty_dict()
     subject: Optional[Union[str, DomainEntityId]] = None
     predicate: Optional[Union[str, PredicateType]] = None
 
@@ -498,8 +489,7 @@ class Association(YAMLRoot):
         if not isinstance(self.object, EntityId):
             self.object = EntityId(self.object)
 
-        if self.has_evidence is not None and not isinstance(self.has_evidence, Evidence):
-            self.has_evidence = Evidence(self.has_evidence)
+        self._normalize_inlined_as_list(slot_name="has_evidence", slot_type=Evidence, key_name="id", keyed=True)
 
         if self.subject is not None and not isinstance(self.subject, DomainEntityId):
             self.subject = DomainEntityId(self.subject)
@@ -1160,10 +1150,10 @@ slots.type_inferences = Slot(uri=GOCAM.type_inferences, name="type inferences", 
                    model_uri=GOCAM.type_inferences, domain=None, range=Optional[Union[Union[str, OntologyClassId], List[Union[str, OntologyClassId]]]])
 
 slots.related_to = Slot(uri=GOCAM.related_to, name="related to", curie=GOCAM.curie('related_to'),
-                   model_uri=GOCAM.related_to, domain=None, range=Optional[Union[dict, Association]])
+                   model_uri=GOCAM.related_to, domain=None, range=Optional[Union[Union[dict, Association], List[Union[dict, Association]]]])
 
 slots.occurs_in = Slot(uri=GOCAM.occurs_in, name="occurs in", curie=GOCAM.curie('occurs_in'),
-                   model_uri=GOCAM.occurs_in, domain=None, range=Optional[Union[dict, OccursInAssociation]])
+                   model_uri=GOCAM.occurs_in, domain=None, range=Optional[Union[Union[dict, OccursInAssociation], List[Union[dict, OccursInAssociation]]]])
 
 slots.has_causal_associations = Slot(uri=GOCAM.has_causal_associations, name="has causal associations", curie=GOCAM.curie('has_causal_associations'),
                    model_uri=GOCAM.has_causal_associations, domain=None, range=Optional[Union[Union[dict, CausalAssociation], List[Union[dict, CausalAssociation]]]])
@@ -1175,22 +1165,22 @@ slots.has_process_causal_associations = Slot(uri=GOCAM.has_process_causal_associ
                    model_uri=GOCAM.has_process_causal_associations, domain=None, range=Optional[Union[Union[dict, CausalAssociationToProcess], List[Union[dict, CausalAssociationToProcess]]]])
 
 slots.happens_during = Slot(uri=GOCAM.happens_during, name="happens during", curie=GOCAM.curie('happens_during'),
-                   model_uri=GOCAM.happens_during, domain=None, range=Optional[Union[dict, HappensDuringAssociation]])
+                   model_uri=GOCAM.happens_during, domain=None, range=Optional[Union[Union[dict, HappensDuringAssociation], List[Union[dict, HappensDuringAssociation]]]])
 
 slots.part_of = Slot(uri=GOCAM.part_of, name="part of", curie=GOCAM.curie('part_of'),
-                   model_uri=GOCAM.part_of, domain=None, range=Optional[Union[dict, PartOfAssociation]])
+                   model_uri=GOCAM.part_of, domain=None, range=Optional[Union[Union[dict, PartOfAssociation], List[Union[dict, PartOfAssociation]]]])
 
 slots.has_part = Slot(uri=GOCAM.has_part, name="has part", curie=GOCAM.curie('has_part'),
-                   model_uri=GOCAM.has_part, domain=None, range=Optional[Union[dict, HasPartAssociation]])
+                   model_uri=GOCAM.has_part, domain=None, range=Optional[Union[Union[dict, HasPartAssociation], List[Union[dict, HasPartAssociation]]]])
 
 slots.enabled_by = Slot(uri=GOCAM.enabled_by, name="enabled by", curie=GOCAM.curie('enabled_by'),
-                   model_uri=GOCAM.enabled_by, domain=MolecularActivity, range=Optional[Union[dict, "EnabledByAssociation"]])
+                   model_uri=GOCAM.enabled_by, domain=MolecularActivity, range=Optional[Union[Union[dict, "EnabledByAssociation"], List[Union[dict, "EnabledByAssociation"]]]])
 
 slots.has_input = Slot(uri=GOCAM.has_input, name="has input", curie=GOCAM.curie('has_input'),
-                   model_uri=GOCAM.has_input, domain=None, range=Optional[Union[dict, HasInputAssociation]])
+                   model_uri=GOCAM.has_input, domain=None, range=Optional[Union[Union[dict, HasInputAssociation], List[Union[dict, HasInputAssociation]]]])
 
 slots.has_evidence = Slot(uri=GOCAM.has_evidence, name="has evidence", curie=GOCAM.curie('has_evidence'),
-                   model_uri=GOCAM.has_evidence, domain=Association, range=Optional[Union[dict, "Evidence"]])
+                   model_uri=GOCAM.has_evidence, domain=Association, range=Optional[Union[Dict[Union[str, EvidenceId], Union[dict, "Evidence"]], List[Union[dict, "Evidence"]]]])
 
 slots.association_slot = Slot(uri=GOCAM.association_slot, name="association slot", curie=GOCAM.curie('association_slot'),
                    model_uri=GOCAM.association_slot, domain=Association, range=Optional[str])
@@ -1232,7 +1222,7 @@ slots.ontology_class_set = Slot(uri=GOCAM.ontology_class_set, name="ontology cla
                    model_uri=GOCAM.ontology_class_set, domain=None, range=Optional[Union[Dict[Union[str, OntologyClassId], Union[dict, OntologyClass]], List[Union[dict, OntologyClass]]]])
 
 slots.molecular_activity_part_of = Slot(uri=GOCAM.part_of, name="molecular activity_part of", curie=GOCAM.curie('part_of'),
-                   model_uri=GOCAM.molecular_activity_part_of, domain=MolecularActivity, range=Optional[Union[dict, "ProcessPartOfAssociation"]])
+                   model_uri=GOCAM.molecular_activity_part_of, domain=MolecularActivity, range=Optional[Union[Union[dict, "ProcessPartOfAssociation"], List[Union[dict, "ProcessPartOfAssociation"]]]])
 
 slots.molecular_activity_has_activity_causal_associations = Slot(uri=GOCAM.has_activity_causal_associations, name="molecular activity_has activity causal associations", curie=GOCAM.curie('has_activity_causal_associations'),
                    model_uri=GOCAM.molecular_activity_has_activity_causal_associations, domain=MolecularActivity, range=Optional[Union[Union[dict, "ActivityToActivityCausalAssociation"], List[Union[dict, "ActivityToActivityCausalAssociation"]]]])
@@ -1250,13 +1240,13 @@ slots.anatomical_entity_category = Slot(uri=GOCAM.category, name="anatomical ent
                    model_uri=GOCAM.anatomical_entity_category, domain=AnatomicalEntity, range=Union[str, "AnatomicalEntityCategory"])
 
 slots.anatomical_entity_part_of = Slot(uri=GOCAM.part_of, name="anatomical entity_part of", curie=GOCAM.curie('part_of'),
-                   model_uri=GOCAM.anatomical_entity_part_of, domain=AnatomicalEntity, range=Optional[Union[dict, "AnatomicalPartOfAssociation"]])
+                   model_uri=GOCAM.anatomical_entity_part_of, domain=AnatomicalEntity, range=Optional[Union[Union[dict, "AnatomicalPartOfAssociation"], List[Union[dict, "AnatomicalPartOfAssociation"]]]])
 
 slots.information_biomacromolecule_category = Slot(uri=GOCAM.category, name="information biomacromolecule_category", curie=GOCAM.curie('category'),
                    model_uri=GOCAM.information_biomacromolecule_category, domain=InformationBiomacromolecule, range=Union[str, "InformationBiomacromoleculeCategory"])
 
 slots.information_biomacromolecule_has_part = Slot(uri=GOCAM.has_part, name="information biomacromolecule_has part", curie=GOCAM.curie('has_part'),
-                   model_uri=GOCAM.information_biomacromolecule_has_part, domain=InformationBiomacromolecule, range=Optional[Union[dict, "MacromoleculeHasPartAssociation"]])
+                   model_uri=GOCAM.information_biomacromolecule_has_part, domain=InformationBiomacromolecule, range=Optional[Union[Union[dict, "MacromoleculeHasPartAssociation"], List[Union[dict, "MacromoleculeHasPartAssociation"]]]])
 
 slots.occurs_in_association_object = Slot(uri=GOCAM.object, name="occurs in association_object", curie=GOCAM.curie('object'),
                    model_uri=GOCAM.occurs_in_association_object, domain=OccursInAssociation, range=Union[str, AnatomicalEntityId])

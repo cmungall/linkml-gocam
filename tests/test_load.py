@@ -21,12 +21,7 @@ class TestLoad(unittest.TestCase):
     """A test case for loading."""
 
     def test_load(self):
-        a = {
-            "id": 'activity-instance:001',
-            "type": "GO:0048018",
-            #"occurs_in": {
-            #    "object": "gomodel:a5g4ccd08-c1"
-            #}
-        }
-        a = json_loader.loads(a, MolecularActivity)
-        #print(a)
+        a1 = json_loader.load(a1json, MolecularActivity)
+        print(a1)
+        #with open(json_in) as stream:
+        m = json_loader.load(json_in, Model)

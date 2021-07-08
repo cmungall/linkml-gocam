@@ -87,7 +87,7 @@ linkml:Nodeidentifier NONLITERAL
           rdf:type [ <DomainEntity> ] ? ;
           &<Continuant_tes> ;
           rdf:type [ <Continuant> ] ? ;
-          <part_of> @<AnatomicalPartOfAssociation> ? ;
+          <part_of> @<AnatomicalPartOfAssociation> * ;
           <category> @<AnatomicalEntityCategory>
        ) ;
        rdf:type [ <AnatomicalEntity> ]
@@ -109,7 +109,7 @@ linkml:Nodeidentifier NONLITERAL
 )
 
 <Association_struct> {
-    (  $<Association_tes> (  <has_evidence> @<Evidence> ? ;
+    (  $<Association_tes> (  <has_evidence> @<Evidence> * ;
           rdf:subject @<DomainEntity> ? ;
           rdf:predicate @<PredicateType> ? ;
           rdf:object @<Entity>
@@ -125,10 +125,10 @@ linkml:Nodeidentifier NONLITERAL
           rdf:type [ <ActivityOrProcess> ] ? ;
           &<ProcessOrPhase_tes> ;
           rdf:type [ <ProcessOrPhase> ] ? ;
-          <occurs_in> @<OccursInAssociation> ? ;
+          <occurs_in> @<OccursInAssociation> * ;
           <has_activity_causal_associations> @<ProcessToActivityCausalAssociation> * ;
           <has_process_causal_associations> @<ProcessToProcessCausalAssociation> * ;
-          <happens_during> @<HappensDuringAssociation> ?
+          <happens_during> @<HappensDuringAssociation> *
        ) ;
        rdf:type [ <BiologicalProcess> ]
     )
@@ -269,7 +269,7 @@ linkml:Nodeidentifier NONLITERAL
           rdf:type [ <ChemicalEntity> ] ? ;
           &<Continuant_tes> ;
           rdf:type [ <Continuant> ] ? ;
-          <has_part> @<MacromoleculeHasPartAssociation> ? ;
+          <has_part> @<MacromoleculeHasPartAssociation> * ;
           <category> @<InformationBiomacromoleculeCategory>
        ) ;
        rdf:type [ <InformationBiomacromolecule> ]
@@ -322,11 +322,11 @@ linkml:Nodeidentifier NONLITERAL
           rdf:type [ <ActivityOrProcess> ] ? ;
           <has_activity_causal_associations> @<ActivityToActivityCausalAssociation> * ;
           <has_process_causal_associations> @<ActivityToProcessCausalAssociation> * ;
-          <happens_during> @<HappensDuringAssociation> ? ;
-          <part_of> @<ProcessPartOfAssociation> ? ;
-          <enabled_by> @<EnabledByAssociation> ? ;
-          <has_input> @<HasInputAssociation> ? ;
-          <occurs_in> @<OccursInAssociation> ?
+          <happens_during> @<HappensDuringAssociation> * ;
+          <part_of> @<ProcessPartOfAssociation> * ;
+          <enabled_by> @<EnabledByAssociation> * ;
+          <has_input> @<HasInputAssociation> * ;
+          <occurs_in> @<OccursInAssociation> *
        ) ;
        rdf:type [ <MolecularActivity> ]
     )

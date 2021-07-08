@@ -1,5 +1,13 @@
 
 
+CREATE TABLE happens_during_association (
+	has_evidence TEXT, 
+	subject TEXT, 
+	predicate TEXT, 
+	object TEXT NOT NULL, 
+	PRIMARY KEY (has_evidence, subject, predicate, object)
+);
+
 CREATE TABLE model (
 	id TEXT NOT NULL, 
 	title TEXT, 
@@ -24,7 +32,6 @@ CREATE TABLE anatomical_entity (
 	id TEXT NOT NULL, 
 	type TEXT NOT NULL, 
 	type_inferences TEXT, 
-	part_of TEXT, 
 	category VARCHAR(24) NOT NULL, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(type) REFERENCES ontology_class (id)
@@ -62,7 +69,6 @@ CREATE TABLE information_biomacromolecule (
 	id TEXT NOT NULL, 
 	type TEXT NOT NULL, 
 	type_inferences TEXT, 
-	has_part TEXT, 
 	category VARCHAR(22) NOT NULL, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(type) REFERENCES ontology_class (id)
@@ -73,9 +79,6 @@ CREATE TABLE molecular_activity (
 	type TEXT NOT NULL, 
 	type_inferences TEXT, 
 	happens_during TEXT, 
-	part_of TEXT, 
-	enabled_by TEXT, 
-	has_input TEXT, 
 	occurs_in TEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(type) REFERENCES ontology_class (id)
@@ -95,7 +98,6 @@ CREATE TABLE activity_to_activity_causal_association (
 	object TEXT NOT NULL, 
 	molecular_activity_id TEXT, 
 	PRIMARY KEY (has_evidence, predicate, subject, object, molecular_activity_id), 
-	FOREIGN KEY(has_evidence) REFERENCES evidence (id), 
 	FOREIGN KEY(subject) REFERENCES molecular_activity (id), 
 	FOREIGN KEY(object) REFERENCES molecular_activity (id), 
 	FOREIGN KEY(molecular_activity_id) REFERENCES molecular_activity (id)
@@ -108,7 +110,6 @@ CREATE TABLE activity_to_process_causal_association (
 	object TEXT NOT NULL, 
 	molecular_activity_id TEXT, 
 	PRIMARY KEY (has_evidence, predicate, subject, object, molecular_activity_id), 
-	FOREIGN KEY(has_evidence) REFERENCES evidence (id), 
 	FOREIGN KEY(subject) REFERENCES molecular_activity (id), 
 	FOREIGN KEY(object) REFERENCES biological_process (id), 
 	FOREIGN KEY(molecular_activity_id) REFERENCES molecular_activity (id)
@@ -119,9 +120,10 @@ CREATE TABLE anatomical_part_of_association (
 	subject TEXT, 
 	predicate TEXT, 
 	object TEXT NOT NULL, 
-	PRIMARY KEY (has_evidence, subject, predicate, object), 
-	FOREIGN KEY(has_evidence) REFERENCES evidence (id), 
-	FOREIGN KEY(object) REFERENCES anatomical_entity (id)
+	anatomical_entity_id TEXT, 
+	PRIMARY KEY (has_evidence, subject, predicate, object, anatomical_entity_id), 
+	FOREIGN KEY(object) REFERENCES anatomical_entity (id), 
+	FOREIGN KEY(anatomical_entity_id) REFERENCES anatomical_entity (id)
 );
 
 CREATE TABLE enabled_by_association (
@@ -129,18 +131,10 @@ CREATE TABLE enabled_by_association (
 	subject TEXT, 
 	predicate TEXT, 
 	object TEXT NOT NULL, 
-	PRIMARY KEY (has_evidence, subject, predicate, object), 
-	FOREIGN KEY(has_evidence) REFERENCES evidence (id), 
-	FOREIGN KEY(object) REFERENCES information_biomacromolecule (id)
-);
-
-CREATE TABLE happens_during_association (
-	has_evidence TEXT, 
-	subject TEXT, 
-	predicate TEXT, 
-	object TEXT NOT NULL, 
-	PRIMARY KEY (has_evidence, subject, predicate, object), 
-	FOREIGN KEY(has_evidence) REFERENCES evidence (id)
+	molecular_activity_id TEXT, 
+	PRIMARY KEY (has_evidence, subject, predicate, object, molecular_activity_id), 
+	FOREIGN KEY(object) REFERENCES information_biomacromolecule (id), 
+	FOREIGN KEY(molecular_activity_id) REFERENCES molecular_activity (id)
 );
 
 CREATE TABLE has_input_association (
@@ -148,8 +142,9 @@ CREATE TABLE has_input_association (
 	subject TEXT, 
 	predicate TEXT, 
 	object TEXT NOT NULL, 
-	PRIMARY KEY (has_evidence, subject, predicate, object), 
-	FOREIGN KEY(has_evidence) REFERENCES evidence (id)
+	molecular_activity_id TEXT, 
+	PRIMARY KEY (has_evidence, subject, predicate, object, molecular_activity_id), 
+	FOREIGN KEY(molecular_activity_id) REFERENCES molecular_activity (id)
 );
 
 CREATE TABLE macromolecule_has_part_association (
@@ -157,8 +152,9 @@ CREATE TABLE macromolecule_has_part_association (
 	subject TEXT, 
 	predicate TEXT, 
 	object TEXT NOT NULL, 
-	PRIMARY KEY (has_evidence, subject, predicate, object), 
-	FOREIGN KEY(has_evidence) REFERENCES evidence (id)
+	information_biomacromolecule_id TEXT, 
+	PRIMARY KEY (has_evidence, subject, predicate, object, information_biomacromolecule_id), 
+	FOREIGN KEY(information_biomacromolecule_id) REFERENCES information_biomacromolecule (id)
 );
 
 CREATE TABLE occurs_in_association (
@@ -167,7 +163,6 @@ CREATE TABLE occurs_in_association (
 	predicate TEXT, 
 	object TEXT NOT NULL, 
 	PRIMARY KEY (has_evidence, subject, predicate, object), 
-	FOREIGN KEY(has_evidence) REFERENCES evidence (id), 
 	FOREIGN KEY(object) REFERENCES anatomical_entity (id)
 );
 
@@ -176,9 +171,10 @@ CREATE TABLE process_part_of_association (
 	subject TEXT, 
 	predicate TEXT, 
 	object TEXT NOT NULL, 
-	PRIMARY KEY (has_evidence, subject, predicate, object), 
-	FOREIGN KEY(has_evidence) REFERENCES evidence (id), 
-	FOREIGN KEY(object) REFERENCES biological_process (id)
+	molecular_activity_id TEXT, 
+	PRIMARY KEY (has_evidence, subject, predicate, object, molecular_activity_id), 
+	FOREIGN KEY(object) REFERENCES biological_process (id), 
+	FOREIGN KEY(molecular_activity_id) REFERENCES molecular_activity (id)
 );
 
 CREATE TABLE process_to_activity_causal_association (
@@ -188,7 +184,6 @@ CREATE TABLE process_to_activity_causal_association (
 	object TEXT NOT NULL, 
 	biological_process_id TEXT, 
 	PRIMARY KEY (has_evidence, predicate, subject, object, biological_process_id), 
-	FOREIGN KEY(has_evidence) REFERENCES evidence (id), 
 	FOREIGN KEY(subject) REFERENCES biological_process (id), 
 	FOREIGN KEY(object) REFERENCES molecular_activity (id), 
 	FOREIGN KEY(biological_process_id) REFERENCES biological_process (id)
@@ -201,7 +196,6 @@ CREATE TABLE process_to_process_causal_association (
 	object TEXT NOT NULL, 
 	biological_process_id TEXT, 
 	PRIMARY KEY (has_evidence, predicate, subject, object, biological_process_id), 
-	FOREIGN KEY(has_evidence) REFERENCES evidence (id), 
 	FOREIGN KEY(subject) REFERENCES biological_process (id), 
 	FOREIGN KEY(object) REFERENCES biological_process (id), 
 	FOREIGN KEY(biological_process_id) REFERENCES biological_process (id)

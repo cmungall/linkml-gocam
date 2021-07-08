@@ -15,6 +15,7 @@ default_curi_maps:
   - go_context
   - idot_context
   - semweb_context
+
 imports:
  - linkml:types
 prefixes:
@@ -141,6 +142,8 @@ slots:
     abstract: true
     range: association
     inlined: true
+    inlined_as_list: true
+    multivalued: true
     description: >-
       Links a subject domain entity to an object domain entity by way of an Association object
     
@@ -149,6 +152,8 @@ slots:
     range: occurs in association
     domain: activity or process
     inlined: true
+    inlined_as_list: true
+    multivalued: true
     description: >-
       Links a subject domain entity (a MA or BP) to an object domain entity by way of an OccursInAssociation
     
@@ -181,12 +186,16 @@ slots:
     is_a: related to
     range: happens during association
     domain: activity or process
+    inlined_as_list: true
+    multivalued: true
     description: >-
       Links a subject domain entity (a MA or BP) to an object domain entity by way of a HappensDuringAssociation 
 
   part of:
     is_a: related to
     range: part of association
+    inlined_as_list: true
+    multivalued: true
     description: >-
       Links a subject domain entity to an object domain entity by way of a PartOfAssociation
     comments:
@@ -195,6 +204,8 @@ slots:
   has part:
     is_a: related to
     range: has part association
+    inlined_as_list: true
+    multivalued: true
     description: >-
       Links a subject domain entity to an object domain entity by way of a HasPartAssociation
 
@@ -202,12 +213,16 @@ slots:
     is_a: related to
     range: enabled by association
     domain: molecular activity
+    inlined_as_list: true
+    multivalued: true
     description: >-
       Links a MolecularActivity to the InformationBiomacromolecule by way of a EnabledByAssociation
 
   has input:
     is_a: related to
     range: has input association
+    inlined_as_list: true
+    multivalued: true
     description: >-
       Links a MA or BP to its input by way of a HasInputAssociation
 
@@ -215,6 +230,8 @@ slots:
     range: evidence
     domain: association
     inlined: true
+    inlined_as_list: true
+    multivalued: true
     description: >-
       Links an association to evidence for it
 

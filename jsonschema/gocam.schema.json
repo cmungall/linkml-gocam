@@ -7,8 +7,11 @@
          "description": "A causal association between two molecular activities",
          "properties": {
             "has_evidence": {
-               "$ref": "#/definitions/Evidence",
-               "description": "Links an association to evidence for it"
+               "description": "Links an association to evidence for it",
+               "items": {
+                  "$ref": "#/definitions/Evidence"
+               },
+               "type": "array"
             },
             "object": {
                "description": "The downstream molecular activity",
@@ -34,8 +37,11 @@
          "description": "A causal association between a molecular activity and a biological process",
          "properties": {
             "has_evidence": {
-               "$ref": "#/definitions/Evidence",
-               "description": "Links an association to evidence for it"
+               "description": "Links an association to evidence for it",
+               "items": {
+                  "$ref": "#/definitions/Evidence"
+               },
+               "type": "array"
             },
             "object": {
                "description": "The upstream biological process",
@@ -68,7 +74,10 @@
                "type": "string"
             },
             "part_of": {
-               "$ref": "#/definitions/AnatomicalPartOfAssociation"
+               "items": {
+                  "$ref": "#/definitions/AnatomicalPartOfAssociation"
+               },
+               "type": "array"
             },
             "type": {
                "description": "links a GOCAM entity (an OWL individual) to the specific class it instantiates",
@@ -95,8 +104,11 @@
          "description": "Connects an anatomical entity (such as a component, cell, or gross anatomical entity) to its parent parts",
          "properties": {
             "has_evidence": {
-               "$ref": "#/definitions/Evidence",
-               "description": "Links an association to evidence for it"
+               "description": "Links an association to evidence for it",
+               "items": {
+                  "$ref": "#/definitions/Evidence"
+               },
+               "type": "array"
             },
             "object": {
                "type": "string"
@@ -121,8 +133,11 @@
          "description": "An instance of a GO biological process",
          "properties": {
             "happens_during": {
-               "$ref": "#/definitions/HappensDuringAssociation",
-               "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of a HappensDuringAssociation "
+               "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of a HappensDuringAssociation ",
+               "items": {
+                  "$ref": "#/definitions/HappensDuringAssociation"
+               },
+               "type": "array"
             },
             "has_activity_causal_associations": {
                "items": {
@@ -141,8 +156,11 @@
                "type": "string"
             },
             "occurs_in": {
-               "$ref": "#/definitions/OccursInAssociation",
-               "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of an OccursInAssociation"
+               "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of an OccursInAssociation",
+               "items": {
+                  "$ref": "#/definitions/OccursInAssociation"
+               },
+               "type": "array"
             },
             "type": {
                "description": "links a GOCAM entity (an OWL individual) to the specific class it instantiates",
@@ -195,8 +213,11 @@
          "description": "Connects an MA to the information biomacromolecule that executes the activity",
          "properties": {
             "has_evidence": {
-               "$ref": "#/definitions/Evidence",
-               "description": "Links an association to evidence for it"
+               "description": "Links an association to evidence for it",
+               "items": {
+                  "$ref": "#/definitions/Evidence"
+               },
+               "type": "array"
             },
             "object": {
                "type": "string"
@@ -267,8 +288,11 @@
          "description": "Connects an MF to a process or phase in which the process occurs",
          "properties": {
             "has_evidence": {
-               "$ref": "#/definitions/Evidence",
-               "description": "Links an association to evidence for it"
+               "description": "Links an association to evidence for it",
+               "items": {
+                  "$ref": "#/definitions/Evidence"
+               },
+               "type": "array"
             },
             "object": {
                "type": "string"
@@ -293,8 +317,11 @@
          "description": "Connects an MF or BP to its input entity, which may be a chemical entity, an information biomacromolecule, or a larger structure",
          "properties": {
             "has_evidence": {
-               "$ref": "#/definitions/Evidence",
-               "description": "Links an association to evidence for it"
+               "description": "Links an association to evidence for it",
+               "items": {
+                  "$ref": "#/definitions/Evidence"
+               },
+               "type": "array"
             },
             "object": {
                "type": "string"
@@ -322,7 +349,10 @@
                "type": "string"
             },
             "has_part": {
-               "$ref": "#/definitions/MacromoleculeHasPartAssociation"
+               "items": {
+                  "$ref": "#/definitions/MacromoleculeHasPartAssociation"
+               },
+               "type": "array"
             },
             "id": {
                "description": "A unique identifier for an entity",
@@ -353,8 +383,11 @@
          "description": "Connects a macromolecule (such as a protein complex) to its parts (gene products or chemical entities)",
          "properties": {
             "has_evidence": {
-               "$ref": "#/definitions/Evidence",
-               "description": "Links an association to evidence for it"
+               "description": "Links an association to evidence for it",
+               "items": {
+                  "$ref": "#/definitions/Evidence"
+               },
+               "type": "array"
             },
             "object": {
                "type": "string"
@@ -451,12 +484,18 @@
          "description": "An instance of a GO molecular function",
          "properties": {
             "enabled_by": {
-               "$ref": "#/definitions/EnabledByAssociation",
-               "description": "Links a MolecularActivity to the InformationBiomacromolecule by way of a EnabledByAssociation"
+               "description": "Links a MolecularActivity to the InformationBiomacromolecule by way of a EnabledByAssociation",
+               "items": {
+                  "$ref": "#/definitions/EnabledByAssociation"
+               },
+               "type": "array"
             },
             "happens_during": {
-               "$ref": "#/definitions/HappensDuringAssociation",
-               "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of a HappensDuringAssociation "
+               "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of a HappensDuringAssociation ",
+               "items": {
+                  "$ref": "#/definitions/HappensDuringAssociation"
+               },
+               "type": "array"
             },
             "has_activity_causal_associations": {
                "items": {
@@ -465,8 +504,11 @@
                "type": "array"
             },
             "has_input": {
-               "$ref": "#/definitions/HasInputAssociation",
-               "description": "Links a MA or BP to its input by way of a HasInputAssociation"
+               "description": "Links a MA or BP to its input by way of a HasInputAssociation",
+               "items": {
+                  "$ref": "#/definitions/HasInputAssociation"
+               },
+               "type": "array"
             },
             "has_process_causal_associations": {
                "items": {
@@ -479,11 +521,17 @@
                "type": "string"
             },
             "occurs_in": {
-               "$ref": "#/definitions/OccursInAssociation",
-               "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of an OccursInAssociation"
+               "description": "Links a subject domain entity (a MA or BP) to an object domain entity by way of an OccursInAssociation",
+               "items": {
+                  "$ref": "#/definitions/OccursInAssociation"
+               },
+               "type": "array"
             },
             "part_of": {
-               "$ref": "#/definitions/ProcessPartOfAssociation"
+               "items": {
+                  "$ref": "#/definitions/ProcessPartOfAssociation"
+               },
+               "type": "array"
             },
             "type": {
                "description": "links a GOCAM entity (an OWL individual) to the specific class it instantiates",
@@ -509,8 +557,11 @@
          "description": "An association owned by a MA or BP that connect to an AE object in which the activity/process is carried out",
          "properties": {
             "has_evidence": {
-               "$ref": "#/definitions/Evidence",
-               "description": "Links an association to evidence for it"
+               "description": "Links an association to evidence for it",
+               "items": {
+                  "$ref": "#/definitions/Evidence"
+               },
+               "type": "array"
             },
             "object": {
                "type": "string"
@@ -559,8 +610,11 @@
          "description": "Connects a MA or BP to its parent parts",
          "properties": {
             "has_evidence": {
-               "$ref": "#/definitions/Evidence",
-               "description": "Links an association to evidence for it"
+               "description": "Links an association to evidence for it",
+               "items": {
+                  "$ref": "#/definitions/Evidence"
+               },
+               "type": "array"
             },
             "object": {
                "type": "string"
@@ -585,8 +639,11 @@
          "description": "A causal association between a biological process and a molecular activity",
          "properties": {
             "has_evidence": {
-               "$ref": "#/definitions/Evidence",
-               "description": "Links an association to evidence for it"
+               "description": "Links an association to evidence for it",
+               "items": {
+                  "$ref": "#/definitions/Evidence"
+               },
+               "type": "array"
             },
             "object": {
                "description": "The downstream molecular activity",
@@ -612,8 +669,11 @@
          "description": "A causal association between two biological processes",
          "properties": {
             "has_evidence": {
-               "$ref": "#/definitions/Evidence",
-               "description": "Links an association to evidence for it"
+               "description": "Links an association to evidence for it",
+               "items": {
+                  "$ref": "#/definitions/Evidence"
+               },
+               "type": "array"
             },
             "object": {
                "description": "The downstream biological process",

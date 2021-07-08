@@ -37,11 +37,11 @@ def id(s):
     return f'gomodel:a5g4ccd08-{s}'
 
 counter = 0
-def gen_evidence(eco: str, ref: str = 'PMID:1234') -> Evidence:
+def gen_evidences(eco: str, ref: str = 'PMID:1234') -> Evidence:
     global  counter
     counter += 1
-    return Evidence(id=id(f'e{counter}'),
-                    evidence_type=eco, reference=ref)
+    return [Evidence(id=id(f'e{counter}'),
+                    evidence_type=eco, reference=ref)]
 
 def add_prefixes(cntxt: dict, p: str, url: str) -> None:
     cntxt['@context'][p] = {'@id': url, '@prefix': True}
@@ -74,28 +74,28 @@ class TestCreate(unittest.TestCase):
         g2 = InformationBiomacromolecule(id=id('g2'), type=FZD1,
                                          category=InformationBiomacromoleculeCategory.GeneOrReferenceProtein)
         a2 = MolecularActivity(id=id('a2'), type=RECEPTOR_ACTIVITY,
-                               enabled_by=EnabledByAssociation( has_evidence=gen_evidence('ECO:nnn'),
+                               enabled_by=EnabledByAssociation(has_evidence=gen_evidences('ECO:nnn'),
                                                                object=g2.id),
                                occurs_in=OccursInAssociation(
-                                   has_evidence=gen_evidence('ECO:nnn'),
+                                   has_evidence=gen_evidences('ECO:nnn'),
                                    object=c2.id),
                                part_of=ProcessPartOfAssociation(
-                                   has_evidence=gen_evidence('ECO:nnn'),
+                                   has_evidence=gen_evidences('ECO:nnn'),
                                    object=p1.id))
         a1_to_a2_assoc = \
-            ActivityToActivityCausalAssociation(has_evidence=gen_evidence('ECO:nnn'),
+            ActivityToActivityCausalAssociation(has_evidence=gen_evidences('ECO:nnn'),
                                                 predicate='regulates',
                                                 object=id('a2'))
         a1 = MolecularActivity(id=id('a1'), type=RECEPTOR_LIGAND,
                                enabled_by=EnabledByAssociation(
-                                   has_evidence=gen_evidence('ECO:nnn'),
+                                   has_evidence=gen_evidences('ECO:nnn'),
                                    object=g1.id),
                                occurs_in=OccursInAssociation(
-                                   has_evidence=gen_evidence('ECO:nnn'),
+                                   has_evidence=gen_evidences('ECO:nnn'),
                                    object=c1.id),
                                #has_activity_causal_associations=[a1_to_a2_assoc],
                                part_of=ProcessPartOfAssociation(
-                                   has_evidence=gen_evidence('ECO:nnn'),
+                                   has_evidence=gen_evidences('ECO:nnn'),
                                    object=p1.id))
         a1.has_activity_causal_associations = [a1_to_a2_assoc]
 
