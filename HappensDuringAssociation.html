@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="img/favicon.ico">
-  <title>Class: HappensDuringAssociation - gocam in linkml demo</title>
+  <title>Class: happens during association - gocam in linkml demo</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="css/theme.css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Class: HappensDuringAssociation";
+    var mkdocs_page_name = "Class: happens during association";
     var mkdocs_page_input_path = "HappensDuringAssociation.md";
     var mkdocs_page_url = null;
   </script>
@@ -79,7 +79,7 @@
     
       
     
-    <li>Class: HappensDuringAssociation</li>
+    <li>Class: happens during association</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -91,17 +91,17 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="class-happensduringassociation">Class: HappensDuringAssociation</h1>
+                <h1 id="class-happens-during-association">Class: happens during association</h1>
 <p>Connects an MF to a process or phase in which the process occurs</p>
 <p>URI: <a href="https://w3id.org/gocam/HappensDuringAssociation">gocam:HappensDuringAssociation</a></p>
-<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[ActivityOrProcess]&lt;object%201..1-%20[HappensDuringAssociation&#124;predicate(i):predicate_type%20%3F],[MolecularActivity]++-%20happens%20during%200..1&gt;[HappensDuringAssociation],[BiologicalProcess]++-%20happens%20during%200..1&gt;[HappensDuringAssociation],[Association]^-[HappensDuringAssociation],[MolecularActivity],[Evidence],[DomainEntity],[BiologicalProcess],[Association],[ActivityOrProcess]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[ActivityOrProcess]&lt;object%201..1-%20[HappensDuringAssociation&#124;predicate(i):predicate_type%20%3F],[MolecularActivity]++-%20happens%20during%200..1&gt;[HappensDuringAssociation],[BiologicalProcess]++-%20happens%20during%200..1&gt;[HappensDuringAssociation],[Association]^-[HappensDuringAssociation],[MolecularActivity],[Evidence],[DomainEntity],[BiologicalProcess],[Association],[ActivityOrProcess]" /></a></p>
+<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[ActivityOrProcess]&lt;object%201..1-%20[HappensDuringAssociation&#124;predicate(i):predicate_type%20%3F],[MolecularActivity]++-%20happens%20during%200..*&gt;[HappensDuringAssociation],[BiologicalProcess]++-%20happens%20during%200..*&gt;[HappensDuringAssociation],[Association]^-[HappensDuringAssociation],[MolecularActivity],[Evidence],[DomainEntity],[BiologicalProcess],[Association],[ActivityOrProcess]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[ActivityOrProcess]&lt;object%201..1-%20[HappensDuringAssociation&#124;predicate(i):predicate_type%20%3F],[MolecularActivity]++-%20happens%20during%200..*&gt;[HappensDuringAssociation],[BiologicalProcess]++-%20happens%20during%200..*&gt;[HappensDuringAssociation],[Association]^-[HappensDuringAssociation],[MolecularActivity],[Evidence],[DomainEntity],[BiologicalProcess],[Association],[ActivityOrProcess]" /></a></p>
 <h2 id="parents">Parents</h2>
 <ul>
 <li>is_a: <a href="Association.html">Association</a> - An association between a domain entity (e.g. a MolecularActivity) and another domain entity (e.g. another MolecularActivity) with evidence and provenance attached</li>
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
-<li><strong><a href="ActivityOrProcess.html">ActivityOrProcess</a></strong> <em><a href="happens_during.html">happens during</a></em>  <sub>0..1</sub>  <strong><a href="HappensDuringAssociation.html">HappensDuringAssociation</a></strong></li>
+<li><strong><a href="ActivityOrProcess.html">ActivityOrProcess</a></strong> <em><a href="happens_during.html">happens during</a></em>  <sub>0..*</sub>  <strong><a href="HappensDuringAssociation.html">HappensDuringAssociation</a></strong></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
 <h3 id="own">Own</h3>
@@ -113,7 +113,7 @@
 </ul>
 <h3 id="inherited-from-association">Inherited from association:</h3>
 <ul>
-<li><a href="has_evidence.html">has evidence</a>  <sub>0..1</sub><ul>
+<li><a href="has_evidence.html">has evidence</a>  <sub>0..*</sub><ul>
 <li>Description: Links an association to evidence for it</li>
 <li>Range: <a href="Evidence.html">Evidence</a></li>
 </ul>

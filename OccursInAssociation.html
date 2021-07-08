@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="img/favicon.ico">
-  <title>Class: OccursInAssociation - gocam in linkml demo</title>
+  <title>Class: occurs in association - gocam in linkml demo</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="css/theme.css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Class: OccursInAssociation";
+    var mkdocs_page_name = "Class: occurs in association";
     var mkdocs_page_input_path = "OccursInAssociation.md";
     var mkdocs_page_url = null;
   </script>
@@ -79,7 +79,7 @@
     
       
     
-    <li>Class: OccursInAssociation</li>
+    <li>Class: occurs in association</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -91,17 +91,17 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="class-occursinassociation">Class: OccursInAssociation</h1>
+                <h1 id="class-occurs-in-association">Class: occurs in association</h1>
 <p>An association owned by a MA or BP that connect to an AE object in which the activity/process is carried out</p>
 <p>URI: <a href="https://w3id.org/gocam/OccursInAssociation">gocam:OccursInAssociation</a></p>
-<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[AnatomicalEntity]&lt;object%201..1-%20[OccursInAssociation&#124;predicate(i):predicate_type%20%3F],[MolecularActivity]++-%20occurs%20in%200..1&gt;[OccursInAssociation],[BiologicalProcess]++-%20occurs%20in%200..1&gt;[OccursInAssociation],[Association]^-[OccursInAssociation],[MolecularActivity],[Evidence],[DomainEntity],[BiologicalProcess],[Association],[AnatomicalEntity],[ActivityOrProcess]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[AnatomicalEntity]&lt;object%201..1-%20[OccursInAssociation&#124;predicate(i):predicate_type%20%3F],[MolecularActivity]++-%20occurs%20in%200..1&gt;[OccursInAssociation],[BiologicalProcess]++-%20occurs%20in%200..1&gt;[OccursInAssociation],[Association]^-[OccursInAssociation],[MolecularActivity],[Evidence],[DomainEntity],[BiologicalProcess],[Association],[AnatomicalEntity],[ActivityOrProcess]" /></a></p>
+<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[AnatomicalEntity]&lt;object%201..1-%20[OccursInAssociation&#124;predicate(i):predicate_type%20%3F],[MolecularActivity]++-%20occurs%20in%200..*&gt;[OccursInAssociation],[BiologicalProcess]++-%20occurs%20in%200..*&gt;[OccursInAssociation],[Association]^-[OccursInAssociation],[MolecularActivity],[Evidence],[DomainEntity],[BiologicalProcess],[Association],[AnatomicalEntity],[ActivityOrProcess]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[AnatomicalEntity]&lt;object%201..1-%20[OccursInAssociation&#124;predicate(i):predicate_type%20%3F],[MolecularActivity]++-%20occurs%20in%200..*&gt;[OccursInAssociation],[BiologicalProcess]++-%20occurs%20in%200..*&gt;[OccursInAssociation],[Association]^-[OccursInAssociation],[MolecularActivity],[Evidence],[DomainEntity],[BiologicalProcess],[Association],[AnatomicalEntity],[ActivityOrProcess]" /></a></p>
 <h2 id="parents">Parents</h2>
 <ul>
 <li>is_a: <a href="Association.html">Association</a> - An association between a domain entity (e.g. a MolecularActivity) and another domain entity (e.g. another MolecularActivity) with evidence and provenance attached</li>
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
-<li><strong><a href="ActivityOrProcess.html">ActivityOrProcess</a></strong> <em><a href="occurs_in.html">occurs in</a></em>  <sub>0..1</sub>  <strong><a href="OccursInAssociation.html">OccursInAssociation</a></strong></li>
+<li><strong><a href="ActivityOrProcess.html">ActivityOrProcess</a></strong> <em><a href="occurs_in.html">occurs in</a></em>  <sub>0..*</sub>  <strong><a href="OccursInAssociation.html">OccursInAssociation</a></strong></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
 <h3 id="own">Own</h3>
@@ -113,7 +113,7 @@
 </ul>
 <h3 id="inherited-from-association">Inherited from association:</h3>
 <ul>
-<li><a href="has_evidence.html">has evidence</a>  <sub>0..1</sub><ul>
+<li><a href="has_evidence.html">has evidence</a>  <sub>0..*</sub><ul>
 <li>Description: Links an association to evidence for it</li>
 <li>Range: <a href="Evidence.html">Evidence</a></li>
 </ul>

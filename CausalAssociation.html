@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="img/favicon.ico">
-  <title>Class: CausalAssociation - gocam in linkml demo</title>
+  <title>Class: causal association - gocam in linkml demo</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="css/theme.css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Class: CausalAssociation";
+    var mkdocs_page_name = "Class: causal association";
     var mkdocs_page_input_path = "CausalAssociation.md";
     var mkdocs_page_url = null;
   </script>
@@ -79,7 +79,7 @@
     
       
     
-    <li>Class: CausalAssociation</li>
+    <li>Class: causal association</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -91,7 +91,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="class-causalassociation">Class: CausalAssociation</h1>
+                <h1 id="class-causal-association">Class: causal association</h1>
 <p>An association owned by an upstream MA or BP that connects to a downstream MA or BP. The nature of the causal relationship is indicated with the predicate.</p>
 <p>URI: <a href="https://w3id.org/gocam/CausalAssociation">gocam:CausalAssociation</a></p>
 <p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[ProcessToProcessCausalAssociation],[ProcessToActivityCausalAssociation],[Evidence],[DomainEntity],[ActivityOrProcess]&lt;object%201..1-%20[CausalAssociation&#124;predicate:predicate_type%20%3F],[DomainEntity]&lt;subject%200..1-%20[CausalAssociation],[CausalAssociation]^-[ProcessToProcessCausalAssociation],[CausalAssociation]^-[ProcessToActivityCausalAssociation],[CausalAssociation]^-[ActivityToProcessCausalAssociation],[CausalAssociation]^-[ActivityToActivityCausalAssociation],[Association]^-[CausalAssociation],[Association],[ActivityToProcessCausalAssociation],[ActivityToActivityCausalAssociation],[ActivityOrProcess]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[ProcessToProcessCausalAssociation],[ProcessToActivityCausalAssociation],[Evidence],[DomainEntity],[ActivityOrProcess]&lt;object%201..1-%20[CausalAssociation&#124;predicate:predicate_type%20%3F],[DomainEntity]&lt;subject%200..1-%20[CausalAssociation],[CausalAssociation]^-[ProcessToProcessCausalAssociation],[CausalAssociation]^-[ProcessToActivityCausalAssociation],[CausalAssociation]^-[ActivityToProcessCausalAssociation],[CausalAssociation]^-[ActivityToActivityCausalAssociation],[Association]^-[CausalAssociation],[Association],[ActivityToProcessCausalAssociation],[ActivityToActivityCausalAssociation],[ActivityOrProcess]" /></a></p>
@@ -108,7 +108,7 @@
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
-<li><strong><a href="ActivityOrProcess.html">ActivityOrProcess</a></strong> <em><a href="has_causal_associations.html">has causal associations</a></em>  <sub>0..1</sub>  <strong><a href="CausalAssociation.html">CausalAssociation</a></strong></li>
+<li><strong><a href="ActivityOrProcess.html">ActivityOrProcess</a></strong> <em><a href="has_causal_associations.html">has causal associations</a></em>  <sub>0..*</sub>  <strong><a href="CausalAssociation.html">CausalAssociation</a></strong></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
 <h3 id="own">Own</h3>
@@ -131,7 +131,7 @@
 </ul>
 <h3 id="inherited-from-association">Inherited from association:</h3>
 <ul>
-<li><a href="has_evidence.html">has evidence</a>  <sub>0..1</sub><ul>
+<li><a href="has_evidence.html">has evidence</a>  <sub>0..*</sub><ul>
 <li>Description: Links an association to evidence for it</li>
 <li>Range: <a href="Evidence.html">Evidence</a></li>
 </ul>

@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="img/favicon.ico">
-  <title>Class: process to process causal association - gocam in linkml demo</title>
+  <title>Subset: deviates from original specification - gocam in linkml demo</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Class: process to process causal association";
-    var mkdocs_page_input_path = "ProcessToProcessCausalAssociation.md";
+    var mkdocs_page_name = "Subset: deviates from original specification";
+    var mkdocs_page_input_path = "DeviatesFromOriginalSpecification.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -79,7 +79,7 @@
     
       
     
-    <li>Class: process to process causal association</li>
+    <li>Subset: deviates from original specification</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -91,49 +91,35 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="class-process-to-process-causal-association">Class: process to process causal association</h1>
-<p>A causal association between two biological processes</p>
-<p>URI: <a href="https://w3id.org/gocam/ProcessToProcessCausalAssociation">gocam:ProcessToProcessCausalAssociation</a></p>
-<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[BiologicalProcess]&lt;object%201..1-%20[ProcessToProcessCausalAssociation&#124;predicate(i):predicate_type%20%3F],[BiologicalProcess]&lt;subject%200..1-%20[ProcessToProcessCausalAssociation],[BiologicalProcess]++-%20has%20process%20causal%20associations%200..*&gt;[ProcessToProcessCausalAssociation],[ProcessToProcessCausalAssociation]uses%20-.-&gt;[CausalAssociationToProcess],[CausalAssociation]^-[ProcessToProcessCausalAssociation],[Evidence],[CausalAssociationToProcess],[CausalAssociation],[BiologicalProcess]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[BiologicalProcess]&lt;object%201..1-%20[ProcessToProcessCausalAssociation&#124;predicate(i):predicate_type%20%3F],[BiologicalProcess]&lt;subject%200..1-%20[ProcessToProcessCausalAssociation],[BiologicalProcess]++-%20has%20process%20causal%20associations%200..*&gt;[ProcessToProcessCausalAssociation],[ProcessToProcessCausalAssociation]uses%20-.-&gt;[CausalAssociationToProcess],[CausalAssociation]^-[ProcessToProcessCausalAssociation],[Evidence],[CausalAssociationToProcess],[CausalAssociation],[BiologicalProcess]" /></a></p>
-<h2 id="parents">Parents</h2>
+                <h1 id="subset-deviates-from-original-specification">Subset: deviates from original specification</h1>
+<p>Subset that deviates from the data model in the original paper [https://pubmed.ncbi.nlm.nih.gov/31548717/]</p>
+<p>URI: <a href="https://w3id.org/gocam/deviates_from_original_specification">gocam:deviates_from_original_specification</a></p>
+<h3 id="classes">Classes</h3>
 <ul>
-<li>is_a: <a href="CausalAssociation.html">CausalAssociation</a> - An association owned by an upstream MA or BP that connects to a downstream MA or BP. The nature of the causal relationship is indicated with the predicate.</li>
+<li><a href="ActivityToProcessCausalAssociation.html">ActivityToProcessCausalAssociation</a> - A causal association between a molecular activity and a biological process</li>
+<li><a href="ProcessToActivityCausalAssociation.html">ProcessToActivityCausalAssociation</a> - A causal association between a biological process and a molecular activity</li>
 </ul>
-<h2 id="uses-mixins">Uses Mixins</h2>
-<ul>
-<li>mixin: <a href="CausalAssociationToProcess.html">CausalAssociationToProcess</a></li>
-</ul>
-<h2 id="referenced-by-class">Referenced by class</h2>
-<ul>
-<li><strong><a href="BiologicalProcess.html">BiologicalProcess</a></strong> <em><a href="biological_process_has_process_causal_associations.html">biological process➞has process causal associations</a></em>  <sub>0..*</sub>  <strong><a href="ProcessToProcessCausalAssociation.html">ProcessToProcessCausalAssociation</a></strong></li>
-</ul>
-<h2 id="attributes">Attributes</h2>
-<h3 id="own">Own</h3>
-<ul>
-<li><a href="process_to_process_causal_association_subject.html">process to process causal association➞subject</a>  <sub>0..1</sub><ul>
-<li>Description: The upstream biological process</li>
-<li>Range: <a href="BiologicalProcess.html">BiologicalProcess</a></li>
-</ul>
-</li>
-<li><a href="process_to_process_causal_association_object.html">process to process causal association➞object</a>  <sub>1..1</sub><ul>
-<li>Description: The downstream biological process</li>
-<li>Range: <a href="BiologicalProcess.html">BiologicalProcess</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="inherited-from-causal-association">Inherited from causal association:</h3>
-<ul>
-<li><a href="has_evidence.html">has evidence</a>  <sub>0..*</sub><ul>
-<li>Description: Links an association to evidence for it</li>
-<li>Range: <a href="Evidence.html">Evidence</a></li>
-</ul>
-</li>
-<li><a href="causal_association_predicate.html">causal association➞predicate</a>  <sub>0..1</sub><ul>
-<li>Description: The causal relationship type which holds between the two activities/processes. This must be drawn from the causal relation hierarchy in RO</li>
-<li>Range: <a href="types/PredicateType.html">PredicateType</a></li>
-</ul>
-</li>
-</ul>
+<h3 id="mixins">Mixins</h3>
+<h3 id="slots">Slots</h3>
+<h3 id="types">Types</h3>
+<h3 id="enums">Enums</h3>
+<h2 id="other-properties">Other properties</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>See also:</strong></td>
+<td></td>
+<td>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7012280/bin/nihms-1067180-f0002.jpg</td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div>

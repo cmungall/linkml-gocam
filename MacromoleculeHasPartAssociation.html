@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="img/favicon.ico">
-  <title>Class: MacromoleculeHasPartAssociation - gocam in linkml demo</title>
+  <title>Class: macromolecule has part association - gocam in linkml demo</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="css/theme.css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Class: MacromoleculeHasPartAssociation";
+    var mkdocs_page_name = "Class: macromolecule has part association";
     var mkdocs_page_input_path = "MacromoleculeHasPartAssociation.md";
     var mkdocs_page_url = null;
   </script>
@@ -79,7 +79,7 @@
     
       
     
-    <li>Class: MacromoleculeHasPartAssociation</li>
+    <li>Class: macromolecule has part association</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -91,17 +91,17 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="class-macromoleculehaspartassociation">Class: MacromoleculeHasPartAssociation</h1>
+                <h1 id="class-macromolecule-has-part-association">Class: macromolecule has part association</h1>
 <p>Connects a macromolecule (such as a protein complex) to its parts (gene products or chemical entities)</p>
 <p>URI: <a href="https://w3id.org/gocam/MacromoleculeHasPartAssociation">gocam:MacromoleculeHasPartAssociation</a></p>
-<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[Continuant]&lt;object%201..1-%20[MacromoleculeHasPartAssociation&#124;predicate(i):predicate_type%20%3F],[InformationBiomacromolecule]++-%20has%20part%200..1&gt;[MacromoleculeHasPartAssociation],[HasPartAssociation]^-[MacromoleculeHasPartAssociation],[InformationBiomacromolecule],[HasPartAssociation],[Evidence],[DomainEntity],[Continuant]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[Continuant]&lt;object%201..1-%20[MacromoleculeHasPartAssociation&#124;predicate(i):predicate_type%20%3F],[InformationBiomacromolecule]++-%20has%20part%200..1&gt;[MacromoleculeHasPartAssociation],[HasPartAssociation]^-[MacromoleculeHasPartAssociation],[InformationBiomacromolecule],[HasPartAssociation],[Evidence],[DomainEntity],[Continuant]" /></a></p>
+<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[Continuant]&lt;object%201..1-%20[MacromoleculeHasPartAssociation&#124;predicate(i):predicate_type%20%3F],[InformationBiomacromolecule]++-%20has%20part%200..*&gt;[MacromoleculeHasPartAssociation],[HasPartAssociation]^-[MacromoleculeHasPartAssociation],[InformationBiomacromolecule],[HasPartAssociation],[Evidence],[DomainEntity],[Continuant]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[Continuant]&lt;object%201..1-%20[MacromoleculeHasPartAssociation&#124;predicate(i):predicate_type%20%3F],[InformationBiomacromolecule]++-%20has%20part%200..*&gt;[MacromoleculeHasPartAssociation],[HasPartAssociation]^-[MacromoleculeHasPartAssociation],[InformationBiomacromolecule],[HasPartAssociation],[Evidence],[DomainEntity],[Continuant]" /></a></p>
 <h2 id="parents">Parents</h2>
 <ul>
 <li>is_a: <a href="HasPartAssociation.html">HasPartAssociation</a> - General grouping for associations that Link an entity to its parts by a HasPartAssociation</li>
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
-<li><strong><a href="InformationBiomacromolecule.html">InformationBiomacromolecule</a></strong> <em><a href="information_biomacromolecule_has_part.html">information biomacromolecule➞has part</a></em>  <sub>0..1</sub>  <strong><a href="MacromoleculeHasPartAssociation.html">MacromoleculeHasPartAssociation</a></strong></li>
+<li><strong><a href="InformationBiomacromolecule.html">InformationBiomacromolecule</a></strong> <em><a href="information_biomacromolecule_has_part.html">information biomacromolecule➞has part</a></em>  <sub>0..*</sub>  <strong><a href="MacromoleculeHasPartAssociation.html">MacromoleculeHasPartAssociation</a></strong></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
 <h3 id="own">Own</h3>
@@ -113,7 +113,7 @@
 </ul>
 <h3 id="inherited-from-has-part-association">Inherited from has part association:</h3>
 <ul>
-<li><a href="has_evidence.html">has evidence</a>  <sub>0..1</sub><ul>
+<li><a href="has_evidence.html">has evidence</a>  <sub>0..*</sub><ul>
 <li>Description: Links an association to evidence for it</li>
 <li>Range: <a href="Evidence.html">Evidence</a></li>
 </ul>

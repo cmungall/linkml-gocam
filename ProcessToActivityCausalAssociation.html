@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="img/favicon.ico">
-  <title>Class: ProcessToActivityCausalAssociation - gocam in linkml demo</title>
+  <title>Class: process to activity causal association - gocam in linkml demo</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="css/theme.css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Class: ProcessToActivityCausalAssociation";
+    var mkdocs_page_name = "Class: process to activity causal association";
     var mkdocs_page_input_path = "ProcessToActivityCausalAssociation.md";
     var mkdocs_page_url = null;
   </script>
@@ -79,7 +79,7 @@
     
       
     
-    <li>Class: ProcessToActivityCausalAssociation</li>
+    <li>Class: process to activity causal association</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -91,10 +91,10 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="class-processtoactivitycausalassociation">Class: ProcessToActivityCausalAssociation</h1>
+                <h1 id="class-process-to-activity-causal-association">Class: process to activity causal association</h1>
 <p>A causal association between a biological process and a molecular activity</p>
 <p>URI: <a href="https://w3id.org/gocam/ProcessToActivityCausalAssociation">gocam:ProcessToActivityCausalAssociation</a></p>
-<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[MolecularActivity]&lt;object%201..1-%20[ProcessToActivityCausalAssociation&#124;predicate(i):predicate_type%20%3F],[BiologicalProcess]&lt;subject%200..1-%20[ProcessToActivityCausalAssociation],[ProcessToActivityCausalAssociation]uses%20-.-&gt;[CausalAssociationToActivity],[CausalAssociation]^-[ProcessToActivityCausalAssociation],[MolecularActivity],[Evidence],[CausalAssociationToActivity],[CausalAssociation],[BiologicalProcess]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[MolecularActivity]&lt;object%201..1-%20[ProcessToActivityCausalAssociation&#124;predicate(i):predicate_type%20%3F],[BiologicalProcess]&lt;subject%200..1-%20[ProcessToActivityCausalAssociation],[ProcessToActivityCausalAssociation]uses%20-.-&gt;[CausalAssociationToActivity],[CausalAssociation]^-[ProcessToActivityCausalAssociation],[MolecularActivity],[Evidence],[CausalAssociationToActivity],[CausalAssociation],[BiologicalProcess]" /></a></p>
+<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[MolecularActivity]&lt;object%201..1-%20[ProcessToActivityCausalAssociation&#124;predicate(i):predicate_type%20%3F],[BiologicalProcess]&lt;subject%200..1-%20[ProcessToActivityCausalAssociation],[BiologicalProcess]++-%20has%20activity%20causal%20associations%200..*&gt;[ProcessToActivityCausalAssociation],[ProcessToActivityCausalAssociation]uses%20-.-&gt;[CausalAssociationToActivity],[CausalAssociation]^-[ProcessToActivityCausalAssociation],[MolecularActivity],[Evidence],[CausalAssociationToActivity],[CausalAssociation],[BiologicalProcess]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[MolecularActivity]&lt;object%201..1-%20[ProcessToActivityCausalAssociation&#124;predicate(i):predicate_type%20%3F],[BiologicalProcess]&lt;subject%200..1-%20[ProcessToActivityCausalAssociation],[BiologicalProcess]++-%20has%20activity%20causal%20associations%200..*&gt;[ProcessToActivityCausalAssociation],[ProcessToActivityCausalAssociation]uses%20-.-&gt;[CausalAssociationToActivity],[CausalAssociation]^-[ProcessToActivityCausalAssociation],[MolecularActivity],[Evidence],[CausalAssociationToActivity],[CausalAssociation],[BiologicalProcess]" /></a></p>
 <h2 id="parents">Parents</h2>
 <ul>
 <li>is_a: <a href="CausalAssociation.html">CausalAssociation</a> - An association owned by an upstream MA or BP that connects to a downstream MA or BP. The nature of the causal relationship is indicated with the predicate.</li>
@@ -104,6 +104,9 @@
 <li>mixin: <a href="CausalAssociationToActivity.html">CausalAssociationToActivity</a></li>
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
+<ul>
+<li><strong><a href="BiologicalProcess.html">BiologicalProcess</a></strong> <em><a href="biological_process_has_activity_causal_associations.html">biological process➞has activity causal associations</a></em>  <sub>0..*</sub>  <strong><a href="ProcessToActivityCausalAssociation.html">ProcessToActivityCausalAssociation</a></strong></li>
+</ul>
 <h2 id="attributes">Attributes</h2>
 <h3 id="own">Own</h3>
 <ul>
@@ -120,7 +123,7 @@
 </ul>
 <h3 id="inherited-from-causal-association">Inherited from causal association:</h3>
 <ul>
-<li><a href="has_evidence.html">has evidence</a>  <sub>0..1</sub><ul>
+<li><a href="has_evidence.html">has evidence</a>  <sub>0..*</sub><ul>
 <li>Description: Links an association to evidence for it</li>
 <li>Range: <a href="Evidence.html">Evidence</a></li>
 </ul>

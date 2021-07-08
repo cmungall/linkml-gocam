@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="img/favicon.ico">
-  <title>Class: Association - gocam in linkml demo</title>
+  <title>Class: association - gocam in linkml demo</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="css/theme.css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Class: Association";
+    var mkdocs_page_name = "Class: association";
     var mkdocs_page_input_path = "Association.md";
     var mkdocs_page_url = null;
   </script>
@@ -79,7 +79,7 @@
     
       
     
-    <li>Class: Association</li>
+    <li>Class: association</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -91,10 +91,10 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="class-association">Class: Association</h1>
+                <h1 id="class-association">Class: association</h1>
 <p>An association between a domain entity (e.g. a MolecularActivity) and another domain entity (e.g. another MolecularActivity) with evidence and provenance attached</p>
 <p>URI: <a href="https://w3id.org/gocam/Association">gocam:Association</a></p>
-<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[PartOfAssociation],[OccursInAssociation],[HasPartAssociation],[HasInputAssociation],[HappensDuringAssociation],[Evidence],[Entity],[EnabledByAssociation],[DomainEntity],[CausalAssociation],[Entity]&lt;object%201..1-%20[Association&#124;predicate:predicate_type%20%3F],[DomainEntity]&lt;subject%200..1-%20[Association],[Evidence]&lt;has%20evidence%200..1-++[Association],[Association]^-[PartOfAssociation],[Association]^-[OccursInAssociation],[Association]^-[HasPartAssociation],[Association]^-[HasInputAssociation],[Association]^-[HappensDuringAssociation],[Association]^-[EnabledByAssociation],[Association]^-[CausalAssociation]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[PartOfAssociation],[OccursInAssociation],[HasPartAssociation],[HasInputAssociation],[HappensDuringAssociation],[Evidence],[Entity],[EnabledByAssociation],[DomainEntity],[CausalAssociation],[Entity]&lt;object%201..1-%20[Association&#124;predicate:predicate_type%20%3F],[DomainEntity]&lt;subject%200..1-%20[Association],[Evidence]&lt;has%20evidence%200..1-++[Association],[Association]^-[PartOfAssociation],[Association]^-[OccursInAssociation],[Association]^-[HasPartAssociation],[Association]^-[HasInputAssociation],[Association]^-[HappensDuringAssociation],[Association]^-[EnabledByAssociation],[Association]^-[CausalAssociation]" /></a></p>
+<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[PartOfAssociation],[OccursInAssociation],[HasPartAssociation],[HasInputAssociation],[HappensDuringAssociation],[Evidence],[Entity],[EnabledByAssociation],[DomainEntity],[CausalAssociation],[Entity]&lt;object%201..1-%20[Association&#124;predicate:predicate_type%20%3F],[DomainEntity]&lt;subject%200..1-%20[Association],[Evidence]&lt;has%20evidence%200..*-++[Association],[Association]^-[PartOfAssociation],[Association]^-[OccursInAssociation],[Association]^-[HasPartAssociation],[Association]^-[HasInputAssociation],[Association]^-[HappensDuringAssociation],[Association]^-[EnabledByAssociation],[Association]^-[CausalAssociation]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[PartOfAssociation],[OccursInAssociation],[HasPartAssociation],[HasInputAssociation],[HappensDuringAssociation],[Evidence],[Entity],[EnabledByAssociation],[DomainEntity],[CausalAssociation],[Entity]&lt;object%201..1-%20[Association&#124;predicate:predicate_type%20%3F],[DomainEntity]&lt;subject%200..1-%20[Association],[Evidence]&lt;has%20evidence%200..*-++[Association],[Association]^-[PartOfAssociation],[Association]^-[OccursInAssociation],[Association]^-[HasPartAssociation],[Association]^-[HasInputAssociation],[Association]^-[HappensDuringAssociation],[Association]^-[EnabledByAssociation],[Association]^-[CausalAssociation]" /></a></p>
 <h2 id="children">Children</h2>
 <ul>
 <li><a href="CausalAssociation.html">CausalAssociation</a> - An association owned by an upstream MA or BP that connects to a downstream MA or BP. The nature of the causal relationship is indicated with the predicate.</li>
@@ -107,12 +107,12 @@
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
-<li><strong>None</strong> <em><a href="related_to.html">related to</a></em>  <sub>0..1</sub>  <strong><a href="Association.html">Association</a></strong></li>
+<li><strong>None</strong> <em><a href="related_to.html">related to</a></em>  <sub>0..*</sub>  <strong><a href="Association.html">Association</a></strong></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
 <h3 id="own">Own</h3>
 <ul>
-<li><a href="has_evidence.html">has evidence</a>  <sub>0..1</sub><ul>
+<li><a href="has_evidence.html">has evidence</a>  <sub>0..*</sub><ul>
 <li>Description: Links an association to evidence for it</li>
 <li>Range: <a href="Evidence.html">Evidence</a></li>
 </ul>

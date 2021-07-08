@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="img/favicon.ico">
-  <title>Class: PartOfAssociation - gocam in linkml demo</title>
+  <title>Class: part of association - gocam in linkml demo</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="css/theme.css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Class: PartOfAssociation";
+    var mkdocs_page_name = "Class: part of association";
     var mkdocs_page_input_path = "PartOfAssociation.md";
     var mkdocs_page_url = null;
   </script>
@@ -79,7 +79,7 @@
     
       
     
-    <li>Class: PartOfAssociation</li>
+    <li>Class: part of association</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -91,10 +91,10 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="class-partofassociation">Class: PartOfAssociation</h1>
+                <h1 id="class-part-of-association">Class: part of association</h1>
 <p>General grouping for associations that Link an entity to its wholes by a PartOfAssociation</p>
 <p>URI: <a href="https://w3id.org/gocam/PartOfAssociation">gocam:PartOfAssociation</a></p>
-<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[ProcessPartOfAssociation],[MolecularActivity]++-%20part%20of(i)%200..1&gt;[PartOfAssociation&#124;predicate(i):predicate_type%20%3F],[AnatomicalEntity]++-%20part%20of(i)%200..1&gt;[PartOfAssociation],[PartOfAssociation]^-[ProcessPartOfAssociation],[PartOfAssociation]^-[AnatomicalPartOfAssociation],[Association]^-[PartOfAssociation],[MolecularActivity],[Evidence],[Entity],[DomainEntity],[Association],[AnatomicalPartOfAssociation],[AnatomicalEntity]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[ProcessPartOfAssociation],[MolecularActivity]++-%20part%20of(i)%200..1&gt;[PartOfAssociation&#124;predicate(i):predicate_type%20%3F],[AnatomicalEntity]++-%20part%20of(i)%200..1&gt;[PartOfAssociation],[PartOfAssociation]^-[ProcessPartOfAssociation],[PartOfAssociation]^-[AnatomicalPartOfAssociation],[Association]^-[PartOfAssociation],[MolecularActivity],[Evidence],[Entity],[DomainEntity],[Association],[AnatomicalPartOfAssociation],[AnatomicalEntity]" /></a></p>
+<p><a href="https://yuml.me/diagram/nofunky;dir:TB/class/[ProcessPartOfAssociation],[MolecularActivity]++-%20part%20of(i)%200..*&gt;[PartOfAssociation&#124;predicate(i):predicate_type%20%3F],[AnatomicalEntity]++-%20part%20of(i)%200..*&gt;[PartOfAssociation],[PartOfAssociation]^-[ProcessPartOfAssociation],[PartOfAssociation]^-[AnatomicalPartOfAssociation],[Association]^-[PartOfAssociation],[MolecularActivity],[Evidence],[Entity],[DomainEntity],[Association],[AnatomicalPartOfAssociation],[AnatomicalEntity]"><img alt="img" src="https://yuml.me/diagram/nofunky;dir:TB/class/[ProcessPartOfAssociation],[MolecularActivity]++-%20part%20of(i)%200..*&gt;[PartOfAssociation&#124;predicate(i):predicate_type%20%3F],[AnatomicalEntity]++-%20part%20of(i)%200..*&gt;[PartOfAssociation],[PartOfAssociation]^-[ProcessPartOfAssociation],[PartOfAssociation]^-[AnatomicalPartOfAssociation],[Association]^-[PartOfAssociation],[MolecularActivity],[Evidence],[Entity],[DomainEntity],[Association],[AnatomicalPartOfAssociation],[AnatomicalEntity]" /></a></p>
 <h2 id="parents">Parents</h2>
 <ul>
 <li>is_a: <a href="Association.html">Association</a> - An association between a domain entity (e.g. a MolecularActivity) and another domain entity (e.g. another MolecularActivity) with evidence and provenance attached</li>
@@ -106,12 +106,12 @@
 </ul>
 <h2 id="referenced-by-class">Referenced by class</h2>
 <ul>
-<li><strong>None</strong> <em><a href="part_of.html">part of</a></em>  <sub>0..1</sub>  <strong><a href="PartOfAssociation.html">PartOfAssociation</a></strong></li>
+<li><strong>None</strong> <em><a href="part_of.html">part of</a></em>  <sub>0..*</sub>  <strong><a href="PartOfAssociation.html">PartOfAssociation</a></strong></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
 <h3 id="inherited-from-association">Inherited from association:</h3>
 <ul>
-<li><a href="has_evidence.html">has evidence</a>  <sub>0..1</sub><ul>
+<li><a href="has_evidence.html">has evidence</a>  <sub>0..*</sub><ul>
 <li>Description: Links an association to evidence for it</li>
 <li>Range: <a href="Evidence.html">Evidence</a></li>
 </ul>
