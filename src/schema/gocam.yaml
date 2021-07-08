@@ -18,6 +18,7 @@ default_curi_maps:
 
 imports:
  - linkml:types
+
 prefixes:
   pav: http://purl.org/pav/
   dce: http://purl.org/dc/elements/1.1/

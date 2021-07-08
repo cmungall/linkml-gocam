@@ -74,7 +74,7 @@ target/graphql/%.graphql: $(SCHEMA_DIR)/%.yaml tdir-graphql
 # TODO: modularize imports. For now imports are merged.
 gen-sqlddl: target/sqlddl/$(SCHEMA_NAME).sql
 target/sqlddl/%.sql: $(SCHEMA_DIR)/%.yaml tdir-sqlddl
-	gen-sqlddl $(GEN_OPTS) --sqla-file target/sqlddl/$*_db_mappings.py $< > $@
+	gen-sqlddl $(GEN_OPTS) --python-import 'gocam.gocam' --sqla-file target/sqlddl/$*_db_mappings.py $< > $@
 
 ####  -- JSON schema --
 # TODO: modularize imports. For now imports are merged.

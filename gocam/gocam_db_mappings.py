@@ -17,7 +17,7 @@ from sqlalchemy.orm import relationship
 mapper_registry = registry()
 metadata = MetaData()
 
-from gocam import *
+from gocam.gocam import *
 
 
 tbl_activity_to_activity_causal_association = Table('activity_to_activity_causal_association', metadata, 
@@ -171,7 +171,7 @@ mapper_registry.map_imperatively(ActivityToProcessCausalAssociation, tbl_activit
 mapper_registry.map_imperatively(AnatomicalEntity, tbl_anatomical_entity, properties={
 
     'part_of': 
-        relationship(anatomical part of association, 
+        relationship(AnatomicalPartOfAssociation, 
                       foreign_keys=tbl_anatomical_part_of_association.columns["anatomical_entity_id"],
                       backref='AnatomicalEntity'),
 
@@ -181,13 +181,13 @@ mapper_registry.map_imperatively(AnatomicalPartOfAssociation, tbl_anatomical_par
 mapper_registry.map_imperatively(BiologicalProcess, tbl_biological_process, properties={
 
     'has_activity_causal_associations': 
-        relationship(process to activity causal association, 
+        relationship(ProcessToActivityCausalAssociation, 
                       foreign_keys=tbl_process_to_activity_causal_association.columns["biological_process_id"],
                       backref='BiologicalProcess'),
 
 
     'has_process_causal_associations': 
-        relationship(process to process causal association, 
+        relationship(ProcessToProcessCausalAssociation, 
                       foreign_keys=tbl_process_to_process_causal_association.columns["biological_process_id"],
                       backref='BiologicalProcess'),
 
@@ -199,7 +199,7 @@ mapper_registry.map_imperatively(EnabledByAssociation, tbl_enabled_by_associatio
 mapper_registry.map_imperatively(Evidence, tbl_evidence, properties={
 
     'reference': 
-        relationship(publication, 
+        relationship(Publication, 
                       foreign_keys=tbl_publication.columns["evidence_id"],
                       backref='Evidence'),
 
@@ -211,7 +211,7 @@ mapper_registry.map_imperatively(HasInputAssociation, tbl_has_input_association,
 mapper_registry.map_imperatively(InformationBiomacromolecule, tbl_information_biomacromolecule, properties={
 
     'has_part': 
-        relationship(macromolecule has part association, 
+        relationship(MacromoleculeHasPartAssociation, 
                       foreign_keys=tbl_macromolecule_has_part_association.columns["information_biomacromolecule_id"],
                       backref='InformationBiomacromolecule'),
 
@@ -221,7 +221,7 @@ mapper_registry.map_imperatively(MacromoleculeHasPartAssociation, tbl_macromolec
 mapper_registry.map_imperatively(Model, tbl_model, properties={
 
     'chemical_entity_set': 
-        relationship(chemical entity, 
+        relationship(ChemicalEntity, 
                       foreign_keys=tbl_chemical_entity.columns["model_id"],
                       backref='Model'),
 
@@ -229,31 +229,31 @@ mapper_registry.map_imperatively(Model, tbl_model, properties={
 mapper_registry.map_imperatively(MolecularActivity, tbl_molecular_activity, properties={
 
     'has_activity_causal_associations': 
-        relationship(activity to activity causal association, 
+        relationship(ActivityToActivityCausalAssociation, 
                       foreign_keys=tbl_activity_to_activity_causal_association.columns["molecular_activity_id"],
                       backref='MolecularActivity'),
 
 
     'has_process_causal_associations': 
-        relationship(activity to process causal association, 
+        relationship(ActivityToProcessCausalAssociation, 
                       foreign_keys=tbl_activity_to_process_causal_association.columns["molecular_activity_id"],
                       backref='MolecularActivity'),
 
 
     'part_of': 
-        relationship(process part of association, 
+        relationship(ProcessPartOfAssociation, 
                       foreign_keys=tbl_process_part_of_association.columns["molecular_activity_id"],
                       backref='MolecularActivity'),
 
 
     'enabled_by': 
-        relationship(enabled by association, 
+        relationship(EnabledByAssociation, 
                       foreign_keys=tbl_enabled_by_association.columns["molecular_activity_id"],
                       backref='MolecularActivity'),
 
 
     'has_input': 
-        relationship(has input association, 
+        relationship(HasInputAssociation, 
                       foreign_keys=tbl_has_input_association.columns["molecular_activity_id"],
                       backref='MolecularActivity'),
 
